@@ -22,6 +22,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             print("We have an error \(configureError)")
         }
         GIDSignIn.sharedInstance().delegate = self
+        /* check for user's token */
+        if GIDSignIn.sharedInstance().hasAuthInKeychain() {
+            print("SIGNED IN")
+        } else {
+            /* code to show your login VC */
+            print("NOT SIGNED IN")
+        }
         
         return true
     }
