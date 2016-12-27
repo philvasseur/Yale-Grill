@@ -13,6 +13,7 @@
 		CD9E14E91E130C7E000E21C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD9E14E71E130C7E000E21C0 /* Main.storyboard */; };
 		CD9E14EB1E130C7E000E21C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD9E14EA1E130C7E000E21C0 /* Assets.xcassets */; };
 		CD9E14EE1E130C7E000E21C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD9E14EC1E130C7E000E21C0 /* LaunchScreen.storyboard */; };
+		CDCFD5911E13215400065E87 /* TabOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCFD5901E13215400065E87 /* TabOne.swift */; };
 		CDD92A2A1E130CE7005C091B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDD92A291E130CE7005C091B /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +26,7 @@
 		CD9E14EA1E130C7E000E21C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CD9E14ED1E130C7E000E21C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CD9E14EF1E130C7E000E21C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CDCFD5901E13215400065E87 /* TabOne.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabOne.swift; sourceTree = "<group>"; };
 		CDD92A291E130CE7005C091B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CDD92A2B1E130E5B005C091B /* YaleGrill-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YaleGrill-Bridging-Header.h"; sourceTree = "<group>"; };
 		D3F3C9E4986110BD99DE40C8 /* Pods-YaleGrill.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YaleGrill.release.xcconfig"; path = "Pods/Target Support Files/Pods-YaleGrill/Pods-YaleGrill.release.xcconfig"; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 			children = (
 				CD9E14E31E130C7E000E21C0 /* AppDelegate.swift */,
 				CD9E14E51E130C7E000E21C0 /* ViewController.swift */,
+				CDCFD5901E13215400065E87 /* TabOne.swift */,
 				CD9E14E71E130C7E000E21C0 /* Main.storyboard */,
 				CD9E14EA1E130C7E000E21C0 /* Assets.xcassets */,
 				CD9E14EC1E130C7E000E21C0 /* LaunchScreen.storyboard */,
@@ -219,6 +222,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD9E14E61E130C7E000E21C0 /* ViewController.swift in Sources */,
+				CDCFD5911E13215400065E87 /* TabOne.swift in Sources */,
 				CD9E14E41E130C7E000E21C0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

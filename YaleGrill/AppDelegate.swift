@@ -25,9 +25,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         /* check for user's token */
         if GIDSignIn.sharedInstance().hasAuthInKeychain() {
             print("SIGNED IN")
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            if let tabScreen = sb.instantiateViewController(withIdentifier: "LoggedInScreen") as? UITabBarController {
+                window!.rootViewController = tabScreen
+            }
         } else {
             /* code to show your login VC */
             print("NOT SIGNED IN")
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            if let tabBarVC = sb.instantiateViewController(withIdentifier: "ViewController") as? ViewController {
+                window!.rootViewController = tabBarVC
+            }
         }
         
         return true
