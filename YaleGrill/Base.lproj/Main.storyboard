@@ -41,65 +41,29 @@
             </objects>
             <point key="canvasLocation" x="6" y="42"/>
         </scene>
-        <!--Order Screen-->
+        <!--Active Orders-->
         <scene sceneID="SIu-QJ-Md8">
             <objects>
                 <viewController storyboardIdentifier="LoggedInScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Xnt-PY-nOB" customClass="OrderScreen" customModule="YaleGrill" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ukG-Wa-vRA">
+                    <view key="view" contentMode="scaleToFill" id="ig9-dd-x8K">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="lTH-1D-6eS">
-                                <rect key="frame" x="283" y="20" width="76" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HoeflerText-Black" family="Hoefler Text" pointSize="17"/>
-                                <state key="normal" title="Sign Out">
-                                    <color key="titleColor" red="0.763398295260594" green="0.76608159739722215" blue="0.7741315038071066" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </state>
-                                <connections>
-                                    <action selector="signOutPressed:" destination="Xnt-PY-nOB" eventType="touchUpInside" id="g9t-WE-14b"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eZZ-Rq-Coy">
-                                <rect key="frame" x="20" y="26" width="268" height="19"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HoeflerText-Black" family="Hoefler Text" pointSize="17"/>
-                                <color key="textColor" red="0.99999058246612549" green="0.99999356269836426" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WNE-bs-JAa">
-                                <rect key="frame" x="60" y="598" width="254" height="49"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <fontDescription key="fontDescription" name="HoeflerText-Black" family="Hoefler Text" pointSize="26"/>
-                                <state key="normal" title="Order Food">
-                                    <color key="titleColor" red="0.99999058246612549" green="0.99999356269836426" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </state>
-                                <connections>
-                                    <segue destination="0M2-0t-HgQ" kind="push" id="xDV-gR-NLV"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="a1t-a2-05X" userLabel="BlackLine">
-                                <rect key="frame" x="0.0" y="49" width="375" height="1"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Active Orders" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sXn-1R-oJh">
-                                <rect key="frame" x="105" y="52" width="164" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HoeflerText-Black" family="Hoefler Text" pointSize="21"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" red="0.072087392210960388" green="0.20567737519741058" blue="0.40402421355247498" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="5s9-OH-dKc"/>
-                    <connections>
-                        <outlet property="ActiveOrdersLabel" destination="sXn-1R-oJh" id="KlH-4a-fOa"/>
-                        <outlet property="OrderFoodButton" destination="WNE-bs-JAa" id="IZl-yO-pPY"/>
-                        <outlet property="WelcomeMessage" destination="eZZ-Rq-Coy" id="6UH-lo-aKj"/>
-                    </connections>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Active Orders" id="5s9-OH-dKc">
+                        <barButtonItem key="leftBarButtonItem" title="Sign out" id="TCN-Qz-55A">
+                            <connections>
+                                <action selector="SignOutPressed:" destination="Xnt-PY-nOB" id="tHN-Fq-NV6"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="Efe-9X-EDW">
+                            <connections>
+                                <segue destination="0M2-0t-HgQ" kind="push" id="agF-1C-y2n"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lEo-E2-T5s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -375,6 +339,6 @@
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="aJ7-ph-fHw"/>
+        <segue reference="Tdl-UM-a2z"/>
     </inferredMetricsTieBreakers>
 </document>
