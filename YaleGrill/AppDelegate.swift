@@ -12,6 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     var window: UIWindow?
+    var signInCallBack : (()->())?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -26,15 +27,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         if GIDSignIn.sharedInstance().hasAuthInKeychain() {
             print("SIGNED IN")
             let sb = UIStoryboard(name: "Main", bundle: nil)
-            if let tabScreen = sb.instantiateViewController(withIdentifier: "LoggedInScreen") as? UITabBarController {
-                window!.rootViewController = tabScreen
+            if let loggedIn = sb.instantiateViewController(withIdentifier: "LoggedInScreen") as? OrderScreen {
+                window!.rootViewController = loggedIn
             }
         } else {
             /* code to show your login VC */
             print("NOT SIGNED IN")
             let sb = UIStoryboard(name: "Main", bundle: nil)
-            if let tabBarVC = sb.instantiateViewController(withIdentifier: "ViewController") as? ViewController {
-                window!.rootViewController = tabBarVC
+            if let signInScreen = sb.instantiateViewController(withIdentifier: "ViewController") as? ViewController {
+                window!.rootViewController = signInScreen
             }
         }
         
@@ -46,6 +47,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             print("Sign In Error: \(error)")
         }else{
             print("Signed in: \(user)")
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            if let loggedIn = sb.instantiateViewController(withIdentifier: "LoggedInScreen") as? OrderScreen {
+                window!.rootViewController = loggedIn
+            }
         }
     }
     
