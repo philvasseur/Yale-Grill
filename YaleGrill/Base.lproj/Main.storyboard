@@ -36,6 +36,9 @@
                         </subviews>
                         <color key="backgroundColor" red="0.10741882778769245" green="0.31071467286659221" blue="0.62267507015145973" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
+                    <connections>
+                        <segue destination="CYl-rG-eM0" kind="push" identifier="SignInSegue" id="pNU-dT-IA1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -154,30 +157,6 @@
                                 <color key="textColor" red="0.99999058249999995" green="0.99999356269999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wva-2X-ZoC">
-                                <rect key="frame" x="266" y="122" width="53" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
-                                <state key="normal" title="Cancel">
-                                    <color key="titleColor" red="0.68903535074390543" green="0.69145727130666002" blue="0.69872303299492389" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </state>
-                            </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DdT-Ap-9sg">
-                                <rect key="frame" x="264" y="246" width="56" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
-                                <state key="normal" title="Cancel">
-                                    <color key="titleColor" red="0.75573322180000002" green="0.75838958170000004" blue="0.76635866119999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </state>
-                            </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="76X-GT-ZOx">
-                                <rect key="frame" x="264" y="371" width="56" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
-                                <state key="normal" title="Cancel">
-                                    <color key="titleColor" red="0.75573322180000002" green="0.75838958170000004" blue="0.76635866119999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </state>
-                            </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Single Burger" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="evk-Ba-c2n">
                                 <rect key="frame" x="35" y="197" width="305" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -224,9 +203,6 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="CancelButton1" destination="wva-2X-ZoC" id="jFg-2m-8kx"/>
-                        <outlet property="CancelButton2" destination="DdT-Ap-9sg" id="2kK-4K-BDw"/>
-                        <outlet property="CancelButton3" destination="76X-GT-ZOx" id="i9w-HG-Oxv"/>
                         <outlet property="noActiveOrdersLabel" destination="anN-nB-wCX" id="70s-hR-wN5"/>
                         <outletCollection property="OrderItemLabels" destination="WCg-xI-ReT" collectionClass="NSMutableArray" id="EIh-r5-zcG"/>
                         <outletCollection property="OrderItemLabels" destination="VxN-u9-fEq" collectionClass="NSMutableArray" id="502-o0-owt"/>
@@ -500,6 +476,7 @@
             <objects>
                 <navigationController storyboardIdentifier="NavControl" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" hidesBarsWhenKeyboardAppears="YES" id="CYl-rG-eM0" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="0S0-rn-29S"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="3L9-0H-vua">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

@@ -14,6 +14,7 @@ class ViewController: UIViewController, GIDSignInUIDelegate {
         super.viewDidLoad()
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().signInSilently()
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
 

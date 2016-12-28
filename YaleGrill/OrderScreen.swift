@@ -16,9 +16,6 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate {
     @IBOutlet var OrderItemLabels: [UILabel]!
     @IBOutlet var OrderItemLabels2: [UILabel]!
     @IBOutlet var OrderItemLabels3: [UILabel]!
-    @IBOutlet weak var CancelButton1: UIButton!
-    @IBOutlet weak var CancelButton2: UIButton!
-    @IBOutlet weak var CancelButton3: UIButton!
     @IBOutlet weak var noActiveOrdersLabel: UILabel!
     @IBAction func SignOutPressed(_ sender: UIBarButtonItem) {
         signOutAndChange(shouldAnimate: true)
@@ -57,7 +54,6 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate {
             for item in OrderItemLabels{
                 item.isHidden=false
                 overAllOrderInfo.append(orderInfo![tempCount])
-                CancelButton1.isHidden=false
                 if(tempCount==12){
                     item.text=orderInfo![tempCount]
                     tempCount+=1
@@ -72,7 +68,6 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate {
             for item in OrderItemLabels2{
                 item.isHidden=false
                 overAllOrderInfo.append(orderInfo![tempCount])
-                CancelButton2.isHidden=false
                 if(tempCount==12){
                     item.text=orderInfo![tempCount]
                     tempCount+=1
@@ -87,7 +82,6 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate {
             for item in OrderItemLabels3{
                 item.isHidden=false
                 overAllOrderInfo.append(orderInfo![tempCount])
-                CancelButton3.isHidden=false
                 if(tempCount==12){
                     item.text=orderInfo![tempCount]
                     tempCount+=1
