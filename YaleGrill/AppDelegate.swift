@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         if GIDSignIn.sharedInstance().hasAuthInKeychain() {
             print("SIGNED IN AUTH")
             let sb = UIStoryboard(name: "Main", bundle: nil)
-            if let loggedIn = sb.instantiateViewController(withIdentifier: "LoggedInScreen") as? OrderScreen {
+            if let loggedIn = sb.instantiateViewController(withIdentifier: "NavControl") as? UINavigationController {
                 window!.rootViewController = loggedIn
             }
         }else if(error != nil){
