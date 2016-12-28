@@ -23,34 +23,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             print("We have an error \(configureError)")
         }
         GIDSignIn.sharedInstance().delegate = self
-        /* check for user's token */
-        if GIDSignIn.sharedInstance().hasAuthInKeychain() {
-            print("SIGNED IN")
-            let sb = UIStoryboard(name: "Main", bundle: nil)
-            if let loggedIn = sb.instantiateViewController(withIdentifier: "LoggedInScreen") as? OrderScreen {
-                window!.rootViewController = loggedIn
-            }
-        } else {
-            /* code to show your login VC */
-            print("NOT SIGNED IN")
-            let sb = UIStoryboard(name: "Main", bundle: nil)
-            if let signInScreen = sb.instantiateViewController(withIdentifier: "ViewController") as? ViewController {
-                window!.rootViewController = signInScreen
-            }
-        }
         
         return true
     }
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        if(error != nil){
-            print("Sign In Error: \(error)")
-        }else{
-            print("Signed in: \(user)")
+        /* check for user's token */
+        if GIDSignIn.sharedInstance().hasAuthInKeychain() {
+            print("SIGNED IN AUTH")
             let sb = UIStoryboard(name: "Main", bundle: nil)
             if let loggedIn = sb.instantiateViewController(withIdentifier: "LoggedInScreen") as? OrderScreen {
                 window!.rootViewController = loggedIn
             }
+        }else if(error != nil){
+                print("Sign In Error: \(error)")
         }
     }
     
