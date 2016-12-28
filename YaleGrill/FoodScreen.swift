@@ -10,7 +10,7 @@ import UIKit
 
 class FoodScreen: UIViewController, GIDSignInUIDelegate{
     
-    
+    var orderInfo: [String] = []
     @IBOutlet weak var BurgerStepCount: UIStepper!
     @IBOutlet weak var VeggieStepCount: UIStepper!
     @IBOutlet weak var ChickenStepCount: UIStepper!
@@ -38,18 +38,18 @@ class FoodScreen: UIViewController, GIDSignInUIDelegate{
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destinationVC = segue.destination as! OrderScreen
-        destinationVC.orderInfo = getOrderInfo()
+        super.prepare(for: segue, sender: sender)
+        orderInfo = getOrderInfo()
     }
     
     func getOrderInfo() -> [String]{
-        var orderInfo = ["","","","","","","","","","","","",""]
-        var toppings = ["Bun","Sauce","Tomato","Cheese","Lettuce"]
+        orderInfo = ["","","","","","","","","","","","",""]
+        var toppings = ["Bun","Cheese","Sauce","Lettuce","Tomatoes"]
         if(BurgerStepCount.value != 0){
             if(BurgerStepCount.value==1){
-                orderInfo[0]="Single Patty"
+                orderInfo[0]="Single Burger"
             }else{
-                orderInfo[0]="Double Patty"
+                orderInfo[0]="Double Burger"
             }
             var count = 1
             for hamSwitch in HamburgerSwitches{
@@ -64,9 +64,9 @@ class FoodScreen: UIViewController, GIDSignInUIDelegate{
         }
         if(VeggieStepCount.value != 0){
             if(VeggieStepCount.value==1){
-                orderInfo[6]="Single Patty"
+                orderInfo[6]="Single Veggie Burger"
             }else{
-                orderInfo[6]="Double Patty"
+                orderInfo[6]="Double Veggie Burger"
             }
             var count = 7
             for vegSwitch in VeggieSwitches{
@@ -79,10 +79,10 @@ class FoodScreen: UIViewController, GIDSignInUIDelegate{
             }
         }
         switch (ChickenStepCount.value){
-        case 1: orderInfo[12]="One Piece"
-        case 2: orderInfo[12]="Two Pieces"
-        case 3: orderInfo[12]="Three Pieces"
-        case 4: orderInfo[12]="Four Pieces"
+        case 1: orderInfo[12]="One Piece of Chicken"
+        case 2: orderInfo[12]="Two Pieces of Chicken"
+        case 3: orderInfo[12]="Three Pieces of Chicken"
+        case 4: orderInfo[12]="Four Pieces of Chicken"
         default: orderInfo[12]=""
         }
         
