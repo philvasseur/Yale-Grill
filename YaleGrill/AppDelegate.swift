@@ -30,10 +30,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         /* check for user's token */
         if GIDSignIn.sharedInstance().hasAuthInKeychain() {
-            print("SIGNED IN AUTH")
-            let sb = UIStoryboard(name: "Main", bundle: nil)
-            if let loggedIn = sb.instantiateViewController(withIdentifier: "NavControl") as? UINavigationController {
-                window!.rootViewController = loggedIn
+            print("\(GIDSignIn.sharedInstance().currentUser.profile.email!) TRYING TO SIGN IN - AUTH")
+            let cEmail = GIDSignIn.sharedInstance().currentUser.profile.email!
+            if(cEmail.lowercased().range(of: "@yale.edu") != nil){ //Checks if email is a Yale email
+                print("Yale Email, SIGNING IN")
+                let sb = UIStoryboard(name: "Main", bundle: nil)
+                if let loggedIn = sb.instantiateViewController(withIdentifier: "NavControl") as? UINavigationController {
+                    window!.rootViewController = loggedIn
+                }
+            }else{ //Not a yale email, so signs user out.
+                print("Non-Yale Email, LOGGING OUT")
+                GIDSignIn.sharedInstance().signOut()
             }
         }else if(error != nil){
                 print("Sign In Error: \(error)")

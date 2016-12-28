@@ -67,7 +67,7 @@
                                 <color key="textColor" red="0.99999058246612549" green="0.99999356269836426" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WNE-bs-JAa">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WNE-bs-JAa">
                                 <rect key="frame" x="60" y="598" width="254" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -79,11 +79,24 @@
                                     <segue destination="0M2-0t-HgQ" kind="push" id="xDV-gR-NLV"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="a1t-a2-05X" userLabel="BlackLine">
+                                <rect key="frame" x="0.0" y="49" width="375" height="1"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Active Orders" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sXn-1R-oJh">
+                                <rect key="frame" x="105" y="52" width="164" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HoeflerText-Black" family="Hoefler Text" pointSize="21"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.072087392210960388" green="0.20567737519741058" blue="0.40402421355247498" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
                     <navigationItem key="navigationItem" id="5s9-OH-dKc"/>
                     <connections>
+                        <outlet property="ActiveOrdersLabel" destination="sXn-1R-oJh" id="KlH-4a-fOa"/>
                         <outlet property="OrderFoodButton" destination="WNE-bs-JAa" id="IZl-yO-pPY"/>
                         <outlet property="WelcomeMessage" destination="eZZ-Rq-Coy" id="6UH-lo-aKj"/>
                     </connections>
@@ -108,6 +121,9 @@
                                 <state key="normal" title="Place Order">
                                     <color key="titleColor" red="0.99999058246612549" green="0.99999356269836426" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
+                                <connections>
+                                    <segue destination="Xnt-PY-nOB" kind="push" id="aJ7-ph-fHw"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Veggie Burger" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ysA-Cv-uWu" userLabel="Veggie Burger Label">
                                 <rect key="frame" x="110" y="285" width="158" height="30"/>
@@ -306,12 +322,15 @@
                         <barButtonItem key="backBarButtonItem" title="Back" id="iiI-zk-27Z"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="BurgerStepCount" destination="suy-p8-HW8" id="3OE-hF-8aT"/>
                         <outlet property="ChickenCount" destination="oJJ-Aq-mQc" id="jIa-fD-1Af"/>
+                        <outlet property="ChickenStepCount" destination="6G8-yc-Xk2" id="IOH-1M-oyl"/>
                         <outlet property="HamburgerCount1" destination="rFc-K7-R9i" id="s5P-UJ-S5c"/>
                         <outlet property="HamburgerCount2" destination="jfv-HN-h1j" id="4Zh-i3-3Jf"/>
                         <outlet property="PlaceButton" destination="JOm-bj-wxH" id="bRe-4a-iI9"/>
                         <outlet property="VeggieCount1" destination="kCH-dJ-L36" id="BUh-6Q-YMg"/>
                         <outlet property="VeggieCount2" destination="B6x-UK-HoA" id="1Wk-1S-3lF"/>
+                        <outlet property="VeggieStepCount" destination="aUi-1u-HFi" id="9sZ-TZ-5nI"/>
                         <outletCollection property="HamburgerSwitches" destination="Hjk-aL-TcF" collectionClass="NSMutableArray" id="VlH-sy-AKQ"/>
                         <outletCollection property="HamburgerSwitches" destination="f4C-mA-n4o" collectionClass="NSMutableArray" id="vgO-Me-E5f"/>
                         <outletCollection property="HamburgerSwitches" destination="0i3-bW-Egt" collectionClass="NSMutableArray" id="2AS-KR-Dhm"/>
@@ -355,4 +374,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="aJ7-ph-fHw"/>
+    </inferredMetricsTieBreakers>
 </document>

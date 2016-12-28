@@ -11,6 +11,9 @@ import UIKit
 class FoodScreen: UIViewController, GIDSignInUIDelegate{
     
     
+    @IBOutlet weak var BurgerStepCount: UIStepper!
+    @IBOutlet weak var VeggieStepCount: UIStepper!
+    @IBOutlet weak var ChickenStepCount: UIStepper!
     @IBOutlet weak var ChickenCount: UILabel!
     @IBOutlet weak var PlaceButton: UIButton!
     @IBOutlet weak var VeggieCount1: UILabel!
@@ -33,6 +36,61 @@ class FoodScreen: UIViewController, GIDSignInUIDelegate{
             ChickenCount.text="Four Pieces"
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! OrderScreen
+        destinationVC.orderInfo = getOrderInfo()
+    }
+    
+    func getOrderInfo() -> [String]{
+        var orderInfo = ["","","","","","","","","","","","",""]
+        var toppings = ["Bun","Sauce","Tomato","Cheese","Lettuce"]
+        if(BurgerStepCount.value != 0){
+            if(BurgerStepCount.value==1){
+                orderInfo[0]="Single Patty"
+            }else{
+                orderInfo[0]="Double Patty"
+            }
+            var count = 1
+            for hamSwitch in HamburgerSwitches{
+                if(hamSwitch.isOn){
+                    orderInfo[count]="\(toppings[count-1])"
+                }else{
+                    orderInfo[count]="No \(toppings[count-1])"
+                }
+                count += 1
+            }
+            
+        }
+        if(VeggieStepCount.value != 0){
+            if(VeggieStepCount.value==1){
+                orderInfo[6]="Single Patty"
+            }else{
+                orderInfo[6]="Double Patty"
+            }
+            var count = 7
+            for vegSwitch in VeggieSwitches{
+                if(vegSwitch.isOn){
+                    orderInfo[count]="\(toppings[count-7])"
+                }else{
+                    orderInfo[count]="No \(toppings[count-7])"
+                }
+                count += 1
+            }
+        }
+        switch (ChickenStepCount.value){
+        case 1: orderInfo[12]="One Piece"
+        case 2: orderInfo[12]="Two Pieces"
+        case 3: orderInfo[12]="Three Pieces"
+        case 4: orderInfo[12]="Four Pieces"
+        default: orderInfo[12]=""
+        }
+        
+        return orderInfo
+    }
+    
+    
+    
     
     @IBAction func VeggieStepper(_ sender: UIStepper) {
         if((sender.value)==0){
