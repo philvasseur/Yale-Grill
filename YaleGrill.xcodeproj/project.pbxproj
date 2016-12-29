@@ -352,6 +352,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9A753CD321527598C2A4A49A /* Pods-YaleGrill.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = YaleGrill/Info.plist;
@@ -368,6 +369,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D3F3C9E4986110BD99DE40C8 /* Pods-YaleGrill.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = YaleGrill/Info.plist;

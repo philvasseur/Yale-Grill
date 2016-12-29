@@ -7,4 +7,5 @@ target 'YaleGrill' do
 
   # Pods for YaleGrill
   pod 'Google/SignIn'
+  pod 'SwiftGifOrigin'
 end
