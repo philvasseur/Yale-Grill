@@ -9,8 +9,8 @@
 import UIKit
 
 class FoodScreen: UIViewController, GIDSignInUIDelegate{
-    
-    var orderInfo: [String] = []
+    var totalOrdersCount: Int = 0
+    var ordersPlaced: [SingleOrder] = []
     @IBOutlet weak var BurgerStepCount: UIStepper!
     @IBOutlet weak var VeggieStepCount: UIStepper!
     @IBOutlet weak var ChickenStepCount: UIStepper!
@@ -37,60 +37,62 @@ class FoodScreen: UIViewController, GIDSignInUIDelegate{
         }
     }
     
+    func createAlert (title : String, message : String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: { (action) in alert.dismiss(animated: true, completion: nil)}))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        ordersPlaced = getOrderInfo()
+        if(ordersPlaced.count+totalOrdersCount > 3){
+            var plural = ""
+            if(totalOrdersCount != 1){
+                plural = "s"
+            }
+            let ordersLeft = 3-totalOrdersCount
+            createAlert(title: "Wow, you're hungry!", message: "You already have \(totalOrdersCount) order\(plural) and just tried to add \(ordersPlaced.count) more, but the max number of orders is 3! Please order only \(ordersLeft) more!")
+            return false
+        }else{
+            return true
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        orderInfo = getOrderInfo()
     }
     
-    func getOrderInfo() -> [String]{
-        orderInfo = ["","","","","","","","","","","","",""]
+    func getOrderInfo() -> [SingleOrder]{
+        let cName = GIDSignIn.sharedInstance().currentUser.profile.name!
+        let orderNum = 111
+        var orderArray = [SingleOrder]()
+        let StepCountArray : [UIStepper] = [BurgerStepCount,VeggieStepCount,ChickenStepCount]
         var toppings = ["Bun","Cheese","Sauce","Lettuce","Tomatoes"]
-        if(BurgerStepCount.value != 0){
-            if(BurgerStepCount.value==1){
-                orderInfo[0]="Single Burger"
-            }else{
-                orderInfo[0]="Double Burger"
-            }
-            var count = 1
-            for hamSwitch in HamburgerSwitches{
-                if(hamSwitch.isOn){
-                    orderInfo[count]="\(toppings[count-1])"
-                }else{
-                    orderInfo[count]="No \(toppings[count-1])"
+        let switchesArray : [[UISwitch]] = [HamburgerSwitches,VeggieSwitches]
+        let foodServingArray : [[String]] = [["Single Burger","Double Burger"],["Single Veggie Burger","Double Veggie Burger"],["One Piece of Chicken","Two Pieces of Chicken","Three Pieces of Chicken","Four Pieces of Chicken"]]
+        for index in 0...2{
+            var orderInfo : [String] = []
+            if(StepCountArray[index].value != 0){
+                orderInfo.append(foodServingArray[index][lround(StepCountArray[index].value)-1])
+                for cSwitch in 0...4{
+                    if(index==2){
+                        orderInfo.append("")
+                    }else{
+                        if(switchesArray[index][cSwitch].isOn){
+                            orderInfo.append("\(toppings[cSwitch])")
+                        }else{
+                            orderInfo.append("No \(toppings[cSwitch])")
+                        }
+                    }
                 }
-                count += 1
+                let tempOrder = SingleOrder(orderNum: orderNum, name: cName, foodServing: orderInfo[0], bunSetting: orderInfo[1], cheeseSetting: orderInfo[2], sauceSetting: orderInfo[3], lettuceSetting: orderInfo[4], tomatoSetting: orderInfo[5])
+                orderArray.append(tempOrder)
             }
-            
-        }
-        if(VeggieStepCount.value != 0){
-            if(VeggieStepCount.value==1){
-                orderInfo[6]="Single Veggie Burger"
-            }else{
-                orderInfo[6]="Double Veggie Burger"
-            }
-            var count = 7
-            for vegSwitch in VeggieSwitches{
-                if(vegSwitch.isOn){
-                    orderInfo[count]="\(toppings[count-7])"
-                }else{
-                    orderInfo[count]="No \(toppings[count-7])"
-                }
-                count += 1
-            }
-        }
-        switch (ChickenStepCount.value){
-        case 1: orderInfo[12]="One Piece of Chicken"
-        case 2: orderInfo[12]="Two Pieces of Chicken"
-        case 3: orderInfo[12]="Three Pieces of Chicken"
-        case 4: orderInfo[12]="Four Pieces of Chicken"
-        default: orderInfo[12]=""
         }
         
-        return orderInfo
+        return orderArray
     }
-    
-    
-    
     
     @IBAction func VeggieStepper(_ sender: UIStepper) {
         if((sender.value)==0){
@@ -129,6 +131,7 @@ class FoodScreen: UIViewController, GIDSignInUIDelegate{
             HamburgerCount2.text="Patties"
         }
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         PlaceButton.layer.cornerRadius = 12

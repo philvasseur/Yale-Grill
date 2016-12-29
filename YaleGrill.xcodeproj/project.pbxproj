@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2D6E9801B1B20A709363705C /* Pods_YaleGrill.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBE7E0123717574065AA7A01 /* Pods_YaleGrill.framework */; };
+		CD4948521E15886500F61FCE /* SingleOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4948511E15886500F61FCE /* SingleOrder.swift */; };
 		CD9E14E41E130C7E000E21C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9E14E31E130C7E000E21C0 /* AppDelegate.swift */; };
 		CD9E14E61E130C7E000E21C0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9E14E51E130C7E000E21C0 /* ViewController.swift */; };
 		CD9E14E91E130C7E000E21C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD9E14E71E130C7E000E21C0 /* Main.storyboard */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		9A753CD321527598C2A4A49A /* Pods-YaleGrill.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YaleGrill.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YaleGrill/Pods-YaleGrill.debug.xcconfig"; sourceTree = "<group>"; };
+		CD4948511E15886500F61FCE /* SingleOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleOrder.swift; sourceTree = "<group>"; };
 		CD9E14E01E130C7E000E21C0 /* YaleGrill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YaleGrill.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD9E14E31E130C7E000E21C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD9E14E51E130C7E000E21C0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				CDD92A291E130CE7005C091B /* GoogleService-Info.plist */,
 				CD9E14EF1E130C7E000E21C0 /* Info.plist */,
 				CDD92A2B1E130E5B005C091B /* YaleGrill-Bridging-Header.h */,
+				CD4948511E15886500F61FCE /* SingleOrder.swift */,
 			);
 			path = YaleGrill;
 			sourceTree = "<group>";
@@ -226,6 +229,7 @@
 			files = (
 				CD9E14E61E130C7E000E21C0 /* ViewController.swift in Sources */,
 				CD9E14E41E130C7E000E21C0 /* AppDelegate.swift in Sources */,
+				CD4948521E15886500F61FCE /* SingleOrder.swift in Sources */,
 				CDCFD5931E1329B100065E87 /* OrderScreen.swift in Sources */,
 				CDCFD5951E1359AE00065E87 /* FoodScreen.swift in Sources */,
 			);
