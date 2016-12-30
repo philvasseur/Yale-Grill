@@ -9,15 +9,26 @@
 import UIKit
 
 class OrderScreen: UIViewController, GIDSignInUIDelegate {
+    
+    private var gifArray = [UIImage.gif(name: "preparing"), UIImage.gif(name: "preparing2"), UIImage.gif(name:"preparing3")]
+    
+    @IBOutlet var LinesArray: [UIImageView]!
     var totalOrderArray: [SingleOrder] = []
-
+    var OrderLabelsArray: [[UILabel]]!
+    var timer = Timer()
+    @IBOutlet var GifViews: [UIImageView]!
     @IBOutlet var OrderItemLabels: [UILabel]!
     @IBOutlet var OrderItemLabels2: [UILabel]!
     @IBOutlet var OrderItemLabels3: [UILabel]!
     @IBOutlet weak var noActiveOrdersLabel: UILabel!
+    @IBOutlet var FinishedGifArray: [UIImageView]!
+    @IBOutlet var FoodIsReadyLabelArray: [UILabel]!
+    private var finishedGif = UIImage.gif(name: "finished")
+    
     @IBAction func SignOutPressed(_ sender: UIBarButtonItem) {
         signOutAndChange(shouldAnimate: true)
     }
+    
     
     @IBAction func unwindToOrderScreen(_ sender: UIStoryboardSegue) {
         if let makeOrderController = sender.source as? FoodScreen {
@@ -29,6 +40,22 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate {
             }
             
         }
+    }
+    private func updateOrderDisplay(cOrder: SingleOrder){
+        let cOrderNum = cOrder.orderNum
+        var cOrderLabels = OrderLabelsArray[cOrderNum]
+        totalOrderArray[cOrderNum] = cOrder
+        if(cOrder.status=="Preparing..."){
+            cOrderLabels[6].isHidden=true
+            cOrderLabels[7].isHidden=true
+            FoodIsReadyLabelArray[cOrderNum].isHidden=false
+            FinishedGifArray[cOrderNum].image = finishedGif
+            FinishedGifArray[cOrderNum].isHidden=false
+            FinishedGifArray[cOrderNum].layer.borderWidth = 3.5
+            FinishedGifArray[cOrderNum].layer.borderColor = UIColor.black.cgColor
+            GifViews[cOrderNum].isHidden=true
+        }
+        
     }
     
     func createAlert (title : String, message : String){
@@ -48,6 +75,8 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate {
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if(totalOrderArray.count>=3){
             createAlert(title: "Sorry!", message: "You can't place more than 3 orders! Please wait for your current orders to be finished!")
+            updateOrderDisplay(cOrder: totalOrderArray[0]) //TEMPORARY JUST TO TEST
+            //ABILITY TO MAKE ORDERS "FINISHED"
             return false
         }else{
             return true
@@ -63,19 +92,36 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate {
     }
     
     private func setSingleOrder(cOrder: SingleOrder){
-        let ItemLabelsArray : [[UILabel]] = [OrderItemLabels,OrderItemLabels2,OrderItemLabels3]
-        for orderSpot in ItemLabelsArray{
-            if(orderSpot[0].isHidden){
-                for itemLabel in orderSpot{
+        for index in 0...2{
+            if(OrderLabelsArray[index][0].isHidden){
+                LinesArray[index].isHidden=false
+                GifViews[index].isHidden=false
+                GifViews[index].image=gifArray[index]
+                GifViews[index].layer.borderWidth = 3.5
+                GifViews[index].layer.borderColor = UIColor.black.cgColor
+                GifViews[index].layer.masksToBounds = true
+                for itemLabel in OrderLabelsArray[index]{
                     itemLabel.isHidden=false
                 }
-                orderSpot[0].text=cOrder.foodServing
-                orderSpot[1].text=cOrder.bunSetting
-                orderSpot[2].text=cOrder.cheeseSetting
-                orderSpot[3].text=cOrder.sauceSetting
-                orderSpot[4].text=cOrder.lettuceSetting
-                orderSpot[5].text=cOrder.tomatoSetting
+                OrderLabelsArray[index][0].text=cOrder.foodServing
+                OrderLabelsArray[index][1].text=cOrder.bunSetting
+                OrderLabelsArray[index][2].text=cOrder.cheeseSetting
+                OrderLabelsArray[index][3].text=cOrder.sauceSetting
+                OrderLabelsArray[index][4].text=cOrder.lettuceSetting
+                OrderLabelsArray[index][5].text=cOrder.tomatoSetting
+                OrderLabelsArray[index][7].text=cOrder.status
                 break
+            }
+        }
+    }
+    @objc private func updatePrep(){
+        for orderLabels in OrderLabelsArray{
+            if(orderLabels[7].text=="Preparing."){
+                orderLabels[7].text="Preparing.."
+            }else if(orderLabels[7].text=="Preparing.."){
+                orderLabels[7].text="Preparing..."
+            }else if(orderLabels[7].text=="Preparing..."){
+                orderLabels[7].text="Preparing."
             }
         }
     }
@@ -88,6 +134,9 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         GIDSignIn.sharedInstance().uiDelegate = self
+        OrderLabelsArray=[OrderItemLabels,OrderItemLabels2,OrderItemLabels3]
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(OrderScreen.updatePrep), userInfo: nil, repeats: true)
+       
         
     }
     

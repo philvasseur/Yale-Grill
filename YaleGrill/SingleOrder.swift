@@ -11,7 +11,7 @@ import UIKit
 class SingleOrder {
     var name, foodServing, bunSetting, cheeseSetting, sauceSetting, lettuceSetting,tomatoSetting: String
     var orderNum: Int
-    var status: String = "Pending"
+    var status: String = "Preparing..."
     
     init(orderNum: Int, name: String, foodServing: String, bunSetting: String, cheeseSetting: String, sauceSetting: String, lettuceSetting: String, tomatoSetting: String) {
         self.name = name

@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		2D6E9801B1B20A709363705C /* Pods_YaleGrill.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBE7E0123717574065AA7A01 /* Pods_YaleGrill.framework */; };
+		CD179F071E15F62600496D5F /* preparing.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD179F061E15F62600496D5F /* preparing.gif */; };
+		CD179F0A1E15F6C300496D5F /* preparing3.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD179F081E15F6C300496D5F /* preparing3.gif */; };
+		CD179F0B1E15F6C300496D5F /* preparing2.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD179F091E15F6C300496D5F /* preparing2.gif */; };
+		CD179F0F1E16042D00496D5F /* finished.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD179F0E1E16042D00496D5F /* finished.gif */; };
+		CD1E95DE1E15C7490056D00E /* Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1E95DD1E15C7490056D00E /* Gif.swift */; };
 		CD4948521E15886500F61FCE /* SingleOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4948511E15886500F61FCE /* SingleOrder.swift */; };
 		CD9E14E41E130C7E000E21C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9E14E31E130C7E000E21C0 /* AppDelegate.swift */; };
 		CD9E14E61E130C7E000E21C0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9E14E51E130C7E000E21C0 /* ViewController.swift */; };
@@ -21,6 +26,11 @@
 
 /* Begin PBXFileReference section */
 		9A753CD321527598C2A4A49A /* Pods-YaleGrill.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YaleGrill.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YaleGrill/Pods-YaleGrill.debug.xcconfig"; sourceTree = "<group>"; };
+		CD179F061E15F62600496D5F /* preparing.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = preparing.gif; path = ../../../../Downloads/preparing.gif; sourceTree = "<group>"; };
+		CD179F081E15F6C300496D5F /* preparing3.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = preparing3.gif; path = ../../../../Downloads/preparing3.gif; sourceTree = "<group>"; };
+		CD179F091E15F6C300496D5F /* preparing2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = preparing2.gif; path = ../../../../Downloads/preparing2.gif; sourceTree = "<group>"; };
+		CD179F0E1E16042D00496D5F /* finished.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = finished.gif; path = ../../../../Downloads/finished.gif; sourceTree = "<group>"; };
+		CD1E95DD1E15C7490056D00E /* Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Gif.swift; path = ../Pods/SwiftGifOrigin/SwiftGifCommon/Gif.swift; sourceTree = "<group>"; };
 		CD4948511E15886500F61FCE /* SingleOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleOrder.swift; sourceTree = "<group>"; };
 		CD9E14E01E130C7E000E21C0 /* YaleGrill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YaleGrill.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD9E14E31E130C7E000E21C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +76,28 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		CD179F0C1E15F71400496D5F /* Gifs */ = {
+			isa = PBXGroup;
+			children = (
+				CD179F0E1E16042D00496D5F /* finished.gif */,
+				CD179F061E15F62600496D5F /* preparing.gif */,
+				CD179F081E15F6C300496D5F /* preparing3.gif */,
+				CD179F091E15F6C300496D5F /* preparing2.gif */,
+			);
+			name = Gifs;
+			sourceTree = "<group>";
+		};
+		CD179F0D1E15F74C00496D5F /* DoNotTouch */ = {
+			isa = PBXGroup;
+			children = (
+				CDD92A291E130CE7005C091B /* GoogleService-Info.plist */,
+				CD9E14EF1E130C7E000E21C0 /* Info.plist */,
+				CDD92A2B1E130E5B005C091B /* YaleGrill-Bridging-Header.h */,
+				CD1E95DD1E15C7490056D00E /* Gif.swift */,
+			);
+			name = DoNotTouch;
+			sourceTree = "<group>";
+		};
 		CD9E14D71E130C7E000E21C0 = {
 			isa = PBXGroup;
 			children = (
@@ -88,16 +120,15 @@
 			isa = PBXGroup;
 			children = (
 				CD9E14E31E130C7E000E21C0 /* AppDelegate.swift */,
+				CD4948511E15886500F61FCE /* SingleOrder.swift */,
 				CD9E14E51E130C7E000E21C0 /* ViewController.swift */,
 				CDCFD5921E1329B100065E87 /* OrderScreen.swift */,
 				CDCFD5941E1359AE00065E87 /* FoodScreen.swift */,
 				CD9E14E71E130C7E000E21C0 /* Main.storyboard */,
-				CD9E14EA1E130C7E000E21C0 /* Assets.xcassets */,
 				CD9E14EC1E130C7E000E21C0 /* LaunchScreen.storyboard */,
-				CDD92A291E130CE7005C091B /* GoogleService-Info.plist */,
-				CD9E14EF1E130C7E000E21C0 /* Info.plist */,
-				CDD92A2B1E130E5B005C091B /* YaleGrill-Bridging-Header.h */,
-				CD4948511E15886500F61FCE /* SingleOrder.swift */,
+				CD9E14EA1E130C7E000E21C0 /* Assets.xcassets */,
+				CD179F0D1E15F74C00496D5F /* DoNotTouch */,
+				CD179F0C1E15F71400496D5F /* Gifs */,
 			);
 			path = YaleGrill;
 			sourceTree = "<group>";
@@ -166,8 +197,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD9E14EE1E130C7E000E21C0 /* LaunchScreen.storyboard in Resources */,
+				CD179F0A1E15F6C300496D5F /* preparing3.gif in Resources */,
+				CD179F0F1E16042D00496D5F /* finished.gif in Resources */,
 				CDD92A2A1E130CE7005C091B /* GoogleService-Info.plist in Resources */,
+				CD179F0B1E15F6C300496D5F /* preparing2.gif in Resources */,
 				CD9E14EB1E130C7E000E21C0 /* Assets.xcassets in Resources */,
+				CD179F071E15F62600496D5F /* preparing.gif in Resources */,
 				CD9E14E91E130C7E000E21C0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -229,6 +264,7 @@
 			files = (
 				CD9E14E61E130C7E000E21C0 /* ViewController.swift in Sources */,
 				CD9E14E41E130C7E000E21C0 /* AppDelegate.swift in Sources */,
+				CD1E95DE1E15C7490056D00E /* Gif.swift in Sources */,
 				CD4948521E15886500F61FCE /* SingleOrder.swift in Sources */,
 				CDCFD5931E1329B100065E87 /* OrderScreen.swift in Sources */,
 				CDCFD5951E1359AE00065E87 /* FoodScreen.swift in Sources */,

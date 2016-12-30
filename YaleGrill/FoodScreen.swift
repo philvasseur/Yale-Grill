@@ -65,7 +65,7 @@ class FoodScreen: UIViewController, GIDSignInUIDelegate{
     
     func getOrderInfo() -> [SingleOrder]{
         let cName = GIDSignIn.sharedInstance().currentUser.profile.name!
-        let orderNum = 111
+        var tempOrderNumber = totalOrdersCount
         var orderArray = [SingleOrder]()
         let StepCountArray : [UIStepper] = [BurgerStepCount,VeggieStepCount,ChickenStepCount]
         var toppings = ["Bun","Cheese","Sauce","Lettuce","Tomatoes"]
@@ -86,8 +86,9 @@ class FoodScreen: UIViewController, GIDSignInUIDelegate{
                         }
                     }
                 }
-                let tempOrder = SingleOrder(orderNum: orderNum, name: cName, foodServing: orderInfo[0], bunSetting: orderInfo[1], cheeseSetting: orderInfo[2], sauceSetting: orderInfo[3], lettuceSetting: orderInfo[4], tomatoSetting: orderInfo[5])
+                let tempOrder = SingleOrder(orderNum: tempOrderNumber, name: cName, foodServing: orderInfo[0], bunSetting: orderInfo[1], cheeseSetting: orderInfo[2], sauceSetting: orderInfo[3], lettuceSetting: orderInfo[4], tomatoSetting: orderInfo[5])
                 orderArray.append(tempOrder)
+                tempOrderNumber+=1
             }
         }
         
