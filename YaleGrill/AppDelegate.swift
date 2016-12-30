@@ -12,8 +12,6 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     var window: UIWindow?
-    var signInCallBack : (()->())?
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -27,6 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         return true
     }
     
+    /*
+     Method for googleSign in. Is called when you press the button and when the application loads. Checks if there is authentication in keychain cached, if so checks if a yale email. If it has a yale email then moves to OrderScreen page with active orders. If not a yale email then logs out.
+    */
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         /* check for user's token */
         if GIDSignIn.sharedInstance().hasAuthInKeychain() {

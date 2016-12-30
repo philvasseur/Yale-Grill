@@ -6,6 +6,10 @@
 //  Copyright © 2016 Phil Vasseur. All rights reserved.
 //
 
+/*
+ Custom class for a single order. Keeps track of all the details of the order. The database will be storing these orders, and will be able to identity each person/order by their name, email, and order number.
+ */
+
 import UIKit
 
 class SingleOrder {

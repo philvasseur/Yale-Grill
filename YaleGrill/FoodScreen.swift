@@ -9,20 +9,21 @@
 import UIKit
 
 class FoodScreen: UIViewController, GIDSignInUIDelegate{
-    var totalOrdersCount: Int = 0
-    var ordersPlaced: [SingleOrder] = []
-    @IBOutlet weak var BurgerStepCount: UIStepper!
-    @IBOutlet weak var VeggieStepCount: UIStepper!
-    @IBOutlet weak var ChickenStepCount: UIStepper!
-    @IBOutlet weak var ChickenCount: UILabel!
-    @IBOutlet weak var PlaceButton: UIButton!
-    @IBOutlet weak var VeggieCount1: UILabel!
-    @IBOutlet weak var VeggieCount2: UILabel!
-    @IBOutlet weak var HamburgerCount1: UILabel!
-    @IBOutlet weak var HamburgerCount2: UILabel!
-    @IBOutlet var HamburgerSwitches: [UISwitch]!
-    @IBOutlet var VeggieSwitches: [UISwitch]!
+    var totalOrdersCount: Int = 0 //Used to keep track of how many orders already exist, so user can't accidently order more than 3.
+    var ordersPlaced: [SingleOrder] = [] //Returned to OrderScreen class when placeOrder button is pressed.
+    @IBOutlet weak var BurgerStepCount: UIStepper! //StepCount which keeps track of how many burger patties are wanted
+    @IBOutlet weak var VeggieStepCount: UIStepper! //StepCount which keeps track of how many veggie patties are wanted
+    @IBOutlet weak var ChickenStepCount: UIStepper! //StepCount which keeps track of how many pieces of chicken are wanted
+    @IBOutlet weak var ChickenCount: UILabel! //Label which is set to the number of chicken pieces that are currently set by stepCount
+    @IBOutlet weak var PlaceButton: UIButton! //PlaceOrder button, just used to make it rounded
+    @IBOutlet weak var VeggieCount1: UILabel! //Label for showing how many veggie patties
+    @IBOutlet weak var VeggieCount2: UILabel! //Separated into two parts
+    @IBOutlet weak var HamburgerCount1: UILabel! //Label for showing how many burger patties
+    @IBOutlet weak var HamburgerCount2: UILabel! //Separated into two parts
+    @IBOutlet var HamburgerSwitches: [UISwitch]! //Switch array which is used to check what burger toppings are wanted when order is placed
+    @IBOutlet var VeggieSwitches: [UISwitch]! //Switch array which is used to check what veggie toppings are wanted when order is placed
     
+    //Updates the ChickenCount label whenever the ChickenStepCount is changed
     @IBAction func StepperCount(_ sender: UIStepper) {
         if((sender.value)==0){
             ChickenCount.text="Zero Pieces"
@@ -37,6 +38,7 @@ class FoodScreen: UIViewController, GIDSignInUIDelegate{
         }
     }
     
+    //CreateAlert method just like in orderScreen class. Used here to stop user from having more than 3 total orders.
     func createAlert (title : String, message : String){
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: { (action) in alert.dismiss(animated: true, completion: nil)}))
@@ -44,6 +46,7 @@ class FoodScreen: UIViewController, GIDSignInUIDelegate{
         self.present(alert, animated: true, completion: nil)
     }
     
+    //Calls the alert method above. Stops placeOrder button from seguing if no orders have been placed or if the total would be more than 3.
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         ordersPlaced = getOrderInfo()
         if(ordersPlaced.count+totalOrdersCount > 3){
@@ -54,15 +57,17 @@ class FoodScreen: UIViewController, GIDSignInUIDelegate{
             let ordersLeft = 3-totalOrdersCount
             createAlert(title: "Wow, you're hungry!", message: "You already have \(totalOrdersCount) order\(plural) and just tried to add \(ordersPlaced.count) more, but the max number of orders is 3! Please order only \(ordersLeft) more!")
             return false
+        }else if(ordersPlaced.count==0){
+            return false
         }else{
             return true
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
-    }
-    
+    //Looping function which goes through all the stepCounts and switches and creates SingleOrder objects. Appends them to the ordersPlaced array
+    //This is called indirectly by placeOrder button. PlaceorderButton is set to unwindSegue, but before it segues it checks shouldPerformSegue.
+    //If conditions are met, then sets the ordersPlaced array to the array returned here. The unwindSegue method in OrderScreen can then access ordersPlaced
+    //to get the orders which were just placed and set the corresponding labels in the active orders screen (OrderScreen.swift)
     func getOrderInfo() -> [SingleOrder]{
         let cName = GIDSignIn.sharedInstance().currentUser.profile.name!
         var tempOrderNumber = totalOrdersCount
@@ -95,6 +100,7 @@ class FoodScreen: UIViewController, GIDSignInUIDelegate{
         return orderArray
     }
     
+    //Changes the veggieBurger text whenever the VeggieStepCount is changed.
     @IBAction func VeggieStepper(_ sender: UIStepper) {
         if((sender.value)==0){
             for item in VeggieSwitches{
@@ -114,6 +120,7 @@ class FoodScreen: UIViewController, GIDSignInUIDelegate{
         }
     }
    
+    //Changes the hamburger text whenever the BurgerStepCount is changed.
     @IBAction func HamburgerStepper(_ sender: UIStepper) {
         if((sender.value)==0){
             for item in HamburgerSwitches {
@@ -133,6 +140,7 @@ class FoodScreen: UIViewController, GIDSignInUIDelegate{
         }
     }
     
+    //Changes the placeButton corner rounding.
     override func viewDidLoad() {
         super.viewDidLoad()
         PlaceButton.layer.cornerRadius = 12

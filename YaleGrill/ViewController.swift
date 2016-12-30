@@ -9,7 +9,8 @@
 import UIKit
 
 class ViewController: UIViewController, GIDSignInUIDelegate {
-
+    
+    //Page for logging in. Doesn't do much besides try to auto login. Contains the GIDSignIn button.
     override func viewDidLoad() {
         super.viewDidLoad()
         GIDSignIn.sharedInstance().uiDelegate = self
