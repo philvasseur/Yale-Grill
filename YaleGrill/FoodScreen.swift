@@ -23,20 +23,6 @@ class FoodScreen: UIViewController, GIDSignInUIDelegate{
     @IBOutlet var HamburgerSwitches: [UISwitch]! //Switch array which is used to check what burger toppings are wanted when order is placed
     @IBOutlet var VeggieSwitches: [UISwitch]! //Switch array which is used to check what veggie toppings are wanted when order is placed
     
-    //Updates the ChickenCount label whenever the ChickenStepCount is changed
-    @IBAction func StepperCount(_ sender: UIStepper) {
-        if((sender.value)==0){
-            ChickenCount.text="Zero Pieces"
-        }else if((sender.value)==1){
-            ChickenCount.text="One Piece"
-        }else if((sender.value)==2){
-            ChickenCount.text="Two Pieces"
-        }else if((sender.value)==3){
-            ChickenCount.text="Three Pieces"
-        }else if((sender.value)==4){
-            ChickenCount.text="Four Pieces"
-        }
-    }
     
     //CreateAlert method just like in orderScreen class. Used here to stop user from having more than 3 total orders.
     func createAlert (title : String, message : String){
@@ -106,17 +92,34 @@ class FoodScreen: UIViewController, GIDSignInUIDelegate{
             for item in VeggieSwitches{
                 item.isEnabled=false
             }
-            VeggieCount1.text="Zero"
-            VeggieCount2.text="Patties"
+            VeggieCount1.frame.origin = CGPoint(x: 1, y: 335)
+            VeggieCount1.text="----"
+            VeggieCount2.text=""
         }else if((sender.value)==1){
             for item in VeggieSwitches{
                 item.isEnabled=true
             }
-            VeggieCount1.text="One"
-            VeggieCount2.text="Patty"
+            VeggieCount1.frame.origin = CGPoint(x: 1, y: 326)
+            VeggieCount1.text="Single"
+            VeggieCount2.text="Veggie"
         }else if((sender.value)==2){
-            VeggieCount1.text="Two"
-            VeggieCount2.text="Patties"
+            VeggieCount1.text="Double"
+            VeggieCount2.text="Veggie"
+        }
+    }
+    
+    //Updates the ChickenCount label whenever the ChickenStepCount is changed
+    @IBAction func StepperCount(_ sender: UIStepper) {
+        if((sender.value)==0){
+            ChickenCount.text="Zero Pieces"
+        }else if((sender.value)==1){
+            ChickenCount.text="One Piece"
+        }else if((sender.value)==2){
+            ChickenCount.text="Two Pieces"
+        }else if((sender.value)==3){
+            ChickenCount.text="Three Pieces"
+        }else if((sender.value)==4){
+            ChickenCount.text="Four Pieces"
         }
     }
    
@@ -126,17 +129,19 @@ class FoodScreen: UIViewController, GIDSignInUIDelegate{
             for item in HamburgerSwitches {
                 item.isEnabled=false
             }
-            HamburgerCount1.text="Zero"
-            HamburgerCount2.text="Patties"
+            HamburgerCount1.frame.origin = CGPoint(x: 1, y: 130)
+            HamburgerCount1.text="----"
+            HamburgerCount2.text=""
         }else if((sender.value)==1){
             for item in HamburgerSwitches {
                 item.isEnabled=true
             }
-            HamburgerCount1.text="One"
-            HamburgerCount2.text="Patty"
+            HamburgerCount1.frame.origin = CGPoint(x: 1, y: 121)
+            HamburgerCount1.text="Single"
+            HamburgerCount2.text="Burger"
         }else if((sender.value)==2){
-            HamburgerCount1.text="Two"
-            HamburgerCount2.text="Patties"
+            HamburgerCount1.text="Double"
+            HamburgerCount2.text="Burger"
         }
     }
     

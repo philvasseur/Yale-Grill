@@ -24,6 +24,19 @@
 		CDD92A2A1E130CE7005C091B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDD92A291E130CE7005C091B /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		CDF25A061E16E7EF00818379 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		9A753CD321527598C2A4A49A /* Pods-YaleGrill.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YaleGrill.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YaleGrill/Pods-YaleGrill.debug.xcconfig"; sourceTree = "<group>"; };
 		CD179F061E15F62600496D5F /* preparing.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = preparing.gif; path = ../../../../Downloads/preparing.gif; sourceTree = "<group>"; };
@@ -43,6 +56,8 @@
 		CDCFD5941E1359AE00065E87 /* FoodScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodScreen.swift; sourceTree = "<group>"; };
 		CDD92A291E130CE7005C091B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CDD92A2B1E130E5B005C091B /* YaleGrill-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YaleGrill-Bridging-Header.h"; sourceTree = "<group>"; };
+		CDF25A111E16E9C100818379 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		CDF25A131E16E9CC00818379 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		D3F3C9E4986110BD99DE40C8 /* Pods-YaleGrill.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YaleGrill.release.xcconfig"; path = "Pods/Target Support Files/Pods-YaleGrill/Pods-YaleGrill.release.xcconfig"; sourceTree = "<group>"; };
 		DBE7E0123717574065AA7A01 /* Pods_YaleGrill.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YaleGrill.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -62,6 +77,8 @@
 		61EEF952E70F989ACF04CCDE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CDF25A131E16E9CC00818379 /* libz.tbd */,
+				CDF25A111E16E9C100818379 /* libsqlite3.tbd */,
 				DBE7E0123717574065AA7A01 /* Pods_YaleGrill.framework */,
 			);
 			name = Frameworks;
@@ -146,6 +163,7 @@
 				CD9E14DE1E130C7E000E21C0 /* Resources */,
 				BC1D219E1867C479F400B70D /* [CP] Embed Pods Frameworks */,
 				1EF745D5A4FE504184A22B8E /* [CP] Copy Pods Resources */,
+				CDF25A061E16E7EF00818379 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -391,6 +409,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Sdk/Aws",
+					"$(PROJECT_DIR)/AmazonAws",
+				);
 				INFOPLIST_FILE = YaleGrill/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.philvasseur.YaleGrill;
@@ -408,6 +431,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Sdk/Aws",
+					"$(PROJECT_DIR)/AmazonAws",
+				);
 				INFOPLIST_FILE = YaleGrill/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.philvasseur.YaleGrill;
