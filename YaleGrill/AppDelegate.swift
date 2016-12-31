@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import AWSCore
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
@@ -19,34 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         GGLContext.sharedInstance().configureWithError(&configureError)
         if(configureError != nil){
             print("We have an error \(configureError)")
-        }
-        GIDSignIn.sharedInstance().delegate = self
-        
+        }        
         return true
     }
     
-    /*
-     Method for googleSign in. Is called when you press the button and when the application loads. Checks if there is authentication in keychain cached, if so checks if a yale email. If it has a yale email then moves to OrderScreen page with active orders. If not a yale email then logs out.
-    */
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        /* check for user's token */
-        if GIDSignIn.sharedInstance().hasAuthInKeychain() {
-            print("\(GIDSignIn.sharedInstance().currentUser.profile.email!) TRYING TO SIGN IN - AUTH")
-            let cEmail = GIDSignIn.sharedInstance().currentUser.profile.email!
-            if(cEmail.lowercased().range(of: "@yale.edu") != nil){ //Checks if email is a Yale email
-                print("Yale Email, SIGNING IN")
-                let sb = UIStoryboard(name: "Main", bundle: nil)
-                if let loggedIn = sb.instantiateViewController(withIdentifier: "NavControl") as? UINavigationController {
-                    window!.rootViewController = loggedIn
-                }
-            }else{ //Not a yale email, so signs user out.
-                print("Non-Yale Email, LOGGING OUT")
-                GIDSignIn.sharedInstance().signOut()
-            }
-        }else if(error != nil){
-                print("Sign In Error: \(error)")
-        }
-    }
+    
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         return GIDSignIn.sharedInstance().handle(url, sourceApplication: sourceApplication, annotation: annotation)

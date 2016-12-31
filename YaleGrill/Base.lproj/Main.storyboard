@@ -33,16 +33,27 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.78222160532994922" green="0.78222160532994922" blue="0.78222160532994922" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3FZ-gM-l9U">
+                                <rect key="frame" x="46" y="236" width="283" height="151"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="37"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.10741882778769245" green="0.31071467286659221" blue="0.62267507015145973" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
                     <connections>
-                        <segue destination="CYl-rG-eM0" kind="push" identifier="SignInSegue" id="pNU-dT-IA1"/>
+                        <outlet property="LoadingLabel" destination="3FZ-gM-l9U" id="bUm-Jw-Ygm"/>
+                        <outlet property="SignInButton" destination="VIN-Hj-NQE" id="CQG-AG-JoC"/>
+                        <outlet property="SignInPicture" destination="ObE-ft-WhJ" id="W7f-7b-hST"/>
+                        <outlet property="SignInText" destination="m6a-k7-tl0" id="PKP-PT-Ipk"/>
+                        <segue destination="CYl-rG-eM0" kind="modal" identifier="SignInSegue" id="pNU-dT-IA1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6" y="42"/>
+            <point key="canvasLocation" x="-80.5" y="41.5"/>
         </scene>
         <!--Orders-->
         <scene sceneID="SIu-QJ-Md8">

@@ -13,15 +13,16 @@
 		CD179F0B1E15F6C300496D5F /* preparing2.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD179F091E15F6C300496D5F /* preparing2.gif */; };
 		CD179F0F1E16042D00496D5F /* finished.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD179F0E1E16042D00496D5F /* finished.gif */; };
 		CD1E95DE1E15C7490056D00E /* Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1E95DD1E15C7490056D00E /* Gif.swift */; };
-		CD4948521E15886500F61FCE /* SingleOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4948511E15886500F61FCE /* SingleOrder.swift */; };
 		CD9E14E41E130C7E000E21C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9E14E31E130C7E000E21C0 /* AppDelegate.swift */; };
 		CD9E14E61E130C7E000E21C0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9E14E51E130C7E000E21C0 /* ViewController.swift */; };
 		CD9E14E91E130C7E000E21C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD9E14E71E130C7E000E21C0 /* Main.storyboard */; };
 		CD9E14EB1E130C7E000E21C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD9E14EA1E130C7E000E21C0 /* Assets.xcassets */; };
 		CD9E14EE1E130C7E000E21C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD9E14EC1E130C7E000E21C0 /* LaunchScreen.storyboard */; };
+		CDC7B2D21E17321E00037869 /* DynamoCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC7B2D11E17321E00037869 /* DynamoCommands.swift */; };
 		CDCFD5931E1329B100065E87 /* OrderScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCFD5921E1329B100065E87 /* OrderScreen.swift */; };
 		CDCFD5951E1359AE00065E87 /* FoodScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCFD5941E1359AE00065E87 /* FoodScreen.swift */; };
 		CDD92A2A1E130CE7005C091B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDD92A291E130CE7005C091B /* GoogleService-Info.plist */; };
+		CDF3BC611E172E34005D7FAE /* Orders.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF3BC601E172E34005D7FAE /* Orders.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -44,7 +45,6 @@
 		CD179F091E15F6C300496D5F /* preparing2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = preparing2.gif; path = ../../../../Downloads/preparing2.gif; sourceTree = "<group>"; };
 		CD179F0E1E16042D00496D5F /* finished.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = finished.gif; path = ../../../../Downloads/finished.gif; sourceTree = "<group>"; };
 		CD1E95DD1E15C7490056D00E /* Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Gif.swift; path = ../Pods/SwiftGifOrigin/SwiftGifCommon/Gif.swift; sourceTree = "<group>"; };
-		CD4948511E15886500F61FCE /* SingleOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleOrder.swift; sourceTree = "<group>"; };
 		CD9E14E01E130C7E000E21C0 /* YaleGrill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YaleGrill.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD9E14E31E130C7E000E21C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD9E14E51E130C7E000E21C0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -52,12 +52,14 @@
 		CD9E14EA1E130C7E000E21C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CD9E14ED1E130C7E000E21C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CD9E14EF1E130C7E000E21C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CDC7B2D11E17321E00037869 /* DynamoCommands.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamoCommands.swift; sourceTree = "<group>"; };
 		CDCFD5921E1329B100065E87 /* OrderScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderScreen.swift; sourceTree = "<group>"; };
 		CDCFD5941E1359AE00065E87 /* FoodScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodScreen.swift; sourceTree = "<group>"; };
 		CDD92A291E130CE7005C091B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CDD92A2B1E130E5B005C091B /* YaleGrill-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YaleGrill-Bridging-Header.h"; sourceTree = "<group>"; };
 		CDF25A111E16E9C100818379 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		CDF25A131E16E9CC00818379 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		CDF3BC601E172E34005D7FAE /* Orders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Orders.swift; path = ../../../../Downloads/Orders.swift; sourceTree = "<group>"; };
 		D3F3C9E4986110BD99DE40C8 /* Pods-YaleGrill.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YaleGrill.release.xcconfig"; path = "Pods/Target Support Files/Pods-YaleGrill/Pods-YaleGrill.release.xcconfig"; sourceTree = "<group>"; };
 		DBE7E0123717574065AA7A01 /* Pods_YaleGrill.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YaleGrill.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -136,11 +138,12 @@
 		CD9E14E21E130C7E000E21C0 /* YaleGrill */ = {
 			isa = PBXGroup;
 			children = (
+				CDF3BC601E172E34005D7FAE /* Orders.swift */,
 				CD9E14E31E130C7E000E21C0 /* AppDelegate.swift */,
-				CD4948511E15886500F61FCE /* SingleOrder.swift */,
 				CD9E14E51E130C7E000E21C0 /* ViewController.swift */,
 				CDCFD5921E1329B100065E87 /* OrderScreen.swift */,
 				CDCFD5941E1359AE00065E87 /* FoodScreen.swift */,
+				CDC7B2D11E17321E00037869 /* DynamoCommands.swift */,
 				CD9E14E71E130C7E000E21C0 /* Main.storyboard */,
 				CD9E14EC1E130C7E000E21C0 /* LaunchScreen.storyboard */,
 				CD9E14EA1E130C7E000E21C0 /* Assets.xcassets */,
@@ -281,9 +284,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD9E14E61E130C7E000E21C0 /* ViewController.swift in Sources */,
+				CDC7B2D21E17321E00037869 /* DynamoCommands.swift in Sources */,
+				CDF3BC611E172E34005D7FAE /* Orders.swift in Sources */,
 				CD9E14E41E130C7E000E21C0 /* AppDelegate.swift in Sources */,
 				CD1E95DE1E15C7490056D00E /* Gif.swift in Sources */,
-				CD4948521E15886500F61FCE /* SingleOrder.swift in Sources */,
 				CDCFD5931E1329B100065E87 /* OrderScreen.swift in Sources */,
 				CDCFD5951E1359AE00065E87 /* FoodScreen.swift in Sources */,
 			);

@@ -10,7 +10,7 @@ import UIKit
 
 class FoodScreen: UIViewController, GIDSignInUIDelegate{
     var totalOrdersCount: Int = 0 //Used to keep track of how many orders already exist, so user can't accidently order more than 3.
-    var ordersPlaced: [SingleOrder] = [] //Returned to OrderScreen class when placeOrder button is pressed.
+    var ordersPlaced: [Orders] = [] //Returned to OrderScreen class when placeOrder button is pressed.
     @IBOutlet weak var BurgerStepCount: UIStepper! //StepCount which keeps track of how many burger patties are wanted
     @IBOutlet weak var VeggieStepCount: UIStepper! //StepCount which keeps track of how many veggie patties are wanted
     @IBOutlet weak var ChickenStepCount: UIStepper! //StepCount which keeps track of how many pieces of chicken are wanted
@@ -54,10 +54,11 @@ class FoodScreen: UIViewController, GIDSignInUIDelegate{
     //This is called indirectly by placeOrder button. PlaceorderButton is set to unwindSegue, but before it segues it checks shouldPerformSegue.
     //If conditions are met, then sets the ordersPlaced array to the array returned here. The unwindSegue method in OrderScreen can then access ordersPlaced
     //to get the orders which were just placed and set the corresponding labels in the active orders screen (OrderScreen.swift)
-    func getOrderInfo() -> [SingleOrder]{
+    func getOrderInfo() -> [Orders]{
         let cName = GIDSignIn.sharedInstance().currentUser.profile.name!
+        let cEmail = GIDSignIn.sharedInstance().currentUser.profile.email!
         var tempOrderNumber = totalOrdersCount
-        var orderArray = [SingleOrder]()
+        var orderArray = [Orders]()
         let StepCountArray : [UIStepper] = [BurgerStepCount,VeggieStepCount,ChickenStepCount]
         var toppings = ["Bun","Cheese","Sauce","Lettuce","Tomatoes"]
         let switchesArray : [[UISwitch]] = [HamburgerSwitches,VeggieSwitches]
@@ -68,7 +69,7 @@ class FoodScreen: UIViewController, GIDSignInUIDelegate{
                 orderInfo.append(foodServingArray[index][lround(StepCountArray[index].value)-1])
                 for cSwitch in 0...4{
                     if(index==2){
-                        orderInfo.append("")
+                        orderInfo.append("EMPTY_STRING")
                     }else{
                         if(switchesArray[index][cSwitch].isOn){
                             orderInfo.append("\(toppings[cSwitch])")
@@ -77,7 +78,7 @@ class FoodScreen: UIViewController, GIDSignInUIDelegate{
                         }
                     }
                 }
-                let tempOrder = SingleOrder(orderNum: tempOrderNumber, name: cName, foodServing: orderInfo[0], bunSetting: orderInfo[1], cheeseSetting: orderInfo[2], sauceSetting: orderInfo[3], lettuceSetting: orderInfo[4], tomatoSetting: orderInfo[5])
+                let tempOrder = Orders.returnNewRow(_email: cEmail, _orderNum: tempOrderNumber, _name: cName, _foodServing: orderInfo[0], _bunSetting: orderInfo[1], _cheeseSetting: orderInfo[2], _sauceSetting: orderInfo[3], _lettuceSetting: orderInfo[4], _tomatoSetting: orderInfo[5], _status: "Preparing...")
                 orderArray.append(tempOrder)
                 tempOrderNumber+=1
             }

@@ -14,9 +14,10 @@ import UIKit
 
 class OrderScreen: UIViewController, GIDSignInUIDelegate {
     
+    private var needsToUpdateOrders = true
     private var gifArray = [UIImage.gif(name: "preparing"), UIImage.gif(name: "preparing2"), UIImage.gif(name:"preparing3")] //Image Array of the three preparing gifs
     @IBOutlet var LinesArray: [UIImageView]! //Array of the two white lines which separate the orders
-    var totalOrderArray: [SingleOrder] = [] //Where all the current orders are appended to and kept track of
+    var totalOrderArray: [Orders] = [] //Where all the current orders are appended to and kept track of
     var OrderLabelsArray: [[UILabel]]! //Holds the three OrderItemLabels outlet collections which are defined below. Allows for easy looping through the three sections and their labels
     var timer = Timer() //Used to update the "Preparing..." text to make it animate
     @IBOutlet var GifViews: [UIImageView]! //Array of the UIImageView which hold the preparing gifs.
@@ -38,28 +39,37 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate {
 
     }
     
+   
+    
     //Used to transfer data when user unwinds from the foodScreen. Called when user pressed the "placeOrder" button, loops through the orders that were just placed and sets each one. 
     //Also sets the noActiveOrdersLabel as hidden. Adds the ordersPlaced to the totalOrderArray.
     @IBAction func unwindToOrderScreen(_ sender: UIStoryboardSegue) {
         if let makeOrderController = sender.source as? FoodScreen {
             let tempOrderArray = makeOrderController.ordersPlaced
-            for order in tempOrderArray{
-                noActiveOrdersLabel.isHidden=true
-                setSingleOrder(cOrder: order)
-                totalOrderArray.append(order)
+            for oldOrder in tempOrderArray{
+                DynamoCommands.dynamoInsertRow(oldOrder)
             }
+            setOrders(ordersArray: tempOrderArray)
+        
             
         }
     }
+    private func setOrders(ordersArray: [Orders]){
+        for newOrder in ordersArray{
+            noActiveOrdersLabel.isHidden=true
+            setSingleOrder(cOrder: newOrder)
+            totalOrderArray.append(newOrder)
+        }
+    }
     
-    //Sets an order to finished. Called when cook sets the order to complete and then will have to somehow pull that it's now set as finished in the database. 
+    //Sets an order to finished. Called when cook sets the order to complete and then will have to somehow pull that it's now set as finished in the database.
     //Changes the order to the new one (should just have status updated), but also hides the "Status" and "Preparing..." labels, and the PreparingGif. 
     //Unhides the foodIsReady label and the FinishedGif.
-    private func updateOrderAsFinished(cOrder: SingleOrder){
-        let cOrderNum = cOrder.orderNum
+    private func updateOrderAsFinished(cOrder: Orders){
+        let cOrderNum = cOrder.orderNumber! as Int
         var cOrderLabels = OrderLabelsArray[cOrderNum]
         totalOrderArray[cOrderNum] = cOrder
-        if(cOrder.status=="Finished"){
+        if(cOrder.orderStatus=="Finished"){
             cOrderLabels[6].isHidden=true
             cOrderLabels[7].isHidden=true
             FoodIsReadyLabelArray[cOrderNum].isHidden=false
@@ -103,7 +113,7 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate {
     //This is the method which sets the labels to the order. Called with a singleOrder object and loops through the three orderItemLabels groups checking if any are still hidden.
     //If they're hidden it means they haven't been used yet. When it finds unused orderItemLabels, sets all the corresponding labels to the correct info, unhides the seperating line,
     //unhides the preparing gif, and the status/preparing labels.
-    private func setSingleOrder(cOrder: SingleOrder){
+    public func setSingleOrder(cOrder: Orders){
         for index in 0...2{
             if(OrderLabelsArray[index][0].isHidden){
                 LinesArray[index].isHidden=false
@@ -112,16 +122,22 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate {
                 GifViews[index].layer.borderWidth = 3.5
                 GifViews[index].layer.borderColor = UIColor.black.cgColor
                 GifViews[index].layer.masksToBounds = true
-                for itemLabel in OrderLabelsArray[index]{
-                    itemLabel.isHidden=false
-                }
+                
                 OrderLabelsArray[index][0].text=cOrder.foodServing
-                OrderLabelsArray[index][1].text=cOrder.bunSetting
-                OrderLabelsArray[index][2].text=cOrder.cheeseSetting
-                OrderLabelsArray[index][3].text=cOrder.sauceSetting
-                OrderLabelsArray[index][4].text=cOrder.lettuceSetting
-                OrderLabelsArray[index][5].text=cOrder.tomatoSetting
-                OrderLabelsArray[index][7].text=cOrder.status
+                OrderLabelsArray[index][0].isHidden = false
+                OrderLabelsArray[index][6].isHidden=false
+                OrderLabelsArray[index][7].text=cOrder.orderStatus
+                OrderLabelsArray[index][7].isHidden = false
+                if(cOrder.bunSetting != "EMPTY_STRING"){
+                    for itemLabel in OrderLabelsArray[index]{
+                        itemLabel.isHidden=false
+                    }
+                    OrderLabelsArray[index][1].text=cOrder.bunSetting
+                    OrderLabelsArray[index][2].text=cOrder.cheeseSetting
+                    OrderLabelsArray[index][3].text=cOrder.sauceSetting
+                    OrderLabelsArray[index][4].text=cOrder.lettuceSetting
+                    OrderLabelsArray[index][5].text=cOrder.tomatoSetting
+                }
                 break
             }
         }
@@ -129,6 +145,10 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate {
     
     //Called by the timer every second starting from when view first loaded. Only does anything if it isn't hidden and the text is set as the Preparing loop. Gives "Preparing..." animatino.
     @objc private func updatePrep(){
+        if(needsToUpdateOrders && DynamoCommands.prevOrders.count>0){
+            setOrders(ordersArray: DynamoCommands.prevOrders)
+            needsToUpdateOrders=false
+        }
         for orderLabels in OrderLabelsArray{
             if(orderLabels[7].text=="Preparing."){
                 orderLabels[7].text="Preparing.."
@@ -151,8 +171,15 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate {
         GIDSignIn.sharedInstance().uiDelegate = self
         OrderLabelsArray=[OrderItemLabels,OrderItemLabels2,OrderItemLabels3]
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(OrderScreen.updatePrep), userInfo: nil, repeats: true)
-       
+        if(needsToUpdateOrders && DynamoCommands.prevOrders.count>0){
+            setOrders(ordersArray: DynamoCommands.prevOrders)
+            needsToUpdateOrders=false
+        }
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
     }
     
     override func didReceiveMemoryWarning() {
