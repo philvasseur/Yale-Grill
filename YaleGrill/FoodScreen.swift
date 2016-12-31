@@ -78,7 +78,7 @@ class FoodScreen: UIViewController, GIDSignInUIDelegate{
                         }
                     }
                 }
-                let tempOrder = Orders.returnNewRow(_email: cEmail, _orderNum: tempOrderNumber, _name: cName, _foodServing: orderInfo[0], _bunSetting: orderInfo[1], _cheeseSetting: orderInfo[2], _sauceSetting: orderInfo[3], _lettuceSetting: orderInfo[4], _tomatoSetting: orderInfo[5], _status: "Preparing...")
+                let tempOrder = Orders.returnNewRow(_email: cEmail, _orderNum: tempOrderNumber, _name: cName, _foodServing: orderInfo[0], _bunSetting: orderInfo[1], _cheeseSetting: orderInfo[2], _sauceSetting: orderInfo[3], _lettuceSetting: orderInfo[4], _tomatoSetting: orderInfo[5], _isFinished: false)
                 orderArray.append(tempOrder)
                 tempOrderNumber+=1
             }

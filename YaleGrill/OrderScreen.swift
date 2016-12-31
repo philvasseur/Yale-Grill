@@ -69,7 +69,7 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate {
         let cOrderNum = cOrder.orderNumber! as Int
         var cOrderLabels = OrderLabelsArray[cOrderNum]
         totalOrderArray[cOrderNum] = cOrder
-        if(cOrder.orderStatus=="Finished"){
+        if(cOrder.isFinished==1){
             cOrderLabels[6].isHidden=true
             cOrderLabels[7].isHidden=true
             FoodIsReadyLabelArray[cOrderNum].isHidden=false
@@ -126,7 +126,9 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate {
                 OrderLabelsArray[index][0].text=cOrder.foodServing
                 OrderLabelsArray[index][0].isHidden = false
                 OrderLabelsArray[index][6].isHidden=false
-                OrderLabelsArray[index][7].text=cOrder.orderStatus
+                if(cOrder.isFinished==0){
+                    OrderLabelsArray[index][7].text="Preparing..."
+                }
                 OrderLabelsArray[index][7].isHidden = false
                 if(cOrder.bunSetting != "EMPTY_STRING"){
                     for itemLabel in OrderLabelsArray[index]{

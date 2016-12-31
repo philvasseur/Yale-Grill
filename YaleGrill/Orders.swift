@@ -26,7 +26,7 @@ class Orders: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     var sauceSetting: String?
     var lettuceSetting: String?
     var tomatoSetting: String?
-    var orderStatus: String?
+    var isFinished: NSNumber?
     
     class func dynamoDBTableName() -> String {
 
@@ -42,7 +42,7 @@ class Orders: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
         return "orderNumber"
     }
     
-    class func returnNewRow(_email: String,_orderNum: Int,_name : String, _foodServing : String, _bunSetting : String, _cheeseSetting : String, _sauceSetting : String, _lettuceSetting : String, _tomatoSetting: String, _status : String) -> Orders {
+    class func returnNewRow(_email: String,_orderNum: Int,_name : String, _foodServing : String, _bunSetting : String, _cheeseSetting : String, _sauceSetting : String, _lettuceSetting : String, _tomatoSetting: String, _isFinished : NSNumber) -> Orders {
         let row = Orders()
         row?.email = _email
         row?.orderNumber = _orderNum as NSNumber?
@@ -53,7 +53,7 @@ class Orders: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
         row?.sauceSetting = _sauceSetting
         row?.lettuceSetting = _lettuceSetting
         row?.tomatoSetting = _tomatoSetting
-        row?.orderStatus = _status
+        row?.isFinished = _isFinished
 
         return row!
     }
