@@ -8,11 +8,17 @@
 
 import UIKit
 import AWSCore
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    static var dBaseRef = FIRDatabase.database().reference()
     var window: UIWindow?
+    
+    override init(){
+        FIRApp.configure()
+
+    }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -20,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GGLContext.sharedInstance().configureWithError(&configureError)
         if(configureError != nil){
             print("We have an error \(configureError)")
-        }        
+        }
         return true
     }
     

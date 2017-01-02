@@ -8,6 +8,7 @@
 
 import Foundation
 import AWSDynamoDB
+import AWSKinesis
 
 class DynamoCommands{
     public static var queryFinished: Bool = true
@@ -50,6 +51,8 @@ class DynamoCommands{
         })
     }
     
+    
+    
     // MARK: Dynamo - Search for orders with this email
     public static func dynamoSearch(email: String) {
         queryFinished = false
@@ -76,4 +79,5 @@ class DynamoCommands{
             return nil
         })
     }
+    
 }

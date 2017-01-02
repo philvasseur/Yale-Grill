@@ -47,7 +47,7 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate {
         if let makeOrderController = sender.source as? FoodScreen {
             let tempOrderArray = makeOrderController.ordersPlaced
             for oldOrder in tempOrderArray{
-                DynamoCommands.dynamoInsertRow(oldOrder)
+                //DynamoCommands.dynamoInsertRow(oldOrder)
             }
             setOrders(ordersArray: tempOrderArray)
         
@@ -60,7 +60,7 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate {
             allActiveOrders[0].orderLocation = 0
             DynamoCommands.dynamoInsertRow(allActiveOrders[0])
         }else if(allActiveOrders.count == 2){
-            if(allActiveOrders[0].orderLocation as! Int > allActiveOrders[1].orderLocation as! Int){
+            if(allActiveOrders[0].orderLocation! > allActiveOrders[1].orderLocation!){
                 allActiveOrders[0].orderLocation = 1
                 allActiveOrders[1].orderLocation = 0
             }else{
@@ -70,7 +70,7 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate {
             
         }
         for Order in allActiveOrders{
-        DynamoCommands.dynamoInsertRow(Order)
+        //DynamoCommands.dynamoInsertRow(Order)
         }
 
     }
@@ -89,7 +89,7 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate {
     //Changes the order to the new one (should just have status updated), but also hides the "Status" and "Preparing..." labels, and the PreparingGif. 
     //Unhides the foodIsReady label and the FinishedGif.
     private func updateOrderAsFinished(cOrder: Orders){
-        let orderLoc = cOrder.orderLocation as! Int
+        let orderLoc = cOrder.orderLocation!
         var cOrderLabels = OrderLabelsArray[orderLoc]
         cOrderLabels[6].isHidden=true
         cOrderLabels[7].isHidden=true
@@ -135,7 +135,7 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate {
     //If they're hidden it means they haven't been used yet. When it finds unused orderItemLabels, sets all the corresponding labels to the correct info, unhides the seperating line,
     //unhides the preparing gif, and the status/preparing labels.
     private func setSingleOrder(cOrder: Orders){
-        let index = cOrder.orderLocation as! Int
+        let index : Int = cOrder.orderLocation!
         LinesArray[index].isHidden=false
         OrderLabelsArray[index][0].text=cOrder.foodServing
         OrderLabelsArray[index][0].isHidden = false
@@ -188,7 +188,7 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate {
         GIDSignIn.sharedInstance().uiDelegate = self
         OrderLabelsArray=[OrderItemLabels,OrderItemLabels2,OrderItemLabels3]
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(OrderScreen.updatePrep), userInfo: nil, repeats: true)
-        setOrders(ordersArray: DynamoCommands.prevOrders)
+        //setOrders(ordersArray: DynamoCommands.prevOrders)
     }
     
     override func viewDidAppear(_ animated: Bool) {

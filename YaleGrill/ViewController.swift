@@ -15,6 +15,7 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
     @IBOutlet weak var SignInButton: GIDSignInButton!
     @IBOutlet weak var SignInText: UILabel!
     @IBOutlet weak var SignInPicture: UIImageView!
+    
     //Page for logging in. Doesn't do much besides try to auto login. Contains the GIDSignIn button.
     /*
      Method for googleSign in. Is called when you press the button and when the application loads. Checks if there is authentication in keychain cached, if so checks if a yale email. If it has a yale email then moves to OrderScreen page with active orders. If not a yale email then logs out.
@@ -34,7 +35,7 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
                 timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(ViewController.runLoadingAnimation), userInfo: nil, repeats: true)
                 //DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
                     // Put your code which should be executed with a delay here
-                while(!DynamoCommands.queryFinished){                    
+                while(!DynamoCommands.queryFinished){
                 }
                    self.performSegue(withIdentifier: "SignInSegue", sender: nil)
                // })
@@ -71,6 +72,10 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
         GIDSignIn.sharedInstance().signInSilently()
         
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
 
     override func didReceiveMemoryWarning() {

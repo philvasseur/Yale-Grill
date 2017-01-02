@@ -28,4 +28,6 @@ target 'YaleGrill' do
   pod 'AWSSimpleDB'
   pod 'AWSSNS'
   pod 'AWSSQS'
+  pod 'Firebase'
+  pod 'Firebase/Database'
 end

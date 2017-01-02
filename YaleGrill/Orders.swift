@@ -14,10 +14,12 @@
 import Foundation
 import UIKit
 import AWSDynamoDB
+import Firebase
 
-class Orders: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
+class Orders {
+    var databaseRef = FIRDatabase.database().reference()
     
-    var email: String?
+    var userID: String?
     var orderID: String?
     var name: String?
     var foodServing: String?
@@ -26,10 +28,46 @@ class Orders: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     var sauceSetting: String?
     var lettuceSetting: String?
     var tomatoSetting: String?
-    var orderStatus: NSNumber?
-    var orderLocation: NSNumber?
+    var orderStatus: Int?
+    var orderLocation: Int?
     
-    class func dynamoDBTableName() -> String {
+    private struct DatabaseKeys {
+        static let foodServing = "foodServing"
+        static let bunSetting = "bunSetting"
+        static let cheeseSetting = "cheeseSetting"
+        static let sauceSetting = "sauceSetting"
+        static let lettuceSetting = "lettuceSetting"
+        static let tomatoSetting = "tomatoSetting"
+        static let orderStatus = "orderStatus"
+        static let orderLocation = "orderLocation"
+        static let orderID = "orderID"
+        
+    }
+    
+    func insertIntoDatabase(){
+        let currentUser = databaseRef.child(userID!)
+        currentUser.child("name").setValue(name)
+        let currentOrder = currentUser.child(orderID!)
+        currentOrder.setValue(convToJason())
+    }
+    
+    private func convToJason() -> [String : AnyObject] {
+        let jsonObject: [String: AnyObject] = [
+            DatabaseKeys.foodServing: foodServing as AnyObject,
+            DatabaseKeys.bunSetting: bunSetting as AnyObject,
+            DatabaseKeys.cheeseSetting: cheeseSetting as AnyObject,
+            DatabaseKeys.sauceSetting: sauceSetting as AnyObject,
+            DatabaseKeys.lettuceSetting: lettuceSetting as AnyObject,
+            DatabaseKeys.tomatoSetting: tomatoSetting as AnyObject,
+            DatabaseKeys.orderStatus: orderStatus as AnyObject,
+            DatabaseKeys.orderLocation: orderLocation as AnyObject,
+            DatabaseKeys.orderID: orderID as AnyObject,
+        ]
+        
+        return jsonObject
+    }
+    
+    /*class func dynamoDBTableName() -> String {
 
         return "yalegrill-mobilehub-1490068997-Orders"
     }
@@ -41,23 +79,23 @@ class Orders: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     class func rangeKeyAttribute() -> String {
 
         return "orderID"
-    }
+    }*/
     
-    class func returnNewRow(_email: String,_name : String, _foodServing : String, _bunSetting : String, _cheeseSetting : String, _sauceSetting : String, _lettuceSetting : String, _tomatoSetting: String, _orderStatus : NSNumber, _orderLocation: NSNumber) -> Orders {
-        let row = Orders()
-        row?.email = _email
+    class func createNewObject(_userID: String,_name : String, _foodServing : String, _bunSetting : String, _cheeseSetting : String, _sauceSetting : String, _lettuceSetting : String, _tomatoSetting: String, _orderStatus : Int, _orderLocation: Int) -> Orders {
+        let order = Orders()
+        order.userID = _userID
         let uuid = CFUUIDCreateString(nil, CFUUIDCreate(nil))
-        row?.orderID = uuid as String?
-        row?.name = _name
-        row?.foodServing = _foodServing
-        row?.bunSetting = _bunSetting
-        row?.cheeseSetting = _cheeseSetting
-        row?.sauceSetting = _sauceSetting
-        row?.lettuceSetting = _lettuceSetting
-        row?.tomatoSetting = _tomatoSetting
-        row?.orderStatus = _orderStatus
-        row?.orderLocation = _orderLocation
+        order.orderID = uuid as String?
+        order.name = _name
+        order.foodServing = _foodServing
+        order.bunSetting = _bunSetting
+        order.cheeseSetting = _cheeseSetting
+        order.sauceSetting = _sauceSetting
+        order.lettuceSetting = _lettuceSetting
+        order.tomatoSetting = _tomatoSetting
+        order.orderStatus = _orderStatus
+        order.orderLocation = _orderLocation
 
-        return row!
+        return order
     }
 }
