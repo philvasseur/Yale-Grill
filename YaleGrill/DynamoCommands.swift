@@ -10,6 +10,7 @@ import Foundation
 import AWSDynamoDB
 
 class DynamoCommands{
+    public static var queryFinished: Bool = true
     public static var prevOrders : [Orders] = []
     
     public static func dynamoInsertRow(_ row: Orders) {
@@ -51,12 +52,14 @@ class DynamoCommands{
     
     // MARK: Dynamo - Search for orders with this email
     public static func dynamoSearch(email: String) {
+        queryFinished = false
        let objectMapper = AWSDynamoDBObjectMapper.default()
         // Set up the query for all rides with the current user's netID.
         let queryForOrders = AWSDynamoDBQueryExpression()
         queryForOrders.scanIndexForward = true
         queryForOrders.keyConditionExpression = "email = :currentUserEmail"
-        queryForOrders.expressionAttributeValues = [":currentUserEmail" : email]
+        queryForOrders.filterExpression = "orderStatus < :num"
+        queryForOrders.expressionAttributeValues = [":currentUserEmail" : email, ":num" : 2]
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         objectMapper.query(Orders.self, expression: queryForOrders).continue(
             { (task: AWSTask<AWSDynamoDBPaginatedOutput>!) -> AnyObject! in
@@ -68,6 +71,7 @@ class DynamoCommands{
                 prevOrders =  result!.items as! [Orders]
                 
             }
+                queryFinished=true
             // We don't use the return value from this task.
             return nil
         })

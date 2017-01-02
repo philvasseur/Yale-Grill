@@ -18,7 +18,7 @@ import AWSDynamoDB
 class Orders: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     
     var email: String?
-    var orderNumber: NSNumber?
+    var orderID: String?
     var name: String?
     var foodServing: String?
     var bunSetting: String?
@@ -26,7 +26,8 @@ class Orders: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     var sauceSetting: String?
     var lettuceSetting: String?
     var tomatoSetting: String?
-    var isFinished: NSNumber?
+    var orderStatus: NSNumber?
+    var orderLocation: NSNumber?
     
     class func dynamoDBTableName() -> String {
 
@@ -39,13 +40,14 @@ class Orders: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     
     class func rangeKeyAttribute() -> String {
 
-        return "orderNumber"
+        return "orderID"
     }
     
-    class func returnNewRow(_email: String,_orderNum: Int,_name : String, _foodServing : String, _bunSetting : String, _cheeseSetting : String, _sauceSetting : String, _lettuceSetting : String, _tomatoSetting: String, _isFinished : NSNumber) -> Orders {
+    class func returnNewRow(_email: String,_name : String, _foodServing : String, _bunSetting : String, _cheeseSetting : String, _sauceSetting : String, _lettuceSetting : String, _tomatoSetting: String, _orderStatus : NSNumber, _orderLocation: NSNumber) -> Orders {
         let row = Orders()
         row?.email = _email
-        row?.orderNumber = _orderNum as NSNumber?
+        let uuid = CFUUIDCreateString(nil, CFUUIDCreate(nil))
+        row?.orderID = uuid as String?
         row?.name = _name
         row?.foodServing = _foodServing
         row?.bunSetting = _bunSetting
@@ -53,7 +55,8 @@ class Orders: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
         row?.sauceSetting = _sauceSetting
         row?.lettuceSetting = _lettuceSetting
         row?.tomatoSetting = _tomatoSetting
-        row?.isFinished = _isFinished
+        row?.orderStatus = _orderStatus
+        row?.orderLocation = _orderLocation
 
         return row!
     }

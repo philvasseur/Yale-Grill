@@ -344,7 +344,6 @@
                         <outletCollection property="LinesArray" destination="Mme-0a-GLw" collectionClass="NSMutableArray" id="QHv-23-Ieu"/>
                         <outletCollection property="FinishedGifArray" destination="w4s-8g-1ef" collectionClass="NSMutableArray" id="UiU-Gq-7XX"/>
                         <outletCollection property="FinishedGifArray" destination="6hb-aT-WUJ" collectionClass="NSMutableArray" id="IIl-66-Gey"/>
-                        <outletCollection property="FinishedGifArray" destination="6hb-aT-WUJ" collectionClass="NSMutableArray" id="xoo-BH-Zod"/>
                         <outletCollection property="FinishedGifArray" destination="MsF-tT-Xca" collectionClass="NSMutableArray" id="lID-oa-A8F"/>
                         <outletCollection property="FoodIsReadyLabelArray" destination="3kn-Sr-h8w" collectionClass="NSMutableArray" id="5FE-2h-1fg"/>
                         <outletCollection property="FoodIsReadyLabelArray" destination="uUq-aS-Kmu" collectionClass="NSMutableArray" id="1pR-uM-tEs"/>

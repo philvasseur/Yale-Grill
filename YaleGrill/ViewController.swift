@@ -32,10 +32,12 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
                 LoadingLabel.isHidden=false
                 DynamoCommands.dynamoSearch(email: GIDSignIn.sharedInstance().currentUser.profile.email!)
                 timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(ViewController.runLoadingAnimation), userInfo: nil, repeats: true)
-                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
+                //DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
                     // Put your code which should be executed with a delay here
+                while(!DynamoCommands.queryFinished){                    
+                }
                    self.performSegue(withIdentifier: "SignInSegue", sender: nil)
-                })
+               // })
             }else{ //Not a yale email, so signs user out.
                 print("Non-Yale Email, LOGGING OUT")
                 GIDSignIn.sharedInstance().signOut()
