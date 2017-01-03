@@ -1,11 +1,7 @@
 # YaleGrill
 
-iOS App allowing Yale students to order to dining hall grills.
+An iOS App allowing Yale students to order to dining hall grills.
 
-YOU NEED GOOGLE SIGN IN POD TO MAKE THIS WORK. https://www.youtube.com/watch?v=QmnI5c85sf0 Is a walk through for installing the right pods.
-
-1. install CocoaPods via gem.
-2. go to project file - pod init
-3. add into pods folder "pod 'Google/SignIn'"
-4. pod install
-5. open the XCWORKSPACE file, not the xcodeproj
+* Keeps track of and updates the orders in realtime using Google's Firebase Database.
+* Uses Google/SignIn, allowing only students with Yale emails to access the app and place orders.
+* Special accounts for the cooks allow them to see all orders, mark them as they finish, and delete them from the server as they get picked up
