@@ -81,7 +81,6 @@ class FoodScreen: UIViewController, GIDSignInUIDelegate{
                
                 let tempOrder = Orders.createNewObject(_userID: cUser, _name: cName, _foodServing: orderInfo[0], _bunSetting: orderInfo[1], _cheeseSetting: orderInfo[2], _sauceSetting: orderInfo[3], _lettuceSetting: orderInfo[4], _tomatoSetting: orderInfo[5], _orderStatus: 0, _orderLocation: tempOrderLoc)
                 orderArray.append(tempOrder)
-                tempOrder.insertIntoDatabase()
                 tempOrderLoc+=1
             }
         }

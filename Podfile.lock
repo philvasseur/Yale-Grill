@@ -1,47 +1,9 @@
 PODS:
-  - AWSAutoScaling (2.4.16):
-    - AWSCore (= 2.4.16)
-  - AWSCloudWatch (2.4.16):
-    - AWSCore (= 2.4.16)
-  - AWSCognito (2.4.16):
-    - AWSCore (= 2.4.16)
-  - AWSCognitoIdentityProvider (2.4.16):
-    - AWSCore (= 2.4.16)
-  - AWSCore (2.4.16)
-  - AWSDynamoDB (2.4.16):
-    - AWSCore (= 2.4.16)
-  - AWSEC2 (2.4.16):
-    - AWSCore (= 2.4.16)
-  - AWSElasticLoadBalancing (2.4.16):
-    - AWSCore (= 2.4.16)
-  - AWSIoT (2.4.16):
-    - AWSCore (= 2.4.16)
-  - AWSKinesis (2.4.16):
-    - AWSCore (= 2.4.16)
-  - AWSLambda (2.4.16):
-    - AWSCore (= 2.4.16)
-  - AWSLex (2.4.16):
-    - AWSCore (= 2.4.16)
-  - AWSMachineLearning (2.4.16):
-    - AWSCore (= 2.4.16)
-  - AWSMobileAnalytics (2.4.16):
-    - AWSCore (= 2.4.16)
-  - AWSPinpoint (2.4.16):
-    - AWSCore (= 2.4.16)
-  - AWSPolly (2.4.16):
-    - AWSCore (= 2.4.16)
-  - AWSS3 (2.4.16):
-    - AWSCore (= 2.4.16)
-  - AWSSES (2.4.16):
-    - AWSCore (= 2.4.16)
-  - AWSSimpleDB (2.4.16):
-    - AWSCore (= 2.4.16)
-  - AWSSNS (2.4.16):
-    - AWSCore (= 2.4.16)
-  - AWSSQS (2.4.16):
-    - AWSCore (= 2.4.16)
   - Firebase (3.11.0):
     - Firebase/Core (= 3.11.0)
+  - Firebase/Auth (3.11.0):
+    - Firebase/Core
+    - FirebaseAuth (= 3.1.0)
   - Firebase/Core (3.11.0):
     - FirebaseAnalytics (= 3.6.0)
     - FirebaseCore (= 3.4.6)
@@ -54,6 +16,10 @@ PODS:
     - GoogleInterchangeUtilities (~> 1.2)
     - GoogleSymbolUtilities (~> 1.1)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseAuth (3.1.0):
+    - FirebaseAnalytics (~> 3.6)
+    - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
+    - GTMSessionFetcher/Core (~> 1.1)
   - FirebaseCore (3.4.6):
     - GoogleInterchangeUtilities (~> 1.2)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
@@ -95,55 +61,16 @@ PODS:
   - SwiftGifOrigin (1.6.1)
 
 DEPENDENCIES:
-  - AWSAutoScaling
-  - AWSCloudWatch
-  - AWSCognito
-  - AWSCognitoIdentityProvider
-  - AWSDynamoDB
-  - AWSEC2
-  - AWSElasticLoadBalancing
-  - AWSIoT
-  - AWSKinesis
-  - AWSLambda
-  - AWSLex
-  - AWSMachineLearning
-  - AWSMobileAnalytics
-  - AWSPinpoint
-  - AWSPolly
-  - AWSS3
-  - AWSSES
-  - AWSSimpleDB
-  - AWSSNS
-  - AWSSQS
   - Firebase
+  - Firebase/Auth
   - Firebase/Database
   - Google/SignIn
   - SwiftGifOrigin
 
 SPEC CHECKSUMS:
-  AWSAutoScaling: b659a202a145e89c212f11b889122545a663f5e8
-  AWSCloudWatch: 3653a840e267235722b350202e06185a976c3ba9
-  AWSCognito: 666dba6eb65ac27faad79e83febf25630913aefc
-  AWSCognitoIdentityProvider: 1c74bb819fc5f74a708a4a8e0be8b235a959ab86
-  AWSCore: 7c3c129991e6387bcbad7132bc3661e7135754db
-  AWSDynamoDB: e6fc88dca72b2efee4492729d96ed945b9f3a224
-  AWSEC2: 357263a041beeb42083faeb4d314eec2cab28165
-  AWSElasticLoadBalancing: 50dbb109ae332101f9263ea130e5766cbd820ee0
-  AWSIoT: e932e22992b8fe0fa5a41ce2de60d8a284396603
-  AWSKinesis: 7e449258e9f7efa7d54c407a7136120ab033115c
-  AWSLambda: 87ec46e9fc53409dcbe28b70a6ac86a27b87275b
-  AWSLex: 948c7cfba9a4d1c110b1e16df4fc7cb5b7928887
-  AWSMachineLearning: 8a8b091506fd54b6939334e18aefc38316541328
-  AWSMobileAnalytics: d149e1d0983df810f59860dfa132f1ac9d97bc5a
-  AWSPinpoint: ef0419b2f69e86e79f6cabe60c1527e719ce7bbe
-  AWSPolly: 1534d56737c4c966d9c449aa8c9d76ae3cc57d9e
-  AWSS3: fef6aa8f8f625df8f67f1b6574fe761f3a4ddc99
-  AWSSES: 2ae1cedd965aaffc7f8be9c7b2cf5e236f7b795b
-  AWSSimpleDB: c4f1f0f2c148b851e24f9c0bd43a89bebf978e72
-  AWSSNS: f7eb9a5c19410e2a0164febc2cd665831c1cd26c
-  AWSSQS: c13f3196915c83cd2b9453412e0db699d7d2ea5f
   Firebase: b8134e285eb33201115bc688bc5d7f112923bc1f
   FirebaseAnalytics: 9c67af0ebeb8d2146c9b4ea2616439affa947b58
+  FirebaseAuth: b436e4ecebe068bf8e8c6e4e29de5756ffe7ee24
   FirebaseCore: 03da1cb32615569bbc2830a22f9ad753d9a02ef5
   FirebaseDatabase: 6de92187481ff0e8e124064f21742e95ee883b02
   FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
@@ -157,6 +84,6 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: a1f8ed39e4fe21c68957daed472c7afbcdf29166
   SwiftGifOrigin: d6679d3ebe9df2e049a84bc52582635107b581f6
 
-PODFILE CHECKSUM: 4de1721e6a049345e75882938d7f2c01099ff891
+PODFILE CHECKSUM: 51c409a6ea35242049a3a155f1b6783345b30c0b
 
 COCOAPODS: 1.1.1

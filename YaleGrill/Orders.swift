@@ -13,25 +13,24 @@
 
 import Foundation
 import UIKit
-import AWSDynamoDB
 import Firebase
 
 class Orders {
     var databaseRef = FIRDatabase.database().reference()
-    
-    var userID: String?
-    var orderID: String?
-    var name: String?
-    var foodServing: String?
-    var bunSetting: String?
-    var cheeseSetting: String?
-    var sauceSetting: String?
-    var lettuceSetting: String?
-    var tomatoSetting: String?
-    var orderStatus: Int?
-    var orderLocation: Int?
+    var userID: String!
+    var orderID: String!
+    var name: String!
+    var foodServing: String!
+    var bunSetting: String!
+    var cheeseSetting: String!
+    var sauceSetting: String!
+    var lettuceSetting: String!
+    var tomatoSetting: String!
+    var orderStatus: Int!
+    var orderLocation: Int!
     
     private struct DatabaseKeys {
+        static let name = "name"
         static let foodServing = "foodServing"
         static let bunSetting = "bunSetting"
         static let cheeseSetting = "cheeseSetting"
@@ -41,18 +40,23 @@ class Orders {
         static let orderStatus = "orderStatus"
         static let orderLocation = "orderLocation"
         static let orderID = "orderID"
-        
+        static let userID = "userID"
     }
     
-    func insertIntoDatabase(){
+    //Inserts a new order into fireBase database, also sets value of ActiveOrders in firebase database (as empty string if no active orders)
+    func insertIntoDatabase(AllActiveIDs : [String]){
+        let user = databaseRef.child(userID)
         let currentUser = databaseRef.child(userID!)
-        currentUser.child("name").setValue(name)
         let currentOrder = currentUser.child(orderID!)
-        currentOrder.setValue(convToJason())
+        currentOrder.setValue(convToJSON())
+        let totalIDs = AllActiveIDs.joined(separator: " ")
+        user.child("ActiveOrders").setValue(totalIDs)
     }
     
-    private func convToJason() -> [String : AnyObject] {
+    //Changes current Orders object into a json object to be uploaded to firebase
+    private func convToJSON() -> [String : AnyObject] {
         let jsonObject: [String: AnyObject] = [
+            DatabaseKeys.name : name as AnyObject,
             DatabaseKeys.foodServing: foodServing as AnyObject,
             DatabaseKeys.bunSetting: bunSetting as AnyObject,
             DatabaseKeys.cheeseSetting: cheeseSetting as AnyObject,
@@ -62,25 +66,31 @@ class Orders {
             DatabaseKeys.orderStatus: orderStatus as AnyObject,
             DatabaseKeys.orderLocation: orderLocation as AnyObject,
             DatabaseKeys.orderID: orderID as AnyObject,
+            DatabaseKeys.userID: userID as AnyObject,
         ]
         
         return jsonObject
     }
     
-    /*class func dynamoDBTableName() -> String {
-
-        return "yalegrill-mobilehub-1490068997-Orders"
+    //Returns an Orders object from a firebase JSON
+    class func convFromJSON(json : [String : AnyObject]) -> Orders {
+        let order = Orders()
+        order.userID = json[DatabaseKeys.userID] as! String
+        order.orderID = json[DatabaseKeys.orderID] as! String
+        order.name = json[DatabaseKeys.name] as! String
+        order.foodServing = json[DatabaseKeys.foodServing] as! String
+        order.bunSetting = json[DatabaseKeys.bunSetting] as! String
+        order.cheeseSetting = json[DatabaseKeys.cheeseSetting] as! String
+        order.sauceSetting = json[DatabaseKeys.sauceSetting] as! String
+        order.lettuceSetting = json[DatabaseKeys.lettuceSetting] as! String
+        order.tomatoSetting = json[DatabaseKeys.tomatoSetting] as! String
+        order.orderStatus = json[DatabaseKeys.orderStatus] as! Int
+        order.orderLocation = json[DatabaseKeys.orderLocation] as! Int
+        
+        return order
     }
     
-    class func hashKeyAttribute() -> String {
-        return "email"
-    }
-    
-    class func rangeKeyAttribute() -> String {
-
-        return "orderID"
-    }*/
-    
+    //Creates a new Orders object
     class func createNewObject(_userID: String,_name : String, _foodServing : String, _bunSetting : String, _cheeseSetting : String, _sauceSetting : String, _lettuceSetting : String, _tomatoSetting: String, _orderStatus : Int, _orderLocation: Int) -> Orders {
         let order = Orders()
         order.userID = _userID
