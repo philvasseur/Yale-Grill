@@ -12,8 +12,8 @@
 		CD179F0A1E15F6C300496D5F /* preparing3.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD179F081E15F6C300496D5F /* preparing3.gif */; };
 		CD179F0B1E15F6C300496D5F /* preparing2.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD179F091E15F6C300496D5F /* preparing2.gif */; };
 		CD179F0F1E16042D00496D5F /* finished.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD179F0E1E16042D00496D5F /* finished.gif */; };
-		CD1E95DE1E15C7490056D00E /* Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1E95DD1E15C7490056D00E /* Gif.swift */; };
-		CD3CD8B01E1AF7DE00CBFB56 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD3CD8AF1E1AF7DE00CBFB56 /* GoogleService-Info.plist */; };
+		CD1A13DC1E1E132C003AFBCE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD1A13DB1E1E132C003AFBCE /* GoogleService-Info.plist */; };
+		CD1A13DE1E1E1356003AFBCE /* Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1A13DD1E1E1356003AFBCE /* Gif.swift */; };
 		CD460E2D1E1B6368007C8588 /* ControlScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD460E2C1E1B6368007C8588 /* ControlScreenView.swift */; };
 		CD9E14E41E130C7E000E21C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9E14E31E130C7E000E21C0 /* AppDelegate.swift */; };
 		CD9E14E61E130C7E000E21C0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9E14E51E130C7E000E21C0 /* ViewController.swift */; };
@@ -44,8 +44,8 @@
 		CD179F081E15F6C300496D5F /* preparing3.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = preparing3.gif; path = ../../../../Downloads/preparing3.gif; sourceTree = "<group>"; };
 		CD179F091E15F6C300496D5F /* preparing2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = preparing2.gif; path = ../../../../Downloads/preparing2.gif; sourceTree = "<group>"; };
 		CD179F0E1E16042D00496D5F /* finished.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = finished.gif; path = ../../../../Downloads/finished.gif; sourceTree = "<group>"; };
-		CD1E95DD1E15C7490056D00E /* Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Gif.swift; path = ../Pods/SwiftGifOrigin/SwiftGifCommon/Gif.swift; sourceTree = "<group>"; };
-		CD3CD8AF1E1AF7DE00CBFB56 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CD1A13DB1E1E132C003AFBCE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CD1A13DD1E1E1356003AFBCE /* Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gif.swift; sourceTree = "<group>"; };
 		CD460E2C1E1B6368007C8588 /* ControlScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlScreenView.swift; sourceTree = "<group>"; };
 		CD9E14E01E130C7E000E21C0 /* YaleGrill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YaleGrill.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD9E14E31E130C7E000E21C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -109,10 +109,10 @@
 		CD179F0D1E15F74C00496D5F /* DoNotTouch */ = {
 			isa = PBXGroup;
 			children = (
-				CD3CD8AF1E1AF7DE00CBFB56 /* GoogleService-Info.plist */,
+				CD1A13DB1E1E132C003AFBCE /* GoogleService-Info.plist */,
 				CD9E14EF1E130C7E000E21C0 /* Info.plist */,
 				CDD92A2B1E130E5B005C091B /* YaleGrill-Bridging-Header.h */,
-				CD1E95DD1E15C7490056D00E /* Gif.swift */,
+				CD1A13DD1E1E1356003AFBCE /* Gif.swift */,
 			);
 			name = DoNotTouch;
 			sourceTree = "<group>";
@@ -218,7 +218,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD9E14EE1E130C7E000E21C0 /* LaunchScreen.storyboard in Resources */,
-				CD3CD8B01E1AF7DE00CBFB56 /* GoogleService-Info.plist in Resources */,
+				CD1A13DC1E1E132C003AFBCE /* GoogleService-Info.plist in Resources */,
 				CD179F0A1E15F6C300496D5F /* preparing3.gif in Resources */,
 				CD179F0F1E16042D00496D5F /* finished.gif in Resources */,
 				CD179F0B1E15F6C300496D5F /* preparing2.gif in Resources */,
@@ -287,8 +287,8 @@
 				CDC1A0DA1E177B49009C2538 /* Orders.swift in Sources */,
 				CD460E2D1E1B6368007C8588 /* ControlScreenView.swift in Sources */,
 				CD9E14E41E130C7E000E21C0 /* AppDelegate.swift in Sources */,
-				CD1E95DE1E15C7490056D00E /* Gif.swift in Sources */,
 				CDCFD5931E1329B100065E87 /* OrderScreen.swift in Sources */,
+				CD1A13DE1E1E1356003AFBCE /* Gif.swift in Sources */,
 				CDCFD5951E1359AE00065E87 /* FoodScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
