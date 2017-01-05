@@ -57,7 +57,7 @@ class FoodScreen: UIViewController, GIDSignInUIDelegate{
     func getOrderInfo() -> [Orders]{
         let cName = GIDSignIn.sharedInstance().currentUser.profile.name!
         let cUser = GIDSignIn.sharedInstance().currentUser.userID!
-        var tempOrderLoc = totalOrdersCount
+        //var tempOrderLoc = totalOrdersCount
         var orderArray = [Orders]()
         let StepCountArray : [UIStepper] = [BurgerStepCount,VeggieStepCount,ChickenStepCount]
         var toppings = ["Bun","Cheese","Sauce","Lettuce","Tomatoes"]
@@ -69,7 +69,7 @@ class FoodScreen: UIViewController, GIDSignInUIDelegate{
                 orderInfo.append(foodServingArray[index][lround(StepCountArray[index].value)-1])
                 for cSwitch in 0...4{
                     if(index==2){
-                        orderInfo.append("EMPTY_STRING")
+                        orderInfo.append("")
                     }else{
                         if(switchesArray[index][cSwitch].isOn){
                             orderInfo.append("\(toppings[cSwitch])")
@@ -79,9 +79,9 @@ class FoodScreen: UIViewController, GIDSignInUIDelegate{
                     }
                 }
                
-                let tempOrder = Orders.createNewObject(_userID: cUser, _name: cName, _foodServing: orderInfo[0], _bunSetting: orderInfo[1], _cheeseSetting: orderInfo[2], _sauceSetting: orderInfo[3], _lettuceSetting: orderInfo[4], _tomatoSetting: orderInfo[5], _orderStatus: 0, _orderLocation: tempOrderLoc)
+                let tempOrder = Orders.createNewObject(_userID: cUser, _name: cName, _foodServing: orderInfo[0], _bunSetting: orderInfo[1], _cheeseSetting: orderInfo[2], _sauceSetting: orderInfo[3], _lettuceSetting: orderInfo[4], _tomatoSetting: orderInfo[5], _orderStatus: 0/*, _orderLocation: tempOrderLoc*/)
                 orderArray.append(tempOrder)
-                tempOrderLoc+=1
+                //tempOrderLoc+=1
             }
         }
         

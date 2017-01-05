@@ -15,8 +15,9 @@ import Firebase
 
 class OrderScreen: UIViewController, GIDSignInUIDelegate {
     
+    // MARK: - Properties
     @IBOutlet weak var LoadingText: UILabel! //LoadingText which shows when first signing in, allows orders queried before user can see active orders screen
-    var dBaseRef = FIRDatabase.database().reference().child(GIDSignIn.sharedInstance().currentUser.userID!) //the FIRDatabase Ref for the current user
+    @IBOutlet weak var LoadingBackground: UIImageView!
     private var gifArray = [UIImage.gif(name: "preparing"), UIImage.gif(name: "preparing2"), UIImage.gif(name:"preparing3")] //Image Array of the three preparing gifs
     @IBOutlet var LinesArray: [UIImageView]! //Array of the two white lines which separate the orders
     var allActiveOrders: [String] = [] //Array of the activeOrderIds
@@ -32,7 +33,7 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate {
     private var finishedGif = UIImage.gif(name: "finished")
     
     
-    
+    // MARK: - Actions
     //When the signout button is pressed, calls the signOut method and changes back to login viewController screen.
     @IBAction func SignOutPressed(_ sender: UIBarButtonItem) {
         print("LOGGING OUT")
@@ -60,70 +61,6 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate {
         }
     }
     
-    //Method to update the orderLocation of orders. If a lower index order is removed it makes it so any remaining orders stay at the lowest possible index, keeps relative order of any orders in mind as to not switch them around
-    private func updateLocations(totalOrderArray : [Orders]) -> [Orders]{
-        if(totalOrderArray.count == 1){
-            if(totalOrderArray[0].orderLocation != 0){
-                wipeLabels(index: totalOrderArray[0].orderLocation)
-                totalOrderArray[0].orderLocation = 0
-                let Order = totalOrderArray[0]
-                dBaseRef.child(Order.orderID).child("orderLocation").setValue(Order.orderLocation)
-            }
-        }else if(totalOrderArray.count == 2){
-            if(totalOrderArray[0].orderLocation! > totalOrderArray[1].orderLocation!){
-                if(totalOrderArray[0].orderLocation != 1){
-                    wipeLabels(index: totalOrderArray[0].orderLocation)
-                    totalOrderArray[0].orderLocation = 1
-                    let Order = totalOrderArray[0]
-                    dBaseRef.child(Order.orderID).child("orderLocation").setValue(Order.orderLocation)
-                }
-                if(totalOrderArray[1].orderLocation != 0){
-                    wipeLabels(index: totalOrderArray[0].orderLocation)
-                    totalOrderArray[1].orderLocation = 0
-                    let Order = totalOrderArray[1]
-                    dBaseRef.child(Order.orderID).child("orderLocation").setValue(Order.orderLocation)
-                }
-            }else{
-                if(totalOrderArray[0].orderLocation != 0){
-                    wipeLabels(index: totalOrderArray[0].orderLocation)
-                    totalOrderArray[0].orderLocation = 0
-                    let Order = totalOrderArray[0]
-                    dBaseRef.child(Order.orderID).child("orderLocation").setValue(Order.orderLocation)
-                }
-                if(totalOrderArray[1].orderLocation != 1){
-                    wipeLabels(index: totalOrderArray[0].orderLocation)
-                    totalOrderArray[1].orderLocation = 1
-                    let Order = totalOrderArray[1]
-                    dBaseRef.child(Order.orderID).child("orderLocation").setValue(Order.orderLocation)
-                }
-            }
-            
-        }
-        return totalOrderArray
-    }
-    
-    //Function called whenever values are updated in the Firebase database. Only called by that async method. Makes it so no active orders is hidden, updates the locations of the orders.
-    //Incase an order has been deleted. What is passed into setOrders are all the currently active orders in the database for the user. Sets each one and then will wipe any unused labels to make sure
-    //that there isn't any leftover text from deleted/moved orders. If no orders, wipes all labels and unhides noActiveOrders label
-    private func setOrders(ordersArray: [Orders]){
-        noActiveOrdersLabel.isHidden=true
-        let newPosOrders = updateLocations(totalOrderArray: ordersArray)
-        for cOrder in newPosOrders{
-            setSingleOrder(cOrder: cOrder)
-        }
-        if(newPosOrders.count==2){
-            wipeLabels(index: 2)
-        }else if(newPosOrders.count==1){
-            wipeLabels(index: 2)
-            wipeLabels(index: 1)
-        }else if(newPosOrders.count==0){
-            wipeLabels(index: 2)
-            wipeLabels(index: 1)
-            wipeLabels(index: 0)
-            noActiveOrdersLabel.isHidden=false
-        }
-    }
-    
     //Hides all labels, meant to get rid of the remains of any deleted/moved order
     private func wipeLabels(index: Int){
         for eachLabel in OrderLabelsArray[index]{
@@ -139,8 +76,8 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate {
     //Sets an order to finished. Called when cook sets the order to complete.
     //Changes the order to the new one (should just have status updated), but also hides the "Status" and "Preparing..." labels, and the PreparingGif. 
     //Unhides the foodIsReady label and the FinishedGif.
-    private func updateOrderAsFinished(cOrder: Orders){
-        let orderLoc = cOrder.orderLocation!
+    private func updateOrderAsFinished(cOrder: Orders, index: Int){
+        let orderLoc = index
         var cOrderLabels = OrderLabelsArray[orderLoc]
         cOrderLabels[6].isHidden=true
         cOrderLabels[7].isHidden=true
@@ -182,8 +119,8 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate {
     }
     
     //Sets the information for an order. Unhides the labels depending on what type of food, and also either sets as preparing or finished depending on orderStatus
-    private func setSingleOrder(cOrder: Orders){
-        let index : Int = cOrder.orderLocation!
+    private func setSingleOrder(cOrder: Orders, index: Int){
+        //let index : Int = cOrder.orderLocation!
         LinesArray[index].isHidden=false
         OrderLabelsArray[index][0].text=cOrder.foodServing
         OrderLabelsArray[index][0].isHidden = false
@@ -216,7 +153,7 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate {
             FoodIsReadyLabelArray[index].isHidden=true
             FinishedGifArray[index].isHidden=true
         }else if(cOrder.orderStatus == 1){
-            updateOrderAsFinished(cOrder: cOrder)
+            updateOrderAsFinished(cOrder: cOrder, index: index)
         }
     }
     
@@ -243,51 +180,47 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate {
     //Checks for any value changes in the user's database, if it has activeOrders child that means user is not new. If new then it waits for it to be created from first order creation.
     override func viewDidLoad() {
         super.viewDidLoad()
-        var firstTime = true
         GIDSignIn.sharedInstance().uiDelegate = self
         OrderLabelsArray=[OrderItemLabels,OrderItemLabels2,OrderItemLabels3]
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(OrderScreen.updatePrep), userInfo: nil, repeats: true)
-        navigationController?.navigationBar.isHidden=true
-        noActiveOrdersLabel.isHidden=true
-        
-        let user = self.dBaseRef
-        user.observe(FIRDataEventType.value, with: { (snapshot) in
-            // Get user value
-            if(snapshot.hasChild("ActiveOrders")){
-                let value = snapshot.value as! NSDictionary
-                let orderIDs = value["ActiveOrders"] as! String
-                let spaceArray = orderIDs.characters.split { $0 == " " }
-                self.allActiveOrders = spaceArray.map(String.init) //sets allActiveOrders from activeOrders value of database, changing it from a string to an array
-                var loadedOrders : [Orders] = []
-                for id in self.allActiveOrders{ //Loops through the ids in active orders and adds the converted json objects to an array of current order objects
-                    let jsonOrder = value[id]
-                    let foundOrder = Orders.convFromJSON(json: jsonOrder as! [String : AnyObject])
-                    loadedOrders.append(foundOrder)
-                }
-                var sec: Int
-                if(firstTime){
-                    sec=1
-                    firstTime=false
-                }else{
-                    sec=0
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(sec), execute: { //If first time loading, waits a second to allow database to connect, if not instantly sets orders.
-                    self.LoadingText.isHidden=true
-                    self.navigationController?.navigationBar.isHidden=false
-                    self.setOrders(ordersArray: loadedOrders)
-                })
-            }else{
-                print("new User")
-                firstTime=false
-                self.LoadingText.isHidden=true
-                self.noActiveOrdersLabel.isHidden=false
-                self.navigationController?.navigationBar.isHidden=false
-            }
-            // ...
+        self.navigationController?.navigationBar.isHidden=true
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+            self.LoadingText.isHidden=true
+            self.LoadingBackground.isHidden=true
+            self.navigationController?.navigationBar.isHidden=false
         })
-        
+        let user = FIRDatabase.database().reference().child("Users").child(GIDSignIn.sharedInstance().currentUser.userID!)
+        user.observe(FIRDataEventType.value, with: { (snapshot) in
+            if(snapshot.hasChild("ActiveOrders")){
+                let userDic = snapshot.value as! NSDictionary
+                let orderIDs = userDic["ActiveOrders"] as! String
+                let tempOrders = orderIDs.characters.split { $0 == " " }
+                self.allActiveOrders = tempOrders.map(String.init)
+                for orderID in self.allActiveOrders {
+                    let orderRef = FIRDatabase.database().reference().child("Orders").child(orderID)
+                    orderRef.removeAllObservers()
+                    orderRef.observe(FIRDataEventType.value, with: { (snapshot) in
+                        let orderDic = snapshot.value as! NSDictionary
+                        let order = Orders.convFromJSON(json: orderDic as! [String : AnyObject])
+                        self.setSingleOrder(cOrder: order, index: self.allActiveOrders.index(of: orderID)!)
+                    })
+                }
+                if(self.allActiveOrders.count != 0){
+                    self.noActiveOrdersLabel.isHidden=true
+                }else{
+                    self.noActiveOrdersLabel.isHidden=false
+                }
+                if(self.allActiveOrders.count < 3){
+                    for i in  self.allActiveOrders.count...2{
+                        self.wipeLabels(index: i)
+                    }
+                }
+            }else{
+                user.child("ActiveOrders").setValue("")
+                user.child("Name").setValue(GIDSignIn.sharedInstance().currentUser.profile.name!)
+            }
+        })
     }
-    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
