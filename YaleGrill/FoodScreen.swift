@@ -40,8 +40,7 @@ class FoodScreen: UIViewController, GIDSignInUIDelegate{
             if(totalOrdersCount != 1){
                 plural = "s"
             }
-            let ordersLeft = 3-totalOrdersCount
-            createAlert(title: "Wow, you're hungry!", message: "You already have \(totalOrdersCount) order\(plural) and just tried to add \(ordersPlaced.count) more, but the max number of orders is 3! Please order only \(ordersLeft) more!")
+            createAlert(title: "Wow, you're hungry!", message: "You already have \(totalOrdersCount) order\(plural) and just tried to add \(ordersPlaced.count) more, but the max number of orders is 3! Sorry!")
             return false
         }else if(ordersPlaced.count==0){
             return false
@@ -57,7 +56,6 @@ class FoodScreen: UIViewController, GIDSignInUIDelegate{
     func getOrderInfo() -> [Orders]{
         let cName = GIDSignIn.sharedInstance().currentUser.profile.name!
         let cUser = GIDSignIn.sharedInstance().currentUser.userID!
-        //var tempOrderLoc = totalOrdersCount
         var orderArray = [Orders]()
         let StepCountArray : [UIStepper] = [BurgerStepCount,VeggieStepCount,ChickenStepCount]
         var toppings = ["Bun","Cheese","Sauce","Lettuce","Tomatoes"]
@@ -79,9 +77,8 @@ class FoodScreen: UIViewController, GIDSignInUIDelegate{
                     }
                 }
                
-                let tempOrder = Orders.createNewObject(_userID: cUser, _name: cName, _foodServing: orderInfo[0], _bunSetting: orderInfo[1], _cheeseSetting: orderInfo[2], _sauceSetting: orderInfo[3], _lettuceSetting: orderInfo[4], _tomatoSetting: orderInfo[5], _orderStatus: 0/*, _orderLocation: tempOrderLoc*/)
+                let tempOrder = Orders.createNewObject(_userID: cUser, _name: cName, _foodServing: orderInfo[0], _bunSetting: orderInfo[1], _cheeseSetting: orderInfo[2], _sauceSetting: orderInfo[3], _lettuceSetting: orderInfo[4], _tomatoSetting: orderInfo[5], _orderStatus: 0)
                 orderArray.append(tempOrder)
-                //tempOrderLoc+=1
             }
         }
         

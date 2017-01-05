@@ -17,7 +17,6 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate {
     
     // MARK: - Properties
     @IBOutlet weak var LoadingText: UILabel! //LoadingText which shows when first signing in, allows orders queried before user can see active orders screen
-    @IBOutlet weak var LoadingBackground: UIImageView!
     private var gifArray = [UIImage.gif(name: "preparing"), UIImage.gif(name: "preparing2"), UIImage.gif(name:"preparing3")] //Image Array of the three preparing gifs
     @IBOutlet var LinesArray: [UIImageView]! //Array of the two white lines which separate the orders
     var allActiveOrders: [String] = [] //Array of the activeOrderIds
@@ -29,7 +28,6 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate {
     @IBOutlet var OrderItemLabels3: [UILabel]!
     @IBOutlet weak var noActiveOrdersLabel: UILabel! //Hidden when an order is created.
     @IBOutlet var FinishedGifArray: [UIImageView]! //Array of UIImageViews which are unhidden when an order is marked finished. Contains the finishedGif
-    @IBOutlet var FoodIsReadyLabelArray: [UILabel]! //Array of "FOOD IS READY" text Overlayed over the FinishedGifArrays. Unhidden when order is marked finished.
     private var finishedGif = UIImage.gif(name: "finished")
     
     
@@ -68,7 +66,6 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate {
         }
         GifViews[index].isHidden=true
         FinishedGifArray[index].isHidden=true
-        FoodIsReadyLabelArray[index].isHidden=true
         LinesArray[index].isHidden=true
         
     }
@@ -79,14 +76,18 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate {
     private func updateOrderAsFinished(cOrder: Orders, index: Int){
         let orderLoc = index
         var cOrderLabels = OrderLabelsArray[orderLoc]
-        cOrderLabels[6].isHidden=true
-        cOrderLabels[7].isHidden=true
-        FoodIsReadyLabelArray[orderLoc].isHidden=false
+        cOrderLabels[7].text="Ready for Pickup!"
+        cOrderLabels[7].textColor = UIColor.black
+        cOrderLabels[7].font = UIFont(name:"Verdana-Bold", size: 20.0)
+        cOrderLabels[7].frame.origin = CGPoint(x: 125, y: cOrderLabels[7].frame.origin.y)
         FinishedGifArray[orderLoc].image = finishedGif
         FinishedGifArray[orderLoc].isHidden=false
-        FinishedGifArray[orderLoc].layer.borderWidth = 3.5
-        FinishedGifArray[orderLoc].layer.borderColor = UIColor.black.cgColor
+        FinishedGifArray[orderLoc].layer.cornerRadius = 9
         GifViews[orderLoc].isHidden=true
+        /*cOrderLabels[6].isHidden=true
+        cOrderLabels[7].isHidden=true
+        FoodIsReadyLabelArray[orderLoc].isHidden=false
+        */
         
     }
     
@@ -144,13 +145,13 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate {
         if(cOrder.orderStatus == 0){
             GifViews[index].isHidden=false
             GifViews[index].image=gifArray[index]
-            GifViews[index].layer.borderWidth = 3.5
-            GifViews[index].layer.borderColor = UIColor.black.cgColor
-            GifViews[index].layer.masksToBounds = true
+            GifViews[index].layer.cornerRadius = 10
             OrderLabelsArray[index][6].isHidden=false
             OrderLabelsArray[index][7].text="Preparing..."
             OrderLabelsArray[index][7].isHidden = false
-            FoodIsReadyLabelArray[index].isHidden=true
+            OrderLabelsArray[index][7].textColor = UIColor.init(netHex: 0x4C8BF6)
+            OrderLabelsArray[index][7].font = UIFont(name:"Verdana-Regular", size: 16.0)
+            OrderLabelsArray[index][7].frame.origin = CGPoint(x: 86, y: OrderLabelsArray[index][7].frame.origin.y)
             FinishedGifArray[index].isHidden=true
         }else if(cOrder.orderStatus == 1){
             updateOrderAsFinished(cOrder: cOrder, index: index)
@@ -185,9 +186,6 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate {
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(OrderScreen.updatePrep), userInfo: nil, repeats: true)
         self.navigationController?.navigationBar.isHidden=true
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-            self.LoadingText.isHidden=true
-            self.LoadingBackground.isHidden=true
-            self.navigationController?.navigationBar.isHidden=false
         })
         let user = FIRDatabase.database().reference().child("Users").child(GIDSignIn.sharedInstance().currentUser.userID!)
         user.observe(FIRDataEventType.value, with: { (snapshot) in
@@ -202,12 +200,15 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate {
                     orderRef.observe(FIRDataEventType.value, with: { (snapshot) in
                         let orderDic = snapshot.value as! NSDictionary
                         let order = Orders.convFromJSON(json: orderDic as! [String : AnyObject])
+                        self.changeFromLoading()
                         self.setSingleOrder(cOrder: order, index: self.allActiveOrders.index(of: orderID)!)
                     })
                 }
+                
                 if(self.allActiveOrders.count != 0){
                     self.noActiveOrdersLabel.isHidden=true
                 }else{
+                    self.changeFromLoading()
                     self.noActiveOrdersLabel.isHidden=false
                 }
                 if(self.allActiveOrders.count < 3){
@@ -221,6 +222,10 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate {
             }
         })
     }
+    func changeFromLoading(){
+        self.LoadingText.isHidden=true
+        self.navigationController?.navigationBar.isHidden=false
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
@@ -232,5 +237,19 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate {
     }
     
     
+}
+
+extension UIColor {
+    convenience init(red: Int, green: Int, blue: Int) {
+        assert(red >= 0 && red <= 255, "Invalid red component")
+        assert(green >= 0 && green <= 255, "Invalid green component")
+        assert(blue >= 0 && blue <= 255, "Invalid blue component")
+        
+        self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
+    }
+    
+    convenience init(netHex:Int) {
+        self.init(red:(netHex >> 16) & 0xff, green:(netHex >> 8) & 0xff, blue:netHex & 0xff)
+    }
 }
 
