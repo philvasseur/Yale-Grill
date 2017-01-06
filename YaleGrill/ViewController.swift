@@ -15,6 +15,7 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
     /*
      Method for googleSign in. Is called when you press the button and when the application loads. Checks if there is authentication in keychain cached, if so checks if a yale email. If it has a yale email then moves to OrderScreen page with active orders. If not a yale email then logs out.
      */
+    
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         /* check for user's token */
         if GIDSignIn.sharedInstance().hasAuthInKeychain() {
@@ -53,12 +54,14 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
         }
     }
     
+    
     func createAlert (title : String, message : String){
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: { (action) in alert.dismiss(animated: true, completion: nil)}))
         
         self.present(alert, animated: true, completion: nil)
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

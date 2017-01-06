@@ -9,22 +9,103 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Table View Controller-->
+        <!--Orders-->
         <scene sceneID="l97-cy-9fo">
             <objects>
-                <tableViewController id="Qtw-aa-nCw" sceneMemberID="viewController">
+                <tableViewController id="Qtw-aa-nCw" customClass="ControlScreenView" customModule="YaleGrill" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="XT6-2U-dEp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="lEX-Lm-rlD">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="90" id="lEX-Lm-rlD" customClass="OrderControlTableCell" customModule="YaleGrill" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lEX-Lm-rlD" id="I5h-u9-F9I">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="FoodServing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="HqK-i6-cs1">
+                                            <rect key="frame" x="8" y="0.0" width="255" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="16"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="No Cheese" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="f7m-vT-DEN">
+                                            <rect key="frame" x="8" y="44" width="114" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="14"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="No Tomatoes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vjs-CX-ciB">
+                                            <rect key="frame" x="8" y="68" width="114" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="14"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="No Sauce" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZfW-Y9-mfJ">
+                                            <rect key="frame" x="132" y="44" width="106" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="14"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="No Lettuce" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vC7-jv-0dJ">
+                                            <rect key="frame" x="132" y="68" width="106" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="14"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Preparing" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XdF-BC-ryG">
+                                            <rect key="frame" x="270" y="44" width="100" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="14"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="No Bun" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DRy-fX-3es">
+                                            <rect key="frame" x="270" y="68" width="74" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="14"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4X5-Ih-Eic">
+                                            <rect key="frame" x="8" y="22" width="233" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="14"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="FqH-gU-C8t">
+                                            <rect key="frame" x="245" y="6" width="124" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" red="0.29803921568627451" green="0.54509803921568623" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="13"/>
+                                            <state key="normal" title="Mark as Ready">
+                                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="ChangeStatusPressed:" destination="lEX-Lm-rlD" eventType="touchUpInside" id="0Iw-gb-iGX"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="BunLabel" destination="DRy-fX-3es" id="Bqj-cu-30u"/>
+                                    <outlet property="CheeseLabel" destination="f7m-vT-DEN" id="gEP-pH-KrF"/>
+                                    <outlet property="FoodServingLabel" destination="HqK-i6-cs1" id="Vg6-50-1Wv"/>
+                                    <outlet property="LettuceLabel" destination="vC7-jv-0dJ" id="2Wf-og-QwO"/>
+                                    <outlet property="OrderName" destination="4X5-Ih-Eic" id="RhI-dz-TDk"/>
+                                    <outlet property="OrderStatusButton" destination="FqH-gU-C8t" id="Jcd-8R-zm6"/>
+                                    <outlet property="OrderStatusLabel" destination="XdF-BC-ryG" id="pBg-gl-4Kf"/>
+                                    <outlet property="SauceLabel" destination="ZfW-Y9-mfJ" id="BPk-3q-NKP"/>
+                                    <outlet property="TomatoLabel" destination="vjs-CX-ciB" id="qEm-fi-Wto"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -32,41 +113,56 @@
                             <outlet property="delegate" destination="Qtw-aa-nCw" id="fbV-m2-Hkd"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Orders" id="MzE-4R-JLz">
+                        <barButtonItem key="leftBarButtonItem" title="Sign out" id="TNG-Cc-ioa">
+                            <connections>
+                                <action selector="signOutPressed2:" destination="Qtw-aa-nCw" id="Tro-Ah-FW5"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Turn Grill On" id="1Wh-oH-qcT">
+                            <connections>
+                                <action selector="GrillButtonPressed:" destination="Qtw-aa-nCw" id="5M7-3g-r4I"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="GrillToggleButton" destination="1Wh-oH-qcT" id="9zQ-pd-xXr"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uTd-19-IuL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-81" y="927"/>
+            <point key="canvasLocation" x="505.5" y="926.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="YaleGrill" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="ViewController" customModule="YaleGrill" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="YaleImage" id="ObE-ft-WhJ">
-                                <rect key="frame" x="29" y="154" width="316" height="314"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="YaleImage" id="ObE-ft-WhJ">
+                                <rect key="frame" x="29" y="84" width="316" height="314"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign in with your Yale Email" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="m6a-k7-tl0">
-                                <rect key="frame" x="32" y="501" width="310" height="34"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                                <fontDescription key="fontDescription" name="HoeflerText-Black" family="Hoefler Text" pointSize="22"/>
-                                <color key="textColor" red="0.99999058246612549" green="0.99999356269836426" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" misplaced="YES" id="VIN-Hj-NQE" customClass="GIDSignInButton">
-                                <rect key="frame" x="67" y="386" width="240" height="55"/>
+                                <rect key="frame" x="67" y="316" width="240" height="55"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.78222160532994922" green="0.78222160532994922" blue="0.78222160532994922" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Please Sign in with your Yale Email" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="x8Q-2e-89c">
+                                <rect key="frame" x="20" y="414" width="337" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="17"/>
+                                <color key="textColor" red="0.9961125851" green="0.99999153610000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.10588235294117647" green="0.30980392156862746" blue="0.62352941176470589" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
                     <connections>
                         <segue destination="CYl-rG-eM0" kind="modal" identifier="SignInSegue" id="pNU-dT-IA1"/>
-                        <segue destination="Qtw-aa-nCw" kind="modal" identifier="ControlScreenSegue" id="hLo-to-9X3"/>
+                        <segue destination="Txg-YN-yko" kind="modal" identifier="ControlScreenSegue" id="hLo-to-9X3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -303,6 +399,17 @@
                                 <color key="textColor" red="0.12659202516078949" green="0.3114888072013855" blue="0.62361329793930054" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Select your Dining Hall before ordering" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="57Q-3Y-bq2">
+                                <rect key="frame" x="13" y="252" width="349" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
+                                <color key="textColor" red="0.29840123653411865" green="0.54416894912719727" blue="0.96475684642791748" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <pickerView hidden="YES" contentMode="scaleToFill" misplaced="YES" id="G9v-uf-5N4">
+                                <rect key="frame" x="42" y="281" width="294" height="169"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" red="0.99999058246612549" green="0.99999356269836426" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
@@ -322,6 +429,8 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="LoadingText" destination="r4t-G6-auf" id="eVs-KE-VAZ"/>
+                        <outlet property="PickerView" destination="G9v-uf-5N4" id="mkp-Cq-LWd"/>
+                        <outlet property="SelectDiningHallLabel" destination="57Q-3Y-bq2" id="80X-PK-eDe"/>
                         <outlet property="noActiveOrdersLabel" destination="anN-nB-wCX" id="70s-hR-wN5"/>
                         <outletCollection property="OrderItemLabels" destination="WCg-xI-ReT" collectionClass="NSMutableArray" id="EIh-r5-zcG"/>
                         <outletCollection property="OrderItemLabels" destination="VxN-u9-fEq" collectionClass="NSMutableArray" id="502-o0-owt"/>
@@ -627,6 +736,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1ds-qu-UgW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="446.5" y="41.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="6eL-MP-IWG">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Txg-YN-yko" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yZ9-AK-vnH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Qtw-aa-nCw" kind="relationship" relationship="rootViewController" id="aQI-ey-mvj"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HrY-cz-ZVA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-81.5" y="926.5"/>
         </scene>
     </scenes>
     <resources>
