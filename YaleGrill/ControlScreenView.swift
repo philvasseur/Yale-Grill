@@ -36,13 +36,13 @@ class ControlScreenView: UITableViewController, GIDSignInUIDelegate {
             print ("Error signing out: %@", signOutError)
         }
         let sb = UIStoryboard(name: "Main", bundle: nil)
-        let signInScreen = sb.instantiateViewController(withIdentifier: "ViewController") as? ViewController
+        let signInScreen = sb.instantiateViewController(withIdentifier: FirebaseConstants.ViewControllerID) as? ViewController
         self.present(signInScreen!, animated:true, completion:nil)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: "cell",
+            withIdentifier: FirebaseConstants.cellIdentifier,
             for: indexPath) as! OrderControlTableCell
         let orderIndex = indexPath.row
         let newCell = setOrderInfo(cell: cell, index: orderIndex)
@@ -73,20 +73,20 @@ class ControlScreenView: UITableViewController, GIDSignInUIDelegate {
             if(grillStatus==nil){
                 self.grillRef.setValue(false)
                 self.grillIsOn = false
-                self.GrillToggleButton.title = "Turn Grill On"
+                self.GrillToggleButton.title = FirebaseConstants.turnGrillOnText
             }else if(grillStatus==true){
                 self.grillIsOn = true
-                self.GrillToggleButton.title = "Turn Grill Off"
+                self.GrillToggleButton.title = FirebaseConstants.turnGrillOffText
             }else if(grillStatus==false){
                 self.grillIsOn = false
-                self.GrillToggleButton.title = "Turn Grill On"
+                self.GrillToggleButton.title = FirebaseConstants.turnGrillOnText
             }
         })
-        let ordersRef = FIRDatabase.database().reference().child("Grills").child(GIDSignIn.sharedInstance().currentUser.userID).child("Orders")
+        let ordersRef = FIRDatabase.database().reference().child(FirebaseConstants.grills).child(GIDSignIn.sharedInstance().currentUser.userID).child(FirebaseConstants.orders)
         ordersRef.queryOrderedByKey().observe(FIRDataEventType.childAdded, with: { (snapshot) in
             let newOrderID = snapshot.value as! String
             self.allActiveIDs.append(newOrderID)
-            let singleOrderRef = FIRDatabase.database().reference().child("Orders").child(newOrderID as String)
+            let singleOrderRef = FIRDatabase.database().reference().child(FirebaseConstants.orders).child(newOrderID as String)
             singleOrderRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
                 let newJson = snapshot.value as! NSDictionary
                 let newOrder = Orders.convFromJSON(json: newJson as! [String : AnyObject])

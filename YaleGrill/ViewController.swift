@@ -22,7 +22,6 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
             print("\(GIDSignIn.sharedInstance().currentUser.profile.email!) TRYING TO SIGN IN - AUTH")
             let cEmail = GIDSignIn.sharedInstance().currentUser.profile.email!
             if(cEmail.lowercased().range(of: "@yale") != nil){ //Checks if email is a Yale email
-                print("Yale Email, SIGNING IN")
                 guard let authentication = user.authentication else { return }
                 let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
                 FIRAuth.auth()?.signIn(with: credential) { (user, error) in
@@ -30,11 +29,11 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
                         print("Firebase Auth Error: \(error)")
                         return
                     }
-                    self.performSegue(withIdentifier: "SignInSegue", sender: nil)
+                    self.performSegue(withIdentifier: FirebaseConstants.SignInSegueID, sender: nil)
                     
                     
                 }
-            }else if(cEmail.lowercased().range(of: "pvass153@gmail.com") != nil){
+            }else if(FirebaseConstants.CookEmailArray.contains(cEmail.lowercased())){
                 guard let authentication = user.authentication else { return }
                 let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
                 FIRAuth.auth()?.signIn(with: credential) { (user, error) in
@@ -42,7 +41,7 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
                         print("Firebase Auth Error: \(error)")
                         return
                     }
-                    self.performSegue(withIdentifier: "ControlScreenSegue", sender: nil)
+                    self.performSegue(withIdentifier: FirebaseConstants.ControlScreenSegueID, sender: nil)
             }
             }else{ //Not a yale email, so signs user out.
                 print("Non-Yale Email, LOGGING OUT")

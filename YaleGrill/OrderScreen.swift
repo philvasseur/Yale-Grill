@@ -17,7 +17,7 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate, UIPickerViewDataSource
     
     // MARK: - Properties
     @IBOutlet weak var LoadingText: UILabel! //LoadingText which shows when first signing in, allows orders queried before user can see active orders screen
-    private var gifArray = [UIImage.gif(name: "preparing"), UIImage.gif(name: "preparing2"), UIImage.gif(name:"preparing3")] //Image Array of the three preparing gifs
+    private var gifArray = [UIImage.gif(name: FirebaseConstants.prepGifIDs[0]), UIImage.gif(name: FirebaseConstants.prepGifIDs[1]), UIImage.gif(name:FirebaseConstants.prepGifIDs[2])] //Image Array of the three preparing gifs
     @IBOutlet var LinesArray: [UIImageView]! //Array of the two white lines which separate the orders
     var allActiveOrders: [String] = [] //Array of the activeOrderIds
     var OrderLabelsArray: [[UILabel]]! //Holds the three OrderItemLabels outlet collections which are defined below. Allows for easy looping through the three sections and their labels
@@ -29,7 +29,7 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate, UIPickerViewDataSource
     @IBOutlet weak var noActiveOrdersLabel: UILabel! //Hidden when an order is created.
     @IBOutlet var FinishedGifArray: [UIImageView]! //Array of UIImageViews which are unhidden when an order is marked finished. Contains the finishedGif
     private var finishedGif = UIImage.gif(name: "finished")
-    var pickerDataSource = ["Jonathan Edwards", "Branford", "Ezra Stiles","Trumbull","Davenport","Timothy Dwight","Morse","Calhoun"]
+    var pickerDataSource = FirebaseConstants.PickerData
     var diningHall : String = "Jonathan Edwards"
     @IBOutlet weak var PickerView: UIPickerView!
     @IBOutlet weak var SelectDiningHallLabel: UILabel!
@@ -47,7 +47,7 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate, UIPickerViewDataSource
             print ("Error signing out: %@", signOutError)
         }
         let sb = UIStoryboard(name: "Main", bundle: nil)
-        let signInScreen = sb.instantiateViewController(withIdentifier: "ViewController") as? ViewController
+        let signInScreen = sb.instantiateViewController(withIdentifier: FirebaseConstants.ViewControllerID) as? ViewController
         self.present(signInScreen!, animated:true, completion:nil)
 
     }
@@ -60,7 +60,7 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate, UIPickerViewDataSource
                 for oldOrder in tempOrderArray{
                     allActiveOrders.append(oldOrder.orderID!)
                     oldOrder.insertIntoDatabase(AllActiveIDs: allActiveOrders)
-                    FIRDatabase.database().reference().child("Grills").child(FirebaseConstants.GrillIDS[diningHall]!).child("Orders").child(oldOrder.orderID).setValue(oldOrder.orderID)
+                    FIRDatabase.database().reference().child(FirebaseConstants.grills).child(FirebaseConstants.GrillIDS[diningHall]!).child(FirebaseConstants.orders).child(oldOrder.orderID).setValue(oldOrder.orderID)
                 }
             }
         }
@@ -83,7 +83,7 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate, UIPickerViewDataSource
     private func updateOrderAsFinished(cOrder: Orders, index: Int){
         let orderLoc = index
         var cOrderLabels = OrderLabelsArray[orderLoc]
-        cOrderLabels[7].text="Ready for Pickup!"
+        cOrderLabels[7].text=FirebaseConstants.UserReadyText
         cOrderLabels[7].textColor = UIColor.black
         cOrderLabels[7].font = UIFont(name:"Verdana-Bold", size: 20.0)
         cOrderLabels[7].frame.origin = CGPoint(x: 125, y: cOrderLabels[7].frame.origin.y)
@@ -91,11 +91,6 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate, UIPickerViewDataSource
         FinishedGifArray[orderLoc].isHidden=false
         FinishedGifArray[orderLoc].layer.cornerRadius = 9
         GifViews[orderLoc].isHidden=true
-        /*cOrderLabels[6].isHidden=true
-        cOrderLabels[7].isHidden=true
-        FoodIsReadyLabelArray[orderLoc].isHidden=false
-        */
-        
     }
     
     //Simple created alert method, just used for warning when user trys to place another order after already having three.
@@ -109,7 +104,7 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate, UIPickerViewDataSource
     //When you hit the composeOrder button tells the foodScreen class how many orders have already been placed. Used to stop user from accidently placing more than 3 orders. 
     //For example, stopping user who already has two orders to place another two, as that would be > 3.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(segue.identifier == "ComposeOrder"){
+        if(segue.identifier == FirebaseConstants.ComposeOrderSegueID){
             let destinationVC = (segue.destination as! FoodScreen)
             destinationVC.totalOrdersCount = allActiveOrders.count
         }
@@ -122,7 +117,6 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate, UIPickerViewDataSource
             return false
         }else if(allActiveOrders.count>=3){
             createAlert(title: "Sorry!", message: "You can't place more than 3 orders! Please wait for your current orders to be finished!")
-            //ABILITY TO MAKE ORDERS "FINISHED"
             return false
         }else{
             return true
@@ -131,33 +125,23 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate, UIPickerViewDataSource
     
     //Sets the information for an order. Unhides the labels depending on what type of food, and also either sets as preparing or finished depending on orderStatus
     private func setSingleOrder(cOrder: Orders, index: Int){
-        //let index : Int = cOrder.orderLocation!
         LinesArray[index].isHidden=false
         OrderLabelsArray[index][0].text=cOrder.foodServing
-        OrderLabelsArray[index][0].isHidden = false
-        if(cOrder.bunSetting != "EMPTY_STRING"){
-            for itemLabel in OrderLabelsArray[index]{
-                itemLabel.isHidden=false
-            }
-            OrderLabelsArray[index][1].text=cOrder.bunSetting
-            OrderLabelsArray[index][2].text=cOrder.cheeseSetting
-            OrderLabelsArray[index][3].text=cOrder.sauceSetting
-            OrderLabelsArray[index][4].text=cOrder.lettuceSetting
-            OrderLabelsArray[index][5].text=cOrder.tomatoSetting
-        }else{
-            OrderLabelsArray[index][1].isHidden=true
-            OrderLabelsArray[index][2].isHidden=true
-            OrderLabelsArray[index][3].isHidden=true
-            OrderLabelsArray[index][4].isHidden=true
-            OrderLabelsArray[index][5].isHidden=true
+        for itemLabel in OrderLabelsArray[index]{
+            itemLabel.isHidden=false
         }
+        OrderLabelsArray[index][1].text=cOrder.bunSetting
+        OrderLabelsArray[index][2].text=cOrder.cheeseSetting
+        OrderLabelsArray[index][3].text=cOrder.sauceSetting
+        OrderLabelsArray[index][4].text=cOrder.lettuceSetting
+        OrderLabelsArray[index][5].text=cOrder.tomatoSetting
         
         if(cOrder.orderStatus == 0){
             GifViews[index].isHidden=false
             GifViews[index].image=gifArray[index]
             GifViews[index].layer.cornerRadius = 10
             OrderLabelsArray[index][6].isHidden=false
-            OrderLabelsArray[index][7].text="Preparing..."
+            OrderLabelsArray[index][7].text=FirebaseConstants.preparingTexts[0]
             OrderLabelsArray[index][7].isHidden = false
             OrderLabelsArray[index][7].textColor = UIColor.init(netHex: 0x4C8BF6)
             OrderLabelsArray[index][7].font = UIFont(name:"Verdana-Regular", size: 16.0)
@@ -171,12 +155,12 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate, UIPickerViewDataSource
     //Called by the timer every second starting from when view first loaded. Only does anything if it isn't hidden and the text is set as the Preparing loop. Gives "Preparing..." animatino.
     @objc private func updatePrep(){
         for orderLabels in OrderLabelsArray{
-            if(orderLabels[7].text=="Preparing."){
-                orderLabels[7].text="Preparing.."
-            }else if(orderLabels[7].text=="Preparing.."){
-                orderLabels[7].text="Preparing..."
-            }else if(orderLabels[7].text=="Preparing..."){
-                orderLabels[7].text="Preparing."
+            if(orderLabels[7].text==FirebaseConstants.preparingTexts[2]){
+                orderLabels[7].text=FirebaseConstants.preparingTexts[1]
+            }else if(orderLabels[7].text==FirebaseConstants.preparingTexts[1]){
+                orderLabels[7].text=FirebaseConstants.preparingTexts[0]
+            }else if(orderLabels[7].text==FirebaseConstants.preparingTexts[0]){
+                orderLabels[7].text=FirebaseConstants.preparingTexts[2]
             }
         }
     }
@@ -212,7 +196,7 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate, UIPickerViewDataSource
         self.navigationController?.navigationBar.isHidden=true
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
         })
-        let grillStatus = FIRDatabase.database().reference().child("Grills").child(FirebaseConstants.GrillIDS[diningHall]!).child("GrillIsOn")
+        let grillStatus = FIRDatabase.database().reference().child(FirebaseConstants.grills).child(FirebaseConstants.GrillIDS[diningHall]!).child(FirebaseConstants.grillStat)
         grillStatus.observe(FIRDataEventType.value, with: { (snapshot) in
             let status = snapshot.value as? Bool
             if(status==nil){
@@ -222,15 +206,15 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate, UIPickerViewDataSource
                 self.grillIsOn=status!
             }
         })
-        let user = FIRDatabase.database().reference().child("Users").child(GIDSignIn.sharedInstance().currentUser.userID!)
+        let user = FIRDatabase.database().reference().child(FirebaseConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!)
         user.observe(FIRDataEventType.value, with: { (snapshot) in
-            if(snapshot.hasChild("ActiveOrders")){
+            if(snapshot.hasChild(FirebaseConstants.activeOrders)){
                 let userDic = snapshot.value as! NSDictionary
-                let orderIDs = userDic["ActiveOrders"] as! String
+                let orderIDs = userDic[FirebaseConstants.activeOrders] as! String
                 let tempOrders = orderIDs.characters.split { $0 == " " }
                 self.allActiveOrders = tempOrders.map(String.init)
                 for orderID in self.allActiveOrders {
-                    let orderRef = FIRDatabase.database().reference().child("Orders").child(orderID)
+                    let orderRef = FIRDatabase.database().reference().child(FirebaseConstants.orders).child(orderID)
                     orderRef.removeAllObservers()
                     orderRef.observe(FIRDataEventType.value, with: { (snapshot) in
                         let orderDic = snapshot.value as! NSDictionary
@@ -256,8 +240,8 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate, UIPickerViewDataSource
                     }
                 }
             }else{
-                user.child("ActiveOrders").setValue("")
-                user.child("Name").setValue(GIDSignIn.sharedInstance().currentUser.profile.name!)
+                user.child(FirebaseConstants.activeOrders).setValue("")
+                user.child(FirebaseConstants.name).setValue(GIDSignIn.sharedInstance().currentUser.profile.name!)
             }
         })
     }

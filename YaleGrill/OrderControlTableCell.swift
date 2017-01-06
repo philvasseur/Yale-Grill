@@ -27,19 +27,19 @@ class OrderControlTableCell: UITableViewCell {
     @IBAction func ChangeStatusPressed(_ sender: UIButton) {
         if(cOrder?.orderStatus==0){
             cOrder?.orderStatus = 1
-            orderRef?.child("orderStatus").setValue(cOrder?.orderStatus)
-            OrderStatusLabel.text = "Ready"
-            OrderStatusButton.setTitle("Delete", for: .normal)
+            orderRef?.child(FirebaseConstants.orderStatus).setValue(cOrder?.orderStatus)
+            OrderStatusLabel.text = FirebaseConstants.ready
+            OrderStatusButton.setTitle(FirebaseConstants.delete, for: .normal)
         }else if(cOrder?.orderStatus==1){
             cOrder.orderStatus=2
             removeOrder()
-            orderRef?.child("orderStatus").setValue(cOrder?.orderStatus)
+            orderRef?.child(FirebaseConstants.orderStatus).setValue(cOrder?.orderStatus)
         }
     }
     
     private func removeOrder(){
         let cOrderID = self.cOrder.orderID!
-        let userRef = FIRDatabase.database().reference().child("Users").child(cOrder.userID!).child("ActiveOrders")
+        let userRef = FIRDatabase.database().reference().child(FirebaseConstants.users).child(cOrder.userID!).child(FirebaseConstants.activeOrders)
         userRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
             let allIDsString = snapshot.value as! String
             let tempArray = allIDsString.characters.split { $0 == " " }
@@ -50,11 +50,11 @@ class OrderControlTableCell: UITableViewCell {
             userRef.setValue(newIDsString)
             
         })
-        FIRDatabase.database().reference().child("Grills").child(grillUserID).child("Orders").child(cOrderID).setValue(nil)
+        FIRDatabase.database().reference().child(FirebaseConstants.grills).child(grillUserID).child(FirebaseConstants.orders).child(cOrderID).setValue(nil)
     }
     func setByOrder(cOrder : Orders, grillUserID : String){
         self.cOrder = cOrder
-        orderRef = FIRDatabase.database().reference().child("Orders").child(cOrder.orderID)
+        orderRef = FIRDatabase.database().reference().child(FirebaseConstants.orders).child(cOrder.orderID)
         FoodServingLabel.text = cOrder.foodServing
         BunLabel.text = cOrder.bunSetting
         CheeseLabel.text = cOrder.cheeseSetting
@@ -63,11 +63,11 @@ class OrderControlTableCell: UITableViewCell {
         LettuceLabel.text = cOrder.lettuceSetting
         OrderName.text = cOrder.name
         if(cOrder.orderStatus==0){
-            OrderStatusLabel.text = "Preparing"
-            OrderStatusButton.setTitle("Mark as Ready", for: .normal)
+            OrderStatusLabel.text = FirebaseConstants.preparingTexts[3]
+            OrderStatusButton.setTitle(FirebaseConstants.markAsReady, for: .normal)
         }else if(cOrder.orderStatus==1){
-            OrderStatusLabel.text = "Ready"
-            OrderStatusButton.setTitle("Delete", for: .normal)
+            OrderStatusLabel.text = FirebaseConstants.ready
+            OrderStatusButton.setTitle(FirebaseConstants.delete, for: .normal)
         }
         self.grillUserID = grillUserID
     }

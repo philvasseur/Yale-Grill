@@ -58,9 +58,9 @@ class FoodScreen: UIViewController, GIDSignInUIDelegate{
         let cUser = GIDSignIn.sharedInstance().currentUser.userID!
         var orderArray = [Orders]()
         let StepCountArray : [UIStepper] = [BurgerStepCount,VeggieStepCount,ChickenStepCount]
-        var toppings = ["Bun","Cheese","Sauce","Lettuce","Tomatoes"]
+        var toppings = FirebaseConstants.toppingsArray
         let switchesArray : [[UISwitch]] = [HamburgerSwitches,VeggieSwitches]
-        let foodServingArray : [[String]] = [["Single Burger","Double Burger"],["Single Veggie Burger","Double Veggie Burger"],["One Piece of Chicken","Two Pieces of Chicken","Three Pieces of Chicken","Four Pieces of Chicken"]]
+        let foodServingArray : [[String]] = FirebaseConstants.foodServingArray
         for index in 0...2{
             var orderInfo : [String] = []
             if(StepCountArray[index].value != 0){

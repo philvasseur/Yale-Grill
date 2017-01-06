@@ -142,16 +142,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="YaleImage" id="ObE-ft-WhJ">
-                                <rect key="frame" x="29" y="84" width="316" height="314"/>
+                                <rect key="frame" x="31" y="143" width="316" height="314"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" misplaced="YES" id="VIN-Hj-NQE" customClass="GIDSignInButton">
-                                <rect key="frame" x="67" y="316" width="240" height="55"/>
+                                <rect key="frame" x="69" y="375" width="240" height="55"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.78222160532994922" green="0.78222160532994922" blue="0.78222160532994922" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Please Sign in with your Yale Email" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="x8Q-2e-89c">
-                                <rect key="frame" x="20" y="414" width="337" height="21"/>
+                                <rect key="frame" x="22" y="473" width="337" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="17"/>
                                 <color key="textColor" red="0.9961125851" green="0.99999153610000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
