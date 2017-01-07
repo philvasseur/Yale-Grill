@@ -22,8 +22,8 @@ class FirebaseConstants {
     static let turnGrillOffText = "Turn Grill Off"
     static let orderStatus = "orderStatus"
     static let ready = "Ready"
-    static let delete = "Delete"
-    static let markAsReady = "Mark as Ready"
+    static let delete = "Mark Picked Up"
+    static let markAsReady = "Mark Ready"
     
     //FOOD CONSTANTS
     static let foodServingArray = [["Single Burger","Double Burger"],["Single Veggie Burger","Double Veggie Burger"],["One Piece of Chicken","Two Pieces of Chicken","Three Pieces of Chicken","Four Pieces of Chicken"]]

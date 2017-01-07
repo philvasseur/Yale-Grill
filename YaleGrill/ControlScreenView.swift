@@ -17,6 +17,7 @@ class ControlScreenView: UITableViewController, GIDSignInUIDelegate {
     private var allActiveOrders : [Orders] = []
     private var allActiveIDs : [String] = []
     @IBOutlet weak var GrillToggleButton: UIBarButtonItem!
+    @IBOutlet weak var NavBar: UINavigationItem!
     
     @IBAction func GrillButtonPressed(_ sender: UIBarButtonItem) {
         if(!grillIsOn){
