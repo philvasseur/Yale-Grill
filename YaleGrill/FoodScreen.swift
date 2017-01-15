@@ -110,7 +110,7 @@ class FoodScreen: UIViewController, GIDSignInUIDelegate{
     //Updates the ChickenCount label whenever the ChickenStepCount is changed
     @IBAction func StepperCount(_ sender: UIStepper) {
         if((sender.value)==0){
-            ChickenCount.text="Zero Pieces"
+            ChickenCount.text="----"
         }else if((sender.value)==1){
             ChickenCount.text="One Piece"
         }else if((sender.value)==2){

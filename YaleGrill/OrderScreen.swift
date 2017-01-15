@@ -17,6 +17,7 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate, UIPickerViewDataSource
     
     // MARK: - Properties
     @IBOutlet weak var LoadingText: UILabel! //LoadingText which shows when first signing in, allows orders queried before user can see active orders screen
+    @IBOutlet weak var LoadingScreen: UIImageView!
     private var gifArray = [UIImage.gif(name: FirebaseConstants.prepGifIDs[0]), UIImage.gif(name: FirebaseConstants.prepGifIDs[1]), UIImage.gif(name:FirebaseConstants.prepGifIDs[2])] //Image Array of the three preparing gifs
     @IBOutlet var LinesArray: [UIImageView]! //Array of the two white lines which separate the orders
     var allActiveOrders: [String] = [] //Array of the activeOrderIds
@@ -143,7 +144,7 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate, UIPickerViewDataSource
             OrderLabelsArray[index][6].isHidden=false
             OrderLabelsArray[index][7].text=FirebaseConstants.preparingTexts[0]
             OrderLabelsArray[index][7].isHidden = false
-            OrderLabelsArray[index][7].textColor = UIColor.init(netHex: 0x4C8BF6)
+            //OrderLabelsArray[index][7].textColor = UIColor.init(netHex: 0x4C8BF6)
             OrderLabelsArray[index][7].font = UIFont(name:"Verdana-Regular", size: 16.0)
             OrderLabelsArray[index][7].frame.origin = CGPoint(x: 86, y: OrderLabelsArray[index][7].frame.origin.y)
             FinishedGifArray[index].isHidden=true
@@ -219,8 +220,10 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate, UIPickerViewDataSource
                     orderRef.observe(FIRDataEventType.value, with: { (snapshot) in
                         let orderDic = snapshot.value as! NSDictionary
                         let order = Orders.convFromJSON(json: orderDic as! [String : AnyObject])
-                        self.changeFromLoading()
                         self.setSingleOrder(cOrder: order, index: self.allActiveOrders.index(of: orderID)!)
+                        if(self.allActiveOrders.last==orderID){
+                            self.changeFromLoading()
+                        }
                     })
                 }
                 
@@ -247,6 +250,7 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate, UIPickerViewDataSource
     }
     func changeFromLoading(){
         self.LoadingText.isHidden=true
+        self.LoadingScreen.isHidden=true
         self.navigationController?.navigationBar.isHidden=false
     }
     
