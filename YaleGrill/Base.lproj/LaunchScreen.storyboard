@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="YaleGrillIcon-LS" translatesAutoresizingMaskIntoConstraints="NO" id="qi9-QM-Aqm">
-                                <rect key="frame" x="-12" y="121" width="398" height="424"/>
+                                <rect key="frame" x="4" y="138" width="367" height="390"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -35,6 +35,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="YaleGrillIcon-LS" width="750" height="750"/>
+        <image name="YaleGrillIcon-LS" width="594" height="594"/>
     </resources>
 </document>

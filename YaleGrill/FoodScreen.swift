@@ -40,7 +40,7 @@ class FoodScreen: UIViewController, GIDSignInUIDelegate{
             if(totalOrdersCount != 1){
                 plural = "s"
             }
-            createAlert(title: "Wow, you're hungry!", message: "You already have \(totalOrdersCount) order\(plural) and just tried to add \(ordersPlaced.count) more, but the max number of orders is 3! Sorry!")
+            createAlert(title: "Wow, you're hungry!", message: "Sorry, \(ordersPlaced.count) more orders sets you over the limit! You have already placed \(totalOrdersCount) order\(plural) and the limit is 3!")
             return false
         }else if(ordersPlaced.count==0){
             return false

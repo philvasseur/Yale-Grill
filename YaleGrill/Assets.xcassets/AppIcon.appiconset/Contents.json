@@ -3,49 +3,49 @@
     {
       "size" : "20x20",
       "idiom" : "iphone",
-      "filename" : "YaleGrillIcon-40.png",
+      "filename" : "GrillIcon40.png",
       "scale" : "2x"
     },
     {
       "size" : "20x20",
       "idiom" : "iphone",
-      "filename" : "YaleGrillIcon-60.png",
+      "filename" : "GrillIcon60.png",
       "scale" : "3x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "YaleGrillIcon-58.png",
+      "filename" : "GrillIcon58.png",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "YaleGrillIcon-87.png",
+      "filename" : "GrillIcon87.png",
       "scale" : "3x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "YaleGrillIcon-81.png",
+      "filename" : "GrillIcon80.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "YaleGrillIcon-120.png",
+      "filename" : "GrillIcon120.png",
       "scale" : "3x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "YaleGrillIcon-121.png",
+      "filename" : "GrillIcon120-1.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "YaleGrillIcon-180.png",
+      "filename" : "GrillIcon180.png",
       "scale" : "3x"
     }
   ],

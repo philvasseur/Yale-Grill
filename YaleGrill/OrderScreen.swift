@@ -114,7 +114,7 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate, UIPickerViewDataSource
     //Used to stop user from placing more than three orders. Only performs segue when the composeOrder button is pressed if there are less than three orders. If >=3, creates an alert.
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if(!grillIsOn){
-            createAlert(title: "Sorry!", message: "The grill is not currently on! Please try again during Dining Hall hours!")
+            createAlert(title: "Sorry!", message: "The grill is currently off! Please try again during Dining Hall hours!")
             return false
         }else if(allActiveOrders.count>=3){
             createAlert(title: "Sorry!", message: "You can't place more than 3 orders! Please wait for your current orders to be finished!")

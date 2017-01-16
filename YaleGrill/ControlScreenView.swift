@@ -67,8 +67,8 @@ class ControlScreenView: UITableViewController, GIDSignInUIDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = 90
+        tableView.allowsSelection = false
         GIDSignIn.sharedInstance().uiDelegate = self
-        print(GIDSignIn.sharedInstance().currentUser.userID)
         grillRef.observe(FIRDataEventType.value, with: { (snapshot) in
             let grillStatus = snapshot.value as? Bool
             if(grillStatus==nil){
