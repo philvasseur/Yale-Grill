@@ -24,6 +24,7 @@ class FirebaseConstants {
     static let ready = "Ready"
     static let delete = "Mark Picked Up"
     static let markAsReady = "Mark Ready"
+    static let prevDining = "PreviousDiningHall"
     
     //FOOD CONSTANTS
     static let foodServingArray = [["Single Burger","Double Burger"],["Single Veggie Burger","Double Veggie Burger"],["One Piece of Chicken","Two Pieces of Chicken","Three Pieces of Chicken","Four Pieces of Chicken"]]
@@ -39,7 +40,7 @@ class FirebaseConstants {
     static let cellIdentifier = "cell"
     
     //Other
-    static let PickerData = ["Jonathan Edwards", "Branford", "Ezra Stiles","Trumbull","Davenport","Timothy Dwight","Morse","Calhoun"]
+    static let PickerData = ["Select Dining Hall","Jonathan Edwards", "Branford", "Ezra Stiles","Trumbull","Davenport","Timothy Dwight","Morse","Calhoun", "Pierson","Saybrook","Berkeley","Silliman"]
     static let UserReadyText = "Ready for Pickup!"
     
 }

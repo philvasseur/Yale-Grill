@@ -13,7 +13,7 @@
 import UIKit
 import Firebase
 
-class OrderScreen: UIViewController, GIDSignInUIDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+class OrderScreen: UIViewController, GIDSignInUIDelegate{
     
     // MARK: - Properties
     @IBOutlet weak var LoadingText: UILabel! //LoadingText which shows when first signing in, allows orders queried before user can see active orders screen
@@ -30,10 +30,7 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate, UIPickerViewDataSource
     @IBOutlet weak var noActiveOrdersLabel: UILabel! //Hidden when an order is created.
     @IBOutlet var FinishedGifArray: [UIImageView]! //Array of UIImageViews which are unhidden when an order is marked finished. Contains the finishedGif
     private var finishedGif = UIImage.gif(name: "finished")
-    var pickerDataSource = FirebaseConstants.PickerData
-    var diningHall : String = "Jonathan Edwards"
-    @IBOutlet weak var PickerView: UIPickerView!
-    @IBOutlet weak var SelectDiningHallLabel: UILabel!
+    var selectedDiningHall : String!
     var grillIsOn = false
     
     // MARK: - Actions
@@ -61,7 +58,7 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate, UIPickerViewDataSource
                 for oldOrder in tempOrderArray{
                     allActiveOrders.append(oldOrder.orderID!)
                     oldOrder.insertIntoDatabase(AllActiveIDs: allActiveOrders)
-                    FIRDatabase.database().reference().child(FirebaseConstants.grills).child(FirebaseConstants.GrillIDS[diningHall]!).child(FirebaseConstants.orders).child(oldOrder.orderID).setValue(oldOrder.orderID)
+                    FIRDatabase.database().reference().child(FirebaseConstants.grills).child(FirebaseConstants.GrillIDS[selectedDiningHall]!).child(FirebaseConstants.orders).child(oldOrder.orderID).setValue(oldOrder.orderID)
                 }
             }
         }
@@ -166,19 +163,6 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate, UIPickerViewDataSource
         }
     }
     
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerDataSource[row]
-    }
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerDataSource.count
-    }
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        diningHall=pickerDataSource[row]
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -189,15 +173,13 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate, UIPickerViewDataSource
     //Checks for any value changes in the user's database, if it has activeOrders child that means user is not new. If new then it waits for it to be created from first order creation.
     override func viewDidLoad() {
         super.viewDidLoad()
-        PickerView.dataSource = self
-        PickerView.delegate = self
+        
         GIDSignIn.sharedInstance().uiDelegate = self
         OrderLabelsArray=[OrderItemLabels,OrderItemLabels2,OrderItemLabels3]
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(OrderScreen.updatePrep), userInfo: nil, repeats: true)
         self.navigationController?.navigationBar.isHidden=true
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-        })
-        let grillStatus = FIRDatabase.database().reference().child(FirebaseConstants.grills).child(FirebaseConstants.GrillIDS[diningHall]!).child(FirebaseConstants.grillStat)
+        self.title=selectedDiningHall
+        let grillStatus = FIRDatabase.database().reference().child(FirebaseConstants.grills).child(FirebaseConstants.GrillIDS[selectedDiningHall]!).child(FirebaseConstants.grillStat)
         grillStatus.observe(FIRDataEventType.value, with: { (snapshot) in
             let status = snapshot.value as? Bool
             if(status==nil){
@@ -229,13 +211,9 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate, UIPickerViewDataSource
                 
                 if(self.allActiveOrders.count != 0){
                     self.noActiveOrdersLabel.isHidden=true
-                    self.PickerView.isHidden=true
-                    self.SelectDiningHallLabel.isHidden=true
                 }else{
                     self.changeFromLoading()
                     self.noActiveOrdersLabel.isHidden=false
-                    //self.PickerView.isHidden=false
-                    //self.SelectDiningHallLabel.isHidden=false
                 }
                 if(self.allActiveOrders.count < 3){
                     for i in  self.allActiveOrders.count...2{
