@@ -141,7 +141,6 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
             OrderLabelsArray[index][6].isHidden=false
             OrderLabelsArray[index][7].text=FirebaseConstants.preparingTexts[0]
             OrderLabelsArray[index][7].isHidden = false
-            //OrderLabelsArray[index][7].textColor = UIColor.init(netHex: 0x4C8BF6)
             OrderLabelsArray[index][7].font = UIFont(name:"Verdana-Regular", size: 16.0)
             OrderLabelsArray[index][7].frame.origin = CGPoint(x: 86, y: OrderLabelsArray[index][7].frame.origin.y)
             FinishedGifArray[index].isHidden=true

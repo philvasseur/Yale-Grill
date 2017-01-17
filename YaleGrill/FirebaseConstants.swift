@@ -7,11 +7,13 @@
 //
 
 import Foundation
+import CoreLocation
 
 class FirebaseConstants {
     //Grill Constants
     static let GrillIDS = ["Jonathan Edwards" : "105206071860987390121"] //pvass153@gmail.com
     static let CookEmailArray = ["pvass153@gmail.com"]
+    static let coordinates  = ["Jonathan Edwards": CLLocation(latitude: 41.308839, longitude: -72.929976),"Branford" : CLLocation(latitude: 41.310051, longitude: -72.930137), "Saybrook":CLLocation(latitude: 41.310170, longitude: -72.929643), "Ezra Stiles":CLLocation(latitude: 41.312518, longitude: -72.930721), "Morse":CLLocation(latitude: 41.312609, longitude: -72.930268),"Trumbull":CLLocation(latitude: 41.310499, longitude: -72.928823), "Silliman":CLLocation(latitude: 41.311213, longitude: -72.924982)]
     static let orders = "Orders"
     static let grills = "Grills"
     static let grillStat = "GrillIsOn"

@@ -8,8 +8,9 @@
 
 import UIKit
 import Firebase
+import CoreLocation
 
-class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
+class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, CLLocationManagerDelegate{
     
     //Page for logging in. Doesn't do much besides try to auto login. Contains the GIDSignIn button.
     /*
@@ -22,6 +23,9 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, 
     @IBOutlet weak var LoadingImage: UIImageView!
     @IBOutlet weak var LoadingBack: UIImageView!
     @IBOutlet weak var GSignInButton: GIDSignInButton!
+    let pickerView = UIPickerView()
+    let locationManager = CLLocationManager()
+    var currentLocation : CLLocation!
     
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
@@ -30,7 +34,7 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, 
         if GIDSignIn.sharedInstance().hasAuthInKeychain() {
             print("\(GIDSignIn.sharedInstance().currentUser.profile.email!) TRYING TO SIGN IN - AUTH")
             let cEmail = GIDSignIn.sharedInstance().currentUser.profile.email!
-            if(cEmail.lowercased().range(of: "@yale") != nil){ //Checks if email is a Yale email
+            if(cEmail.lowercased().range(of: "@yale.edu") != nil){ //Checks if email is a Yale email
                 guard let authentication = user.authentication else { return }
                 let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
                 FIRAuth.auth()?.signIn(with: credential) { (user, error) in
@@ -42,21 +46,26 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, 
                         let dHallRef = FIRDatabase.database().reference().child(FirebaseConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!).child(FirebaseConstants.prevDining)
                         dHallRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
                             let pastDHall = snapshot.value as? String
-                            if(pastDHall != nil){
+                            if((pastDHall != nil) && (FirebaseConstants.GrillIDS[pastDHall!] != nil)){
                                 self.diningHallTextField.text = pastDHall
                                 self.performSegue(withIdentifier: FirebaseConstants.SignInSegueID, sender: nil)
-                            }else{
+                            }else { //Should never happen unless someone messes with database
                                 GIDSignIn.sharedInstance().signOut()
-                                self.createAlert(title: "Sorry!", message: "Please select a dining hall!")
+                                self.createAlert(title: "Sorry about that!", message: "We can't find a previously selected dining hall or the dining hall we found is not activated. If you think this is an error, contact philip.vasseur@yale.edu.")
                                 print("No Accessible Dining Hall")
                                 self.LoadingBack.isHidden=true
                                 self.LoadingImage.isHidden=true
                             }
                         })
                     }else{
-                        let dHallRef = FIRDatabase.database().reference().child(FirebaseConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!).child(FirebaseConstants.prevDining)
-                        dHallRef.setValue(selectedDiningHall)
-                        self.performSegue(withIdentifier: FirebaseConstants.SignInSegueID, sender: nil)
+                        if(FirebaseConstants.GrillIDS[selectedDiningHall!] != nil){
+                            let dHallRef = FIRDatabase.database().reference().child(FirebaseConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!).child(FirebaseConstants.prevDining)
+                            dHallRef.setValue(selectedDiningHall)
+                            self.performSegue(withIdentifier: FirebaseConstants.SignInSegueID, sender: nil)
+                        }else{
+                            GIDSignIn.sharedInstance().signOut()
+                            self.createAlert(title: "Sorry, \(selectedDiningHall!) Dining Hall isn't activated!", message: "Please select another dining hall. If you think this is an error, contact philip.vasseur@yale.edu.")
+                        }
                     }
                 }
             }else if(FirebaseConstants.CookEmailArray.contains(cEmail.lowercased())){
@@ -78,9 +87,15 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, 
             print("Sign In Error: \(error)")
             LoadingBack.isHidden=true
             LoadingImage.isHidden=true
-        }else{
             LoadingBack.isHidden=true
             LoadingImage.isHidden=true
+            self.locationManager.delegate = self
+            self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            self.locationManager.requestWhenInUseAuthorization()
+            self.locationManager.startUpdatingLocation()
+        }else{
+            print("in it")
+            
         }
     }
     
@@ -120,10 +135,31 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        self.currentLocation = locations.last!
+        var closestDiningHall = ["DiningHall": "None","Distance" : CLLocationDistanceMax] as [String : Any]
+        for college in FirebaseConstants.coordinates{
+            let dis = college.value.distance(from: currentLocation)
+            if(dis < closestDiningHall["Distance"] as! CLLocationDistance && dis<=100){
+                closestDiningHall["DiningHall"] = college.key
+                closestDiningHall["Distance"] = dis
+            }
+        }
+        if(closestDiningHall["DiningHall"] as! String != "None"){
+            let row = FirebaseConstants.PickerData.index(of :closestDiningHall["DiningHall"] as! String)!
+            pickerView.selectRow(row, inComponent: 0, animated: false)
+            pickerView(pickerView, didSelectRow: row, inComponent: 1)
+        }
+        self.locationManager.stopUpdatingLocation()
+        
+    }
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Failed with error: \(error)")
+    }
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        let pickerView = UIPickerView()
         pickerView.showsSelectionIndicator = true
         pickerView.dataSource = self
         pickerView.delegate = self
@@ -133,6 +169,9 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, 
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().signInSilently()
+        
+        
+        
         
         // Do any additional setup after loading the view, typically from a nib.
     }
