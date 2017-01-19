@@ -19,7 +19,7 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, 
     var pickerDataSource = FirebaseConstants.PickerData
 
     @IBOutlet weak var diningHallTextField: UITextField!
-    //@IBOutlet weak var PickerView: UIPickerView!
+    @IBOutlet weak var DisabledSignInColor: UIImageView!
     @IBOutlet weak var LoadingImage: UIImageView!
     @IBOutlet weak var LoadingBack: UIImageView!
     @IBOutlet weak var GSignInButton: GIDSignInButton!
@@ -165,6 +165,7 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, 
         pickerView.delegate = self
         diningHallTextField.inputView = pickerView
         GSignInButton.isEnabled=false
+        DisabledSignInColor.layer.cornerRadius = 2
         self.diningHallTextField.text = "Select Dining Hall"
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self
