@@ -33,63 +33,93 @@
                                             <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=regular">
+                                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="21"/>
+                                            </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Cheese" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f7m-vT-DEN">
-                                            <rect key="frame" x="8" y="44" width="75" height="18"/>
+                                            <rect key="frame" x="8" y="47.5" width="75" height="17.5"/>
                                             <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=regular">
+                                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="17"/>
+                                            </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Tomatoes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vjs-CX-ciB">
-                                            <rect key="frame" x="8" y="67.5" width="92" height="18"/>
+                                            <rect key="frame" x="8" y="68" width="91.5" height="17.5"/>
                                             <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=regular">
+                                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="17"/>
+                                            </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Sauce" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZfW-Y9-mfJ">
-                                            <rect key="frame" x="149.5" y="44" width="67" height="18"/>
+                                            <rect key="frame" x="149.5" y="47.5" width="66.5" height="17.5"/>
                                             <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=regular">
+                                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="17"/>
+                                            </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Lettuce" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vC7-jv-0dJ">
-                                            <rect key="frame" x="149.5" y="67.5" width="76" height="18"/>
+                                            <rect key="frame" x="149.5" y="68" width="76" height="17.5"/>
                                             <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=regular">
+                                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="17"/>
+                                            </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preparing" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XdF-BC-ryG">
-                                            <rect key="frame" x="279" y="44.5" width="78" height="18"/>
+                                            <rect key="frame" x="280" y="48" width="78" height="17.5"/>
                                             <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=regular">
+                                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="17"/>
+                                            </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Bun" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DRy-fX-3es">
-                                            <rect key="frame" x="279" y="67.5" width="52" height="18"/>
+                                            <rect key="frame" x="280" y="68" width="52" height="17.5"/>
                                             <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=regular">
+                                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="17"/>
+                                            </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4X5-Ih-Eic">
-                                            <rect key="frame" x="8" y="22.5" width="46" height="18"/>
+                                            <rect key="frame" x="8" y="26" width="45.5" height="17.5"/>
                                             <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=regular">
+                                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="17"/>
+                                            </variation>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FqH-gU-C8t">
-                                            <rect key="frame" x="245" y="1" width="120" height="37.5"/>
+                                            <rect key="frame" x="245" y="5" width="120" height="36"/>
                                             <color key="backgroundColor" red="0.29803921568627451" green="0.54509803921568623" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="200" id="Ysc-zX-Dz1"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="13"/>
                                             <state key="normal" title="Mark as Ready">
                                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             </state>
+                                            <variation key="heightClass=regular-widthClass=regular">
+                                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="19"/>
+                                            </variation>
                                             <connections>
                                                 <action selector="ChangeStatusPressed:" destination="lEX-Lm-rlD" eventType="touchUpInside" id="0Iw-gb-iGX"/>
                                             </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="FqH-gU-C8t" firstAttribute="height" secondItem="I5h-u9-F9I" secondAttribute="height" multiplier="0.42" id="2U6-ry-bRH"/>
+                                        <constraint firstItem="FqH-gU-C8t" firstAttribute="height" secondItem="I5h-u9-F9I" secondAttribute="height" multiplier="0.4" id="2U6-ry-bRH"/>
                                         <constraint firstItem="HqK-i6-cs1" firstAttribute="leading" secondItem="4X5-Ih-Eic" secondAttribute="leading" id="3Zg-Va-RUA"/>
                                         <constraint firstItem="vjs-CX-ciB" firstAttribute="centerY" secondItem="I5h-u9-F9I" secondAttribute="centerY" multiplier="1.71" id="4SG-gF-cU5"/>
                                         <constraint firstItem="vC7-jv-0dJ" firstAttribute="centerX" secondItem="I5h-u9-F9I" secondAttribute="centerX" id="88H-y9-swh"/>
@@ -99,16 +129,16 @@
                                         <constraint firstItem="XdF-BC-ryG" firstAttribute="centerY" secondItem="ZfW-Y9-mfJ" secondAttribute="centerY" id="Lhk-Y3-EoO"/>
                                         <constraint firstItem="ZfW-Y9-mfJ" firstAttribute="centerY" secondItem="f7m-vT-DEN" secondAttribute="centerY" id="Mi0-jz-DTz"/>
                                         <constraint firstItem="vjs-CX-ciB" firstAttribute="leading" secondItem="f7m-vT-DEN" secondAttribute="leading" id="Rkc-Xf-gnk"/>
-                                        <constraint firstItem="f7m-vT-DEN" firstAttribute="centerY" secondItem="I5h-u9-F9I" secondAttribute="centerY" multiplier="1.18" id="Url-J4-gkz"/>
+                                        <constraint firstItem="f7m-vT-DEN" firstAttribute="centerY" secondItem="I5h-u9-F9I" secondAttribute="centerY" multiplier="1.25" id="Url-J4-gkz"/>
                                         <constraint firstItem="DRy-fX-3es" firstAttribute="centerX" secondItem="FqH-gU-C8t" secondAttribute="centerX" id="VuT-sG-QCu"/>
                                         <constraint firstItem="4X5-Ih-Eic" firstAttribute="leading" secondItem="f7m-vT-DEN" secondAttribute="leading" id="asQ-bi-cx1"/>
+                                        <constraint firstItem="HqK-i6-cs1" firstAttribute="top" secondItem="I5h-u9-F9I" secondAttribute="top" id="cgN-lv-40o"/>
                                         <constraint firstItem="DRy-fX-3es" firstAttribute="centerY" secondItem="vC7-jv-0dJ" secondAttribute="centerY" id="eLx-di-zdC"/>
-                                        <constraint firstItem="FqH-gU-C8t" firstAttribute="top" secondItem="I5h-u9-F9I" secondAttribute="top" constant="1" id="hsK-y5-yMx"/>
-                                        <constraint firstItem="HqK-i6-cs1" firstAttribute="top" secondItem="I5h-u9-F9I" secondAttribute="top" id="iFH-Fk-Qbg"/>
-                                        <constraint firstItem="FqH-gU-C8t" firstAttribute="width" secondItem="I5h-u9-F9I" secondAttribute="width" multiplier="0.32" id="kqX-Dd-GUY"/>
+                                        <constraint firstItem="FqH-gU-C8t" firstAttribute="top" secondItem="I5h-u9-F9I" secondAttribute="top" constant="5" id="gST-p4-z3C"/>
+                                        <constraint firstItem="FqH-gU-C8t" firstAttribute="width" secondItem="I5h-u9-F9I" secondAttribute="width" multiplier="0.32" priority="900" id="kqX-Dd-GUY"/>
                                         <constraint firstAttribute="leadingMargin" secondItem="f7m-vT-DEN" secondAttribute="leading" id="sPM-ao-1tb"/>
                                         <constraint firstItem="vC7-jv-0dJ" firstAttribute="centerY" secondItem="vjs-CX-ciB" secondAttribute="centerY" id="u6R-pn-3mS"/>
-                                        <constraint firstItem="4X5-Ih-Eic" firstAttribute="centerY" secondItem="I5h-u9-F9I" secondAttribute="centerY" multiplier="0.7" id="w4h-5l-Fnh"/>
+                                        <constraint firstItem="4X5-Ih-Eic" firstAttribute="centerY" secondItem="I5h-u9-F9I" secondAttribute="centerY" multiplier="0.76" id="w4h-5l-Fnh"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -163,7 +193,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="YaleImage" translatesAutoresizingMaskIntoConstraints="NO" id="3fh-YX-xub" userLabel="YaleImage">
-                                <rect key="frame" x="39" y="81.5" width="297" height="230.5"/>
+                                <rect key="frame" x="39" y="82" width="297" height="230"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="3fh-YX-xub" secondAttribute="height" multiplier="297:230" id="DWx-lY-bAZ"/>
                                 </constraints>
@@ -269,69 +299,89 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="subtleWaves" translatesAutoresizingMaskIntoConstraints="NO" id="zHH-HP-w8n" userLabel="LoadingScreen">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" red="0.99999058249999995" green="0.99999356269999995" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="tintColor" red="0.2984012365" green="0.54416894910000002" blue="0.96475684640000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="r4t-G6-auf">
+                                <rect key="frame" x="102" y="314.5" width="171" height="38"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="r4t-G6-auf" secondAttribute="height" multiplier="9:2" id="eyT-dX-bvM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="31"/>
+                                <color key="textColor" red="0.29803921568627451" green="0.54509803921568623" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="subtleWaves" translatesAutoresizingMaskIntoConstraints="NO" id="IX8-1K-4fs" userLabel="Background">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.99999058246612549" green="0.99999356269836426" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="tintColor" red="0.29840123653411865" green="0.54416894912719727" blue="0.96475684642791748" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </imageView>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5Fj-G3-UWF">
-                                <rect key="frame" x="237.5" y="161" width="123" height="92"/>
+                                <rect key="frame" x="237.5" y="181" width="123" height="92.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="5Fj-G3-UWF" secondAttribute="height" multiplier="123:92" id="qZu-MW-TOJ"/>
                                 </constraints>
                             </imageView>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mme-0a-GLw">
-                                <rect key="frame" x="237.5" y="356" width="123" height="91.5"/>
+                                <rect key="frame" x="237.5" y="373" width="123" height="92.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Mme-0a-GLw" secondAttribute="height" multiplier="123:92" id="J5W-uF-DgF"/>
                                 </constraints>
                             </imageView>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WpI-2V-Am0">
-                                <rect key="frame" x="237.5" y="557.5" width="123" height="92"/>
+                                <rect key="frame" x="237.5" y="565.5" width="123" height="91.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="WpI-2V-Am0" secondAttribute="height" multiplier="123:92" id="7sE-IR-nIg"/>
                                 </constraints>
                             </imageView>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5pE-eX-QMR">
-                                <rect key="frame" x="17" y="263" width="341" height="1"/>
+                                <rect key="frame" x="17" y="286.5" width="341" height="1"/>
                                 <color key="backgroundColor" red="0.8040701134553645" green="0.80689637474888376" blue="0.81537515862944165" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="XXf-MG-uaT"/>
                                 </constraints>
                             </imageView>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="npb-OV-XU8">
-                                <rect key="frame" x="17" y="463" width="341" height="1"/>
+                                <rect key="frame" x="17" y="479.5" width="341" height="1"/>
                                 <color key="backgroundColor" red="0.8040701134553645" green="0.80689637474888376" blue="0.81537515862944165" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="hdW-3u-357"/>
                                 </constraints>
                             </imageView>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="w4s-8g-1ef">
-                                <rect key="frame" x="117.5" y="187.5" width="215" height="39"/>
+                                <rect key="frame" x="117.5" y="207.5" width="215" height="39"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="215" id="61G-cv-hcD"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="39" id="8Ei-f8-8nP"/>
                                     <constraint firstAttribute="width" secondItem="w4s-8g-1ef" secondAttribute="height" multiplier="215:39" id="nJT-5g-RMO"/>
                                 </constraints>
                             </imageView>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6hb-aT-WUJ">
-                                <rect key="frame" x="117.5" y="381.5" width="215" height="39"/>
+                                <rect key="frame" x="117.5" y="400.5" width="215" height="39"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="39" id="KRn-5M-hXx"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="215" id="O3O-bL-nRb"/>
                                     <constraint firstAttribute="width" secondItem="6hb-aT-WUJ" secondAttribute="height" multiplier="215:39" id="unt-XF-qXm"/>
                                 </constraints>
                             </imageView>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MsF-tT-Xca">
-                                <rect key="frame" x="117.5" y="585" width="215" height="39"/>
+                                <rect key="frame" x="117.5" y="591.5" width="215" height="39"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="215" id="6AM-6X-GAI"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="39" id="VIE-NU-ykJ"/>
                                     <constraint firstAttribute="width" secondItem="MsF-tT-Xca" secondAttribute="height" multiplier="215:39" id="XzL-m5-iQq"/>
                                 </constraints>
                             </imageView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have no active orders" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="anN-nB-wCX">
-                                <rect key="frame" x="70.5" y="91" width="234" height="19.5"/>
+                                <rect key="frame" x="70.5" y="102.5" width="234" height="19.5"/>
                                 <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="16"/>
                                 <color key="textColor" red="0.29803921568627451" green="0.54509803921568623" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Single Burger" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="WCg-xI-ReT">
-                                <rect key="frame" x="122.5" y="73" width="130" height="21"/>
+                                <rect key="frame" x="122.5" y="84.5" width="130" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="4sv-cI-s4k"/>
                                 </constraints>
@@ -340,55 +390,55 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Single Burger" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="evk-Ba-c2n">
-                                <rect key="frame" x="122.5" y="273" width="130" height="21"/>
+                                <rect key="frame" x="122.5" y="295.5" width="130" height="21"/>
                                 <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="17"/>
                                 <color key="textColor" red="0.29803921570000003" green="0.5450980392" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Single Burger" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="riA-Mr-0ft">
-                                <rect key="frame" x="122.5" y="473" width="130" height="21"/>
+                                <rect key="frame" x="122.5" y="486.5" width="130" height="21"/>
                                 <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="17"/>
                                 <color key="textColor" red="0.29803921570000003" green="0.5450980392" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dmC-CK-AgK">
+                                <rect key="frame" x="21" y="217.5" width="60" height="18.5"/>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
+                                <color key="textColor" red="0.29803921568627451" green="0.54509803921568623" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XDp-gV-c32">
+                                <rect key="frame" x="21" y="411" width="60" height="18.5"/>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
+                                <color key="textColor" red="0.29803921568627451" green="0.54509803921568623" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H5F-Xf-qxu">
-                                <rect key="frame" x="21" y="594.5" width="60" height="18.5"/>
+                                <rect key="frame" x="21" y="601" width="60" height="18.5"/>
                                 <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
                                 <color key="textColor" red="0.29803921568627451" green="0.54509803921568623" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preparing..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VJ0-h4-DBb">
-                                <rect key="frame" x="91" y="594.5" width="94.5" height="19.5"/>
+                                <rect key="frame" x="91" y="601" width="94.5" height="19.5"/>
                                 <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XDp-gV-c32">
-                                <rect key="frame" x="21" y="392.5" width="60" height="18.5"/>
-                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
-                                <color key="textColor" red="0.29803921568627451" green="0.54509803921568623" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preparing..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OsX-Lq-VfK">
-                                <rect key="frame" x="91" y="392" width="94.5" height="19.5"/>
+                                <rect key="frame" x="91" y="410.5" width="94.5" height="19.5"/>
                                 <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dmC-CK-AgK">
-                                <rect key="frame" x="21" y="197.5" width="60" height="18.5"/>
-                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
-                                <color key="textColor" red="0.29803921568627451" green="0.54509803921568623" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preparing..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Quj-L5-qE2">
-                                <rect key="frame" x="91" y="196.5" width="94.5" height="19.5"/>
+                                <rect key="frame" x="91" y="217" width="94.5" height="19.5"/>
                                 <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Nov-rg-Its">
-                                <rect key="frame" x="25" y="111" width="325" height="41"/>
+                                <rect key="frame" x="25" y="126" width="325" height="41"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="uVZ-5t-TYS">
                                         <rect key="frame" x="0.0" y="0.0" width="42" height="41"/>
@@ -438,7 +488,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="735-c5-fwa">
-                                <rect key="frame" x="25" y="303" width="325" height="41"/>
+                                <rect key="frame" x="25" y="323" width="325" height="41"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="4R2-cy-uet">
                                         <rect key="frame" x="0.0" y="0.0" width="42" height="41"/>
@@ -488,7 +538,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="gKf-cf-B2E">
-                                <rect key="frame" x="25" y="503" width="325" height="41"/>
+                                <rect key="frame" x="25" y="515" width="325" height="41"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="FvT-sf-8e1">
                                         <rect key="frame" x="0.0" y="0.0" width="42" height="41"/>
@@ -538,35 +588,21 @@
                                 </subviews>
                             </stackView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ready For Pickup!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BwP-Ce-aXI">
-                                <rect key="frame" x="134" y="196" width="182.5" height="22"/>
-                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="18"/>
+                                <rect key="frame" x="138.5" y="217" width="172.5" height="21"/>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ready For Pickup!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Sn-RB-sr2">
-                                <rect key="frame" x="134" y="389.5" width="182.5" height="22"/>
-                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="18"/>
+                                <rect key="frame" x="138.5" y="409" width="172.5" height="21"/>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ready For Pickup!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ciw-DR-MBy">
-                                <rect key="frame" x="134" y="593" width="182.5" height="22"/>
-                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="18"/>
+                                <rect key="frame" x="138.5" y="600" width="172.5" height="21"/>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="17"/>
                                 <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="subtleWaves" translatesAutoresizingMaskIntoConstraints="NO" id="zHH-HP-w8n" userLabel="LoadingScreen">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" red="0.99999058249999995" green="0.99999356269999995" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
-                                <color key="tintColor" red="0.2984012365" green="0.54416894910000002" blue="0.96475684640000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="r4t-G6-auf">
-                                <rect key="frame" x="102" y="314.5" width="171" height="38"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="r4t-G6-auf" secondAttribute="height" multiplier="9:2" id="eyT-dX-bvM"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="31"/>
-                                <color key="textColor" red="0.29803921568627451" green="0.54509803921568623" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -576,11 +612,11 @@
                             <constraint firstItem="Quj-L5-qE2" firstAttribute="centerY" secondItem="dmC-CK-AgK" secondAttribute="centerY" id="0rL-5i-n95"/>
                             <constraint firstAttribute="trailing" secondItem="735-c5-fwa" secondAttribute="trailing" constant="25" id="17g-Z4-QvG"/>
                             <constraint firstItem="IX8-1K-4fs" firstAttribute="height" secondItem="ig9-dd-x8K" secondAttribute="height" id="1I5-Yn-ulj"/>
-                            <constraint firstItem="WCg-xI-ReT" firstAttribute="centerY" secondItem="ig9-dd-x8K" secondAttribute="centerY" multiplier="0.25" priority="900" id="2hJ-ai-gVx"/>
+                            <constraint firstItem="WCg-xI-ReT" firstAttribute="centerY" secondItem="ig9-dd-x8K" secondAttribute="centerY" multiplier="0.285" priority="900" id="2hJ-ai-gVx"/>
                             <constraint firstItem="ciw-DR-MBy" firstAttribute="centerX" secondItem="MsF-tT-Xca" secondAttribute="centerX" id="5ia-VS-RR3"/>
                             <constraint firstItem="zHH-HP-w8n" firstAttribute="top" secondItem="ig9-dd-x8K" secondAttribute="top" id="5xa-e9-Mgr"/>
                             <constraint firstItem="gKf-cf-B2E" firstAttribute="leading" secondItem="ig9-dd-x8K" secondAttribute="leading" constant="25" id="6GC-9c-DUU"/>
-                            <constraint firstItem="6hb-aT-WUJ" firstAttribute="width" secondItem="ig9-dd-x8K" secondAttribute="width" multiplier="0.5733" id="7zx-qy-dkK"/>
+                            <constraint firstItem="6hb-aT-WUJ" firstAttribute="width" secondItem="ig9-dd-x8K" secondAttribute="width" multiplier="0.5733" priority="900" id="7zx-qy-dkK"/>
                             <constraint firstAttribute="trailing" secondItem="gKf-cf-B2E" secondAttribute="trailing" constant="25" id="8Ic-ni-12K"/>
                             <constraint firstItem="w4s-8g-1ef" firstAttribute="centerY" secondItem="dmC-CK-AgK" secondAttribute="centerY" id="8RD-Er-sb5"/>
                             <constraint firstItem="IX8-1K-4fs" firstAttribute="top" secondItem="ig9-dd-x8K" secondAttribute="top" id="8pk-0x-Yrl"/>
@@ -595,11 +631,11 @@
                             <constraint firstItem="WCg-xI-ReT" firstAttribute="centerX" secondItem="ig9-dd-x8K" secondAttribute="centerX" id="GIC-st-dUA"/>
                             <constraint firstItem="5Fj-G3-UWF" firstAttribute="width" secondItem="ig9-dd-x8K" secondAttribute="width" multiplier="0.328" id="Gte-pu-MeC"/>
                             <constraint firstItem="OsX-Lq-VfK" firstAttribute="leading" secondItem="XDp-gV-c32" secondAttribute="trailing" constant="10" id="HSY-hH-YPq"/>
-                            <constraint firstItem="dmC-CK-AgK" firstAttribute="centerY" secondItem="ig9-dd-x8K" secondAttribute="centerY" multiplier="0.62" id="Hzz-Cr-1LH"/>
+                            <constraint firstItem="dmC-CK-AgK" firstAttribute="centerY" secondItem="ig9-dd-x8K" secondAttribute="centerY" multiplier="0.68" id="Hzz-Cr-1LH"/>
                             <constraint firstItem="WpI-2V-Am0" firstAttribute="width" secondItem="ig9-dd-x8K" secondAttribute="width" multiplier="0.328" id="IC3-zU-wqx"/>
                             <constraint firstItem="BwP-Ce-aXI" firstAttribute="centerY" secondItem="w4s-8g-1ef" secondAttribute="centerY" id="LA9-bL-hxe"/>
                             <constraint firstItem="Nov-rg-Its" firstAttribute="leading" secondItem="ig9-dd-x8K" secondAttribute="leading" constant="25" id="Loi-iV-f43"/>
-                            <constraint firstItem="735-c5-fwa" firstAttribute="centerY" secondItem="ig9-dd-x8K" secondAttribute="centerY" multiplier="0.97" id="MYj-mn-AoA"/>
+                            <constraint firstItem="735-c5-fwa" firstAttribute="centerY" secondItem="ig9-dd-x8K" secondAttribute="centerY" multiplier="1.03" id="MYj-mn-AoA"/>
                             <constraint firstItem="MsF-tT-Xca" firstAttribute="centerY" secondItem="H5F-Xf-qxu" secondAttribute="centerY" id="NQA-wA-RVl"/>
                             <constraint firstItem="w4s-8g-1ef" firstAttribute="centerX" secondItem="ig9-dd-x8K" secondAttribute="centerX" multiplier="1.2" id="NqE-2u-zoz"/>
                             <constraint firstItem="VJ0-h4-DBb" firstAttribute="leading" secondItem="H5F-Xf-qxu" secondAttribute="trailing" constant="10" id="OdZ-0g-CCo"/>
@@ -608,23 +644,23 @@
                             <constraint firstItem="zHH-HP-w8n" firstAttribute="leading" secondItem="ig9-dd-x8K" secondAttribute="leading" id="SGs-Mh-cGq"/>
                             <constraint firstItem="BwP-Ce-aXI" firstAttribute="centerX" secondItem="w4s-8g-1ef" secondAttribute="centerX" id="SIZ-Y7-Scf"/>
                             <constraint firstItem="5Fj-G3-UWF" firstAttribute="centerY" secondItem="w4s-8g-1ef" secondAttribute="centerY" id="Tc3-qV-HT6"/>
-                            <constraint firstItem="H5F-Xf-qxu" firstAttribute="centerY" secondItem="ig9-dd-x8K" secondAttribute="centerY" multiplier="1.811" id="U4F-le-82b"/>
+                            <constraint firstItem="H5F-Xf-qxu" firstAttribute="centerY" secondItem="ig9-dd-x8K" secondAttribute="centerY" multiplier="1.83" id="U4F-le-82b"/>
                             <constraint firstItem="MsF-tT-Xca" firstAttribute="centerX" secondItem="ig9-dd-x8K" secondAttribute="centerX" multiplier="1.2" id="VIr-KY-5OI"/>
-                            <constraint firstItem="Nov-rg-Its" firstAttribute="centerY" secondItem="ig9-dd-x8K" secondAttribute="centerY" multiplier="0.395" id="WT2-9G-Fsy"/>
+                            <constraint firstItem="Nov-rg-Its" firstAttribute="centerY" secondItem="ig9-dd-x8K" secondAttribute="centerY" multiplier="0.44" id="WT2-9G-Fsy"/>
                             <constraint firstItem="WpI-2V-Am0" firstAttribute="centerX" secondItem="ig9-dd-x8K" secondAttribute="centerX" multiplier="1.595" id="XiL-OA-vSU"/>
-                            <constraint firstItem="npb-OV-XU8" firstAttribute="centerY" secondItem="ig9-dd-x8K" secondAttribute="centerY" multiplier="1.39" id="XrU-NN-eIC"/>
-                            <constraint firstItem="MsF-tT-Xca" firstAttribute="width" secondItem="ig9-dd-x8K" secondAttribute="width" multiplier="0.5733" id="XtK-6u-Gqa"/>
+                            <constraint firstItem="npb-OV-XU8" firstAttribute="centerY" secondItem="ig9-dd-x8K" secondAttribute="centerY" multiplier="1.44" id="XrU-NN-eIC"/>
+                            <constraint firstItem="MsF-tT-Xca" firstAttribute="width" secondItem="ig9-dd-x8K" secondAttribute="width" multiplier="0.5733" priority="900" id="XtK-6u-Gqa"/>
                             <constraint firstItem="IX8-1K-4fs" firstAttribute="width" secondItem="ig9-dd-x8K" secondAttribute="width" id="Ycz-cc-Z5O"/>
                             <constraint firstItem="zHH-HP-w8n" firstAttribute="width" secondItem="ig9-dd-x8K" secondAttribute="width" id="Ytt-nz-iQE"/>
                             <constraint firstItem="6hb-aT-WUJ" firstAttribute="centerY" secondItem="XDp-gV-c32" secondAttribute="centerY" id="aAg-t7-7Ql"/>
                             <constraint firstItem="3Sn-RB-sr2" firstAttribute="centerY" secondItem="6hb-aT-WUJ" secondAttribute="centerY" id="agM-Yf-Pcm"/>
                             <constraint firstItem="H5F-Xf-qxu" firstAttribute="leading" secondItem="XDp-gV-c32" secondAttribute="leading" id="c7T-yh-v2d"/>
-                            <constraint firstItem="evk-Ba-c2n" firstAttribute="centerY" secondItem="ig9-dd-x8K" secondAttribute="centerY" multiplier="0.85" id="d8o-L6-YS4"/>
+                            <constraint firstItem="evk-Ba-c2n" firstAttribute="centerY" secondItem="ig9-dd-x8K" secondAttribute="centerY" multiplier="0.918" id="d8o-L6-YS4"/>
                             <constraint firstItem="r4t-G6-auf" firstAttribute="width" secondItem="ig9-dd-x8K" secondAttribute="width" multiplier="0.456" id="dYA-Jz-VT8"/>
                             <constraint firstItem="Mme-0a-GLw" firstAttribute="width" secondItem="ig9-dd-x8K" secondAttribute="width" multiplier="0.328" id="fPq-VL-kT8"/>
                             <constraint firstItem="anN-nB-wCX" firstAttribute="centerX" secondItem="ig9-dd-x8K" secondAttribute="centerX" id="fxQ-Ll-jTQ"/>
                             <constraint firstItem="dmC-CK-AgK" firstAttribute="leading" secondItem="ig9-dd-x8K" secondAttribute="leadingMargin" constant="5" id="jEg-qs-mQH"/>
-                            <constraint firstItem="XDp-gV-c32" firstAttribute="centerY" secondItem="ig9-dd-x8K" secondAttribute="centerY" multiplier="1.204" id="jKy-MH-udp"/>
+                            <constraint firstItem="XDp-gV-c32" firstAttribute="centerY" secondItem="ig9-dd-x8K" secondAttribute="centerY" multiplier="1.26" id="jKy-MH-udp"/>
                             <constraint firstItem="zHH-HP-w8n" firstAttribute="height" secondItem="ig9-dd-x8K" secondAttribute="height" id="jM9-PJ-UZ2"/>
                             <constraint firstItem="r4t-G6-auf" firstAttribute="centerX" secondItem="ig9-dd-x8K" secondAttribute="centerX" id="jWu-jg-dAm"/>
                             <constraint firstItem="3Sn-RB-sr2" firstAttribute="centerX" secondItem="6hb-aT-WUJ" secondAttribute="centerX" id="jcz-H5-dSV"/>
@@ -632,16 +668,16 @@
                             <constraint firstItem="Mme-0a-GLw" firstAttribute="centerY" secondItem="6hb-aT-WUJ" secondAttribute="centerY" id="nxN-J7-47W"/>
                             <constraint firstItem="riA-Mr-0ft" firstAttribute="centerX" secondItem="ig9-dd-x8K" secondAttribute="centerX" id="ocM-GJ-AAv"/>
                             <constraint firstItem="evk-Ba-c2n" firstAttribute="centerX" secondItem="ig9-dd-x8K" secondAttribute="centerX" id="qHz-a7-RKJ"/>
-                            <constraint firstItem="gKf-cf-B2E" firstAttribute="centerY" secondItem="ig9-dd-x8K" secondAttribute="centerY" multiplier="1.57" id="r6t-Ru-1Ex"/>
+                            <constraint firstItem="gKf-cf-B2E" firstAttribute="centerY" secondItem="ig9-dd-x8K" secondAttribute="centerY" multiplier="1.605" id="r6t-Ru-1Ex"/>
                             <constraint firstAttribute="trailing" secondItem="Nov-rg-Its" secondAttribute="trailing" constant="25" id="sDN-y3-iM0"/>
-                            <constraint firstItem="5pE-eX-QMR" firstAttribute="centerY" secondItem="ig9-dd-x8K" secondAttribute="centerY" multiplier="0.79" id="t47-F5-jMs"/>
+                            <constraint firstItem="5pE-eX-QMR" firstAttribute="centerY" secondItem="ig9-dd-x8K" secondAttribute="centerY" multiplier="0.86" id="t47-F5-jMs"/>
                             <constraint firstItem="ciw-DR-MBy" firstAttribute="centerY" secondItem="MsF-tT-Xca" secondAttribute="centerY" id="tHJ-WD-6lx"/>
-                            <constraint firstItem="riA-Mr-0ft" firstAttribute="centerY" secondItem="ig9-dd-x8K" secondAttribute="centerY" multiplier="1.45" id="txW-y5-q2P"/>
+                            <constraint firstItem="riA-Mr-0ft" firstAttribute="centerY" secondItem="ig9-dd-x8K" secondAttribute="centerY" multiplier="1.49" id="txW-y5-q2P"/>
                             <constraint firstItem="Quj-L5-qE2" firstAttribute="leading" secondItem="dmC-CK-AgK" secondAttribute="trailing" constant="10" id="uUH-jo-yHr"/>
-                            <constraint firstItem="w4s-8g-1ef" firstAttribute="width" secondItem="ig9-dd-x8K" secondAttribute="width" multiplier="0.5733" id="uao-0Z-lFA"/>
+                            <constraint firstItem="w4s-8g-1ef" firstAttribute="width" secondItem="ig9-dd-x8K" secondAttribute="width" multiplier="0.5733" priority="900" id="uao-0Z-lFA"/>
                             <constraint firstItem="XDp-gV-c32" firstAttribute="leading" secondItem="dmC-CK-AgK" secondAttribute="leading" id="wTy-6y-xin"/>
                             <constraint firstItem="anN-nB-wCX" firstAttribute="top" secondItem="WCg-xI-ReT" secondAttribute="bottom" constant="-3" id="x19-NB-L5v"/>
-                            <constraint firstItem="WCg-xI-ReT" firstAttribute="top" relation="greaterThanOrEqual" secondItem="yXN-qZ-zOm" secondAttribute="bottom" constant="4" id="yeu-us-sV0"/>
+                            <constraint firstItem="WCg-xI-ReT" firstAttribute="top" relation="greaterThanOrEqual" secondItem="yXN-qZ-zOm" secondAttribute="bottom" id="yeu-us-sV0"/>
                             <constraint firstItem="5pE-eX-QMR" firstAttribute="width" secondItem="ig9-dd-x8K" secondAttribute="width" multiplier="0.90933" id="yvf-de-SuK"/>
                         </constraints>
                     </view>
@@ -762,13 +798,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cheese" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sgE-CY-qhp" userLabel="VCheese">
-                                <rect key="frame" x="27" y="395" width="59" height="20"/>
+                                <rect key="frame" x="27.5" y="395" width="59" height="20"/>
                                 <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lettuce" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wZa-xd-0Za" userLabel="VLettuce">
-                                <rect key="frame" x="26" y="443.5" width="60" height="20"/>
+                                <rect key="frame" x="26.5" y="443.5" width="60" height="20"/>
                                 <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
@@ -789,7 +825,7 @@
                                 <rect key="frame" x="293.5" y="197" width="51" height="31"/>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cheese" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oye-nk-whA" userLabel="HCheese">
-                                <rect key="frame" x="27" y="202" width="59" height="20"/>
+                                <rect key="frame" x="27.5" y="202" width="59" height="20"/>
                                 <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
@@ -816,16 +852,16 @@
                                 <rect key="frame" x="293.5" y="248.5" width="51" height="31"/>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lettuce" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N5V-k0-qln" userLabel="HLettuce">
-                                <rect key="frame" x="27" y="253.5" width="60" height="20"/>
+                                <rect key="frame" x="27.5" y="253.5" width="60" height="20"/>
                                 <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I49-FE-SE3" userLabel="HLettuceSwitch">
-                                <rect key="frame" x="95" y="247.5" width="51" height="31"/>
+                                <rect key="frame" x="95.5" y="247.5" width="51" height="31"/>
                             </switch>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nJV-Oz-ZHf" userLabel="HCheeseSwitch">
-                                <rect key="frame" x="95" y="197" width="51" height="31"/>
+                                <rect key="frame" x="95.5" y="197" width="51" height="31"/>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bun" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kcM-fd-ckW" userLabel="HBun">
                                 <rect key="frame" x="231.5" y="152" width="32" height="20"/>
@@ -841,14 +877,14 @@
                                 </connections>
                             </stepper>
                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="2" translatesAutoresizingMaskIntoConstraints="NO" id="suy-p8-HW8">
-                                <rect key="frame" x="95" y="147" width="94" height="29"/>
+                                <rect key="frame" x="95.5" y="147" width="94" height="29"/>
                                 <color key="tintColor" red="0.29803921568627451" green="0.54509803921568623" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <connections>
                                     <action selector="HamburgerStepper:" destination="0M2-0t-HgQ" eventType="valueChanged" id="DVg-fk-3Jp"/>
                                 </connections>
                             </stepper>
                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="2" translatesAutoresizingMaskIntoConstraints="NO" id="aUi-1u-HFi">
-                                <rect key="frame" x="95" y="339" width="94" height="29"/>
+                                <rect key="frame" x="95.5" y="339" width="94" height="29"/>
                                 <color key="tintColor" red="0.29803921568627451" green="0.54509803921568623" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <connections>
                                     <action selector="VeggieStepper:" destination="0M2-0t-HgQ" eventType="valueChanged" id="spu-dr-Cpi"/>
@@ -864,13 +900,13 @@
                                 <rect key="frame" x="293.5" y="438.5" width="51" height="31"/>
                             </switch>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PDJ-a4-1ct">
-                                <rect key="frame" x="95" y="389" width="51" height="31"/>
+                                <rect key="frame" x="95.5" y="389" width="51" height="31"/>
                             </switch>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uKh-Mh-AIR">
-                                <rect key="frame" x="95" y="438.5" width="51" height="31"/>
+                                <rect key="frame" x="95.5" y="438.5" width="51" height="31"/>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chicken Breast" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="Fcd-aT-iXy" userLabel="Chicken Breast Label">
-                                <rect key="frame" x="99" y="497.5" width="177" height="25.5"/>
+                                <rect key="frame" x="99" y="497.5" width="177" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Fcd-aT-iXy" secondAttribute="height" multiplier="177:26" id="N61-kV-Aqi"/>
                                 </constraints>
@@ -879,13 +915,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="----" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="rFc-K7-R9i">
-                                <rect key="frame" x="41.5" y="152" width="29.5" height="19"/>
+                                <rect key="frame" x="41.5" y="152" width="30" height="19"/>
                                 <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="----" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="f3b-gc-g0i">
-                                <rect key="frame" x="41.5" y="344" width="29.5" height="19"/>
+                                <rect key="frame" x="41.5" y="344" width="30" height="19"/>
                                 <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
