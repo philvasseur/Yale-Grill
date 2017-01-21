@@ -81,10 +81,12 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
     private func updateOrderAsFinished(cOrder: Orders, index: Int){
         let orderLoc = index
         var cOrderLabels = OrderLabelsArray[orderLoc]
-        cOrderLabels[7].text=FirebaseConstants.UserReadyText
+        cOrderLabels[7].isHidden=true
+        cOrderLabels[8].isHidden=false
+        /*cOrderLabels[7].text=FirebaseConstants.UserReadyText
         cOrderLabels[7].textColor = UIColor.black
         cOrderLabels[7].font = UIFont(name:"Verdana-Bold", size: 20.0)
-        cOrderLabels[7].frame.origin = CGPoint(x: 125, y: cOrderLabels[7].frame.origin.y)
+        cOrderLabels[7].frame.origin = CGPoint(x: 125, y: cOrderLabels[7].frame.origin.y)*/
         FinishedGifArray[orderLoc].image = finishedGif
         FinishedGifArray[orderLoc].isHidden=false
         FinishedGifArray[orderLoc].layer.cornerRadius = 9
@@ -125,8 +127,8 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
     private func setSingleOrder(cOrder: Orders, index: Int){
         LinesArray[index].isHidden=false
         OrderLabelsArray[index][0].text=cOrder.foodServing
-        for itemLabel in OrderLabelsArray[index]{
-            itemLabel.isHidden=false
+        for i in 0...6{
+            OrderLabelsArray[index][i].isHidden=false
         }
         OrderLabelsArray[index][1].text=cOrder.bunSetting
         OrderLabelsArray[index][2].text=cOrder.cheeseSetting
@@ -138,11 +140,11 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
             GifViews[index].isHidden=false
             GifViews[index].image=gifArray[index]
             GifViews[index].layer.cornerRadius = 10
-            OrderLabelsArray[index][6].isHidden=false
             OrderLabelsArray[index][7].text=FirebaseConstants.preparingTexts[0]
             OrderLabelsArray[index][7].isHidden = false
-            OrderLabelsArray[index][7].font = UIFont(name:"Verdana-Regular", size: 16.0)
-            OrderLabelsArray[index][7].frame.origin = CGPoint(x: 86, y: OrderLabelsArray[index][7].frame.origin.y)
+            OrderLabelsArray[index][8].isHidden = true
+            /*OrderLabelsArray[index][7].font = UIFont(name:"Verdana-Regular", size: 16.0)
+            OrderLabelsArray[index][7].frame.origin = CGPoint(x: 86, y: OrderLabelsArray[index][7].frame.origin.y)*/
             FinishedGifArray[index].isHidden=true
         }else if(cOrder.orderStatus == 1){
             updateOrderAsFinished(cOrder: cOrder, index: index)
@@ -195,6 +197,17 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
                 let orderIDs = userDic[FirebaseConstants.activeOrders] as! String
                 let tempOrders = orderIDs.characters.split { $0 == " " }
                 self.allActiveOrders = tempOrders.map(String.init)
+                if(self.allActiveOrders.count != 0){
+                    self.noActiveOrdersLabel.isHidden=true
+                }else{
+                    self.changeFromLoading()
+                    self.noActiveOrdersLabel.isHidden=false
+                }
+                if(self.allActiveOrders.count < 3){
+                    for i in  self.allActiveOrders.count...2{
+                        self.wipeLabels(index: i)
+                    }
+                }
                 for orderID in self.allActiveOrders {
                     let orderRef = FIRDatabase.database().reference().child(FirebaseConstants.orders).child(orderID)
                     orderRef.removeAllObservers()
@@ -206,18 +219,6 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
                             self.changeFromLoading()
                         }
                     })
-                }
-                
-                if(self.allActiveOrders.count != 0){
-                    self.noActiveOrdersLabel.isHidden=true
-                }else{
-                    self.changeFromLoading()
-                    self.noActiveOrdersLabel.isHidden=false
-                }
-                if(self.allActiveOrders.count < 3){
-                    for i in  self.allActiveOrders.count...2{
-                        self.wipeLabels(index: i)
-                    }
                 }
             }else{
                 user.child(FirebaseConstants.activeOrders).setValue("")

@@ -17,9 +17,7 @@ class FoodScreen: UIViewController, GIDSignInUIDelegate{
     @IBOutlet weak var ChickenCount: UILabel! //Label which is set to the number of chicken pieces that are currently set by stepCount
     @IBOutlet weak var PlaceButton: UIButton! //PlaceOrder button, just used to make it rounded
     @IBOutlet weak var VeggieCount1: UILabel! //Label for showing how many veggie patties
-    @IBOutlet weak var VeggieCount2: UILabel! //Separated into two parts
     @IBOutlet weak var HamburgerCount1: UILabel! //Label for showing how many burger patties
-    @IBOutlet weak var HamburgerCount2: UILabel! //Separated into two parts
     @IBOutlet var HamburgerSwitches: [UISwitch]! //Switch array which is used to check what burger toppings are wanted when order is placed
     @IBOutlet var VeggieSwitches: [UISwitch]! //Switch array which is used to check what veggie toppings are wanted when order is placed
     
@@ -88,22 +86,17 @@ class FoodScreen: UIViewController, GIDSignInUIDelegate{
     //Changes the veggieBurger text whenever the VeggieStepCount is changed.
     @IBAction func VeggieStepper(_ sender: UIStepper) {
         if((sender.value)==0){
-            for item in VeggieSwitches{
+            for item in VeggieSwitches {
                 item.isEnabled=false
             }
-            VeggieCount1.frame.origin = CGPoint(x: 1, y: 335)
             VeggieCount1.text="----"
-            VeggieCount2.text=""
         }else if((sender.value)==1){
-            for item in VeggieSwitches{
+            for item in VeggieSwitches {
                 item.isEnabled=true
             }
-            VeggieCount1.frame.origin = CGPoint(x: 1, y: 326)
             VeggieCount1.text="Single"
-            VeggieCount2.text="Veggie"
         }else if((sender.value)==2){
             VeggieCount1.text="Double"
-            VeggieCount2.text="Veggie"
         }
     }
     
@@ -128,19 +121,14 @@ class FoodScreen: UIViewController, GIDSignInUIDelegate{
             for item in HamburgerSwitches {
                 item.isEnabled=false
             }
-            HamburgerCount1.frame.origin = CGPoint(x: 1, y: 130)
             HamburgerCount1.text="----"
-            HamburgerCount2.text=""
         }else if((sender.value)==1){
             for item in HamburgerSwitches {
                 item.isEnabled=true
             }
-            HamburgerCount1.frame.origin = CGPoint(x: 1, y: 121)
             HamburgerCount1.text="Single"
-            HamburgerCount2.text="Burger"
         }else if((sender.value)==2){
             HamburgerCount1.text="Double"
-            HamburgerCount2.text="Burger"
         }
     }
     

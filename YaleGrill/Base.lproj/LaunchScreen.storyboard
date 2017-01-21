@@ -23,9 +23,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="YaleGrillIcon-LS" translatesAutoresizingMaskIntoConstraints="NO" id="qi9-QM-Aqm">
-                                <rect key="frame" x="0.0" y="134" width="375" height="398.5"/>
+                                <rect key="frame" x="0.0" y="138" width="375" height="390"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="qi9-QM-Aqm" secondAttribute="height" multiplier="367:390" id="TYE-DD-8IH"/>
+                                    <constraint firstAttribute="width" secondItem="qi9-QM-Aqm" secondAttribute="height" multiplier="375:390" id="TYE-DD-8IH"/>
                                 </constraints>
                             </imageView>
                         </subviews>
