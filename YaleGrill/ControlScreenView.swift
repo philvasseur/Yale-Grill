@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Firebase
 
-class ControlScreenView: UITableViewController, GIDSignInUIDelegate {
+class ControlScreenView: UITableViewController, GIDSignInUIDelegate, UITextViewDelegate {
    
     var grillRef = FIRDatabase.database().reference().child("Grills").child(GIDSignIn.sharedInstance().currentUser.userID).child("GrillIsOn")
     private var grillIsOn : Bool = false
@@ -27,6 +27,7 @@ class ControlScreenView: UITableViewController, GIDSignInUIDelegate {
         }
     }
     
+    
     @IBAction func signOutPressed2(_ sender: UIBarButtonItem) {
         print("LOGGING OUT")
         GIDSignIn.sharedInstance().signOut()
@@ -42,11 +43,14 @@ class ControlScreenView: UITableViewController, GIDSignInUIDelegate {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(
+        guard let cell = tableView.dequeueReusableCell(
             withIdentifier: FirebaseConstants.cellIdentifier,
-            for: indexPath) as! OrderControlTableCell
+            for: indexPath) as? OrderControlTableCell else {
+                fatalError("BAD ERROR... ORDER CONTROL TABLE CELL")
+        }
         let orderIndex = indexPath.row
         let newCell = setOrderInfo(cell: cell, index: orderIndex)
+        newCell.delegate = self
         return newCell
     }
     
@@ -62,7 +66,67 @@ class ControlScreenView: UITableViewController, GIDSignInUIDelegate {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
+    
+    func showAlert(title:String, message:String, userID :String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Save", style: UIAlertActionStyle.default, handler: { (action) in self.saveBan(userID: userID, alert: alert)}))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: { (action) in alert.dismiss(animated: true, completion: nil)}))
+        alert.addTextField { (textField : UITextField!) -> Void in
+            textField.font = UIFont(name: "System", size: 18)
+            textField.placeholder = "Number of Days"
+            textField.textAlignment = .center
+            textField.keyboardType = .numberPad
+        }
+        let attributedString = NSAttributedString(string: title, attributes: [
+            NSFontAttributeName : UIFont.systemFont(ofSize: 20), //your font here
+            NSForegroundColorAttributeName : UIColor.black
+            ])
+        alert.setValue(attributedString, forKey: "attributedTitle")
+        self.present(alert, animated: true, completion: nil)
+        
+    }
+    
+    func createAlert (title : String, message : String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: { (action) in alert.dismiss(animated: true, completion: nil)}))
+        let attributedString = NSAttributedString(string: title, attributes: [
+            NSFontAttributeName : UIFont.systemFont(ofSize: 19), //your font here
+            NSForegroundColorAttributeName : UIColor.black
+            ])
+        let attributedString2 = NSAttributedString(string: message, attributes: [
+            NSFontAttributeName : UIFont.systemFont(ofSize: 16), //your font here
+            NSForegroundColorAttributeName : UIColor.black
+            ])
+        alert.setValue(attributedString, forKey: "attributedTitle")
+        alert.setValue(attributedString2, forKey: "attributedMessage")
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func saveBan(userID : String, alert: UIAlertController){
+        var bannedUntil : String?
+        let banText = alert.textFields![0].text!
+        let invalidCharacters = CharacterSet(charactersIn: "0123456789").inverted
+        if((banText.rangeOfCharacter(from: invalidCharacters, options: [], range: banText.startIndex ..< banText.endIndex) == nil) || (banText.isEmpty)){
+            print("Does not have bad chars")
+            alert.dismiss(animated: true, completion: nil)
+            if(!(banText.isEmpty) && alert.textFields![0].text! != "0"){
+                let banLength = Int(alert.textFields![0].text!)
+                let date = Date()
+                let banEndsDate = NSCalendar.current.date(byAdding: .day, value: banLength!, to: date)
+                bannedUntil = banEndsDate?.description
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateStyle = DateFormatter.Style.full
+                print("\(userID) is banned until \(banEndsDate!)")
+                createAlert(title: "User Banned", message: "The ban will expire on \(dateFormatter.string(from: banEndsDate!)).")
+            }else{
+                createAlert(title: "Ban Cleared", message: "Any existing ban on the user has been removed.")
+            }
+            FIRDatabase.database().reference().child(FirebaseConstants.users).child(userID).child("BannedUntil").setValue(bannedUntil)
+        }else{
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -9,9 +9,11 @@
 import UIKit
 import Firebase
 
-class OrderControlTableCell: UITableViewCell {
 
-    @IBOutlet weak var OrderName: UILabel!
+
+class OrderControlTableCell: UITableViewCell{
+
+    @IBOutlet weak var nameButton: UIButton!
     @IBOutlet weak var FoodServingLabel: UILabel!
     @IBOutlet weak var BunLabel: UILabel!
     @IBOutlet weak var CheeseLabel: UILabel!
@@ -23,20 +25,29 @@ class OrderControlTableCell: UITableViewCell {
     private var grillUserID : String!
     private var cOrder : Orders!
     private var orderRef : FIRDatabaseReference?
+    var delegate:ControlScreenView?
+    
     
     @IBAction func ChangeStatusPressed(_ sender: UIButton) {
         if(cOrder?.orderStatus==0){
             cOrder?.orderStatus = 1
-            orderRef?.child(FirebaseConstants.orderStatus).setValue(cOrder?.orderStatus)
-            OrderStatusLabel.text = FirebaseConstants.ready
-            OrderStatusButton.setTitle(FirebaseConstants.delete, for: .normal)
+            OrderStatusLabel.text = FirebaseConstants.preparingTexts[3]
+            OrderStatusButton.setTitle("Mark Ready", for: .normal)
         }else if(cOrder?.orderStatus==1){
             cOrder.orderStatus=2
+            OrderStatusLabel.text = FirebaseConstants.ready
+            OrderStatusButton.setTitle(FirebaseConstants.delete, for: .normal)
+        }else if(cOrder?.orderStatus==2){
             removeOrder()
-            orderRef?.child(FirebaseConstants.orderStatus).setValue(cOrder?.orderStatus)
         }
+        orderRef?.child(FirebaseConstants.orderStatus).setValue(cOrder?.orderStatus)
     }
     
+    @IBAction func BanButtonPressed(_ sender: Any) {
+        self.delegate?.showAlert(title: "Ban \(cOrder.name!)?", message: "", userID : cOrder.userID!)
+        
+    }
+
     private func removeOrder(){
         let cOrderID = self.cOrder.orderID!
         let userRef = FIRDatabase.database().reference().child(FirebaseConstants.users).child(cOrder.userID!).child(FirebaseConstants.activeOrders)
@@ -61,11 +72,14 @@ class OrderControlTableCell: UITableViewCell {
         SauceLabel.text = cOrder.sauceSetting
         TomatoLabel.text = cOrder.tomatoSetting
         LettuceLabel.text = cOrder.lettuceSetting
-        OrderName.text = cOrder.name
+        nameButton.setTitle(cOrder.name, for: .normal)
         if(cOrder.orderStatus==0){
+            OrderStatusLabel.text = "Order Placed"
+            OrderStatusButton.setTitle("Mark Preparing", for: .normal)
+        }else if(cOrder.orderStatus==1){
             OrderStatusLabel.text = FirebaseConstants.preparingTexts[3]
             OrderStatusButton.setTitle(FirebaseConstants.markAsReady, for: .normal)
-        }else if(cOrder.orderStatus==1){
+        }else if(cOrder.orderStatus==2){
             OrderStatusLabel.text = FirebaseConstants.ready
             OrderStatusButton.setTitle(FirebaseConstants.delete, for: .normal)
         }
@@ -78,7 +92,7 @@ class OrderControlTableCell: UITableViewCell {
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+        super.setSelected(selected, animated: false)
 
         // Configure the view for the selected state
     }

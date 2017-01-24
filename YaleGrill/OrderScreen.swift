@@ -32,6 +32,7 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
     private var finishedGif = UIImage.gif(name: "finished")
     var selectedDiningHall : String!
     var grillIsOn = false
+    var bannedUntil : Date?
     
     // MARK: - Actions
     //When the signout button is pressed, calls the signOut method and changes back to login viewController screen.
@@ -83,10 +84,6 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
         var cOrderLabels = OrderLabelsArray[orderLoc]
         cOrderLabels[7].isHidden=true
         cOrderLabels[8].isHidden=false
-        /*cOrderLabels[7].text=FirebaseConstants.UserReadyText
-        cOrderLabels[7].textColor = UIColor.black
-        cOrderLabels[7].font = UIFont(name:"Verdana-Bold", size: 20.0)
-        cOrderLabels[7].frame.origin = CGPoint(x: 125, y: cOrderLabels[7].frame.origin.y)*/
         FinishedGifArray[orderLoc].image = finishedGif
         FinishedGifArray[orderLoc].isHidden=false
         FinishedGifArray[orderLoc].layer.cornerRadius = 9
@@ -118,6 +115,12 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
         }else if(allActiveOrders.count>=3){
             createAlert(title: "Sorry!", message: "You can't place more than 3 orders! Please wait for your current orders to be finished!")
             return false
+        }else if(bannedUntil != nil){
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = DateFormatter.Style.full
+            let bannedUntilString = dateFormatter.string(from: bannedUntil!)
+            createAlert(title: "You've been temporarily banned!", message: "Due to not picking up your orders, you have been temproarily banned from using YaleGrill. The ban will expire on \(bannedUntilString). If you think this is a mistake, please contact philip.vasseur@yale.edu.")
+            return false
         }else{
             return true
         }
@@ -135,18 +138,16 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
         OrderLabelsArray[index][3].text=cOrder.sauceSetting
         OrderLabelsArray[index][4].text=cOrder.lettuceSetting
         OrderLabelsArray[index][5].text=cOrder.tomatoSetting
-        
-        if(cOrder.orderStatus == 0){
+        let notFinishedTexts = ["Order Placed",FirebaseConstants.preparingTexts[0]]
+        if(cOrder.orderStatus == 0 || cOrder.orderStatus == 1){
             GifViews[index].isHidden=false
             GifViews[index].image=gifArray[index]
             GifViews[index].layer.cornerRadius = 10
-            OrderLabelsArray[index][7].text=FirebaseConstants.preparingTexts[0]
+            OrderLabelsArray[index][7].text=notFinishedTexts[cOrder.orderStatus]
             OrderLabelsArray[index][7].isHidden = false
             OrderLabelsArray[index][8].isHidden = true
-            /*OrderLabelsArray[index][7].font = UIFont(name:"Verdana-Regular", size: 16.0)
-            OrderLabelsArray[index][7].frame.origin = CGPoint(x: 86, y: OrderLabelsArray[index][7].frame.origin.y)*/
             FinishedGifArray[index].isHidden=true
-        }else if(cOrder.orderStatus == 1){
+        }else if(cOrder.orderStatus == 2){
             updateOrderAsFinished(cOrder: cOrder, index: index)
         }
     }
@@ -194,6 +195,20 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
         user.observe(FIRDataEventType.value, with: { (snapshot) in
             if(snapshot.hasChild(FirebaseConstants.activeOrders)){
                 let userDic = snapshot.value as! NSDictionary
+                let bannedUntilString = userDic["BannedUntil"] as? String
+                if(bannedUntilString != nil){
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss zzz"
+                    self.bannedUntil = dateFormatter.date(from: bannedUntilString!)
+                    let timeUntil = self.bannedUntil?.timeIntervalSinceNow
+                    if(timeUntil?.isLessThanOrEqualTo(0))!{
+                         self.bannedUntil = nil
+                        user.child("BannedUntil").setValue(nil)
+                    }
+                    print("Banned for: \(timeUntil!)")
+                }else{
+                    self.bannedUntil = nil
+                }
                 let orderIDs = userDic[FirebaseConstants.activeOrders] as! String
                 let tempOrders = orderIDs.characters.split { $0 == " " }
                 self.allActiveOrders = tempOrders.map(String.init)
