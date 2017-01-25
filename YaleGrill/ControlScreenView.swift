@@ -107,8 +107,7 @@ class ControlScreenView: UITableViewController, GIDSignInUIDelegate, UITextViewD
         var bannedUntil : String?
         let banText = alert.textFields![0].text!
         let invalidCharacters = CharacterSet(charactersIn: "0123456789").inverted
-        if((banText.rangeOfCharacter(from: invalidCharacters, options: [], range: banText.startIndex ..< banText.endIndex) == nil) || (banText.isEmpty)){
-            print("Does not have bad chars")
+        if(((banText.rangeOfCharacter(from: invalidCharacters, options: [], range: banText.startIndex ..< banText.endIndex) == nil) || (banText.isEmpty)) && banText.characters.count < 7){
             alert.dismiss(animated: true, completion: nil)
             if(!(banText.isEmpty) && alert.textFields![0].text! != "0"){
                 let banLength = Int(alert.textFields![0].text!)
