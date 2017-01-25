@@ -64,7 +64,7 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, 
                             self.performSegue(withIdentifier: FirebaseConstants.SignInSegueID, sender: nil)
                         }else{
                             GIDSignIn.sharedInstance().signOut()
-                            self.createAlert(title: "Sorry, \(selectedDiningHall!) Dining Hall isn't activated!", message: "Please select another dining hall. If you think this is an error, contact philip.vasseur@yale.edu.")
+                            self.createAlert(title: "\(selectedDiningHall!) Dining Hall isn't activated!", message: "Please select another dining hall. If you think this is an error, contact philip.vasseur@yale.edu.")
                         }
                     }
                 }
@@ -81,7 +81,7 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, 
             }else{ //Not a yale email, so signs user out.
                 print("Non-Yale Email, LOGGING OUT")
                 GIDSignIn.sharedInstance().signOut()
-                createAlert(title: "Sorry!", message: "You must use a Yale email address to sign in!")
+                createAlert(title: "Invalid Email Address!", message: "You must use a Yale email address to sign in!")
             }
         }else if(error != nil){
             print("Sign In Error: \(error)")
