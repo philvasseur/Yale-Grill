@@ -26,6 +26,7 @@ class Orders {
     var lettuceSetting: String!
     var tomatoSetting: String!
     var orderStatus: Int!
+    var orderNum: Int!
     
     private struct DatabaseKeys {
         static let name = "name"
@@ -38,6 +39,7 @@ class Orders {
         static let orderStatus = "orderStatus"
         static let orderID = "orderID"
         static let userID = "userID"
+        static let orderNum = "orderNum"
     }
     
     //Inserts a new order into fireBase database, also sets value of ActiveOrders in firebase database (as empty string if no active orders)
@@ -63,6 +65,7 @@ class Orders {
             DatabaseKeys.orderStatus: orderStatus as AnyObject,
             DatabaseKeys.orderID: orderID as AnyObject,
             DatabaseKeys.userID: userID as AnyObject,
+            DatabaseKeys.orderNum: orderNum as AnyObject
         ]
         
         return jsonObject
@@ -81,6 +84,7 @@ class Orders {
         order.lettuceSetting = json[DatabaseKeys.lettuceSetting] as! String
         order.tomatoSetting = json[DatabaseKeys.tomatoSetting] as! String
         order.orderStatus = json[DatabaseKeys.orderStatus] as! Int
+        order.orderNum = json[DatabaseKeys.orderNum] as! Int
         
         return order
     }
@@ -99,6 +103,7 @@ class Orders {
         order.lettuceSetting = _lettuceSetting
         order.tomatoSetting = _tomatoSetting
         order.orderStatus = _orderStatus
+        order.orderNum = 0;
 
         return order
     }

@@ -25,7 +25,7 @@
                                 <rect key="frame" x="0.0" y="28" width="768" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lEX-Lm-rlD" id="I5h-u9-F9I">
-                                    <rect key="frame" x="0.0" y="0.0" width="768" height="89.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="768" height="89"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FoodServing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="HqK-i6-cs1">
@@ -47,7 +47,7 @@
                                             </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Tomatoes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vjs-CX-ciB">
-                                            <rect key="frame" x="8" y="67" width="111" height="21"/>
+                                            <rect key="frame" x="8" y="66" width="111" height="21"/>
                                             <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -65,7 +65,7 @@
                                             </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Lettuce" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vC7-jv-0dJ">
-                                            <rect key="frame" x="338" y="67" width="92" height="21"/>
+                                            <rect key="frame" x="338" y="66" width="92" height="21"/>
                                             <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -83,7 +83,7 @@
                                             </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Bun" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DRy-fX-3es">
-                                            <rect key="frame" x="601.5" y="67" width="62.5" height="21"/>
+                                            <rect key="frame" x="601.5" y="66" width="62.5" height="21"/>
                                             <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -121,6 +121,15 @@
                                                 <action selector="BanButtonPressed:" destination="lEX-Lm-rlD" eventType="touchUpInside" id="KHO-8k-Aya"/>
                                             </connections>
                                         </button>
+                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- #100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eG2-uC-62S">
+                                            <rect key="frame" x="70" y="24" width="65" height="21"/>
+                                            <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=regular">
+                                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="17"/>
+                                            </variation>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <constraints>
@@ -136,6 +145,7 @@
                                         <constraint firstItem="KkZ-uJ-gFp" firstAttribute="leading" secondItem="HqK-i6-cs1" secondAttribute="leading" id="NCB-qV-UYd"/>
                                         <constraint firstItem="vjs-CX-ciB" firstAttribute="leading" secondItem="f7m-vT-DEN" secondAttribute="leading" id="Rkc-Xf-gnk"/>
                                         <constraint firstItem="f7m-vT-DEN" firstAttribute="centerY" secondItem="I5h-u9-F9I" secondAttribute="centerY" multiplier="1.25" id="Url-J4-gkz"/>
+                                        <constraint firstItem="eG2-uC-62S" firstAttribute="leading" secondItem="KkZ-uJ-gFp" secondAttribute="trailing" constant="6" id="YRv-Vu-cPL"/>
                                         <constraint firstItem="f7m-vT-DEN" firstAttribute="leading" secondItem="KkZ-uJ-gFp" secondAttribute="leading" id="Zil-Jo-Gc7"/>
                                         <constraint firstItem="HqK-i6-cs1" firstAttribute="top" secondItem="I5h-u9-F9I" secondAttribute="top" id="cgN-lv-40o"/>
                                         <constraint firstItem="DRy-fX-3es" firstAttribute="centerY" secondItem="vC7-jv-0dJ" secondAttribute="centerY" id="eLx-di-zdC"/>
@@ -144,6 +154,7 @@
                                         <constraint firstItem="FqH-gU-C8t" firstAttribute="width" secondItem="I5h-u9-F9I" secondAttribute="width" multiplier="0.32" priority="900" id="kqX-Dd-GUY"/>
                                         <constraint firstAttribute="leadingMargin" secondItem="f7m-vT-DEN" secondAttribute="leading" id="sPM-ao-1tb"/>
                                         <constraint firstItem="vC7-jv-0dJ" firstAttribute="centerY" secondItem="vjs-CX-ciB" secondAttribute="centerY" id="u6R-pn-3mS"/>
+                                        <constraint firstItem="eG2-uC-62S" firstAttribute="centerY" secondItem="KkZ-uJ-gFp" secondAttribute="centerY" id="zbs-YV-qwy"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -151,6 +162,7 @@
                                     <outlet property="CheeseLabel" destination="f7m-vT-DEN" id="gEP-pH-KrF"/>
                                     <outlet property="FoodServingLabel" destination="HqK-i6-cs1" id="Vg6-50-1Wv"/>
                                     <outlet property="LettuceLabel" destination="vC7-jv-0dJ" id="2Wf-og-QwO"/>
+                                    <outlet property="OrderNumLabel" destination="eG2-uC-62S" id="fxr-eC-zzE"/>
                                     <outlet property="OrderStatusButton" destination="FqH-gU-C8t" id="Jcd-8R-zm6"/>
                                     <outlet property="OrderStatusLabel" destination="XdF-BC-ryG" id="pBg-gl-4Kf"/>
                                     <outlet property="SauceLabel" destination="ZfW-Y9-mfJ" id="BPk-3q-NKP"/>
@@ -183,7 +195,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uTd-19-IuL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="645.60000000000002" y="754.27286356821594"/>
+            <point key="canvasLocation" x="645.3125" y="754.1015625"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -198,7 +210,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="YaleImage" translatesAutoresizingMaskIntoConstraints="NO" id="3fh-YX-xub" userLabel="YaleImage">
-                                <rect key="frame" x="80" y="66.5" width="608" height="471.5"/>
+                                <rect key="frame" x="80" y="66" width="608" height="472"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="3fh-YX-xub" secondAttribute="height" multiplier="297:230" id="DWx-lY-bAZ"/>
                                 </constraints>
@@ -334,7 +346,7 @@
                                 </constraints>
                             </imageView>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WpI-2V-Am0">
-                                <rect key="frame" x="486.5" y="843" width="252" height="187.5"/>
+                                <rect key="frame" x="486.5" y="842.5" width="252" height="189"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="WpI-2V-Am0" secondAttribute="height" multiplier="123:92" id="7sE-IR-nIg"/>
                                 </constraints>
@@ -429,7 +441,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preparing..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OsX-Lq-VfK">
-                                <rect key="frame" x="95" y="635" width="94.5" height="19.5"/>
+                                <rect key="frame" x="95" y="634.5" width="94.5" height="19.5"/>
                                 <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
@@ -591,19 +603,19 @@
                                 </subviews>
                             </stackView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ready For Pickup!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BwP-Ce-aXI">
-                                <rect key="frame" x="375" y="337.5" width="172.5" height="21"/>
+                                <rect key="frame" x="374.5" y="337.5" width="172.5" height="21"/>
                                 <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ready For Pickup!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Sn-RB-sr2">
-                                <rect key="frame" x="375" y="634.5" width="172.5" height="21"/>
+                                <rect key="frame" x="374.5" y="634" width="172.5" height="21"/>
                                 <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ready For Pickup!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ciw-DR-MBy">
-                                <rect key="frame" x="375" y="926" width="172.5" height="21"/>
+                                <rect key="frame" x="374.5" y="926.5" width="172.5" height="21"/>
                                 <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -848,7 +860,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Burger" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="Bqf-AA-1WH" userLabel="Hamburger Label">
-                                <rect key="frame" x="301" y="140.5" width="166" height="57"/>
+                                <rect key="frame" x="301" y="140" width="166" height="57.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Bqf-AA-1WH" secondAttribute="height" multiplier="81:28" id="aJl-Mm-g1i"/>
                                 </constraints>
@@ -923,7 +935,7 @@
                                 <rect key="frame" x="154" y="681.5" width="51" height="31"/>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chicken Breast" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="Fcd-aT-iXy" userLabel="Chicken Breast Label">
-                                <rect key="frame" x="203" y="756.5" width="362.5" height="53.5"/>
+                                <rect key="frame" x="203" y="757" width="362.5" height="53"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Fcd-aT-iXy" secondAttribute="height" multiplier="177:26" id="N61-kV-Aqi"/>
                                 </constraints>

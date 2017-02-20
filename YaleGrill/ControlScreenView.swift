@@ -147,6 +147,13 @@ class ControlScreenView: UITableViewController, GIDSignInUIDelegate, UITextViewD
             }
         })
         let ordersRef = FIRDatabase.database().reference().child(FirebaseConstants.grills).child(GIDSignIn.sharedInstance().currentUser.userID).child(FirebaseConstants.orders)
+        let orderNumRef = FIRDatabase.database().reference().child(FirebaseConstants.grills).child(GIDSignIn.sharedInstance().currentUser.userID).child("OrderNumCount")
+        orderNumRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+            let orderNum = snapshot.value as? Int
+            if(orderNum == nil) {
+                orderNumRef.setValue(1);
+            }
+        })
         
         ordersRef.queryOrderedByKey().observe(FIRDataEventType.childAdded, with: { (snapshot) in
             let newOrderID = snapshot.value as! String
