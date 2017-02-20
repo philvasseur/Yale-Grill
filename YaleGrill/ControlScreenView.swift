@@ -30,7 +30,7 @@ class ControlScreenView: UITableViewController, GIDSignInUIDelegate, UITextViewD
     
     @IBAction func signOutPressed2(_ sender: UIBarButtonItem) {
         print("LOGGING OUT")
-        GIDSignIn.sharedInstance().signOut()
+        GIDSignIn.sharedInstance().signOut() 
         let firebaseAuth = FIRAuth.auth()
         do {
             try firebaseAuth?.signOut()
@@ -147,6 +147,7 @@ class ControlScreenView: UITableViewController, GIDSignInUIDelegate, UITextViewD
             }
         })
         let ordersRef = FIRDatabase.database().reference().child(FirebaseConstants.grills).child(GIDSignIn.sharedInstance().currentUser.userID).child(FirebaseConstants.orders)
+        
         ordersRef.queryOrderedByKey().observe(FIRDataEventType.childAdded, with: { (snapshot) in
             let newOrderID = snapshot.value as! String
             self.allActiveIDs.append(newOrderID)

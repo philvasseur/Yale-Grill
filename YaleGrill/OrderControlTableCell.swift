@@ -38,6 +38,7 @@ class OrderControlTableCell: UITableViewCell{
             OrderStatusLabel.text = FirebaseConstants.ready
             OrderStatusButton.setTitle(FirebaseConstants.delete, for: .normal)
         }else if(cOrder?.orderStatus==2){
+            cOrder.orderStatus=3
             removeOrder()
         }
         orderRef?.child(FirebaseConstants.orderStatus).setValue(cOrder?.orderStatus)
@@ -59,10 +60,12 @@ class OrderControlTableCell: UITableViewCell{
             allIDsArray[idIndex!]=""
             let newIDsString = allIDsArray.joined(separator: " ")
             userRef.setValue(newIDsString)
+            FIRDatabase.database().reference().child(FirebaseConstants.grills).child(self.grillUserID).child(FirebaseConstants.orders).child(cOrderID).setValue(nil)
             
         })
-        FIRDatabase.database().reference().child(FirebaseConstants.grills).child(grillUserID).child(FirebaseConstants.orders).child(cOrderID).setValue(nil)
+        
     }
+    
     func setByOrder(cOrder : Orders, grillUserID : String){
         self.cOrder = cOrder
         orderRef = FIRDatabase.database().reference().child(FirebaseConstants.orders).child(cOrder.orderID)

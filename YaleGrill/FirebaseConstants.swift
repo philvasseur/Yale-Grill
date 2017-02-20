@@ -55,7 +55,7 @@ class FirebaseConstants {
     static let cellIdentifier = "cell"
     
     //Other
-    static let PickerData = ["Select Dining Hall","Jonathan Edwards", "Branford", "Ezra Stiles","Trumbull","Davenport","Timothy Dwight","Morse","Calhoun", "Pierson","Saybrook","Berkeley","Silliman"]
+    static let PickerData = ["Select Dining Hall","Jonathan Edwards", "Branford", "Ezra Stiles","Trumbull","Davenport","Timothy Dwight","Morse","Hopper", "Pierson","Saybrook","Berkeley","Silliman"]
     static let UserReadyText = "Ready for Pickup!"
     
 }
