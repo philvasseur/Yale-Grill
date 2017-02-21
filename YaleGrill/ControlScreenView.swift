@@ -10,16 +10,21 @@ import Foundation
 import UIKit
 import Firebase
 
-class ControlScreenView: UITableViewController, GIDSignInUIDelegate, UITextViewDelegate {
+class ControlScreenView: UITableViewController, GIDSignInUIDelegate {
    
-    var grillRef = FIRDatabase.database().reference().child("Grills").child(GIDSignIn.sharedInstance().currentUser.userID).child("GrillIsOn")
-    private var grillIsOn : Bool = false
-    private var allActiveOrders : [Orders] = []
-    private var allActiveIDs : [String] = []
+    // MARK: - Outlets
     @IBOutlet weak var GrillToggleButton: UIBarButtonItem!
     @IBOutlet weak var NavBar: UINavigationItem!
-    private var orderNumCount: Int = -1
     
+    // MARK: - Global Variables
+    var orderNumCount: Int = -1
+    var grillRef = FIRDatabase.database().reference().child("Grills").child(GIDSignIn.sharedInstance().currentUser.userID).child("GrillIsOn")
+    var grillIsOn : Bool = false
+    var allActiveOrders : [Orders] = []
+    var allActiveIDs : [String] = []
+    
+    
+    // MARK: - Actions
     @IBAction func GrillButtonPressed(_ sender: UIBarButtonItem) {
         if(!grillIsOn){
             grillRef.setValue(true)            
@@ -43,32 +48,8 @@ class ControlScreenView: UITableViewController, GIDSignInUIDelegate, UITextViewD
         self.present(signInScreen!, animated:true, completion:nil)
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: FirebaseConstants.cellIdentifier,
-            for: indexPath) as? OrderControlTableCell else {
-                fatalError("BAD ERROR... ORDER CONTROL TABLE CELL")
-        }
-        let orderIndex = indexPath.row
-        let newCell = setOrderInfo(cell: cell, index: orderIndex)
-        newCell.delegate = self
-        return newCell
-    }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allActiveOrders.count
-    }
-    
-    private func setOrderInfo(cell : OrderControlTableCell, index : Int) -> OrderControlTableCell{
-        cell.setByOrder(cOrder: allActiveOrders[index], grillUserID : GIDSignIn.sharedInstance().currentUser.userID!)
-        return cell
-    }
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    
+    // MARK: - Functions
     func createAlert (title : String, message : String){
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: { (action) in alert.dismiss(animated: true, completion: nil)}))
@@ -110,12 +91,37 @@ class ControlScreenView: UITableViewController, GIDSignInUIDelegate, UITextViewD
             }
         })
     }
+    
+    
+    // MARK: - Overridden Functions
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: FirebaseConstants.cellIdentifier,
+            for: indexPath) as? OrderControlTableCell else {
+                fatalError("BAD ERROR... ORDER CONTROL TABLE CELL")
+        }
+        let orderIndex = indexPath.row
+        cell.setByOrder(cOrder: allActiveOrders[orderIndex], grillUserID : GIDSignIn.sharedInstance().currentUser.userID!)
 
+        //let newCell = setOrderInfo(cell: cell, index: orderIndex)
+        cell.delegate = self
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return allActiveOrders.count
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = 90
         tableView.allowsSelection = false
         GIDSignIn.sharedInstance().uiDelegate = self
+        
         grillRef.observe(FIRDataEventType.value, with: { (snapshot) in
             let grillStatus = snapshot.value as? Bool
             if(grillStatus==nil){
@@ -130,6 +136,7 @@ class ControlScreenView: UITableViewController, GIDSignInUIDelegate, UITextViewD
                 self.GrillToggleButton.title = FirebaseConstants.turnGrillOnText
             }
         })
+        
         let ordersRef = FIRDatabase.database().reference().child(FirebaseConstants.grills).child(GIDSignIn.sharedInstance().currentUser.userID).child(FirebaseConstants.orders)
         let orderNumRef = FIRDatabase.database().reference().child(FirebaseConstants.grills).child(GIDSignIn.sharedInstance().currentUser.userID).child("OrderNumCount")
         orderNumRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
@@ -143,26 +150,26 @@ class ControlScreenView: UITableViewController, GIDSignInUIDelegate, UITextViewD
                 self.orderNumCount = orderNum!
             }
         
-        
-        ordersRef.queryOrderedByKey().observe(FIRDataEventType.childAdded, with: { (snapshot) in
-            let newOrderID = snapshot.value as! String
-            self.allActiveIDs.append(newOrderID)
-            let singleOrderRef = FIRDatabase.database().reference().child(FirebaseConstants.orders).child(newOrderID as String)
-            singleOrderRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
-                let newJson = snapshot.value as! NSDictionary
-                let newOrder = Orders.convFromJSON(json: newJson as! [String : AnyObject])
-                if(newOrder.orderNum == 0){
-                    newOrder.orderNum = self.orderNumCount
-                    self.orderNumCount += 1
-                    orderNumRef.setValue(self.orderNumCount)
-                    singleOrderRef.child("orderNum").setValue(newOrder.orderNum)
-                }
-                let newIndexPath = IndexPath(row: self.allActiveOrders.count, section: 0)
-                self.allActiveOrders.append(newOrder)
-                self.tableView.insertRows(at: [newIndexPath], with: .automatic)
+            ordersRef.queryOrderedByKey().observe(FIRDataEventType.childAdded, with: { (snapshot) in
+                let newOrderID = snapshot.value as! String
+                self.allActiveIDs.append(newOrderID)
+                let singleOrderRef = FIRDatabase.database().reference().child(FirebaseConstants.orders).child(newOrderID as String)
+                singleOrderRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+                    let newJson = snapshot.value as! NSDictionary
+                    let newOrder = Orders.convFromJSON(json: newJson as! [String : AnyObject])
+                    if(newOrder.orderNum == 0){
+                        newOrder.orderNum = self.orderNumCount
+                        self.orderNumCount += 1
+                        orderNumRef.setValue(self.orderNumCount)
+                        singleOrderRef.child("orderNum").setValue(newOrder.orderNum)
+                    }
+                    let newIndexPath = IndexPath(row: self.allActiveOrders.count, section: 0)
+                    self.allActiveOrders.append(newOrder)
+                    self.tableView.insertRows(at: [newIndexPath], with: .automatic)
+                })
             })
         })
-        })
+        
         ordersRef.queryOrderedByKey().observe(FIRDataEventType.childRemoved, with: { (snapshot) in
             let orderID = snapshot.value as! String
             let removedIndex = self.allActiveIDs.index(of: orderID)

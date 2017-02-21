@@ -13,6 +13,7 @@ import Firebase
 
 class OrderControlTableCell: UITableViewCell{
 
+    // MARK: - Outlets
     @IBOutlet weak var OrderNumLabel: UILabel!
     @IBOutlet weak var FoodServingLabel: UILabel!
     @IBOutlet weak var BunLabel: UILabel!
@@ -23,14 +24,16 @@ class OrderControlTableCell: UITableViewCell{
     @IBOutlet weak var LettuceLabel: UILabel!
     @IBOutlet weak var OrderStatusLabel: UILabel!
     @IBOutlet weak var OrderStatusButton: UIButton!
+    
+    // MARK: - Global Variables
     final var READYTIMER : Double = 0.5
-    private var grillUserID : String!
-    private var cOrder : Orders!
-    private var orderRef : FIRDatabaseReference?
+    var grillUserID : String!
+    var cOrder : Orders!
+    var orderRef : FIRDatabaseReference?
     var delegate:ControlScreenView?
     var task : DispatchWorkItem?
     
-    
+    // MARK: - Actions
     @IBAction func ChangeStatusPressed(_ sender: UIButton) {
         if(cOrder?.orderStatus==0){
             cOrder?.orderStatus = 1
@@ -53,24 +56,7 @@ class OrderControlTableCell: UITableViewCell{
         orderRef?.child(FirebaseConstants.orderStatus).setValue(cOrder?.orderStatus)
     }
     
-    private func removeOrder(){
-        task?.cancel()
-        let cOrderID = self.cOrder.orderID!
-        let userRef = FIRDatabase.database().reference().child(FirebaseConstants.users).child(cOrder.userID!).child(FirebaseConstants.activeOrders)
-        userRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
-            let allIDsString = snapshot.value as! String
-            let tempArray = allIDsString.characters.split { $0 == " " }
-            var allIDsArray = tempArray.map(String.init)
-            let idIndex = allIDsArray.index(of: cOrderID)
-            allIDsArray[idIndex!]=""
-            let newIDsString = allIDsArray.joined(separator: " ")
-            userRef.setValue(newIDsString)
-            FIRDatabase.database().reference().child(FirebaseConstants.grills).child(self.grillUserID).child(FirebaseConstants.orders).child(cOrderID).setValue(nil)
-            
-        })
-        
-    }
-    
+    // MARK: - Functions
     func setByOrder(cOrder : Orders, grillUserID : String){
         self.cOrder = cOrder
         orderRef = FIRDatabase.database().reference().child(FirebaseConstants.orders).child(cOrder.orderID)
@@ -98,6 +84,26 @@ class OrderControlTableCell: UITableViewCell{
         }
         self.grillUserID = grillUserID
     }
+    
+    private func removeOrder(){
+        task?.cancel()
+        let cOrderID = self.cOrder.orderID!
+        let userRef = FIRDatabase.database().reference().child(FirebaseConstants.users).child(cOrder.userID!).child(FirebaseConstants.activeOrders)
+        userRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+            let allIDsString = snapshot.value as! String
+            let tempArray = allIDsString.characters.split { $0 == " " }
+            var allIDsArray = tempArray.map(String.init)
+            let idIndex = allIDsArray.index(of: cOrderID)
+            allIDsArray[idIndex!]=""
+            let newIDsString = allIDsArray.joined(separator: " ")
+            userRef.setValue(newIDsString)
+            FIRDatabase.database().reference().child(FirebaseConstants.grills).child(self.grillUserID).child(FirebaseConstants.orders).child(cOrderID).setValue(nil)
+            
+        })
+        
+    }
+    
+    // MARK: - Overridden Functions
     override func awakeFromNib() {
         super.awakeFromNib()
         OrderStatusButton.layer.cornerRadius = 9
