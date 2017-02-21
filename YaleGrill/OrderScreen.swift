@@ -132,7 +132,7 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
             let dateFormatter = DateFormatter()
             dateFormatter.dateStyle = DateFormatter.Style.full
             let bannedUntilString = dateFormatter.string(from: bannedUntil!)
-            createAlert(title: "You've Been Banned!", message: "Due to not picking up your orders, you have been temporarily banned from using YaleGrill. This ban will expire on \n\n\(bannedUntilString).\n\nIf you think this is a mistake, please contact philip.vasseur@yale.edu.")
+            createAlert(title: "You've Been Banned!", message: "Due to not picking up 5 orders, you have been temporarily banned from using YaleGrill. This ban will expire on \n\n\(bannedUntilString).\n\n This is an automated ban, and was not done by any Yale Employee. If you think this is a mistake, please contact philip.vasseur@yale.edu.")
             return false
         }else{
             return true

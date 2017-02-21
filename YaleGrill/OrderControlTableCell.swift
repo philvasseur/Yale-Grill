@@ -14,19 +14,21 @@ import Firebase
 class OrderControlTableCell: UITableViewCell{
 
     @IBOutlet weak var OrderNumLabel: UILabel!
-    @IBOutlet weak var nameButton: UIButton!
     @IBOutlet weak var FoodServingLabel: UILabel!
     @IBOutlet weak var BunLabel: UILabel!
     @IBOutlet weak var CheeseLabel: UILabel!
+    @IBOutlet weak var NameLabel: UILabel!
     @IBOutlet weak var SauceLabel: UILabel!
     @IBOutlet weak var TomatoLabel: UILabel!
     @IBOutlet weak var LettuceLabel: UILabel!
     @IBOutlet weak var OrderStatusLabel: UILabel!
     @IBOutlet weak var OrderStatusButton: UIButton!
+    final var READYTIMER : Double = 8
     private var grillUserID : String!
     private var cOrder : Orders!
     private var orderRef : FIRDatabaseReference?
     var delegate:ControlScreenView?
+    var task : DispatchWorkItem?
     
     
     @IBAction func ChangeStatusPressed(_ sender: UIButton) {
@@ -38,6 +40,12 @@ class OrderControlTableCell: UITableViewCell{
             cOrder.orderStatus=2
             OrderStatusLabel.text = FirebaseConstants.ready
             OrderStatusButton.setTitle(FirebaseConstants.delete, for: .normal)
+            task = DispatchWorkItem {
+                print("Running Task")
+                self.delegate?.giveStrike(userID : self.cOrder.userID!,name : self.cOrder.name)
+                self.NameLabel.text = "Anyone (was \(self.cOrder.name!))"
+            }
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + READYTIMER*60, execute: task!)
         }else if(cOrder?.orderStatus==2){
             cOrder.orderStatus=3
             removeOrder()
@@ -45,12 +53,8 @@ class OrderControlTableCell: UITableViewCell{
         orderRef?.child(FirebaseConstants.orderStatus).setValue(cOrder?.orderStatus)
     }
     
-    @IBAction func BanButtonPressed(_ sender: Any) {
-        self.delegate?.showAlert(title: "Ban \(cOrder.name!)?", message: "", userID : cOrder.userID!)
-        
-    }
-
     private func removeOrder(){
+        task?.cancel()
         let cOrderID = self.cOrder.orderID!
         let userRef = FIRDatabase.database().reference().child(FirebaseConstants.users).child(cOrder.userID!).child(FirebaseConstants.activeOrders)
         userRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
@@ -76,12 +80,12 @@ class OrderControlTableCell: UITableViewCell{
         SauceLabel.text = cOrder.sauceSetting
         TomatoLabel.text = cOrder.tomatoSetting
         LettuceLabel.text = cOrder.lettuceSetting
+        NameLabel.text = cOrder.name
         if(cOrder.orderNum > 9) {
             OrderNumLabel.text = "- #\(cOrder.orderNum!)"
         }else{
              OrderNumLabel.text = "- #0\(cOrder.orderNum!)"
         }
-        nameButton.setTitle(cOrder.name, for: .normal)
         if(cOrder.orderStatus==0){
             OrderStatusLabel.text = "Order Placed"
             OrderStatusButton.setTitle("Mark Preparing", for: .normal)

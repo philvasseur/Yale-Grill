@@ -69,25 +69,6 @@ class ControlScreenView: UITableViewController, GIDSignInUIDelegate, UITextViewD
     }
     
     
-    func showAlert(title:String, message:String, userID :String){
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Save", style: UIAlertActionStyle.default, handler: { (action) in self.saveBan(userID: userID, alert: alert)}))
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: { (action) in alert.dismiss(animated: true, completion: nil)}))
-        alert.addTextField { (textField : UITextField!) -> Void in
-            textField.font = UIFont(name: "System", size: 18)
-            textField.placeholder = "Number of Days"
-            textField.textAlignment = .center
-            textField.keyboardType = .numberPad
-        }
-        let attributedString = NSAttributedString(string: title, attributes: [
-            NSFontAttributeName : UIFont.systemFont(ofSize: 20), //your font here
-            NSForegroundColorAttributeName : UIColor.black
-            ])
-        alert.setValue(attributedString, forKey: "attributedTitle")
-        self.present(alert, animated: true, completion: nil)
-        
-    }
-    
     func createAlert (title : String, message : String){
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: { (action) in alert.dismiss(animated: true, completion: nil)}))
@@ -104,28 +85,28 @@ class ControlScreenView: UITableViewController, GIDSignInUIDelegate, UITextViewD
         self.present(alert, animated: true, completion: nil)
     }
     
-    func saveBan(userID : String, alert: UIAlertController){
-        var bannedUntil : String?
-        let banText = alert.textFields![0].text!
-        let invalidCharacters = CharacterSet(charactersIn: "0123456789").inverted
-        if(((banText.rangeOfCharacter(from: invalidCharacters, options: [], range: banText.startIndex ..< banText.endIndex) == nil) || (banText.isEmpty)) && banText.characters.count < 7){
-            alert.dismiss(animated: true, completion: nil)
-            if(!(banText.isEmpty) && alert.textFields![0].text! != "0"){
-                let banLength = Int(alert.textFields![0].text!)
-                let date = Date()
-                let banEndsDate = NSCalendar.current.date(byAdding: .day, value: banLength!, to: date)
-                bannedUntil = banEndsDate?.description
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateStyle = DateFormatter.Style.full
-                print("\(userID) is banned until \(banEndsDate!)")
-                createAlert(title: "User Banned", message: "The ban will expire on \(dateFormatter.string(from: banEndsDate!)).")
+    func giveStrike(userID : String, name: String){
+        let date = Date()
+        let strikeBanLimit = 5
+        let banLength = 10
+        self.createAlert(title: "Strike Given", message: "Due to not picking up their food, \(name) has been given a strike.")
+        FIRDatabase.database().reference().child(FirebaseConstants.users).child(userID).child("Strikes").observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+            let strikes = snapshot.value as? Int
+            if(strikes == nil) {
+                FIRDatabase.database().reference().child(FirebaseConstants.users).child(userID).child("Strikes").setValue(1)
             }else{
-                createAlert(title: "Ban Cleared", message: "Any existing ban on the user has been removed.")
+                FIRDatabase.database().reference().child(FirebaseConstants.users).child(userID).child("Strikes").setValue(strikes!+1)
+                if(((strikes!+1) % strikeBanLimit) == 0) {
+                    var bannedUntil : String?
+                    let banEndsDate = NSCalendar.current.date(byAdding: .day, value: banLength, to: date)
+                    bannedUntil = banEndsDate?.description
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateStyle = DateFormatter.Style.full
+                    print("\(userID) is banned until \(banEndsDate!)")
+                    FIRDatabase.database().reference().child(FirebaseConstants.users).child(userID).child("BannedUntil").setValue(bannedUntil)
+                }
             }
-            FIRDatabase.database().reference().child(FirebaseConstants.users).child(userID).child("BannedUntil").setValue(bannedUntil)
-        }else{
-            self.present(alert, animated: true, completion: nil)
-        }
+        })
     }
 
     override func viewDidLoad() {
