@@ -16,7 +16,6 @@ import Firebase
 class OrderScreen: UIViewController, GIDSignInUIDelegate{
     
     // MARK: - Outlets
-    
     @IBOutlet weak var LoadingText: UILabel! //LoadingText which shows when first signing in
     @IBOutlet weak var LoadingScreen: UIImageView! //Loading screen which is up until orders are set.
     @IBOutlet var LinesArray: [UIImageView]! //Array of the two white lines which separate the orders
@@ -28,7 +27,6 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
     @IBOutlet var FinishedGifArray: [UIImageView]! //Array of UIImageViews which are unhidden when an order is marked finished.
     
     // MARK: - Global Variables
-    
     var allActiveOrders: [String] = [] //Array of the activeOrderIds
     var OrderLabelsArray: [[UILabel]]! //Holds the three OrderItemLabels outlet collections which are defined below. Allows for easy looping through the three sections and their labels
     var timer = Timer() //Used to update the "Preparing..." text to make it animate
@@ -40,7 +38,6 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
     
     
     // MARK: - Actions
-    
     //When the signout button is pressed, calls the signOut method and changes back to login viewController screen.
     @IBAction func SignOutPressed(_ sender: UIBarButtonItem) {
         print("LOGGING OUT") //for debugging
