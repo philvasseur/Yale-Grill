@@ -58,8 +58,21 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
             if(grillIsOn){
                 for oldOrder in tempOrderArray{
                     allActiveOrders.append(oldOrder.orderID!)
-                    oldOrder.insertIntoDatabase(AllActiveIDs: allActiveOrders)
-                    FIRDatabase.database().reference().child(FirebaseConstants.grills).child(FirebaseConstants.GrillIDS[selectedDiningHall]!).child(FirebaseConstants.orders).child(oldOrder.orderID).setValue(oldOrder.orderID)
+                    /*FIRDatabase.database().reference().child(FirebaseConstants.grills).child(FirebaseConstants.GrillIDS[selectedDiningHall]!).child("OrderNumCount").runTransactionBlock { (currentData: FIRMutableData) -> FIRTransactionResult in
+                        var value = currentData.value as? Int
+                        if value == nil {
+                            print("Value was nil")
+                            return FIRTransactionResult.success(withValue: currentData)
+                        }else if value == 100 {
+                            value = 1
+                        }
+                        oldOrder.orderNum = value
+                        currentData.value = value! + 1
+                        print("\(value!+1) for order \(oldOrder.orderID!)")*/
+                        oldOrder.insertIntoDatabase(AllActiveIDs: self.allActiveOrders)
+                        FIRDatabase.database().reference().child(FirebaseConstants.grills).child(FirebaseConstants.GrillIDS[self.selectedDiningHall]!).child(FirebaseConstants.orders).child(oldOrder.orderID).setValue(oldOrder.orderID)
+                        //return FIRTransactionResult.success(withValue: currentData)
+                    //}
                 }
             }
         }
@@ -133,12 +146,21 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
         for i in 0...6{
             OrderLabelsArray[index][i].isHidden=false
         }
+        
         OrderLabelsArray[index][1].text=cOrder.bunSetting
         OrderLabelsArray[index][2].text=cOrder.cheeseSetting
         OrderLabelsArray[index][3].text=cOrder.sauceSetting
         OrderLabelsArray[index][4].text=cOrder.lettuceSetting
         OrderLabelsArray[index][5].text=cOrder.tomatoSetting
         let notFinishedTexts = ["Order Placed",FirebaseConstants.preparingTexts[0]]
+        OrderLabelsArray[index][9].isHidden = false
+        if(cOrder.orderNum > 0 && cOrder.orderNum < 10){
+            OrderLabelsArray[index][10].text = "0\(cOrder.orderNum!)"
+            OrderLabelsArray[index][10].isHidden = false
+        }else if(cOrder.orderNum != 0) {
+            OrderLabelsArray[index][10].text = "\(cOrder.orderNum!)"
+            OrderLabelsArray[index][10].isHidden = false
+        }
         if(cOrder.orderStatus == 0 || cOrder.orderStatus == 1){
             GifViews[index].isHidden=false
             GifViews[index].image=gifArray[index]

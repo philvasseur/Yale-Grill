@@ -103,7 +103,7 @@ class Orders {
         order.lettuceSetting = _lettuceSetting
         order.tomatoSetting = _tomatoSetting
         order.orderStatus = _orderStatus
-        order.orderNum = 0;
+        order.orderNum = 0
 
         return order
     }

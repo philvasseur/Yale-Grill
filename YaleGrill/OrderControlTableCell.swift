@@ -31,20 +31,6 @@ class OrderControlTableCell: UITableViewCell{
     
     @IBAction func ChangeStatusPressed(_ sender: UIButton) {
         if(cOrder?.orderStatus==0){
-            let orderNumRef = FIRDatabase.database().reference().child(FirebaseConstants.grills).child(grillUserID).child("OrderNumCount")
-            orderNumRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
-                let orderNumCount = snapshot.value as! Int
-                self.cOrder.orderNum=orderNumCount
-                if(orderNumCount == 99) {
-                    orderNumRef.setValue(1)
-                }else{
-                    orderNumRef.setValue(orderNumCount + 1)
-                }
-                self.OrderNumLabel.text = "- #\(orderNumCount)"
-                self.OrderNumLabel.isHidden=false
-                self.orderRef?.child("orderNum").setValue(self.cOrder?.orderNum)
-                
-            })
             cOrder?.orderStatus = 1
             OrderStatusLabel.text = FirebaseConstants.preparingTexts[3]
             OrderStatusButton.setTitle("Mark Ready", for: .normal)
@@ -90,13 +76,13 @@ class OrderControlTableCell: UITableViewCell{
         SauceLabel.text = cOrder.sauceSetting
         TomatoLabel.text = cOrder.tomatoSetting
         LettuceLabel.text = cOrder.lettuceSetting
-        if(cOrder.orderNum != 0) {
+        if(cOrder.orderNum > 9) {
             OrderNumLabel.text = "- #\(cOrder.orderNum!)"
-            OrderNumLabel.isHidden=false
+        }else{
+             OrderNumLabel.text = "- #0\(cOrder.orderNum!)"
         }
         nameButton.setTitle(cOrder.name, for: .normal)
         if(cOrder.orderStatus==0){
-            OrderNumLabel.isHidden=true
             OrderStatusLabel.text = "Order Placed"
             OrderStatusButton.setTitle("Mark Preparing", for: .normal)
         }else if(cOrder.orderStatus==1){

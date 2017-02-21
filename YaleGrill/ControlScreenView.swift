@@ -18,6 +18,7 @@ class ControlScreenView: UITableViewController, GIDSignInUIDelegate, UITextViewD
     private var allActiveIDs : [String] = []
     @IBOutlet weak var GrillToggleButton: UIBarButtonItem!
     @IBOutlet weak var NavBar: UINavigationItem!
+    private var orderNumCount: Int = -1
     
     @IBAction func GrillButtonPressed(_ sender: UIBarButtonItem) {
         if(!grillIsOn){
@@ -152,8 +153,13 @@ class ControlScreenView: UITableViewController, GIDSignInUIDelegate, UITextViewD
             let orderNum = snapshot.value as? Int
             if(orderNum == nil) {
                 orderNumRef.setValue(1);
+            }else if(orderNum == 100){
+                orderNumRef.setValue(1);
+                self.orderNumCount = 1
+            }else{
+                self.orderNumCount = orderNum!
             }
-        })
+        
         
         ordersRef.queryOrderedByKey().observe(FIRDataEventType.childAdded, with: { (snapshot) in
             let newOrderID = snapshot.value as! String
@@ -162,10 +168,17 @@ class ControlScreenView: UITableViewController, GIDSignInUIDelegate, UITextViewD
             singleOrderRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
                 let newJson = snapshot.value as! NSDictionary
                 let newOrder = Orders.convFromJSON(json: newJson as! [String : AnyObject])
+                if(newOrder.orderNum == 0){
+                    newOrder.orderNum = self.orderNumCount
+                    self.orderNumCount += 1
+                    orderNumRef.setValue(self.orderNumCount)
+                    singleOrderRef.child("orderNum").setValue(newOrder.orderNum)
+                }
                 let newIndexPath = IndexPath(row: self.allActiveOrders.count, section: 0)
                 self.allActiveOrders.append(newOrder)
                 self.tableView.insertRows(at: [newIndexPath], with: .automatic)
             })
+        })
         })
         ordersRef.queryOrderedByKey().observe(FIRDataEventType.childRemoved, with: { (snapshot) in
             let orderID = snapshot.value as! String
