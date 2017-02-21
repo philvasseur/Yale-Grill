@@ -15,7 +15,7 @@ import Firebase
 
 class OrderScreen: UIViewController, GIDSignInUIDelegate{
     
-    // MARK: - Properties
+    // MARK: - Variables
     @IBOutlet weak var LoadingText: UILabel! //LoadingText which shows when first signing in, allows orders queried before user can see active orders screen
     @IBOutlet weak var LoadingScreen: UIImageView!
     private var gifArray = [UIImage.gif(name: FirebaseConstants.prepGifIDs[0]), UIImage.gif(name: FirebaseConstants.prepGifIDs[1]), UIImage.gif(name:FirebaseConstants.prepGifIDs[2])] //Image Array of the three preparing gifs
@@ -51,32 +51,23 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
 
     }
     
-    //Used to transfer data when user unwinds from the foodScreen. Called when user pressed the "placeOrder" button, loops through the orders placed, adds their orderID to the array and inserts them into the fireBase database
+    //Used to transfer data when user unwinds from the foodScreen. Called when user pressed the "placeOrder" button, loops through the orders placed
     @IBAction func unwindToOrderScreen(_ sender: UIStoryboardSegue) {
         if let makeOrderController = sender.source as? FoodScreen {
             let tempOrderArray = makeOrderController.ordersPlaced
             if(grillIsOn){
                 for oldOrder in tempOrderArray{
-                    allActiveOrders.append(oldOrder.orderID!)
-                    /*FIRDatabase.database().reference().child(FirebaseConstants.grills).child(FirebaseConstants.GrillIDS[selectedDiningHall]!).child("OrderNumCount").runTransactionBlock { (currentData: FIRMutableData) -> FIRTransactionResult in
-                        var value = currentData.value as? Int
-                        if value == nil {
-                            print("Value was nil")
-                            return FIRTransactionResult.success(withValue: currentData)
-                        }else if value == 100 {
-                            value = 1
-                        }
-                        oldOrder.orderNum = value
-                        currentData.value = value! + 1
-                        print("\(value!+1) for order \(oldOrder.orderID!)")*/
-                        oldOrder.insertIntoDatabase(AllActiveIDs: self.allActiveOrders)
-                        FIRDatabase.database().reference().child(FirebaseConstants.grills).child(FirebaseConstants.GrillIDS[self.selectedDiningHall]!).child(FirebaseConstants.orders).child(oldOrder.orderID).setValue(oldOrder.orderID)
-                        //return FIRTransactionResult.success(withValue: currentData)
-                    //}
+                    allActiveOrders.append(oldOrder.orderID!) //Adds new orders to local orderIDs array
+                    oldOrder.insertIntoDatabase(AllActiveIDs: self.allActiveOrders) //Inserts order into Database
+                    FIRDatabase.database().reference().child(FirebaseConstants.grills).child(FirebaseConstants.GrillIDS[self.selectedDiningHall]!).child(FirebaseConstants.orders).child(oldOrder.orderID).setValue(oldOrder.orderID)
+                    //Above: Inserts orderID into grill's active orders
                 }
             }
         }
     }
+    
+    
+    // MARK: - Functions
     
     //Hides all labels, meant to get rid of the remains of any deleted/moved order
     private func wipeLabels(index: Int){
@@ -90,17 +81,9 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
     }
     
     //Sets an order to finished. Called when cook sets the order to complete.
-    //Changes the order to the new one (should just have status updated), but also hides the "Status" and "Preparing..." labels, and the PreparingGif. 
-    //Unhides the foodIsReady label and the FinishedGif.
+    //Hides the "Status" and "Preparing..." labels, and the PreparingGif.
     private func updateOrderAsFinished(cOrder: Orders, index: Int){
-        let orderLoc = index
-        var cOrderLabels = OrderLabelsArray[orderLoc]
-        cOrderLabels[7].isHidden=true
-        cOrderLabels[8].isHidden=false
-        FinishedGifArray[orderLoc].image = finishedGif
-        FinishedGifArray[orderLoc].isHidden=false
-        FinishedGifArray[orderLoc].layer.cornerRadius = 9
-        GifViews[orderLoc].isHidden=true
+        
     }
     
     //Simple created alert method, just used for warning when user trys to place another order after already having three.
@@ -111,7 +94,54 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
         self.present(alert, animated: true, completion: nil)
     }
     
-    //When you hit the composeOrder button tells the foodScreen class how many orders have already been placed. Used to stop user from accidently placing more than 3 orders. 
+    
+    
+    //Sets the information for an order. Unhides the labels for all of the order information depending on the index, 
+    //and sets various GIFs/Status texts depending on the order status.
+    private func setSingleOrder(cOrder: Orders, index: Int){
+        LinesArray[index].isHidden=false
+        OrderLabelsArray[index][0].text=cOrder.foodServing
+        OrderLabelsArray[index][1].text=cOrder.bunSetting
+        OrderLabelsArray[index][2].text=cOrder.cheeseSetting
+        OrderLabelsArray[index][3].text=cOrder.sauceSetting
+        OrderLabelsArray[index][4].text=cOrder.lettuceSetting
+        OrderLabelsArray[index][5].text=cOrder.tomatoSetting
+        let notFinishedTexts = ["Order Placed",FirebaseConstants.preparingTexts[0]]
+        
+        if(cOrder.orderNum > 0 && cOrder.orderNum < 10){
+            OrderLabelsArray[index][10].text = "0\(cOrder.orderNum!)"
+        }else if(cOrder.orderNum != 0) {
+            OrderLabelsArray[index][10].text = "\(cOrder.orderNum!)"
+        }
+        for i in 0...6{
+            OrderLabelsArray[index][i].isHidden=false
+        }
+        OrderLabelsArray[index][9].isHidden = false //'Order#' Label
+        OrderLabelsArray[index][10].isHidden = false //The actual order Number label
+
+        
+        //Order Status 0 means placed, 1 means preparing, and 2 means Ready
+        if(cOrder.orderStatus == 0 || cOrder.orderStatus == 1){
+            GifViews[index].isHidden=false
+            GifViews[index].image=gifArray[index]
+            GifViews[index].layer.cornerRadius = 10
+            OrderLabelsArray[index][7].text=notFinishedTexts[cOrder.orderStatus] //Sets to either Preparing or Order Placed
+            OrderLabelsArray[index][7].isHidden = false //Unhides the "preparing/order placed" label
+            OrderLabelsArray[index][8].isHidden = true //Hides the "Ready for Pickup" label
+            FinishedGifArray[index].isHidden=true //Hides the finishedGif Array
+        }else if(cOrder.orderStatus == 2){
+            OrderLabelsArray[index][7].isHidden=true //Hides 'Preparing...' Label
+            OrderLabelsArray[index][8].isHidden=false //Unhides the "Ready For Pickup" Label
+            FinishedGifArray[index].image = finishedGif
+            FinishedGifArray[index].isHidden=false
+            FinishedGifArray[index].layer.cornerRadius = 9 //Unhides and sets properties of Finished Gif
+            GifViews[index].isHidden=true //Hides the preparing gif
+        }
+    }
+    
+    // MARK: - Overriden Functions
+    
+    //When you hit the composeOrder button tells the foodScreen class how many orders have already been placed. Used to stop user from accidently placing more than 3 orders.
     //For example, stopping user who already has two orders to place another two, as that would be > 3.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == FirebaseConstants.ComposeOrderSegueID){
@@ -132,45 +162,10 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
             let dateFormatter = DateFormatter()
             dateFormatter.dateStyle = DateFormatter.Style.full
             let bannedUntilString = dateFormatter.string(from: bannedUntil!)
-            createAlert(title: "You've Been Banned!", message: "Due to not picking up 5 orders, you have been temporarily banned from using YaleGrill. This ban will expire on \n\n\(bannedUntilString).\n\n This is an automated ban, and was not done by any Yale Employee. If you think this is a mistake, please contact philip.vasseur@yale.edu.")
+            createAlert(title: "You've Been Banned!", message: "Due to not picking up 5 orders, you have been temporarily banned from using YaleGrill. This ban will expire on \n\n\(bannedUntilString).\n\n This is an automated ban. If you think this is a mistake, please contact philip.vasseur@yale.edu.")
             return false
         }else{
             return true
-        }
-    }
-    
-    //Sets the information for an order. Unhides the labels depending on what type of food, and also either sets as preparing or finished depending on orderStatus
-    private func setSingleOrder(cOrder: Orders, index: Int){
-        LinesArray[index].isHidden=false
-        OrderLabelsArray[index][0].text=cOrder.foodServing
-        for i in 0...6{
-            OrderLabelsArray[index][i].isHidden=false
-        }
-        
-        OrderLabelsArray[index][1].text=cOrder.bunSetting
-        OrderLabelsArray[index][2].text=cOrder.cheeseSetting
-        OrderLabelsArray[index][3].text=cOrder.sauceSetting
-        OrderLabelsArray[index][4].text=cOrder.lettuceSetting
-        OrderLabelsArray[index][5].text=cOrder.tomatoSetting
-        let notFinishedTexts = ["Order Placed",FirebaseConstants.preparingTexts[0]]
-        OrderLabelsArray[index][9].isHidden = false
-        if(cOrder.orderNum > 0 && cOrder.orderNum < 10){
-            OrderLabelsArray[index][10].text = "0\(cOrder.orderNum!)"
-            OrderLabelsArray[index][10].isHidden = false
-        }else if(cOrder.orderNum != 0) {
-            OrderLabelsArray[index][10].text = "\(cOrder.orderNum!)"
-            OrderLabelsArray[index][10].isHidden = false
-        }
-        if(cOrder.orderStatus == 0 || cOrder.orderStatus == 1){
-            GifViews[index].isHidden=false
-            GifViews[index].image=gifArray[index]
-            GifViews[index].layer.cornerRadius = 10
-            OrderLabelsArray[index][7].text=notFinishedTexts[cOrder.orderStatus]
-            OrderLabelsArray[index][7].isHidden = false
-            OrderLabelsArray[index][8].isHidden = true
-            FinishedGifArray[index].isHidden=true
-        }else if(cOrder.orderStatus == 2){
-            updateOrderAsFinished(cOrder: cOrder, index: index)
         }
     }
     
@@ -280,6 +275,8 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
     
     
 }
+
+// MARK: - Extension
 
 extension UIColor {
     convenience init(red: Int, green: Int, blue: Int) {

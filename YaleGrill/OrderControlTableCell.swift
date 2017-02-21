@@ -23,7 +23,7 @@ class OrderControlTableCell: UITableViewCell{
     @IBOutlet weak var LettuceLabel: UILabel!
     @IBOutlet weak var OrderStatusLabel: UILabel!
     @IBOutlet weak var OrderStatusButton: UIButton!
-    final var READYTIMER : Double = 8
+    final var READYTIMER : Double = 0.5
     private var grillUserID : String!
     private var cOrder : Orders!
     private var orderRef : FIRDatabaseReference?

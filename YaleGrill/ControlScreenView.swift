@@ -82,7 +82,9 @@ class ControlScreenView: UITableViewController, GIDSignInUIDelegate, UITextViewD
             ])
         alert.setValue(attributedString, forKey: "attributedTitle")
         alert.setValue(attributedString2, forKey: "attributedMessage")
-        self.present(alert, animated: true, completion: nil)
+        if(self.presentedViewController == nil) {
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     func giveStrike(userID : String, name: String){
