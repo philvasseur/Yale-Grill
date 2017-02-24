@@ -130,9 +130,11 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
     
     //Once all previous orders hav ebeen set the Loading text/Screen is hidden and nav bar is unhidden
     func changeFromLoading(){
+        //DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1){
         self.LoadingText.isHidden=true
         self.LoadingScreen.isHidden=true
         self.navigationController?.navigationBar.isHidden=false
+        //}
     }
     
     //Called by the timer every second starting from when view first loaded. Only does anything if it isn't hidden and the text is set as the Preparing loop. Gives "Preparing..." animation.
@@ -268,7 +270,7 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
     //Tries to make sure that Nav bar isn't hidden if the loading screen is hidden.
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        if(LoadingScreen.isHidden == false) {
+        if(LoadingScreen.isHidden == true) {
             changeFromLoading()
         }
     }
