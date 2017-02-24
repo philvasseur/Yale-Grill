@@ -26,7 +26,7 @@ class OrderControlTableCell: UITableViewCell{
     @IBOutlet weak var OrderStatusButton: UIButton!
     
     // MARK: - Global Variables
-    final var READYTIMER : Double = 0.5
+    final var READYTIMER : Double = 8
     var grillUserID : String!
     var cOrder : Orders!
     var orderRef : FIRDatabaseReference?

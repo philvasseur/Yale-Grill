@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,18 +21,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="YaleGrillIcon-LS" translatesAutoresizingMaskIntoConstraints="NO" id="qi9-QM-Aqm">
-                                <rect key="frame" x="0.0" y="138" width="375" height="390"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="finalIconFull" translatesAutoresizingMaskIntoConstraints="NO" id="swI-8I-UBi">
+                                <rect key="frame" x="-0.5" y="138.5" width="375" height="390"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="qi9-QM-Aqm" secondAttribute="height" multiplier="375:390" id="TYE-DD-8IH"/>
+                                    <constraint firstAttribute="width" secondItem="swI-8I-UBi" secondAttribute="height" multiplier="25:26" id="T1C-Rd-EbS"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="qi9-QM-Aqm" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="BO6-yz-pVy"/>
-                            <constraint firstItem="qi9-QM-Aqm" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" id="cBh-IP-Oh5"/>
-                            <constraint firstItem="qi9-QM-Aqm" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="dkR-sn-7QJ"/>
+                            <constraint firstItem="swI-8I-UBi" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="WAe-Jm-R30"/>
+                            <constraint firstItem="swI-8I-UBi" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" id="WpA-G3-y6i"/>
+                            <constraint firstItem="swI-8I-UBi" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Y9m-Ko-s5c"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -43,6 +42,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="YaleGrillIcon-LS" width="594" height="594"/>
+        <image name="finalIconFull" width="600" height="600"/>
     </resources>
 </document>

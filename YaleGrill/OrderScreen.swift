@@ -86,14 +86,16 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
         
         if(cOrder.orderNum > 0 && cOrder.orderNum < 10){
             OrderLabelsArray[index][10].text = "0\(cOrder.orderNum!)"
+            OrderLabelsArray[index][10].isHidden = false //The actual order Number label
         }else if(cOrder.orderNum != 0) {
             OrderLabelsArray[index][10].text = "\(cOrder.orderNum!)"
+            OrderLabelsArray[index][10].isHidden = false //The actual order Number label
+
         }
         for i in 0...6{
             OrderLabelsArray[index][i].isHidden=false
         }
         OrderLabelsArray[index][9].isHidden = false //'Order#' Label
-        OrderLabelsArray[index][10].isHidden = false //The actual order Number label
         
         
         //Order Status 0 means placed, 1 means preparing, and 2 means Ready
@@ -234,12 +236,6 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
                 let orderIDs = userDic[FirebaseConstants.activeOrders] as! String //Gets string of all active Orders
                 let tempOrders = orderIDs.characters.split { $0 == " " }
                 self.allActiveOrders = tempOrders.map(String.init) //These lines just change the string to an array of IDs
-                if(self.allActiveOrders.count != 0){ //If there are >0 orders, hides label
-                    self.noActiveOrdersLabel.isHidden=true
-                }else{
-                    self.changeFromLoading() //If there are no orders, hides loading stuff
-                    self.noActiveOrdersLabel.isHidden=false
-                }
                 if(self.allActiveOrders.count < 3){
                     for i in  self.allActiveOrders.count...2{ //Loop to clear the sections which have no orders
                         self.wipeLabels(index: i)
@@ -256,6 +252,12 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
                             self.changeFromLoading()
                         }
                     })
+                }
+                if(self.allActiveOrders.count != 0){ //If there are >0 orders, hides label
+                    self.noActiveOrdersLabel.isHidden=true
+                }else{
+                    self.changeFromLoading() //If there are no orders, hides loading stuff
+                    self.noActiveOrdersLabel.isHidden=false
                 }
             }else{
                 user.child(FirebaseConstants.activeOrders).setValue("") //If user has no active orders, creates empty one

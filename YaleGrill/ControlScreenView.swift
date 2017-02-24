@@ -17,6 +17,8 @@ class ControlScreenView: UITableViewController, GIDSignInUIDelegate {
     @IBOutlet weak var NavBar: UINavigationItem!
     
     // MARK: - Global Variables
+    final var strikeBanLimit = 5
+    final var banLength = 10
     var orderNumCount: Int = -1
     var grillRef = FIRDatabase.database().reference().child("Grills").child(GIDSignIn.sharedInstance().currentUser.userID).child("GrillIsOn")
     var grillIsOn : Bool = false
@@ -70,8 +72,6 @@ class ControlScreenView: UITableViewController, GIDSignInUIDelegate {
     
     func giveStrike(userID : String, name: String){
         let date = Date()
-        let strikeBanLimit = 5
-        let banLength = 10
         self.createAlert(title: "Strike Given", message: "Due to not picking up their food, \(name) has been given a strike.")
         FIRDatabase.database().reference().child(FirebaseConstants.users).child(userID).child("Strikes").observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
             let strikes = snapshot.value as? Int
@@ -79,9 +79,9 @@ class ControlScreenView: UITableViewController, GIDSignInUIDelegate {
                 FIRDatabase.database().reference().child(FirebaseConstants.users).child(userID).child("Strikes").setValue(1)
             }else{
                 FIRDatabase.database().reference().child(FirebaseConstants.users).child(userID).child("Strikes").setValue(strikes!+1)
-                if(((strikes!+1) % strikeBanLimit) == 0) {
+                if(((strikes!+1) % self.strikeBanLimit) == 0) {
                     var bannedUntil : String?
-                    let banEndsDate = NSCalendar.current.date(byAdding: .day, value: banLength, to: date)
+                    let banEndsDate = NSCalendar.current.date(byAdding: .day, value: self.banLength, to: date)
                     bannedUntil = banEndsDate?.description
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateStyle = DateFormatter.Style.full
