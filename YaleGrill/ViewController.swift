@@ -3,7 +3,7 @@
 //  YaleGrill
 //
 //  Created by Phil Vasseur on 12/27/16.
-//  Copyright © 2016 Phil Vasseur. All rights reserved.
+//  Copyright © 2017 Phil Vasseur. All rights reserved.
 //
 
 import UIKit
@@ -91,7 +91,7 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, 
             print("Sign In Error: \(error)")
             LoadingBack.isHidden=true
             LoadingImage.isHidden=true
-            self.locationManager.delegate = self
+            self.locationManager.delegate = self //still need to fully implement location services
             self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
             self.locationManager.requestWhenInUseAuthorization()
             self.locationManager.startUpdatingLocation()

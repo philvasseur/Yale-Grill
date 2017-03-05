@@ -3,7 +3,7 @@
 //  YaleGrill
 //
 //  Created by Phil Vasseur on 12/27/16.
-//  Copyright © 2016 Phil Vasseur. All rights reserved.
+//  Copyright © 2017 Phil Vasseur. All rights reserved.
 //
 
 import UIKit
