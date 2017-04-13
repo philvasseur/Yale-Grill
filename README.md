@@ -1,6 +1,6 @@
 # YaleGrill
 
-YaleGrill is an iOS applicagtion that stream lines the grill ordering process at Yale Dining Halls.
+YaleGrill is an iOS applicagtion that streamlines the grill ordering process at Yale Dining Halls.
 
 Only usable by those with a valid Yale email address.
 
