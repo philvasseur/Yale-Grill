@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var configureError: NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)
         if(configureError != nil){
-            print("We have an error \(configureError)")
+            print("We have an error!")
         }
         return true
     }
