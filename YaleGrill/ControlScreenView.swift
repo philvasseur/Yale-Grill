@@ -143,6 +143,7 @@ class ControlScreenView: UITableViewController, GIDSignInUIDelegate {
             let orderNum = snapshot.value as? Int
             if(orderNum == nil) {
                 orderNumRef.setValue(1);
+                self.orderNumCount = 1
             }else if(orderNum == 100){
                 orderNumRef.setValue(1);
                 self.orderNumCount = 1

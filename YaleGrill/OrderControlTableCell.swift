@@ -89,17 +89,10 @@ class OrderControlTableCell: UITableViewCell{
         task?.cancel()
         let cOrderID = self.cOrder.orderID!
         let userRef = FIRDatabase.database().reference().child(FirebaseConstants.users).child(cOrder.userID!).child(FirebaseConstants.activeOrders)
-        userRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
-            let allIDsString = snapshot.value as! String
-            let tempArray = allIDsString.characters.split { $0 == " " }
-            var allIDsArray = tempArray.map(String.init)
-            let idIndex = allIDsArray.index(of: cOrderID)
-            allIDsArray[idIndex!]=""
-            let newIDsString = allIDsArray.joined(separator: " ")
-            userRef.setValue(newIDsString)
-            FIRDatabase.database().reference().child(FirebaseConstants.grills).child(self.grillUserID).child(FirebaseConstants.orders).child(cOrderID).setValue(nil)
-            
-        })
+        userRef.child(cOrderID).setValue(nil)
+        
+        FIRDatabase.database().reference().child(FirebaseConstants.grills).child(self.grillUserID).child(FirebaseConstants.orders).child(cOrderID).setValue(nil)
+        
         
     }
     

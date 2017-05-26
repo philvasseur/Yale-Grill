@@ -40,9 +40,9 @@ class Orders {
     
     //Inserts a new order into fireBase database, also sets value of ActiveOrders in firebase database (as empty string if no active orders)
     func insertIntoDatabase(AllActiveIDs : [String]){
-        let activeOrders = FIRDatabase.database().reference().child("Users").child(userID).child("ActiveOrders")
+        /*let activeOrders = FIRDatabase.database().reference().child("Users").child(userID).child("ActiveOrders")
         let totalIDs = AllActiveIDs.joined(separator: " ")
-        activeOrders.setValue(totalIDs)
+        activeOrders.setValue(totalIDs)*/
         let currentOrder = FIRDatabase.database().reference().child("Orders").child(orderID)
         currentOrder.setValue(convToJSON())
         

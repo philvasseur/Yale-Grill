@@ -90,7 +90,6 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
         }else if(cOrder.orderNum != 0) {
             OrderLabelsArray[index][10].text = "\(cOrder.orderNum!)"
             OrderLabelsArray[index][10].isHidden = false //The actual order Number label
-
         }
         for i in 0...6{
             OrderLabelsArray[index][i].isHidden=false

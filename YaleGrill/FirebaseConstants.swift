@@ -45,6 +45,7 @@ class FirebaseConstants {
     ]
     static let toppingsArray = ["Bun","Cheese","Sauce","Lettuce","Tomatoes"]
     static let preparingTexts = ["Preparing...","Preparing..","Preparing.","Preparing"]
+    static let gifArray = ["preparing","preparing2","preparing3"]
     
     //ID Constants
     static let SignInSegueID = "SignInSegue"

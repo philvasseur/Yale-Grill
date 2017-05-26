@@ -13,6 +13,9 @@
 		CD179F0B1E15F6C300496D5F /* preparing2.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD179F091E15F6C300496D5F /* preparing2.gif */; };
 		CD179F0F1E16042D00496D5F /* finished.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD179F0E1E16042D00496D5F /* finished.gif */; };
 		CD1A13DE1E1E1356003AFBCE /* Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1A13DD1E1E1356003AFBCE /* Gif.swift */; };
+		CD3EEFB21ECB958E00A86A52 /* OrderScreenTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3EEFB11ECB958E00A86A52 /* OrderScreenTableViewController.swift */; };
+		CD3EEFB61ECB971C00A86A52 /* NSLayoutConstraintExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3EEFB51ECB971C00A86A52 /* NSLayoutConstraintExtension.swift */; };
+		CD3EEFB81ECB977B00A86A52 /* OrderScreenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3EEFB71ECB977B00A86A52 /* OrderScreenTableViewCell.swift */; };
 		CD460E2D1E1B6368007C8588 /* ControlScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD460E2C1E1B6368007C8588 /* ControlScreenView.swift */; };
 		CD9E14E41E130C7E000E21C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9E14E31E130C7E000E21C0 /* AppDelegate.swift */; };
 		CD9E14E61E130C7E000E21C0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9E14E51E130C7E000E21C0 /* ViewController.swift */; };
@@ -47,6 +50,9 @@
 		CD179F091E15F6C300496D5F /* preparing2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = preparing2.gif; path = ../../../../Downloads/preparing2.gif; sourceTree = "<group>"; };
 		CD179F0E1E16042D00496D5F /* finished.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = finished.gif; path = ../../../../Downloads/finished.gif; sourceTree = "<group>"; };
 		CD1A13DD1E1E1356003AFBCE /* Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gif.swift; sourceTree = "<group>"; };
+		CD3EEFB11ECB958E00A86A52 /* OrderScreenTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderScreenTableViewController.swift; sourceTree = "<group>"; };
+		CD3EEFB51ECB971C00A86A52 /* NSLayoutConstraintExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraintExtension.swift; sourceTree = "<group>"; };
+		CD3EEFB71ECB977B00A86A52 /* OrderScreenTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderScreenTableViewCell.swift; sourceTree = "<group>"; };
 		CD460E2C1E1B6368007C8588 /* ControlScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlScreenView.swift; sourceTree = "<group>"; };
 		CD9E14E01E130C7E000E21C0 /* YaleGrill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YaleGrill.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD9E14E31E130C7E000E21C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +63,7 @@
 		CD9E14EF1E130C7E000E21C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CDC1A0D91E177B49009C2538 /* Orders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Orders.swift; sourceTree = "<group>"; };
 		CDC64C991E1FF52D002959BA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CDC748D01ED4FF3700370350 /* YaleGrill.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YaleGrill.entitlements; sourceTree = "<group>"; };
 		CDCFD5921E1329B100065E87 /* OrderScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderScreen.swift; sourceTree = "<group>"; };
 		CDCFD5941E1359AE00065E87 /* FoodScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodScreen.swift; sourceTree = "<group>"; };
 		CDD92A2B1E130E5B005C091B /* YaleGrill-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YaleGrill-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -117,6 +124,7 @@
 				CD9E14EF1E130C7E000E21C0 /* Info.plist */,
 				CDD92A2B1E130E5B005C091B /* YaleGrill-Bridging-Header.h */,
 				CD1A13DD1E1E1356003AFBCE /* Gif.swift */,
+				CD3EEFB51ECB971C00A86A52 /* NSLayoutConstraintExtension.swift */,
 			);
 			name = DoNotTouch;
 			sourceTree = "<group>";
@@ -142,6 +150,7 @@
 		CD9E14E21E130C7E000E21C0 /* YaleGrill */ = {
 			isa = PBXGroup;
 			children = (
+				CDC748D01ED4FF3700370350 /* YaleGrill.entitlements */,
 				CDC1A0D91E177B49009C2538 /* Orders.swift */,
 				CD9E14E31E130C7E000E21C0 /* AppDelegate.swift */,
 				CD9E14E51E130C7E000E21C0 /* ViewController.swift */,
@@ -150,6 +159,8 @@
 				CD460E2C1E1B6368007C8588 /* ControlScreenView.swift */,
 				CDE5C00C1E1EEA5A00226D71 /* OrderControlTableCell.swift */,
 				CD9E14E71E130C7E000E21C0 /* Main.storyboard */,
+				CD3EEFB11ECB958E00A86A52 /* OrderScreenTableViewController.swift */,
+				CD3EEFB71ECB977B00A86A52 /* OrderScreenTableViewCell.swift */,
 				CD9E14EC1E130C7E000E21C0 /* LaunchScreen.storyboard */,
 				CDE5C00E1E1F0F4900226D71 /* FirebaseConstants.swift */,
 				CD9E14EA1E130C7E000E21C0 /* Assets.xcassets */,
@@ -195,9 +206,17 @@
 				TargetAttributes = {
 					CD9E14DF1E130C7E000E21C0 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = Q59G9CJ8UJ;
+						DevelopmentTeam = JKE2CE3SSD;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -290,11 +309,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD3EEFB81ECB977B00A86A52 /* OrderScreenTableViewCell.swift in Sources */,
 				CD9E14E61E130C7E000E21C0 /* ViewController.swift in Sources */,
 				CDC1A0DA1E177B49009C2538 /* Orders.swift in Sources */,
 				CD460E2D1E1B6368007C8588 /* ControlScreenView.swift in Sources */,
 				CDE5C00D1E1EEA5A00226D71 /* OrderControlTableCell.swift in Sources */,
+				CD3EEFB21ECB958E00A86A52 /* OrderScreenTableViewController.swift in Sources */,
 				CD9E14E41E130C7E000E21C0 /* AppDelegate.swift in Sources */,
+				CD3EEFB61ECB971C00A86A52 /* NSLayoutConstraintExtension.swift in Sources */,
 				CDE5C00F1E1F0F4900226D71 /* FirebaseConstants.swift in Sources */,
 				CDCFD5931E1329B100065E87 /* OrderScreen.swift in Sources */,
 				CD1A13DE1E1E1356003AFBCE /* Gif.swift in Sources */,
@@ -422,14 +444,16 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = YaleGrill/YaleGrill.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = Q59G9CJ8UJ;
+				DEVELOPMENT_TEAM = JKE2CE3SSD;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = YaleGrill/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.philvasseur.yale-grill";
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.yale.yale-grill";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "YaleGrill/YaleGrill-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -444,14 +468,16 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = YaleGrill/YaleGrill.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = Q59G9CJ8UJ;
+				DEVELOPMENT_TEAM = JKE2CE3SSD;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = YaleGrill/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.philvasseur.yale-grill";
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.yale.yale-grill";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "YaleGrill/YaleGrill-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

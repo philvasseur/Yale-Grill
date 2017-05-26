@@ -37,7 +37,7 @@
                                             </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Cheese" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f7m-vT-DEN">
-                                            <rect key="frame" x="8" y="47.5" width="75" height="17.5"/>
+                                            <rect key="frame" x="8" y="47" width="75" height="18"/>
                                             <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -46,7 +46,7 @@
                                             </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Tomatoes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vjs-CX-ciB">
-                                            <rect key="frame" x="8" y="68.5" width="91.5" height="17.5"/>
+                                            <rect key="frame" x="8" y="67" width="92" height="18"/>
                                             <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -55,7 +55,7 @@
                                             </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Sauce" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZfW-Y9-mfJ">
-                                            <rect key="frame" x="149.5" y="47.5" width="66.5" height="17.5"/>
+                                            <rect key="frame" x="149.5" y="47" width="67" height="18"/>
                                             <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -64,7 +64,7 @@
                                             </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Lettuce" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vC7-jv-0dJ">
-                                            <rect key="frame" x="149.5" y="68.5" width="76" height="17.5"/>
+                                            <rect key="frame" x="149.5" y="67" width="76" height="18"/>
                                             <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -73,7 +73,7 @@
                                             </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order Placed" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XdF-BC-ryG">
-                                            <rect key="frame" x="259.5" y="47.5" width="101.5" height="17.5"/>
+                                            <rect key="frame" x="259" y="47" width="102" height="18"/>
                                             <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -82,7 +82,7 @@
                                             </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Bun" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DRy-fX-3es">
-                                            <rect key="frame" x="259.5" y="68.5" width="51.5" height="17.5"/>
+                                            <rect key="frame" x="259" y="67" width="52" height="18"/>
                                             <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -108,7 +108,7 @@
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- #100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eG2-uC-62S">
-                                            <rect key="frame" x="64" y="25.5" width="57.5" height="18.5"/>
+                                            <rect key="frame" x="64" y="24" width="58" height="19"/>
                                             <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -117,7 +117,7 @@
                                             </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eU5-lf-na5">
-                                            <rect key="frame" x="8" y="25.5" width="49" height="18.5"/>
+                                            <rect key="frame" x="8" y="24" width="49" height="19"/>
                                             <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -205,7 +205,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="YaleImage" translatesAutoresizingMaskIntoConstraints="NO" id="3fh-YX-xub" userLabel="YaleImage">
-                                <rect key="frame" x="39" y="81.5" width="297" height="230.5"/>
+                                <rect key="frame" x="39" y="82" width="297" height="230"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="3fh-YX-xub" secondAttribute="height" multiplier="297:230" id="DWx-lY-bAZ"/>
                                 </constraints>
@@ -257,18 +257,13 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qwN-LX-wub">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0B7-Lh-0B6">
+                                <rect key="frame" x="167.5" y="313.5" width="40" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="finalIconFull" translatesAutoresizingMaskIntoConstraints="NO" id="LGW-sm-021">
-                                <rect key="frame" x="0.0" y="138.5" width="375" height="390"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="LGW-sm-021" secondAttribute="height" multiplier="25:26" id="peJ-un-F7V"/>
-                                </constraints>
-                            </imageView>
+                            </view>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="rHD-UZ-naE">
+                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.10588235294117647" green="0.30980392156862746" blue="0.62352941176470589" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
@@ -279,19 +274,18 @@
                             <constraint firstItem="VIN-Hj-NQE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Nxn-dX-Ol7"/>
                             <constraint firstItem="x8Q-2e-89c" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="1.15" id="OUN-9x-ug6"/>
                             <constraint firstItem="xTe-bi-vpj" firstAttribute="width" secondItem="VIN-Hj-NQE" secondAttribute="width" id="Pu2-3J-wKG"/>
-                            <constraint firstItem="qwN-LX-wub" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="QfA-0r-J9W"/>
+                            <constraint firstItem="rHD-UZ-naE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="S0H-NH-AvD"/>
                             <constraint firstItem="xTe-bi-vpj" firstAttribute="centerY" secondItem="VIN-Hj-NQE" secondAttribute="centerY" id="UD7-DX-DiX"/>
-                            <constraint firstItem="qwN-LX-wub" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="Xqb-c5-dm0"/>
                             <constraint firstItem="Prv-Si-nvN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ZaD-3V-k7k"/>
                             <constraint firstItem="3fh-YX-xub" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ZuP-M5-FL2"/>
                             <constraint firstItem="3fh-YX-xub" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="0.59" id="bqi-eL-7s0"/>
-                            <constraint firstItem="LGW-sm-021" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="fby-Nm-MYf"/>
-                            <constraint firstItem="LGW-sm-021" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="nPi-eK-IhI"/>
+                            <constraint firstItem="rHD-UZ-naE" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="e7F-v2-0df"/>
+                            <constraint firstItem="0B7-Lh-0B6" firstAttribute="centerX" secondItem="rHD-UZ-naE" secondAttribute="centerX" id="gfK-EI-gPe"/>
+                            <constraint firstItem="0B7-Lh-0B6" firstAttribute="centerY" secondItem="rHD-UZ-naE" secondAttribute="centerY" id="oQg-ge-Mmr"/>
                             <constraint firstItem="VIN-Hj-NQE" firstAttribute="top" secondItem="3fh-YX-xub" secondAttribute="bottom" constant="-5" id="pfu-eD-I2B"/>
-                            <constraint firstItem="qwN-LX-wub" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="qhl-ep-3fF"/>
-                            <constraint firstItem="qwN-LX-wub" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="t5p-tH-WB3"/>
+                            <constraint firstItem="0B7-Lh-0B6" firstAttribute="width" secondItem="rHD-UZ-naE" secondAttribute="width" multiplier="2" id="qPC-KU-awr"/>
+                            <constraint firstItem="0B7-Lh-0B6" firstAttribute="height" secondItem="rHD-UZ-naE" secondAttribute="height" multiplier="2" id="tZ6-8f-Ump"/>
                             <constraint firstItem="VIN-Hj-NQE" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.6" priority="900" id="ulw-tv-A1C"/>
-                            <constraint firstItem="LGW-sm-021" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="wwp-5e-JL4"/>
                             <constraint firstItem="xTe-bi-vpj" firstAttribute="centerX" secondItem="VIN-Hj-NQE" secondAttribute="centerX" id="x56-pD-fKy"/>
                             <constraint firstItem="GFl-ZW-WQc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="xGf-VJ-zZh"/>
                             <constraint firstItem="3fh-YX-xub" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.792" id="xhV-l2-8t2"/>
@@ -300,9 +294,9 @@
                     <connections>
                         <outlet property="DisabledSignInColor" destination="4r6-q8-vo8" id="okx-G1-b3Y"/>
                         <outlet property="GSignInButton" destination="VIN-Hj-NQE" id="GDW-Cd-weg"/>
-                        <outlet property="LoadingBack" destination="qwN-LX-wub" id="UWT-Ys-i6M"/>
-                        <outlet property="LoadingImage" destination="LGW-sm-021" id="nbo-x0-kYP"/>
                         <outlet property="diningHallTextField" destination="GFl-ZW-WQc" id="skK-68-f5t"/>
+                        <outlet property="loadingIndicator" destination="rHD-UZ-naE" id="V6w-Mj-jma"/>
+                        <outlet property="loadingView" destination="0B7-Lh-0B6" id="GUq-kU-3kE"/>
                         <segue destination="CYl-rG-eM0" kind="presentation" identifier="SignInSegue" id="pNU-dT-IA1"/>
                         <segue destination="Txg-YN-yko" kind="presentation" identifier="ControlScreenSegue" id="hLo-to-9X3"/>
                     </connections>
@@ -323,25 +317,39 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="subtleWaves" translatesAutoresizingMaskIntoConstraints="NO" id="zHH-HP-w8n" userLabel="LoadingScreen">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" red="0.99999058249999995" green="0.99999356269999995" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="tintColor" red="0.2984012365" green="0.54416894910000002" blue="0.96475684640000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="r4t-G6-auf">
+                                <rect key="frame" x="102" y="314.5" width="171" height="38"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="r4t-G6-auf" secondAttribute="height" multiplier="9:2" id="eyT-dX-bvM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="31"/>
+                                <color key="textColor" red="0.29803921568627451" green="0.54509803921568623" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="subtleWaves" translatesAutoresizingMaskIntoConstraints="NO" id="IX8-1K-4fs" userLabel="Background">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.99999058246612549" green="0.99999356269836426" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="tintColor" red="0.29840123653411865" green="0.54416894912719727" blue="0.96475684642791748" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </imageView>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5Fj-G3-UWF">
-                                <rect key="frame" x="237.5" y="180" width="123" height="92"/>
+                                <rect key="frame" x="237.5" y="181" width="123" height="91.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="5Fj-G3-UWF" secondAttribute="height" multiplier="123:92" id="qZu-MW-TOJ"/>
                                 </constraints>
                             </imageView>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mme-0a-GLw">
-                                <rect key="frame" x="237.5" y="373.5" width="123" height="92"/>
+                                <rect key="frame" x="237.5" y="374.5" width="123" height="91.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Mme-0a-GLw" secondAttribute="height" multiplier="123:92" id="J5W-uF-DgF"/>
                                 </constraints>
                             </imageView>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WpI-2V-Am0">
-                                <rect key="frame" x="237.5" y="564.5" width="123" height="92"/>
+                                <rect key="frame" x="237.5" y="564.5" width="123" height="91.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="WpI-2V-Am0" secondAttribute="height" multiplier="123:92" id="7sE-IR-nIg"/>
                                 </constraints>
@@ -361,7 +369,7 @@
                                 </constraints>
                             </imageView>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="w4s-8g-1ef">
-                                <rect key="frame" x="117.5" y="207" width="215" height="39"/>
+                                <rect key="frame" x="117.5" y="207.5" width="215" height="39"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="215" id="61G-cv-hcD"/>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="39" id="8Ei-f8-8nP"/>
@@ -377,7 +385,7 @@
                                 </constraints>
                             </imageView>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MsF-tT-Xca">
-                                <rect key="frame" x="117.5" y="590.5" width="215" height="39"/>
+                                <rect key="frame" x="117.5" y="591" width="215" height="39"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="215" id="6AM-6X-GAI"/>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="39" id="VIE-NU-ykJ"/>
@@ -429,6 +437,12 @@
                                 <color key="textColor" red="0.29803921568627451" green="0.54509803921568623" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preparing..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Quj-L5-qE2">
+                                <rect key="frame" x="94" y="216.5" width="94.5" height="19.5"/>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preparing..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VJ0-h4-DBb">
                                 <rect key="frame" x="91" y="601" width="94.5" height="19.5"/>
                                 <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
@@ -437,12 +451,6 @@
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preparing..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OsX-Lq-VfK">
                                 <rect key="frame" x="91" y="410" width="94.5" height="19.5"/>
-                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preparing..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Quj-L5-qE2">
-                                <rect key="frame" x="94" y="217.5" width="94.5" height="19.5"/>
                                 <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
@@ -598,71 +606,57 @@
                                 </subviews>
                             </stackView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ready For Pickup!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BwP-Ce-aXI">
-                                <rect key="frame" x="139" y="216" width="172.5" height="21"/>
+                                <rect key="frame" x="139" y="216.5" width="172.5" height="21"/>
                                 <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ready For Pickup!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Sn-RB-sr2">
-                                <rect key="frame" x="139" y="409" width="172.5" height="21"/>
+                                <rect key="frame" x="139" y="409.5" width="172.5" height="21"/>
                                 <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ready For Pickup!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ciw-DR-MBy">
-                                <rect key="frame" x="139" y="599.5" width="172.5" height="21"/>
+                                <rect key="frame" x="139" y="600" width="172.5" height="21"/>
                                 <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order#:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gwd-W8-0NM">
-                                <rect key="frame" x="21" y="253.5" width="67.5" height="18.5"/>
+                                <rect key="frame" x="21" y="254" width="67.5" height="18.5"/>
                                 <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
                                 <color key="textColor" red="0.29840123653411865" green="0.54416894912719727" blue="0.96475684642791748" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xWg-In-Jl0">
-                                <rect key="frame" x="94" y="253.5" width="20.5" height="19.5"/>
+                                <rect key="frame" x="94" y="253" width="20.5" height="19.5"/>
                                 <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order#:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RwJ-zY-vVA">
-                                <rect key="frame" x="21" y="447" width="67.5" height="18.5"/>
+                                <rect key="frame" x="21" y="447.5" width="67.5" height="18.5"/>
                                 <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
                                 <color key="textColor" red="0.2984012365" green="0.54416894910000002" blue="0.96475684640000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IGd-xl-OgT" userLabel="01">
-                                <rect key="frame" x="91" y="447" width="20.5" height="19.5"/>
+                                <rect key="frame" x="91" y="447.5" width="20.5" height="19.5"/>
                                 <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order#:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WC9-27-fD1">
-                                <rect key="frame" x="21" y="638" width="67.5" height="18.5"/>
+                                <rect key="frame" x="21" y="637.5" width="67.5" height="18.5"/>
                                 <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
                                 <color key="textColor" red="0.2984012365" green="0.54416894910000002" blue="0.96475684640000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="02" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wWC-ge-qJI" userLabel="02">
-                                <rect key="frame" x="91" y="637" width="20.5" height="19.5"/>
+                                <rect key="frame" x="91" y="637.5" width="20.5" height="19.5"/>
                                 <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
                                 <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="subtleWaves" translatesAutoresizingMaskIntoConstraints="NO" id="zHH-HP-w8n" userLabel="LoadingScreen">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" red="0.99999058249999995" green="0.99999356269999995" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
-                                <color key="tintColor" red="0.2984012365" green="0.54416894910000002" blue="0.96475684640000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="r4t-G6-auf">
-                                <rect key="frame" x="102" y="314.5" width="171" height="38"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="r4t-G6-auf" secondAttribute="height" multiplier="9:2" id="eyT-dX-bvM"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="31"/>
-                                <color key="textColor" red="0.29803921568627451" green="0.54509803921568623" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -760,11 +754,7 @@
                                 <action selector="SignOutPressed:" destination="Xnt-PY-nOB" id="tHN-Fq-NV6"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="Efe-9X-EDW">
-                            <connections>
-                                <segue destination="0M2-0t-HgQ" kind="show" identifier="ComposeOrder" id="gES-79-pvV"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="Efe-9X-EDW"/>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -817,7 +807,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lEo-E2-T5s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1418" y="34"/>
+            <point key="canvasLocation" x="2084" y="753"/>
         </scene>
         <!--Menu-->
         <scene sceneID="wnc-WG-0NI">
@@ -845,7 +835,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Bos-uJ-tw6" kind="unwind" unwindAction="unwindToOrderScreen:" id="klF-Sv-eKb"/>
+                                    <segue destination="Bos-uJ-tw6" kind="unwind" unwindAction="unwindToOrderScreen:" id="Jyn-Ra-dEV"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Veggie Burger" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="ysA-Cv-uWu" userLabel="Veggie Burger Label">
@@ -1102,7 +1092,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Yd-7a-o1d" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Bos-uJ-tw6" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2197.5999999999999" y="33.733133433283363"/>
+            <point key="canvasLocation" x="2249" y="34"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MJZ-9b-7gP">
@@ -1110,13 +1100,13 @@
                 <navigationController storyboardIdentifier="NavControl" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" hidesBarsWhenKeyboardAppears="YES" id="CYl-rG-eM0" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="0S0-rn-29S"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="3L9-0H-vua">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3L9-0H-vua">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Xnt-PY-nOB" kind="relationship" relationship="rootViewController" id="Tdl-UM-a2z"/>
+                        <segue destination="oI0-JY-wm8" kind="relationship" relationship="rootViewController" id="jxC-TV-d0f"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1ds-qu-UgW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1128,7 +1118,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Txg-YN-yko" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="yZ9-AK-vnH">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yZ9-AK-vnH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1141,10 +1131,196 @@
             </objects>
             <point key="canvasLocation" x="-118.11594202898553" y="755.29891304347836"/>
         </scene>
+        <!--College-->
+        <scene sceneID="j6F-ka-Q4e">
+            <objects>
+                <tableViewController id="oI0-JY-wm8" customClass="OrderScreenTableViewController" customModule="YaleGrill" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="tHX-MW-vhW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="customerCell" rowHeight="202" id="KP1-Mz-dig" customClass="OrderScreenTableViewCell" customModule="YaleGrill" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="202"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KP1-Mz-dig" id="u16-cG-Axu">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="201.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5MX-0p-me1">
+                                            <rect key="frame" x="237.5" y="85.5" width="123" height="92"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="5MX-0p-me1" secondAttribute="height" multiplier="123:92" id="uaw-O7-5SQ"/>
+                                            </constraints>
+                                        </imageView>
+                                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gdd-ll-mdG">
+                                            <rect key="frame" x="99" y="112" width="214.5" height="39"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="gdd-ll-mdG" secondAttribute="height" multiplier="215:39" id="Fxm-Na-PvM"/>
+                                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="39" id="MQx-sy-Juz"/>
+                                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="215" id="zBT-aU-ev4"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OdE-J3-qRy">
+                                            <rect key="frame" x="13" y="121.5" width="60" height="18.5"/>
+                                            <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
+                                            <color key="textColor" red="0.29803921570000003" green="0.5450980392" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nlc-Uh-R7I">
+                                            <rect key="frame" x="86" y="162.5" width="20.5" height="19.5"/>
+                                            <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ready For Pickup!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eUK-LC-MQQ">
+                                            <rect key="frame" x="120" y="121" width="172.5" height="21"/>
+                                            <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order#:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UdW-k8-VRx">
+                                            <rect key="frame" x="13" y="162.5" width="67.5" height="18.5"/>
+                                            <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
+                                            <color key="textColor" red="0.2984012365" green="0.54416894910000002" blue="0.96475684640000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preparing..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQh-xB-B67">
+                                            <rect key="frame" x="86" y="121.5" width="94.5" height="19.5"/>
+                                            <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="fLW-gF-Qfu">
+                                            <rect key="frame" x="18" y="40.5" width="339" height="41"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="P7h-kW-U0F">
+                                                    <rect key="frame" x="0.0" y="0.0" width="62.5" height="41"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Cheese" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="StG-8Z-oM8" userLabel="Label">
+                                                            <rect key="frame" x="0.0" y="0.0" width="62.5" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Sauce" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g5D-xW-SFR" userLabel="Label">
+                                                            <rect key="frame" x="0.0" y="20.5" width="62.5" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="EqI-mQ-j0x">
+                                                    <rect key="frame" x="137.5" y="0.0" width="80" height="41"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Lettuce" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FhZ-qA-Qsb" userLabel="Label">
+                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Tomatoes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jmw-SR-p6x" userLabel="Label">
+                                                            <rect key="frame" x="0.0" y="20.5" width="80" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="4oi-rA-cL9">
+                                                    <rect key="frame" x="309" y="0.0" width="30" height="20.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bun" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O85-66-luW" userLabel="Label">
+                                                            <rect key="frame" x="0.0" y="0.0" width="30" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                        </stackView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Single Burger" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ORw-FO-C17" userLabel="Title">
+                                            <rect key="frame" x="122.5" y="10" width="130" height="21"/>
+                                            <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="17"/>
+                                            <color key="textColor" red="0.29803921570000003" green="0.5450980392" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=regular">
+                                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="21"/>
+                                            </variation>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstItem="nlc-Uh-R7I" firstAttribute="centerY" secondItem="UdW-k8-VRx" secondAttribute="centerY" id="5P5-T8-QUK"/>
+                                        <constraint firstItem="ORw-FO-C17" firstAttribute="centerY" secondItem="u16-cG-Axu" secondAttribute="centerY" multiplier="0.2" id="5XU-Mf-mQQ"/>
+                                        <constraint firstItem="OdE-J3-qRy" firstAttribute="leading" secondItem="u16-cG-Axu" secondAttribute="leadingMargin" constant="5" id="9gm-QW-jT9"/>
+                                        <constraint firstItem="UdW-k8-VRx" firstAttribute="centerY" secondItem="u16-cG-Axu" secondAttribute="centerY" multiplier="1.7" id="HWE-K7-Tk3"/>
+                                        <constraint firstItem="5MX-0p-me1" firstAttribute="width" secondItem="5MX-0p-me1" secondAttribute="height" multiplier="123:92" id="SYz-6b-OED"/>
+                                        <constraint firstItem="fLW-gF-Qfu" firstAttribute="centerY" secondItem="u16-cG-Axu" secondAttribute="centerY" multiplier="0.6" id="TAA-cM-kzL"/>
+                                        <constraint firstItem="BQh-xB-B67" firstAttribute="leading" secondItem="OdE-J3-qRy" secondAttribute="trailing" constant="13" id="Ucs-Dy-sp7"/>
+                                        <constraint firstItem="ORw-FO-C17" firstAttribute="centerX" secondItem="u16-cG-Axu" secondAttribute="centerX" id="Ycq-vy-jWk"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="fLW-gF-Qfu" secondAttribute="trailing" constant="10" id="aAG-vW-OKZ"/>
+                                        <constraint firstItem="gdd-ll-mdG" firstAttribute="centerY" secondItem="eUK-LC-MQQ" secondAttribute="centerY" id="aTb-eR-vrg"/>
+                                        <constraint firstItem="UdW-k8-VRx" firstAttribute="leading" secondItem="OdE-J3-qRy" secondAttribute="leading" id="aoI-Rt-bQv"/>
+                                        <constraint firstItem="gdd-ll-mdG" firstAttribute="centerX" secondItem="eUK-LC-MQQ" secondAttribute="centerX" id="bpX-fm-bf2"/>
+                                        <constraint firstItem="gdd-ll-mdG" firstAttribute="width" secondItem="gdd-ll-mdG" secondAttribute="height" multiplier="215:39" id="bst-5g-fkU"/>
+                                        <constraint firstItem="BQh-xB-B67" firstAttribute="centerY" secondItem="OdE-J3-qRy" secondAttribute="centerY" id="ji0-rW-lKB"/>
+                                        <constraint firstItem="5MX-0p-me1" firstAttribute="centerY" secondItem="gdd-ll-mdG" secondAttribute="centerY" id="k6K-il-a1V"/>
+                                        <constraint firstItem="5MX-0p-me1" firstAttribute="width" secondItem="u16-cG-Axu" secondAttribute="width" multiplier="0.328" id="mfy-lz-xrc"/>
+                                        <constraint firstItem="fLW-gF-Qfu" firstAttribute="leading" secondItem="u16-cG-Axu" secondAttribute="leadingMargin" constant="10" id="nsx-bU-VmR"/>
+                                        <constraint firstItem="gdd-ll-mdG" firstAttribute="width" secondItem="u16-cG-Axu" secondAttribute="width" multiplier="0.5733" id="qZK-ih-R3D"/>
+                                        <constraint firstItem="5MX-0p-me1" firstAttribute="centerX" secondItem="u16-cG-Axu" secondAttribute="centerX" multiplier="1.595" id="rea-BW-Oxt"/>
+                                        <constraint firstItem="nlc-Uh-R7I" firstAttribute="leading" secondItem="BQh-xB-B67" secondAttribute="leading" id="rlx-h9-U7x"/>
+                                        <constraint firstItem="OdE-J3-qRy" firstAttribute="centerY" secondItem="u16-cG-Axu" secondAttribute="centerY" multiplier="1.3" id="rmg-Vs-HGp"/>
+                                        <constraint firstItem="eUK-LC-MQQ" firstAttribute="centerY" secondItem="BQh-xB-B67" secondAttribute="centerY" id="sV6-iq-wUf"/>
+                                        <constraint firstItem="eUK-LC-MQQ" firstAttribute="centerX" secondItem="u16-cG-Axu" secondAttribute="centerX" multiplier="1.1" id="tQW-0B-ysI"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="attributeFiveLabel" destination="jmw-SR-p6x" id="DCY-zF-zaR"/>
+                                    <outlet property="attributeFourLabel" destination="g5D-xW-SFR" id="nkH-pp-Mfc"/>
+                                    <outlet property="attributeOneLabel" destination="StG-8Z-oM8" id="Ahf-mJ-Mwl"/>
+                                    <outlet property="attributeThreeLabel" destination="O85-66-luW" id="fRa-1i-Oh4"/>
+                                    <outlet property="attributeTwoLabel" destination="FhZ-qA-Qsb" id="7qX-xy-0xn"/>
+                                    <outlet property="orderNumLabel" destination="nlc-Uh-R7I" id="IqO-O2-yQw"/>
+                                    <outlet property="orderNumText" destination="UdW-k8-VRx" id="zQb-i3-Yoq"/>
+                                    <outlet property="orderTitle" destination="ORw-FO-C17" id="vlY-F9-kex"/>
+                                    <outlet property="preparingGIF" destination="5MX-0p-me1" id="tG2-Ug-wvD"/>
+                                    <outlet property="readyForPickupText" destination="eUK-LC-MQQ" id="edj-qG-cNX"/>
+                                    <outlet property="readyGIF" destination="gdd-ll-mdG" id="omG-pl-BfK"/>
+                                    <outlet property="statusLabel" destination="BQh-xB-B67" id="Sdz-tA-PyD"/>
+                                    <outlet property="statusText" destination="OdE-J3-qRy" id="H9Z-xi-Xha"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="oI0-JY-wm8" id="BFg-qC-Tu8"/>
+                            <outlet property="delegate" destination="oI0-JY-wm8" id="11p-SF-u4b"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="College" id="xSU-F8-deG">
+                        <barButtonItem key="leftBarButtonItem" title="Sign Out" id="yzH-BA-ZGw">
+                            <connections>
+                                <action selector="signOutPressed:" destination="oI0-JY-wm8" id="1NC-hV-Y06"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="ndn-JL-74r">
+                            <connections>
+                                <segue destination="0M2-0t-HgQ" kind="show" identifier="ComposeOrder" id="g0P-EA-OWh"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VK3-bf-OhV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1436" y="34"/>
+        </scene>
     </scenes>
     <resources>
         <image name="YaleImage" width="1953" height="1474"/>
-        <image name="finalIconFull" width="600" height="600"/>
         <image name="subtleWaves" width="543" height="800"/>
     </resources>
 </document>
