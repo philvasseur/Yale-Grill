@@ -45,7 +45,7 @@ class GlobalConstants {
     ]
     static let toppingsArray = ["Bun","Cheese","Sauce","Lettuce","Tomatoes"]
     static let preparingTexts = ["Preparing...","Preparing..","Preparing.","Preparing"]
-    static let gifArray = ["preparing","preparing2","preparing3"]
+    static let gifArray = ["preparing1","preparing2","preparing3","preparing4","preparing5"]
     
     //ID Constants
     static let SignInSegueID = "SignInSegue"

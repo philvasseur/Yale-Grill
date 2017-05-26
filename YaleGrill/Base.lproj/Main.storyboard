@@ -73,7 +73,7 @@
                                             </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order Placed" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XdF-BC-ryG">
-                                            <rect key="frame" x="259" y="47" width="102" height="18"/>
+                                            <rect key="frame" x="259.5" y="47" width="102" height="18"/>
                                             <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -82,7 +82,7 @@
                                             </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Bun" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DRy-fX-3es">
-                                            <rect key="frame" x="259" y="67" width="52" height="18"/>
+                                            <rect key="frame" x="259.5" y="67" width="52" height="18"/>
                                             <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -205,7 +205,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="YaleImage" translatesAutoresizingMaskIntoConstraints="NO" id="3fh-YX-xub" userLabel="YaleImage">
-                                <rect key="frame" x="39" y="82" width="297" height="230"/>
+                                <rect key="frame" x="39" y="81.5" width="297" height="230.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="3fh-YX-xub" secondAttribute="height" multiplier="297:230" id="DWx-lY-bAZ"/>
                                 </constraints>
@@ -1162,7 +1162,7 @@
                                             </constraints>
                                         </imageView>
                                         <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gdd-ll-mdG">
-                                            <rect key="frame" x="98.5" y="112" width="215" height="39"/>
+                                            <rect key="frame" x="98.5" y="112" width="214.5" height="39"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="gdd-ll-mdG" secondAttribute="height" multiplier="215:39" id="Fxm-Na-PvM"/>
                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="39" id="MQx-sy-Juz"/>

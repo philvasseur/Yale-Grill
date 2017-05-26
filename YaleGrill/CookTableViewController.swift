@@ -144,9 +144,6 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
             if(orderNum == nil) {
                 orderNumRef.setValue(1);
                 self.orderNumCount = 1
-            }else if(orderNum == 100){
-                orderNumRef.setValue(1);
-                self.orderNumCount = 1
             }else{
                 self.orderNumCount = orderNum!
             }
@@ -163,6 +160,10 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
                         self.orderNumCount += 1
                         orderNumRef.setValue(self.orderNumCount)
                         singleOrderRef.child("orderNum").setValue(newOrder.orderNum)
+                    }
+                    if(self.orderNumCount >= 100){
+                        orderNumRef.setValue(1);
+                        self.orderNumCount = 1
                     }
                     let newIndexPath = IndexPath(row: self.allActiveOrders.count, section: 0)
                     self.allActiveOrders.append(newOrder)

@@ -8,16 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		2D6E9801B1B20A709363705C /* Pods_YaleGrill.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBE7E0123717574065AA7A01 /* Pods_YaleGrill.framework */; };
-		CD179F071E15F62600496D5F /* preparing.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD179F061E15F62600496D5F /* preparing.gif */; };
-		CD179F0A1E15F6C300496D5F /* preparing3.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD179F081E15F6C300496D5F /* preparing3.gif */; };
-		CD179F0B1E15F6C300496D5F /* preparing2.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD179F091E15F6C300496D5F /* preparing2.gif */; };
-		CD179F0F1E16042D00496D5F /* finished.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD179F0E1E16042D00496D5F /* finished.gif */; };
 		CD1A13DE1E1E1356003AFBCE /* Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1A13DD1E1E1356003AFBCE /* Gif.swift */; };
 		CD3EEFB21ECB958E00A86A52 /* CustomerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3EEFB11ECB958E00A86A52 /* CustomerTableViewController.swift */; };
 		CD3EEFB61ECB971C00A86A52 /* NSLayoutConstraintExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3EEFB51ECB971C00A86A52 /* NSLayoutConstraintExtension.swift */; };
 		CD3EEFB81ECB977B00A86A52 /* CustomerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3EEFB71ECB977B00A86A52 /* CustomerTableViewCell.swift */; };
 		CD460E2D1E1B6368007C8588 /* CookTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD460E2C1E1B6368007C8588 /* CookTableViewController.swift */; };
 		CD58B0E91ED88CB700C6F02C /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD58B0E81ED88CB700C6F02C /* UIColorExtensions.swift */; };
+		CD58B0F21ED89CA800C6F02C /* preparing2.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD58B0EE1ED89CA800C6F02C /* preparing2.gif */; };
+		CD58B0F31ED89CA800C6F02C /* preparing1.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD58B0EF1ED89CA800C6F02C /* preparing1.gif */; };
+		CD58B0F41ED89CA800C6F02C /* preparing3.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD58B0F01ED89CA800C6F02C /* preparing3.gif */; };
+		CD58B0F51ED89CA800C6F02C /* finished.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD58B0F11ED89CA800C6F02C /* finished.gif */; };
+		CD58B0FC1ED8A08900C6F02C /* preparing4.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD58B0F81ED8A08900C6F02C /* preparing4.gif */; };
+		CD58B1011ED8A83400C6F02C /* preparing5.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD58B1001ED8A83400C6F02C /* preparing5.gif */; };
 		CD9E14E41E130C7E000E21C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9E14E31E130C7E000E21C0 /* AppDelegate.swift */; };
 		CD9E14E61E130C7E000E21C0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9E14E51E130C7E000E21C0 /* LoginViewController.swift */; };
 		CD9E14E91E130C7E000E21C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD9E14E71E130C7E000E21C0 /* Main.storyboard */; };
@@ -46,16 +48,18 @@
 
 /* Begin PBXFileReference section */
 		9A753CD321527598C2A4A49A /* Pods-YaleGrill.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YaleGrill.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YaleGrill/Pods-YaleGrill.debug.xcconfig"; sourceTree = "<group>"; };
-		CD179F061E15F62600496D5F /* preparing.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = preparing.gif; path = ../../../../Downloads/preparing.gif; sourceTree = "<group>"; };
-		CD179F081E15F6C300496D5F /* preparing3.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = preparing3.gif; path = ../../../../Downloads/preparing3.gif; sourceTree = "<group>"; };
-		CD179F091E15F6C300496D5F /* preparing2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = preparing2.gif; path = ../../../../Downloads/preparing2.gif; sourceTree = "<group>"; };
-		CD179F0E1E16042D00496D5F /* finished.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = finished.gif; path = ../../../../Downloads/finished.gif; sourceTree = "<group>"; };
 		CD1A13DD1E1E1356003AFBCE /* Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gif.swift; sourceTree = "<group>"; };
 		CD3EEFB11ECB958E00A86A52 /* CustomerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerTableViewController.swift; sourceTree = "<group>"; };
 		CD3EEFB51ECB971C00A86A52 /* NSLayoutConstraintExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraintExtension.swift; sourceTree = "<group>"; };
 		CD3EEFB71ECB977B00A86A52 /* CustomerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerTableViewCell.swift; sourceTree = "<group>"; };
 		CD460E2C1E1B6368007C8588 /* CookTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CookTableViewController.swift; sourceTree = "<group>"; };
 		CD58B0E81ED88CB700C6F02C /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
+		CD58B0EE1ED89CA800C6F02C /* preparing2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = preparing2.gif; sourceTree = "<group>"; };
+		CD58B0EF1ED89CA800C6F02C /* preparing1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = preparing1.gif; sourceTree = "<group>"; };
+		CD58B0F01ED89CA800C6F02C /* preparing3.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = preparing3.gif; sourceTree = "<group>"; };
+		CD58B0F11ED89CA800C6F02C /* finished.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = finished.gif; sourceTree = "<group>"; };
+		CD58B0F81ED8A08900C6F02C /* preparing4.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = preparing4.gif; sourceTree = "<group>"; };
+		CD58B1001ED8A83400C6F02C /* preparing5.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = preparing5.gif; sourceTree = "<group>"; };
 		CD9E14E01E130C7E000E21C0 /* YaleGrill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YaleGrill.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD9E14E31E130C7E000E21C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD9E14E51E130C7E000E21C0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -111,10 +115,12 @@
 		CD179F0C1E15F71400496D5F /* Gifs */ = {
 			isa = PBXGroup;
 			children = (
-				CD179F0E1E16042D00496D5F /* finished.gif */,
-				CD179F061E15F62600496D5F /* preparing.gif */,
-				CD179F081E15F6C300496D5F /* preparing3.gif */,
-				CD179F091E15F6C300496D5F /* preparing2.gif */,
+				CD58B1001ED8A83400C6F02C /* preparing5.gif */,
+				CD58B0F81ED8A08900C6F02C /* preparing4.gif */,
+				CD58B0F01ED89CA800C6F02C /* preparing3.gif */,
+				CD58B0EE1ED89CA800C6F02C /* preparing2.gif */,
+				CD58B0EF1ED89CA800C6F02C /* preparing1.gif */,
+				CD58B0F11ED89CA800C6F02C /* finished.gif */,
 			);
 			name = Gifs;
 			sourceTree = "<group>";
@@ -278,14 +284,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD58B0FC1ED8A08900C6F02C /* preparing4.gif in Resources */,
 				CD9E14EE1E130C7E000E21C0 /* LaunchScreen.storyboard in Resources */,
+				CD58B1011ED8A83400C6F02C /* preparing5.gif in Resources */,
 				CDC64C9A1E1FF52D002959BA /* GoogleService-Info.plist in Resources */,
-				CD179F0A1E15F6C300496D5F /* preparing3.gif in Resources */,
-				CD179F0F1E16042D00496D5F /* finished.gif in Resources */,
-				CD179F0B1E15F6C300496D5F /* preparing2.gif in Resources */,
+				CD58B0F31ED89CA800C6F02C /* preparing1.gif in Resources */,
+				CD58B0F51ED89CA800C6F02C /* finished.gif in Resources */,
 				CD9E14EB1E130C7E000E21C0 /* Assets.xcassets in Resources */,
-				CD179F071E15F62600496D5F /* preparing.gif in Resources */,
 				CD9E14E91E130C7E000E21C0 /* Main.storyboard in Resources */,
+				CD58B0F41ED89CA800C6F02C /* preparing3.gif in Resources */,
+				CD58B0F21ED89CA800C6F02C /* preparing2.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

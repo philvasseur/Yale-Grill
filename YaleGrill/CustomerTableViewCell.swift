@@ -44,7 +44,8 @@ class CustomerTableViewCell: UITableViewCell{
     func setByOrderID(orderID : String){
         let notFinishedTexts = ["Order Placed",GlobalConstants.preparingTexts[0]]
         
-        preparingGIF.loadGif(name: GlobalConstants.gifArray[Int(arc4random_uniform(3))])
+        //Loads a random preparing gif
+        preparingGIF.loadGif(name: GlobalConstants.gifArray[Int(arc4random_uniform(UInt32(GlobalConstants.gifArray.count)))])
         preparingGIF.layer.cornerRadius = 10
         
         orderRef = FIRDatabase.database().reference().child(GlobalConstants.orders).child(orderID)
