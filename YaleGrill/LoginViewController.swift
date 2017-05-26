@@ -12,9 +12,8 @@ import CoreLocation
 
 class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, CLLocationManagerDelegate{
     
-    /*
-     Method for googleSign in. Is called when you press the button and when the application loads. Checks if there is authentication in keychain cached, if so checks if a yale email. If it has a yale email then moves to OrderScreen page with active orders. If not a yale email then logs out.
-     */
+    
+    //LOCATION SERVICES NOT TURNED ON ATM
     
     // MARK: - Outlets
     @IBOutlet weak var diningHallTextField: UITextField!
@@ -32,6 +31,10 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     
     
     // MARK: - Functions
+    
+    /*
+     Method for googleSign in. Is called when you press the button and when the application loads. Checks if there is authentication in keychain cached, if so checks if a yale email. If it has a yale email then moves to OrderScreen page with active orders. If not a yale email then logs out.
+     */
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         /* check for user's token */
         
@@ -238,20 +241,22 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         pickerView.delegate = self
         diningHallTextField.inputView = pickerView
         GSignInButton.isEnabled=false
-        DisabledSignInColor.layer.cornerRadius = 2
+        DisabledSignInColor.layer.cornerRadius = 2 //Used to set the color for when login button when disabled
         self.diningHallTextField.text = "Select Dining Hall"
         
-        
+        //Style for the loading indicator when someone logs in
         loadingIndicator.activityIndicatorViewStyle = .whiteLarge
-        
         loadingView.backgroundColor = UIColor.darkGray.withAlphaComponent(0.8)
         loadingView.layer.cornerRadius = 10.0
         loadingIndicator.hidesWhenStopped = true
+        
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().signInSilently()
      
     }
+    
+    //Sets the customers order information before segueing
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier==GlobalConstants.SignInSegueID){
             let destinationNav = segue.destination as! UINavigationController
