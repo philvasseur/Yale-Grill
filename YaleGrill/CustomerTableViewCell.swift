@@ -1,8 +1,8 @@
 //
-//  OrderControlTableCell.swift
+//  CustomerTableViewCell.swift
 //  YaleGrill
 //
-//  Created by Phil Vasseur on 1/5/17.
+//  Created by Phil Vasseur on 5/25/17.
 //  Copyright © 2017 Phil Vasseur. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 
-class OrderScreenTableViewCell: UITableViewCell{
+class CustomerTableViewCell: UITableViewCell{
     
     // MARK: - Outlets
     @IBOutlet weak var readyGIF: UIImageView!
@@ -33,36 +33,38 @@ class OrderScreenTableViewCell: UITableViewCell{
     // MARK: - Global Variables
     var cOrder : Orders!
     var orderRef : FIRDatabaseReference!
-    var delegate:OrderScreenTableViewController?
+    var delegate:CustomerTableViewController?
     var timer = Timer()
+    var orderLabels: [UILabel]!
+    
     
     // MARK: - Actions
     
     // MARK: - Functions
     func setByOrderID(orderID : String){
-        let notFinishedTexts = ["Order Placed",FirebaseConstants.preparingTexts[0]]
+        let notFinishedTexts = ["Order Placed",GlobalConstants.preparingTexts[0]]
         
-        DispatchQueue.global(qos: .userInitiated).async { // run async to make placeOrder more snappy
-            self.readyGIF.image = UIImage.gif(name: "finished")
-            self.readyGIF.layer.cornerRadius = 9
-        }
-        preparingGIF.image = UIImage.gif(name: FirebaseConstants.gifArray[Int(arc4random_uniform(3))])
+        preparingGIF.loadGif(name: GlobalConstants.gifArray[Int(arc4random_uniform(3))])
         preparingGIF.layer.cornerRadius = 10
         
-        orderRef = FIRDatabase.database().reference().child(FirebaseConstants.orders).child(orderID)
+        orderRef = FIRDatabase.database().reference().child(GlobalConstants.orders).child(orderID)
         
         orderRef.observe(FIRDataEventType.value, with: { (snapshot) in //Observes the specific order
             let orderDic = snapshot.value as! NSDictionary
             let order = Orders.convFromJSON(json: orderDic as! [String : AnyObject]) //Converts the JSON from database
             self.cOrder = order
             
-            
+            //Sets all the info in the cell
             self.orderTitle.text = self.cOrder.foodServing
             self.attributeOneLabel.text = self.cOrder.cheeseSetting
             self.attributeTwoLabel.text = self.cOrder.lettuceSetting
             self.attributeThreeLabel.text = self.cOrder.bunSetting
             self.attributeFourLabel.text = self.cOrder.sauceSetting
             self.attributeFiveLabel.text = self.cOrder.tomatoSetting
+            
+            for label in self.orderLabels { //unhides once info shows, makes it look snappier
+                label.isHidden = false
+            }
             
             //Order Status 0 means placed, 1 means preparing, and 2 means Ready
             if(self.cOrder.orderStatus == 0 || self.cOrder.orderStatus == 1){
@@ -71,8 +73,10 @@ class OrderScreenTableViewCell: UITableViewCell{
                 self.readyForPickupText.isHidden = true //Hides the "Ready for Pickup" label
                 self.preparingGIF.isHidden = false
                 self.readyGIF.isHidden = true
-            }else if(self.cOrder.orderStatus == 2){
+            }else if(self.cOrder.orderStatus == 2 || self.cOrder.orderStatus == 3){
                 self.statusLabel.isHidden=true //Hides 'Preparing...' Label
+                self.readyGIF.image = UIImage.gif(name: "finished") //Done here to make place order snappier
+                self.readyGIF.layer.cornerRadius = 9
                 self.readyForPickupText.isHidden=false //Unhides the "Ready For Pickup" Label
                 self.preparingGIF.isHidden = true
                 self.readyGIF.isHidden = false
@@ -89,28 +93,34 @@ class OrderScreenTableViewCell: UITableViewCell{
             }
         })
         
+        
     }
     
     //Called by the timer every second starting from when view first loaded. Only does anything if it isn't hidden and the text is set as the Preparing loop. Gives "Preparing..." animation.
     @objc private func updatePrep(){
-            if(statusLabel.text==FirebaseConstants.preparingTexts[2]){
-                statusLabel.text=FirebaseConstants.preparingTexts[1]
-            }else if(statusLabel.text==FirebaseConstants.preparingTexts[1]){
-                statusLabel.text=FirebaseConstants.preparingTexts[0]
-            }else if(statusLabel.text==FirebaseConstants.preparingTexts[0]){
-                statusLabel.text=FirebaseConstants.preparingTexts[2]
+            if(statusLabel.text==GlobalConstants.preparingTexts[2]){
+                statusLabel.text=GlobalConstants.preparingTexts[1]
+            }else if(statusLabel.text==GlobalConstants.preparingTexts[1]){
+                statusLabel.text=GlobalConstants.preparingTexts[0]
+            }else if(statusLabel.text==GlobalConstants.preparingTexts[0]){
+                statusLabel.text=GlobalConstants.preparingTexts[2]
             } else if(statusLabel.text != "Order Placed"){
-                timer.invalidate()
+                timer.invalidate() //Gets rid of timer after preparing status
         }
     }
     
     // MARK: - Overridden Functions
     override func awakeFromNib() {
         super.awakeFromNib()
+        orderLabels = [self.attributeOneLabel,self.attributeTwoLabel,self.attributeThreeLabel,self.attributeFourLabel,self.attributeFiveLabel,self.orderTitle]
+        for label in orderLabels { //hides labels until they info is loaded
+            label.isHidden = true
+        }
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.updatePrep), userInfo: nil, repeats: true)
         //Creates the timer for animations
         // Initialization code
     }
+    
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: false)

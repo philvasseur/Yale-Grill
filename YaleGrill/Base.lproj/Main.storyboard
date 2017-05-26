@@ -11,16 +11,16 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Orders-->
+        <!--Cook Orders-->
         <scene sceneID="l97-cy-9fo">
             <objects>
-                <tableViewController id="Qtw-aa-nCw" customClass="ControlScreenView" customModule="YaleGrill" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Cook Orders" id="Qtw-aa-nCw" customClass="CookTableViewController" customModule="YaleGrill" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="XT6-2U-dEp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="90" id="lEX-Lm-rlD" customClass="OrderControlTableCell" customModule="YaleGrill" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cookCell" rowHeight="90" id="lEX-Lm-rlD" customClass="CookTableViewCell" customModule="YaleGrill" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lEX-Lm-rlD" id="I5h-u9-F9I">
@@ -192,10 +192,10 @@
             </objects>
             <point key="canvasLocation" x="645.3125" y="754.1015625"/>
         </scene>
-        <!--View Controller-->
+        <!--Login View-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="ViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="ViewController" customModule="YaleGrill" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" title="Login View" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="LoginViewController" customModule="YaleGrill" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Zuz-hs-Mwr"/>
                         <viewControllerLayoutGuide type="bottom" id="Gw9-Jt-OwV"/>
@@ -305,10 +305,10 @@
             </objects>
             <point key="canvasLocation" x="-117.59999999999999" y="33.733133433283363"/>
         </scene>
-        <!--College-->
+        <!--DO NOT USE-->
         <scene sceneID="SIu-QJ-Md8">
             <objects>
-                <viewController storyboardIdentifier="LoggedInScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Xnt-PY-nOB" customClass="OrderScreen" customModule="YaleGrill" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoggedInScreen" title="DO NOT USE" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Xnt-PY-nOB" customClass="OrderScreen" customModule="YaleGrill" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yXN-qZ-zOm"/>
                         <viewControllerLayoutGuide type="bottom" id="fwT-oK-Cgh"/>
@@ -343,7 +343,7 @@
                                 </constraints>
                             </imageView>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mme-0a-GLw">
-                                <rect key="frame" x="237.5" y="374.5" width="123" height="91.5"/>
+                                <rect key="frame" x="237.5" y="374" width="123" height="92"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Mme-0a-GLw" secondAttribute="height" multiplier="123:92" id="J5W-uF-DgF"/>
                                 </constraints>
@@ -612,7 +612,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ready For Pickup!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Sn-RB-sr2">
-                                <rect key="frame" x="139" y="409.5" width="172.5" height="21"/>
+                                <rect key="frame" x="139" y="409" width="172.5" height="21"/>
                                 <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -659,6 +659,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OUT OF ORDER - LEGACY CODE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7rN-4P-s77">
+                                <rect key="frame" x="19" y="320.5" width="338" height="26.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.99999058246612549" green="0.99999356269836426" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
@@ -667,6 +673,7 @@
                             <constraint firstAttribute="trailing" secondItem="735-c5-fwa" secondAttribute="trailing" constant="25" id="17g-Z4-QvG"/>
                             <constraint firstItem="IX8-1K-4fs" firstAttribute="height" secondItem="ig9-dd-x8K" secondAttribute="height" id="1I5-Yn-ulj"/>
                             <constraint firstItem="WCg-xI-ReT" firstAttribute="centerY" secondItem="ig9-dd-x8K" secondAttribute="centerY" multiplier="0.285" priority="900" id="2hJ-ai-gVx"/>
+                            <constraint firstItem="7rN-4P-s77" firstAttribute="centerY" secondItem="IX8-1K-4fs" secondAttribute="centerY" id="4ll-CW-Tno"/>
                             <constraint firstItem="ciw-DR-MBy" firstAttribute="centerX" secondItem="MsF-tT-Xca" secondAttribute="centerX" id="5ia-VS-RR3"/>
                             <constraint firstItem="zHH-HP-w8n" firstAttribute="top" secondItem="ig9-dd-x8K" secondAttribute="top" id="5xa-e9-Mgr"/>
                             <constraint firstItem="gKf-cf-B2E" firstAttribute="leading" secondItem="ig9-dd-x8K" secondAttribute="leading" constant="25" id="6GC-9c-DUU"/>
@@ -712,6 +719,7 @@
                             <constraint firstItem="MsF-tT-Xca" firstAttribute="width" secondItem="ig9-dd-x8K" secondAttribute="width" multiplier="0.5733" priority="900" id="XtK-6u-Gqa"/>
                             <constraint firstItem="IX8-1K-4fs" firstAttribute="width" secondItem="ig9-dd-x8K" secondAttribute="width" id="Ycz-cc-Z5O"/>
                             <constraint firstItem="zHH-HP-w8n" firstAttribute="width" secondItem="ig9-dd-x8K" secondAttribute="width" id="Ytt-nz-iQE"/>
+                            <constraint firstItem="7rN-4P-s77" firstAttribute="centerX" secondItem="IX8-1K-4fs" secondAttribute="centerX" id="ZAY-EY-mAc"/>
                             <constraint firstItem="wWC-ge-qJI" firstAttribute="centerY" secondItem="WC9-27-fD1" secondAttribute="centerY" id="ZDd-iq-Vkm"/>
                             <constraint firstItem="6hb-aT-WUJ" firstAttribute="centerY" secondItem="XDp-gV-c32" secondAttribute="centerY" id="aAg-t7-7Ql"/>
                             <constraint firstItem="3Sn-RB-sr2" firstAttribute="centerY" secondItem="6hb-aT-WUJ" secondAttribute="centerY" id="agM-Yf-Pcm"/>
@@ -807,12 +815,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lEo-E2-T5s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2084" y="753"/>
+            <point key="canvasLocation" x="2154" y="934"/>
         </scene>
-        <!--Menu-->
+        <!--Customer Menu-->
         <scene sceneID="wnc-WG-0NI">
             <objects>
-                <viewController id="0M2-0t-HgQ" customClass="FoodScreen" customModule="YaleGrill" sceneMemberID="viewController">
+                <viewController title="Customer Menu" id="0M2-0t-HgQ" customClass="MenuViewController" customModule="YaleGrill" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3AD-Bt-ovx"/>
                         <viewControllerLayoutGuide type="bottom" id="8rF-hq-GZ1"/>
@@ -821,7 +829,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="subtleWaves" translatesAutoresizingMaskIntoConstraints="NO" id="adO-gK-Fha">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg2" translatesAutoresizingMaskIntoConstraints="NO" id="adO-gK-Fha">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JOm-bj-wxH">
@@ -1094,53 +1102,53 @@
             </objects>
             <point key="canvasLocation" x="2249" y="34"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Customer NavController-->
         <scene sceneID="MJZ-9b-7gP">
             <objects>
-                <navigationController storyboardIdentifier="NavControl" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" hidesBarsWhenKeyboardAppears="YES" id="CYl-rG-eM0" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavControl" title="Customer NavController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" hidesBarsWhenKeyboardAppears="YES" id="CYl-rG-eM0" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="0S0-rn-29S"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3L9-0H-vua">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="3L9-0H-vua">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="oI0-JY-wm8" kind="relationship" relationship="rootViewController" id="jxC-TV-d0f"/>
+                        <segue destination="oI0-JY-wm8" kind="relationship" relationship="rootViewController" id="mlY-fN-SrD"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1ds-qu-UgW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="647.10144927536237" y="33.831521739130437"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Cook NavController-->
         <scene sceneID="6eL-MP-IWG">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Txg-YN-yko" sceneMemberID="viewController">
+                <navigationController title="Cook NavController" automaticallyAdjustsScrollViewInsets="NO" id="Txg-YN-yko" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yZ9-AK-vnH">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="yZ9-AK-vnH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Qtw-aa-nCw" kind="relationship" relationship="rootViewController" id="aQI-ey-mvj"/>
+                        <segue destination="Qtw-aa-nCw" kind="relationship" relationship="rootViewController" id="vra-p4-XUz"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HrY-cz-ZVA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-118.11594202898553" y="755.29891304347836"/>
         </scene>
-        <!--College-->
+        <!--Customer Orders-->
         <scene sceneID="j6F-ka-Q4e">
             <objects>
-                <tableViewController id="oI0-JY-wm8" customClass="OrderScreenTableViewController" customModule="YaleGrill" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Customer Orders" id="oI0-JY-wm8" customClass="CustomerTableViewController" customModule="YaleGrill" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="tHX-MW-vhW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="customerCell" rowHeight="202" id="KP1-Mz-dig" customClass="OrderScreenTableViewCell" customModule="YaleGrill" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="customerCell" rowHeight="202" id="KP1-Mz-dig" customClass="CustomerTableViewCell" customModule="YaleGrill" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="202"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KP1-Mz-dig" id="u16-cG-Axu">
@@ -1154,7 +1162,7 @@
                                             </constraints>
                                         </imageView>
                                         <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gdd-ll-mdG">
-                                            <rect key="frame" x="99" y="112" width="214.5" height="39"/>
+                                            <rect key="frame" x="98.5" y="112" width="215" height="39"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="gdd-ll-mdG" secondAttribute="height" multiplier="215:39" id="Fxm-Na-PvM"/>
                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="39" id="MQx-sy-Juz"/>
@@ -1167,7 +1175,7 @@
                                             <color key="textColor" red="0.29803921570000003" green="0.5450980392" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nlc-Uh-R7I">
+                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nlc-Uh-R7I">
                                             <rect key="frame" x="86" y="162.5" width="20.5" height="19.5"/>
                                             <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
                                             <nil key="textColor"/>
@@ -1185,7 +1193,7 @@
                                             <color key="textColor" red="0.2984012365" green="0.54416894910000002" blue="0.96475684640000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preparing..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQh-xB-B67">
+                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preparing..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQh-xB-B67">
                                             <rect key="frame" x="86" y="121.5" width="94.5" height="19.5"/>
                                             <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1241,7 +1249,7 @@
                                                 </stackView>
                                             </subviews>
                                         </stackView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Single Burger" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ORw-FO-C17" userLabel="Title">
+                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Single Burger" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ORw-FO-C17" userLabel="Title">
                                             <rect key="frame" x="122.5" y="10" width="130" height="21"/>
                                             <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="17"/>
                                             <color key="textColor" red="0.29803921570000003" green="0.5450980392" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1321,6 +1329,7 @@
     </scenes>
     <resources>
         <image name="YaleImage" width="1953" height="1474"/>
+        <image name="bg2" width="335" height="667"/>
         <image name="subtleWaves" width="543" height="800"/>
     </resources>
 </document>

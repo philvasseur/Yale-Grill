@@ -1,5 +1,5 @@
 //
-//  OrderControlTableCell.swift
+//  CookTableViewCell.swift
 //  YaleGrill
 //
 //  Created by Phil Vasseur on 1/5/17.
@@ -11,7 +11,7 @@ import Firebase
 
 
 
-class OrderControlTableCell: UITableViewCell{
+class CookTableViewCell: UITableViewCell{
 
     // MARK: - Outlets
     @IBOutlet weak var OrderNumLabel: UILabel!
@@ -26,23 +26,23 @@ class OrderControlTableCell: UITableViewCell{
     @IBOutlet weak var OrderStatusButton: UIButton!
     
     // MARK: - Global Variables
-    final var READYTIMER : Double = 8
+    final var READYTIMER : Double = 0.25
     var grillUserID : String!
     var cOrder : Orders!
     var orderRef : FIRDatabaseReference?
-    var delegate:ControlScreenView?
+    var delegate:CookTableViewController?
     var task : DispatchWorkItem?
     
     // MARK: - Actions
     @IBAction func ChangeStatusPressed(_ sender: UIButton) {
         if(cOrder?.orderStatus==0){
             cOrder?.orderStatus = 1
-            OrderStatusLabel.text = FirebaseConstants.preparingTexts[3]
+            OrderStatusLabel.text = GlobalConstants.preparingTexts[3]
             OrderStatusButton.setTitle("Mark Ready", for: .normal)
         }else if(cOrder?.orderStatus==1){
             cOrder.orderStatus=2
-            OrderStatusLabel.text = FirebaseConstants.ready
-            OrderStatusButton.setTitle(FirebaseConstants.delete, for: .normal)
+            OrderStatusLabel.text = GlobalConstants.ready
+            OrderStatusButton.setTitle(GlobalConstants.delete, for: .normal)
             task = DispatchWorkItem {
                 print("Running Task")
                 self.delegate?.giveStrike(userID : self.cOrder.userID!,name : self.cOrder.name)
@@ -53,13 +53,13 @@ class OrderControlTableCell: UITableViewCell{
             cOrder.orderStatus=3
             removeOrder()
         }
-        orderRef?.child(FirebaseConstants.orderStatus).setValue(cOrder?.orderStatus)
+        orderRef?.child(GlobalConstants.orderStatus).setValue(cOrder?.orderStatus)
     }
     
     // MARK: - Functions
     func setByOrder(cOrder : Orders, grillUserID : String){
         self.cOrder = cOrder
-        orderRef = FIRDatabase.database().reference().child(FirebaseConstants.orders).child(cOrder.orderID)
+        orderRef = FIRDatabase.database().reference().child(GlobalConstants.orders).child(cOrder.orderID)
         FoodServingLabel.text = cOrder.foodServing
         BunLabel.text = cOrder.bunSetting
         CheeseLabel.text = cOrder.cheeseSetting
@@ -76,11 +76,11 @@ class OrderControlTableCell: UITableViewCell{
             OrderStatusLabel.text = "Order Placed"
             OrderStatusButton.setTitle("Mark Preparing", for: .normal)
         }else if(cOrder.orderStatus==1){
-            OrderStatusLabel.text = FirebaseConstants.preparingTexts[3]
-            OrderStatusButton.setTitle(FirebaseConstants.markAsReady, for: .normal)
+            OrderStatusLabel.text = GlobalConstants.preparingTexts[3]
+            OrderStatusButton.setTitle(GlobalConstants.markAsReady, for: .normal)
         }else if(cOrder.orderStatus==2){
-            OrderStatusLabel.text = FirebaseConstants.ready
-            OrderStatusButton.setTitle(FirebaseConstants.delete, for: .normal)
+            OrderStatusLabel.text = GlobalConstants.ready
+            OrderStatusButton.setTitle(GlobalConstants.delete, for: .normal)
         }
         self.grillUserID = grillUserID
     }
@@ -88,10 +88,10 @@ class OrderControlTableCell: UITableViewCell{
     private func removeOrder(){
         task?.cancel()
         let cOrderID = self.cOrder.orderID!
-        let userRef = FIRDatabase.database().reference().child(FirebaseConstants.users).child(cOrder.userID!).child(FirebaseConstants.activeOrders)
+        let userRef = FIRDatabase.database().reference().child(GlobalConstants.users).child(cOrder.userID!).child(GlobalConstants.activeOrders)
         userRef.child(cOrderID).setValue(nil)
         
-        FIRDatabase.database().reference().child(FirebaseConstants.grills).child(self.grillUserID).child(FirebaseConstants.orders).child(cOrderID).setValue(nil)
+        FIRDatabase.database().reference().child(GlobalConstants.grills).child(self.grillUserID).child(GlobalConstants.orders).child(cOrderID).setValue(nil)
         
         
     }

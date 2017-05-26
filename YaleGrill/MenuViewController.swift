@@ -1,5 +1,5 @@
 //
-//  FoodScreen.swift
+//  MenuViewController.swift
 //  YaleGrill
 //
 //  Created by Phil Vasseur on 12/27/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FoodScreen: UIViewController, GIDSignInUIDelegate{
+class MenuViewController: UIViewController, GIDSignInUIDelegate{
     
     
     // MARK: - Outlets
@@ -89,9 +89,9 @@ class FoodScreen: UIViewController, GIDSignInUIDelegate{
         let cUser = GIDSignIn.sharedInstance().currentUser.userID!
         var orderArray = [Orders]()
         let StepCountArray : [UIStepper] = [BurgerStepCount,VeggieStepCount,ChickenStepCount]
-        var toppings = FirebaseConstants.toppingsArray
+        var toppings = GlobalConstants.toppingsArray
         let switchesArray : [[UISwitch]] = [HamburgerSwitches,VeggieSwitches]
-        let foodServingArray : [[String]] = FirebaseConstants.foodServingArray
+        let foodServingArray : [[String]] = GlobalConstants.foodServingArray
         for index in 0...2{
             var orderInfo : [String] = []
             if(StepCountArray[index].value != 0){

@@ -1,8 +1,8 @@
 //
-//  ControlScreenView.swift
+//  CustomerTableViewController.swift
 //  YaleGrill
 //
-//  Created by Phil Vasseur on 1/2/17.
+//  Created by Phil Vasseur on 5/25/17.
 //  Copyright © 2017 Phil Vasseur. All rights reserved.
 //
 
@@ -10,11 +10,12 @@ import Foundation
 import UIKit
 import Firebase
 
-class OrderScreenTableViewController: UITableViewController, GIDSignInUIDelegate {
+class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
     
     var allActiveIDs : [String] = []
     var selectedDiningHall : String!
     var grillIsOn = false
+    var noOrdersLabel = UILabel()
     
     // MARK: - Actions
     
@@ -29,7 +30,7 @@ class OrderScreenTableViewController: UITableViewController, GIDSignInUIDelegate
             print ("Error signing out: %@", signOutError)
         }
         let sb = UIStoryboard(name: "Main", bundle: nil)
-        let signInScreen = sb.instantiateViewController(withIdentifier: FirebaseConstants.ViewControllerID) as? ViewController
+        let signInScreen = sb.instantiateViewController(withIdentifier: GlobalConstants.ViewControllerID) as? LoginViewController
         self.present(signInScreen!, animated:true, completion:nil)
     }
 
@@ -37,21 +38,21 @@ class OrderScreenTableViewController: UITableViewController, GIDSignInUIDelegate
     
     //Used to transfer data when user unwinds from the foodScreen. Called when user pressed the "placeOrder" button, loops through the orders placed
     @IBAction func unwindToOrderScreen(_ sender: UIStoryboardSegue) {
-        if let makeOrderController = sender.source as? FoodScreen {
+        if let makeOrderController = sender.source as? MenuViewController {
             let tempOrderArray = makeOrderController.ordersPlaced //Gets the placed orders when user Unwinds from FoodScreen
             if(grillIsOn){ //Only goes through orders if the grill is on
                 var indexPaths : [IndexPath] = []
                 for placedOrder in tempOrderArray{
                     allActiveIDs.append(placedOrder.orderID!) //Adds new orders to local orderIDs array
                     placedOrder.insertIntoDatabase(AllActiveIDs: self.allActiveIDs) //Inserts order into Database   
-                    FIRDatabase.database().reference().child(FirebaseConstants.grills).child(FirebaseConstants.GrillIDS[self.selectedDiningHall]!).child(FirebaseConstants.orders).child(placedOrder.orderID).setValue(placedOrder.orderID)
+                    FIRDatabase.database().reference().child(GlobalConstants.grills).child(GlobalConstants.GrillIDS[self.selectedDiningHall]!).child(GlobalConstants.orders).child(placedOrder.orderID).setValue(placedOrder.orderID)
                     
-                    FIRDatabase.database().reference().child(FirebaseConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!).child(FirebaseConstants.activeOrders).child(placedOrder.orderID).setValue(placedOrder.orderID)
+                    FIRDatabase.database().reference().child(GlobalConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!).child(GlobalConstants.activeOrders).child(placedOrder.orderID).setValue(placedOrder.orderID)
                     indexPaths.append(IndexPath(row: allActiveIDs.count-1, section: 0))
                     
                     //Above: Inserts orderID into grill's active orders
                 }
-                self.tableView.insertRows(at: indexPaths, with: .fade)
+                self.tableView.insertRows(at: indexPaths, with: .none)
             }
         }
     }
@@ -71,8 +72,8 @@ class OrderScreenTableViewController: UITableViewController, GIDSignInUIDelegate
     
     //When you hit the composeOrder button tells the foodScreen class how many orders have already been placed. Used to stop user from accidently placing more than 3 orders.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(segue.identifier == FirebaseConstants.ComposeOrderSegueID){
-            let destinationVC = (segue.destination as! FoodScreen)
+        if(segue.identifier == GlobalConstants.ComposeOrderSegueID){
+            let destinationVC = (segue.destination as! MenuViewController)
             destinationVC.totalOrdersCount = allActiveIDs.count //sets num of orders variable in FoodScreen
         }
     }
@@ -95,12 +96,12 @@ class OrderScreenTableViewController: UITableViewController, GIDSignInUIDelegate
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: "customerCell",
-            for: indexPath) as? OrderScreenTableViewCell else {
+            for: indexPath) as? CustomerTableViewCell else {
                 fatalError("BAD ERROR... ORDER CONTROL TABLE CELL")
         }
         let index = indexPath.row
         
-        cell.setByOrderID(orderID: allActiveIDs[index])
+        cell.setByOrderID(orderID: allActiveIDs[index]) //Sets all the info in the cell
         cell.delegate = self
         return cell
     }
@@ -110,6 +111,11 @@ class OrderScreenTableViewController: UITableViewController, GIDSignInUIDelegate
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
+        if(allActiveIDs.count == 0) { //shows the no active orders label if there are no orders
+            noOrdersLabel.isHidden = false
+        } else {
+            noOrdersLabel.isHidden = true
+        }
         return 1
     }
     
@@ -117,12 +123,26 @@ class OrderScreenTableViewController: UITableViewController, GIDSignInUIDelegate
         super.viewDidLoad()
         tableView.rowHeight = self.tableView.frame.height/3.3
         tableView.allowsSelection = false
-        tableView.tableFooterView = UIView()
-        tableView.backgroundView = UIImageView(image: UIImage(named: "subtleWaves.png"))
+        tableView.tableFooterView = UIView() //gets rid of dividers below empty cells
+        
+        //Sets up background image and no active orders label for when user has no orders placed
+        noOrdersLabel.text = "No Active Orders"
+        noOrdersLabel.sizeToFit()
+        noOrdersLabel.font = UIFont(name: "Verdana-Bold", size: 17)
+        //let newView = UIView()
+        //newView.backgroundColor = UIColor(hex: "#F6F6F6")
+        let newView = UIImageView(image: UIImage(named: "bg2"))
+        self.tableView.backgroundView = newView
+        self.tableView.backgroundView?.addSubview(noOrdersLabel)
+        NSLayoutConstraint.useAndActivate(constraints:
+            [noOrdersLabel.centerXAnchor.constraint(equalTo: (tableView.backgroundView?.centerXAnchor)!), noOrdersLabel.centerYAnchor.constraint(equalTo: (tableView.backgroundView?.centerYAnchor)!)])
+        
+        
+        
         GIDSignIn.sharedInstance().uiDelegate = self
         self.title=selectedDiningHall //Sets title as dining hall, which is set in ViewController screen
         
-        let grillStatus = FIRDatabase.database().reference().child(FirebaseConstants.grills).child(FirebaseConstants.GrillIDS[selectedDiningHall]!).child(FirebaseConstants.grillStat)
+        let grillStatus = FIRDatabase.database().reference().child(GlobalConstants.grills).child(GlobalConstants.GrillIDS[selectedDiningHall]!).child(GlobalConstants.grillStat)
         grillStatus.observe(FIRDataEventType.value, with: { (snapshot) in //Used to check if grill is on or off.
             let status = snapshot.value as? Bool
             if(status==nil){
@@ -134,10 +154,10 @@ class OrderScreenTableViewController: UITableViewController, GIDSignInUIDelegate
         })
         
         //Reference to the user's specific account
-        let user = FIRDatabase.database().reference().child(FirebaseConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!)
+        let user = FIRDatabase.database().reference().child(GlobalConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!)
         
         //Observes for any deletions in the user active order array
-        user.child(FirebaseConstants.activeOrders).queryOrderedByKey().observe(FIRDataEventType.childRemoved, with: { (snapshot) in
+        user.child(GlobalConstants.activeOrders).queryOrderedByKey().observe(FIRDataEventType.childRemoved, with: { (snapshot) in
             let orderID = snapshot.value as! String
             let removedIndex = self.allActiveIDs.index(of: orderID)
             let newIndexPath = IndexPath(row: removedIndex!, section: 0)

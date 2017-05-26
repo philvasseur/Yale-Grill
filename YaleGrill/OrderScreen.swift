@@ -7,6 +7,16 @@
 //
 
 /*
+ *
+ *
+ THIS ORDER SCREEN IS NO LONGER USED. IT HAS BEEN REPLACED WITH THE CUSTOMER TABLE VIEW CONTROLLER. IGNORE THIS CODE.
+ IT IS OLD LEGACY CODE.
+ *
+ *
+ */
+
+
+/*
  OrderScreen page. This class is for the page which contains all active orders, sign out button, and compose button. Has all the order information and keeps track of the all of the current orders. GIfs and such on this page as well.
 */
 
@@ -31,7 +41,7 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
     var OrderLabelsArray: [[UILabel]]! //Holds the three OrderItemLabels outlet collections which are defined below. Allows for easy looping through the three sections and their labels
     var timer = Timer() //Used to update the "Preparing..." text to make it animate
     var finishedGif = UIImage.gif(name: "finished")
-    var gifArray = [UIImage.gif(name: FirebaseConstants.prepGifIDs[0]), UIImage.gif(name: FirebaseConstants.prepGifIDs[1]), UIImage.gif(name:FirebaseConstants.prepGifIDs[2])] //Image Array of the three preparing gifs
+    var gifArray = [UIImage.gif(name: GlobalConstants.prepGifIDs[0]), UIImage.gif(name: GlobalConstants.prepGifIDs[1]), UIImage.gif(name:GlobalConstants.prepGifIDs[2])] //Image Array of the three preparing gifs
     var selectedDiningHall : String!
     var grillIsOn = false
     var bannedUntil : Date?
@@ -49,20 +59,20 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
             print ("Error signing out: %@", signOutError)
         }
         let sb = UIStoryboard(name: "Main", bundle: nil)
-        let signInScreen = sb.instantiateViewController(withIdentifier: FirebaseConstants.ViewControllerID) as? ViewController
+        let signInScreen = sb.instantiateViewController(withIdentifier: GlobalConstants.ViewControllerID) as? LoginViewController
         self.present(signInScreen!, animated:true, completion:nil) //Changes back to the original ViewController
 
     }
     
     //Used to transfer data when user unwinds from the foodScreen. Called when user pressed the "placeOrder" button, loops through the orders placed
     @IBAction func unwindToOrderScreen(_ sender: UIStoryboardSegue) {
-        if let makeOrderController = sender.source as? FoodScreen {
+        if let makeOrderController = sender.source as? MenuViewController {
             let tempOrderArray = makeOrderController.ordersPlaced //Gets the placed orders when user Unwinds from FoodScreen
             if(grillIsOn){ //Only goes through orders if the grill is on
                 for placedOrder in tempOrderArray{
                     allActiveOrders.append(placedOrder.orderID!) //Adds new orders to local orderIDs array
                     placedOrder.insertIntoDatabase(AllActiveIDs: self.allActiveOrders) //Inserts order into Database
-                    FIRDatabase.database().reference().child(FirebaseConstants.grills).child(FirebaseConstants.GrillIDS[self.selectedDiningHall]!).child(FirebaseConstants.orders).child(placedOrder.orderID).setValue(placedOrder.orderID)
+                    FIRDatabase.database().reference().child(GlobalConstants.grills).child(GlobalConstants.GrillIDS[self.selectedDiningHall]!).child(GlobalConstants.orders).child(placedOrder.orderID).setValue(placedOrder.orderID)
                     //Above: Inserts orderID into grill's active orders
                 }
             }
@@ -82,7 +92,7 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
         OrderLabelsArray[index][3].text=cOrder.sauceSetting
         OrderLabelsArray[index][4].text=cOrder.lettuceSetting
         OrderLabelsArray[index][5].text=cOrder.tomatoSetting
-        let notFinishedTexts = ["Order Placed",FirebaseConstants.preparingTexts[0]]
+        let notFinishedTexts = ["Order Placed",GlobalConstants.preparingTexts[0]]
         
         if(cOrder.orderNum > 0 && cOrder.orderNum < 10){
             OrderLabelsArray[index][10].text = "0\(cOrder.orderNum!)"
@@ -139,12 +149,12 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
     //Called by the timer every second starting from when view first loaded. Only does anything if it isn't hidden and the text is set as the Preparing loop. Gives "Preparing..." animation.
     @objc private func updatePrep(){
         for orderLabels in OrderLabelsArray{
-            if(orderLabels[7].text==FirebaseConstants.preparingTexts[2]){
-                orderLabels[7].text=FirebaseConstants.preparingTexts[1]
-            }else if(orderLabels[7].text==FirebaseConstants.preparingTexts[1]){
-                orderLabels[7].text=FirebaseConstants.preparingTexts[0]
-            }else if(orderLabels[7].text==FirebaseConstants.preparingTexts[0]){
-                orderLabels[7].text=FirebaseConstants.preparingTexts[2]
+            if(orderLabels[7].text==GlobalConstants.preparingTexts[2]){
+                orderLabels[7].text=GlobalConstants.preparingTexts[1]
+            }else if(orderLabels[7].text==GlobalConstants.preparingTexts[1]){
+                orderLabels[7].text=GlobalConstants.preparingTexts[0]
+            }else if(orderLabels[7].text==GlobalConstants.preparingTexts[0]){
+                orderLabels[7].text=GlobalConstants.preparingTexts[2]
             }
         }
     }
@@ -163,8 +173,8 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
     
     //When you hit the composeOrder button tells the foodScreen class how many orders have already been placed. Used to stop user from accidently placing more than 3 orders.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(segue.identifier == FirebaseConstants.ComposeOrderSegueID){
-            let destinationVC = (segue.destination as! FoodScreen)
+        if(segue.identifier == GlobalConstants.ComposeOrderSegueID){
+            let destinationVC = (segue.destination as! MenuViewController)
             destinationVC.totalOrdersCount = allActiveOrders.count //sets num of orders variable in FoodScreen
         }
     }
@@ -201,7 +211,7 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
         self.navigationController?.navigationBar.isHidden=true //Hides the navigation bar for loading screen
         self.title=selectedDiningHall //Sets title as dining hall, which is set in ViewController screen
         
-        let grillStatus = FIRDatabase.database().reference().child(FirebaseConstants.grills).child(FirebaseConstants.GrillIDS[selectedDiningHall]!).child(FirebaseConstants.grillStat)
+        let grillStatus = FIRDatabase.database().reference().child(GlobalConstants.grills).child(GlobalConstants.GrillIDS[selectedDiningHall]!).child(GlobalConstants.grillStat)
         grillStatus.observe(FIRDataEventType.value, with: { (snapshot) in //Used to check if grill is on or off.
             let status = snapshot.value as? Bool
             if(status==nil){
@@ -213,9 +223,9 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
         })
         
         //Reference to the user's specific account
-        let user = FIRDatabase.database().reference().child(FirebaseConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!)
+        let user = FIRDatabase.database().reference().child(GlobalConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!)
         user.observe(FIRDataEventType.value, with: { (snapshot) in //Observes for any changes in the user
-            if(snapshot.hasChild(FirebaseConstants.activeOrders)){
+            if(snapshot.hasChild(GlobalConstants.activeOrders)){
                 let userDic = snapshot.value as! NSDictionary
                 let bannedUntilString = userDic["BannedUntil"] as? String
                 //Checks if user has bannedUntil property in their account, if so checks if still banned
@@ -234,7 +244,7 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
                 }
                 
                 
-                let orderIDs = userDic[FirebaseConstants.activeOrders] as! String //Gets string of all active Orders
+                let orderIDs = userDic[GlobalConstants.activeOrders] as! String //Gets string of all active Orders
                 let tempOrders = orderIDs.characters.split { $0 == " " }
                 self.allActiveOrders = tempOrders.map(String.init) //These lines just change the string to an array of IDs
                 if(self.allActiveOrders.count < 3){
@@ -243,7 +253,7 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
                     }
                 }
                 for orderID in self.allActiveOrders {
-                    let orderRef = FIRDatabase.database().reference().child(FirebaseConstants.orders).child(orderID)
+                    let orderRef = FIRDatabase.database().reference().child(GlobalConstants.orders).child(orderID)
                     orderRef.removeAllObservers()
                     orderRef.observe(FIRDataEventType.value, with: { (snapshot) in //Observes the specific order
                         let orderDic = snapshot.value as! NSDictionary
@@ -261,8 +271,8 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
                     self.noActiveOrdersLabel.isHidden=false
                 }
             }else{
-                user.child(FirebaseConstants.activeOrders).setValue("") //If user has no active orders, creates empty one
-                user.child(FirebaseConstants.name).setValue(GIDSignIn.sharedInstance().currentUser.profile.name!) //same for name
+                user.child(GlobalConstants.activeOrders).setValue("") //If user has no active orders, creates empty one
+                user.child(GlobalConstants.name).setValue(GIDSignIn.sharedInstance().currentUser.profile.name!) //same for name
             }
         })
     }

@@ -1,5 +1,5 @@
 //
-//  ControlScreenView.swift
+//  CookTableViewController.swift
 //  YaleGrill
 //
 //  Created by Phil Vasseur on 1/2/17.
@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Firebase
 
-class ControlScreenView: UITableViewController, GIDSignInUIDelegate {
+class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
    
     // MARK: - Outlets
     @IBOutlet weak var GrillToggleButton: UIBarButtonItem!
@@ -46,7 +46,7 @@ class ControlScreenView: UITableViewController, GIDSignInUIDelegate {
             print ("Error signing out: %@", signOutError)
         }
         let sb = UIStoryboard(name: "Main", bundle: nil)
-        let signInScreen = sb.instantiateViewController(withIdentifier: FirebaseConstants.ViewControllerID) as? ViewController
+        let signInScreen = sb.instantiateViewController(withIdentifier: GlobalConstants.ViewControllerID) as? LoginViewController
         self.present(signInScreen!, animated:true, completion:nil)
     }
     
@@ -73,12 +73,12 @@ class ControlScreenView: UITableViewController, GIDSignInUIDelegate {
     func giveStrike(userID : String, name: String){
         let date = Date()
         self.createAlert(title: "Strike Given", message: "Due to not picking up their food, \(name) has been given a strike.")
-        FIRDatabase.database().reference().child(FirebaseConstants.users).child(userID).child("Strikes").observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+        FIRDatabase.database().reference().child(GlobalConstants.users).child(userID).child("Strikes").observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
             let strikes = snapshot.value as? Int
             if(strikes == nil) {
-                FIRDatabase.database().reference().child(FirebaseConstants.users).child(userID).child("Strikes").setValue(1)
+                FIRDatabase.database().reference().child(GlobalConstants.users).child(userID).child("Strikes").setValue(1)
             }else{
-                FIRDatabase.database().reference().child(FirebaseConstants.users).child(userID).child("Strikes").setValue(strikes!+1)
+                FIRDatabase.database().reference().child(GlobalConstants.users).child(userID).child("Strikes").setValue(strikes!+1)
                 if(((strikes!+1) % self.strikeBanLimit) == 0) {
                     var bannedUntil : String?
                     let banEndsDate = NSCalendar.current.date(byAdding: .day, value: self.banLength, to: date)
@@ -86,7 +86,7 @@ class ControlScreenView: UITableViewController, GIDSignInUIDelegate {
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateStyle = DateFormatter.Style.full
                     print("\(userID) is banned until \(banEndsDate!)")
-                    FIRDatabase.database().reference().child(FirebaseConstants.users).child(userID).child("BannedUntil").setValue(bannedUntil)
+                    FIRDatabase.database().reference().child(GlobalConstants.users).child(userID).child("BannedUntil").setValue(bannedUntil)
                 }
             }
         })
@@ -96,8 +96,8 @@ class ControlScreenView: UITableViewController, GIDSignInUIDelegate {
     // MARK: - Overridden Functions
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: FirebaseConstants.cellIdentifier,
-            for: indexPath) as? OrderControlTableCell else {
+            withIdentifier: "cookCell",
+            for: indexPath) as? CookTableViewCell else {
                 fatalError("BAD ERROR... ORDER CONTROL TABLE CELL")
         }
         let orderIndex = indexPath.row
@@ -127,18 +127,18 @@ class ControlScreenView: UITableViewController, GIDSignInUIDelegate {
             if(grillStatus==nil){
                 self.grillRef.setValue(false)
                 self.grillIsOn = false
-                self.GrillToggleButton.title = FirebaseConstants.turnGrillOnText
+                self.GrillToggleButton.title = GlobalConstants.turnGrillOnText
             }else if(grillStatus==true){
                 self.grillIsOn = true
-                self.GrillToggleButton.title = FirebaseConstants.turnGrillOffText
+                self.GrillToggleButton.title = GlobalConstants.turnGrillOffText
             }else if(grillStatus==false){
                 self.grillIsOn = false
-                self.GrillToggleButton.title = FirebaseConstants.turnGrillOnText
+                self.GrillToggleButton.title = GlobalConstants.turnGrillOnText
             }
         })
         
-        let ordersRef = FIRDatabase.database().reference().child(FirebaseConstants.grills).child(GIDSignIn.sharedInstance().currentUser.userID).child(FirebaseConstants.orders)
-        let orderNumRef = FIRDatabase.database().reference().child(FirebaseConstants.grills).child(GIDSignIn.sharedInstance().currentUser.userID).child("OrderNumCount")
+        let ordersRef = FIRDatabase.database().reference().child(GlobalConstants.grills).child(GIDSignIn.sharedInstance().currentUser.userID).child(GlobalConstants.orders)
+        let orderNumRef = FIRDatabase.database().reference().child(GlobalConstants.grills).child(GIDSignIn.sharedInstance().currentUser.userID).child("OrderNumCount")
         orderNumRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
             let orderNum = snapshot.value as? Int
             if(orderNum == nil) {
@@ -154,7 +154,7 @@ class ControlScreenView: UITableViewController, GIDSignInUIDelegate {
             ordersRef.queryOrderedByKey().observe(FIRDataEventType.childAdded, with: { (snapshot) in
                 let newOrderID = snapshot.value as! String
                 self.allActiveIDs.append(newOrderID)
-                let singleOrderRef = FIRDatabase.database().reference().child(FirebaseConstants.orders).child(newOrderID as String)
+                let singleOrderRef = FIRDatabase.database().reference().child(GlobalConstants.orders).child(newOrderID as String)
                 singleOrderRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
                     let newJson = snapshot.value as! NSDictionary
                     let newOrder = Orders.convFromJSON(json: newJson as! [String : AnyObject])

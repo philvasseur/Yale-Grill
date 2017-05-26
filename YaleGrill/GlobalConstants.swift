@@ -9,7 +9,7 @@
 import Foundation
 import CoreLocation
 
-class FirebaseConstants {
+class GlobalConstants {
     //Grill Constants
     static let GrillIDS = ["Jonathan Edwards" : "105206071860987390121"] //pvass153@gmail.com
     static let CookEmailArray = ["pvass153@gmail.com"]
@@ -53,7 +53,6 @@ class FirebaseConstants {
     static let ComposeOrderSegueID = "ComposeOrder"
     static let ViewControllerID = "ViewController"
     static let prepGifIDs = ["preparing","preparing2","preparing3"]
-    static let cellIdentifier = "cell"
     
     //Other
     static let PickerData = ["Select Dining Hall","Jonathan Edwards", "Branford", "Ezra Stiles","Trumbull","Davenport","Timothy Dwight","Morse","Hopper", "Pierson","Saybrook","Berkeley","Silliman"]

@@ -13,21 +13,22 @@
 		CD179F0B1E15F6C300496D5F /* preparing2.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD179F091E15F6C300496D5F /* preparing2.gif */; };
 		CD179F0F1E16042D00496D5F /* finished.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD179F0E1E16042D00496D5F /* finished.gif */; };
 		CD1A13DE1E1E1356003AFBCE /* Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1A13DD1E1E1356003AFBCE /* Gif.swift */; };
-		CD3EEFB21ECB958E00A86A52 /* OrderScreenTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3EEFB11ECB958E00A86A52 /* OrderScreenTableViewController.swift */; };
+		CD3EEFB21ECB958E00A86A52 /* CustomerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3EEFB11ECB958E00A86A52 /* CustomerTableViewController.swift */; };
 		CD3EEFB61ECB971C00A86A52 /* NSLayoutConstraintExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3EEFB51ECB971C00A86A52 /* NSLayoutConstraintExtension.swift */; };
-		CD3EEFB81ECB977B00A86A52 /* OrderScreenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3EEFB71ECB977B00A86A52 /* OrderScreenTableViewCell.swift */; };
-		CD460E2D1E1B6368007C8588 /* ControlScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD460E2C1E1B6368007C8588 /* ControlScreenView.swift */; };
+		CD3EEFB81ECB977B00A86A52 /* CustomerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3EEFB71ECB977B00A86A52 /* CustomerTableViewCell.swift */; };
+		CD460E2D1E1B6368007C8588 /* CookTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD460E2C1E1B6368007C8588 /* CookTableViewController.swift */; };
+		CD58B0E91ED88CB700C6F02C /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD58B0E81ED88CB700C6F02C /* UIColorExtensions.swift */; };
 		CD9E14E41E130C7E000E21C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9E14E31E130C7E000E21C0 /* AppDelegate.swift */; };
-		CD9E14E61E130C7E000E21C0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9E14E51E130C7E000E21C0 /* ViewController.swift */; };
+		CD9E14E61E130C7E000E21C0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9E14E51E130C7E000E21C0 /* LoginViewController.swift */; };
 		CD9E14E91E130C7E000E21C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD9E14E71E130C7E000E21C0 /* Main.storyboard */; };
 		CD9E14EB1E130C7E000E21C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD9E14EA1E130C7E000E21C0 /* Assets.xcassets */; };
 		CD9E14EE1E130C7E000E21C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD9E14EC1E130C7E000E21C0 /* LaunchScreen.storyboard */; };
 		CDC1A0DA1E177B49009C2538 /* Orders.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC1A0D91E177B49009C2538 /* Orders.swift */; };
 		CDC64C9A1E1FF52D002959BA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDC64C991E1FF52D002959BA /* GoogleService-Info.plist */; };
 		CDCFD5931E1329B100065E87 /* OrderScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCFD5921E1329B100065E87 /* OrderScreen.swift */; };
-		CDCFD5951E1359AE00065E87 /* FoodScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCFD5941E1359AE00065E87 /* FoodScreen.swift */; };
-		CDE5C00D1E1EEA5A00226D71 /* OrderControlTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE5C00C1E1EEA5A00226D71 /* OrderControlTableCell.swift */; };
-		CDE5C00F1E1F0F4900226D71 /* FirebaseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE5C00E1E1F0F4900226D71 /* FirebaseConstants.swift */; };
+		CDCFD5951E1359AE00065E87 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCFD5941E1359AE00065E87 /* MenuViewController.swift */; };
+		CDE5C00D1E1EEA5A00226D71 /* CookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE5C00C1E1EEA5A00226D71 /* CookTableViewCell.swift */; };
+		CDE5C00F1E1F0F4900226D71 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE5C00E1E1F0F4900226D71 /* GlobalConstants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -50,13 +51,14 @@
 		CD179F091E15F6C300496D5F /* preparing2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = preparing2.gif; path = ../../../../Downloads/preparing2.gif; sourceTree = "<group>"; };
 		CD179F0E1E16042D00496D5F /* finished.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = finished.gif; path = ../../../../Downloads/finished.gif; sourceTree = "<group>"; };
 		CD1A13DD1E1E1356003AFBCE /* Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gif.swift; sourceTree = "<group>"; };
-		CD3EEFB11ECB958E00A86A52 /* OrderScreenTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderScreenTableViewController.swift; sourceTree = "<group>"; };
+		CD3EEFB11ECB958E00A86A52 /* CustomerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerTableViewController.swift; sourceTree = "<group>"; };
 		CD3EEFB51ECB971C00A86A52 /* NSLayoutConstraintExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraintExtension.swift; sourceTree = "<group>"; };
-		CD3EEFB71ECB977B00A86A52 /* OrderScreenTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderScreenTableViewCell.swift; sourceTree = "<group>"; };
-		CD460E2C1E1B6368007C8588 /* ControlScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlScreenView.swift; sourceTree = "<group>"; };
+		CD3EEFB71ECB977B00A86A52 /* CustomerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerTableViewCell.swift; sourceTree = "<group>"; };
+		CD460E2C1E1B6368007C8588 /* CookTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CookTableViewController.swift; sourceTree = "<group>"; };
+		CD58B0E81ED88CB700C6F02C /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		CD9E14E01E130C7E000E21C0 /* YaleGrill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YaleGrill.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD9E14E31E130C7E000E21C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CD9E14E51E130C7E000E21C0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CD9E14E51E130C7E000E21C0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CD9E14E81E130C7E000E21C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CD9E14EA1E130C7E000E21C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CD9E14ED1E130C7E000E21C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -65,10 +67,10 @@
 		CDC64C991E1FF52D002959BA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CDC748D01ED4FF3700370350 /* YaleGrill.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YaleGrill.entitlements; sourceTree = "<group>"; };
 		CDCFD5921E1329B100065E87 /* OrderScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderScreen.swift; sourceTree = "<group>"; };
-		CDCFD5941E1359AE00065E87 /* FoodScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodScreen.swift; sourceTree = "<group>"; };
+		CDCFD5941E1359AE00065E87 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		CDD92A2B1E130E5B005C091B /* YaleGrill-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YaleGrill-Bridging-Header.h"; sourceTree = "<group>"; };
-		CDE5C00C1E1EEA5A00226D71 /* OrderControlTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderControlTableCell.swift; sourceTree = "<group>"; };
-		CDE5C00E1E1F0F4900226D71 /* FirebaseConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseConstants.swift; sourceTree = "<group>"; };
+		CDE5C00C1E1EEA5A00226D71 /* CookTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CookTableViewCell.swift; sourceTree = "<group>"; };
+		CDE5C00E1E1F0F4900226D71 /* GlobalConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		CDF25A111E16E9C100818379 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		CDF25A131E16E9CC00818379 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		D3F3C9E4986110BD99DE40C8 /* Pods-YaleGrill.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YaleGrill.release.xcconfig"; path = "Pods/Target Support Files/Pods-YaleGrill/Pods-YaleGrill.release.xcconfig"; sourceTree = "<group>"; };
@@ -117,16 +119,55 @@
 			name = Gifs;
 			sourceTree = "<group>";
 		};
-		CD179F0D1E15F74C00496D5F /* DoNotTouch */ = {
+		CD179F0D1E15F74C00496D5F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				CDC64C991E1FF52D002959BA /* GoogleService-Info.plist */,
-				CD9E14EF1E130C7E000E21C0 /* Info.plist */,
 				CDD92A2B1E130E5B005C091B /* YaleGrill-Bridging-Header.h */,
 				CD1A13DD1E1E1356003AFBCE /* Gif.swift */,
 				CD3EEFB51ECB971C00A86A52 /* NSLayoutConstraintExtension.swift */,
+				CD58B0E81ED88CB700C6F02C /* UIColorExtensions.swift */,
 			);
-			name = DoNotTouch;
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		CD58B0EA1ED8998A00C6F02C /* App Files */ = {
+			isa = PBXGroup;
+			children = (
+				CDE5C00E1E1F0F4900226D71 /* GlobalConstants.swift */,
+				CDC64C991E1FF52D002959BA /* GoogleService-Info.plist */,
+				CD9E14EF1E130C7E000E21C0 /* Info.plist */,
+				CD9E14EA1E130C7E000E21C0 /* Assets.xcassets */,
+				CD179F0C1E15F71400496D5F /* Gifs */,
+			);
+			name = "App Files";
+			sourceTree = "<group>";
+		};
+		CD58B0EB1ED899C000C6F02C /* Legacy Code */ = {
+			isa = PBXGroup;
+			children = (
+				CDCFD5921E1329B100065E87 /* OrderScreen.swift */,
+			);
+			name = "Legacy Code";
+			sourceTree = "<group>";
+		};
+		CD58B0EC1ED899FD00C6F02C /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				CD9E14E51E130C7E000E21C0 /* LoginViewController.swift */,
+				CDCFD5941E1359AE00065E87 /* MenuViewController.swift */,
+				CD460E2C1E1B6368007C8588 /* CookTableViewController.swift */,
+				CD3EEFB11ECB958E00A86A52 /* CustomerTableViewController.swift */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		CD58B0ED1ED89BA400C6F02C /* TableView Cells */ = {
+			isa = PBXGroup;
+			children = (
+				CDE5C00C1E1EEA5A00226D71 /* CookTableViewCell.swift */,
+				CD3EEFB71ECB977B00A86A52 /* CustomerTableViewCell.swift */,
+			);
+			name = "TableView Cells";
 			sourceTree = "<group>";
 		};
 		CD9E14D71E130C7E000E21C0 = {
@@ -151,21 +192,15 @@
 			isa = PBXGroup;
 			children = (
 				CDC748D01ED4FF3700370350 /* YaleGrill.entitlements */,
+				CD9E14E71E130C7E000E21C0 /* Main.storyboard */,
+				CD9E14EC1E130C7E000E21C0 /* LaunchScreen.storyboard */,
 				CDC1A0D91E177B49009C2538 /* Orders.swift */,
 				CD9E14E31E130C7E000E21C0 /* AppDelegate.swift */,
-				CD9E14E51E130C7E000E21C0 /* ViewController.swift */,
-				CDCFD5921E1329B100065E87 /* OrderScreen.swift */,
-				CDCFD5941E1359AE00065E87 /* FoodScreen.swift */,
-				CD460E2C1E1B6368007C8588 /* ControlScreenView.swift */,
-				CDE5C00C1E1EEA5A00226D71 /* OrderControlTableCell.swift */,
-				CD9E14E71E130C7E000E21C0 /* Main.storyboard */,
-				CD3EEFB11ECB958E00A86A52 /* OrderScreenTableViewController.swift */,
-				CD3EEFB71ECB977B00A86A52 /* OrderScreenTableViewCell.swift */,
-				CD9E14EC1E130C7E000E21C0 /* LaunchScreen.storyboard */,
-				CDE5C00E1E1F0F4900226D71 /* FirebaseConstants.swift */,
-				CD9E14EA1E130C7E000E21C0 /* Assets.xcassets */,
-				CD179F0D1E15F74C00496D5F /* DoNotTouch */,
-				CD179F0C1E15F71400496D5F /* Gifs */,
+				CD58B0EC1ED899FD00C6F02C /* View Controllers */,
+				CD58B0ED1ED89BA400C6F02C /* TableView Cells */,
+				CD58B0EA1ED8998A00C6F02C /* App Files */,
+				CD179F0D1E15F74C00496D5F /* Extensions */,
+				CD58B0EB1ED899C000C6F02C /* Legacy Code */,
 			);
 			path = YaleGrill;
 			sourceTree = "<group>";
@@ -309,18 +344,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD3EEFB81ECB977B00A86A52 /* OrderScreenTableViewCell.swift in Sources */,
-				CD9E14E61E130C7E000E21C0 /* ViewController.swift in Sources */,
+				CD3EEFB81ECB977B00A86A52 /* CustomerTableViewCell.swift in Sources */,
+				CD9E14E61E130C7E000E21C0 /* LoginViewController.swift in Sources */,
+				CD58B0E91ED88CB700C6F02C /* UIColorExtensions.swift in Sources */,
 				CDC1A0DA1E177B49009C2538 /* Orders.swift in Sources */,
-				CD460E2D1E1B6368007C8588 /* ControlScreenView.swift in Sources */,
-				CDE5C00D1E1EEA5A00226D71 /* OrderControlTableCell.swift in Sources */,
-				CD3EEFB21ECB958E00A86A52 /* OrderScreenTableViewController.swift in Sources */,
+				CD460E2D1E1B6368007C8588 /* CookTableViewController.swift in Sources */,
+				CDE5C00D1E1EEA5A00226D71 /* CookTableViewCell.swift in Sources */,
+				CD3EEFB21ECB958E00A86A52 /* CustomerTableViewController.swift in Sources */,
 				CD9E14E41E130C7E000E21C0 /* AppDelegate.swift in Sources */,
 				CD3EEFB61ECB971C00A86A52 /* NSLayoutConstraintExtension.swift in Sources */,
-				CDE5C00F1E1F0F4900226D71 /* FirebaseConstants.swift in Sources */,
+				CDE5C00F1E1F0F4900226D71 /* GlobalConstants.swift in Sources */,
 				CDCFD5931E1329B100065E87 /* OrderScreen.swift in Sources */,
 				CD1A13DE1E1E1356003AFBCE /* Gif.swift in Sources */,
-				CDCFD5951E1359AE00065E87 /* FoodScreen.swift in Sources */,
+				CDCFD5951E1359AE00065E87 /* MenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

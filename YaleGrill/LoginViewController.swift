@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  LoginViewController.swift
 //  YaleGrill
 //
 //  Created by Phil Vasseur on 12/27/16.
@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import CoreLocation
 
-class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, CLLocationManagerDelegate{
+class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, CLLocationManagerDelegate{
     
     /*
      Method for googleSign in. Is called when you press the button and when the application loads. Checks if there is authentication in keychain cached, if so checks if a yale email. If it has a yale email then moves to OrderScreen page with active orders. If not a yale email then logs out.
@@ -27,7 +27,7 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, 
     let pickerView = UIPickerView()
     let locationManager = CLLocationManager()
     var currentLocation : CLLocation!
-    var pickerDataSource = FirebaseConstants.PickerData
+    var pickerDataSource = GlobalConstants.PickerData
     var allActiveIDs : [String] = []
     
     
@@ -52,20 +52,21 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, 
                     if(selectedDiningHall=="Select Dining Hall"){ //Should Only happen if autologin, thus it pulls the last dHall logged into from the database
                         self.pullDiningHall()
                     }else{ //If Dining Hall selected is actual dining hall
-                        if(FirebaseConstants.GrillIDS[selectedDiningHall!] != nil){ //Checks that dining hall is activated
-                            let dHallRef = FIRDatabase.database().reference().child(FirebaseConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!).child(FirebaseConstants.prevDining)
+                        if(GlobalConstants.GrillIDS[selectedDiningHall!] != nil){ //Checks that dining hall is activated
+                            let dHallRef = FIRDatabase.database().reference().child(GlobalConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!).child(GlobalConstants.prevDining)
                             dHallRef.setValue(selectedDiningHall) //Updates last dining hall logged into
-                            self.loadUsersAndSegue()
+                            self.loadUserAndSegue()
                             
-                        }else{
+                        }else{ //Happens during a bug with pickerView, rare, but took into account just in case
                             GIDSignIn.sharedInstance().signOut()
+                            self.stopLoadAnimation()
                             self.createAlert(title: "\(selectedDiningHall!) Dining Hall isn't activated!", message: "Please select another dining hall. If you think this is an error, contact philip.vasseur@yale.edu.")
                         }
                     }
                 }
 
                 
-            }else if(FirebaseConstants.CookEmailArray.contains(cEmail.lowercased())){ //If not a yale email, checks if the account is a cook's account
+            }else if(GlobalConstants.CookEmailArray.contains(cEmail.lowercased())){ //If not a yale email, checks if the account is a cook's account
                 guard let authentication = user.authentication else { return }
                 let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
                 FIRAuth.auth()?.signIn(with: credential) { (user, error) in //If so authenticates the cooks account
@@ -73,9 +74,8 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, 
                         print("Firebase Auth Error: \(error)")
                         return
                     }
-                    self.performSegue(withIdentifier: FirebaseConstants.ControlScreenSegueID, sender: nil) //Then segues to the ControlScreenView
+                    self.performSegue(withIdentifier: GlobalConstants.ControlScreenSegueID, sender: nil) //Then segues to the ControlScreenView
                 }
-                self.stopLoadAnimation()
             }else{ //Not a yale email, so signs user out
                 print("Non-Yale Email, LOGGING OUT")
                 stopLoadAnimation()
@@ -93,13 +93,14 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, 
     }
     
     
-    func loadUsersAndSegue() {
-        let user = FIRDatabase.database().reference().child(FirebaseConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!)
+    func loadUserAndSegue() { //Loads the user orders and ban info, for CUSTOMERS only. Cooks don't need this checked.
+        let user = FIRDatabase.database().reference().child(GlobalConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!)
         user.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in //Gets initial info for user
-            if(snapshot.hasChild(FirebaseConstants.activeOrders)){
+            var bannedUntil : Date? = nil
+            if(snapshot.hasChild(GlobalConstants.activeOrders)){
                 let userDic = snapshot.value as! NSDictionary
-                var bannedUntil : Date? = nil
                 let bannedUntilString = userDic["BannedUntil"] as? String
+                
                 //Checks if user has bannedUntil property in their account, if so checks if still banned
                 if(bannedUntilString != nil){
                     let dateFormatter = DateFormatter()
@@ -113,30 +114,49 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, 
                     print("Banned for: \(timeUntil!)") //debugging
                 }
                 
-                if(bannedUntil != nil){
-                    let dateFormatter = DateFormatter()
-                    dateFormatter.dateStyle = DateFormatter.Style.full
-                    let bannedUntilString = dateFormatter.string(from: bannedUntil!)
-                    self.createAlert(title: "You've Been Banned!", message: "Due to not picking up 5 orders, you have been temporarily banned from using YaleGrill. This ban will expire on \n\n\(bannedUntilString).\n\n This is an automated ban. If you think this is a mistake, please contact philip.vasseur@yale.edu.")
-                    
-                }
-                
-                
-                /*let orderIDs = userDic[FirebaseConstants.activeOrders] as! String //Gets string of all active Orders
-                 let tempOrders = orderIDs.characters.split { $0 == " " }
-                 self.allActiveIDs = tempOrders.map(String.init) //These lines just change the string to an array of IDs*/
-                let ordersValue = userDic[FirebaseConstants.activeOrders] as? [String: String]
+                let ordersValue = userDic[GlobalConstants.activeOrders] as? [String: String]
                 for (key, _) in ordersValue! {
                     self.allActiveIDs.append(key)
-                    
                 }
                 
             }else{
-                //user.child(FirebaseConstants.activeOrders).setValue("") //If user has no active orders, creates empty one
-                user.child(FirebaseConstants.name).setValue(GIDSignIn.sharedInstance().currentUser.profile.name!) //same for name
+                user.child(GlobalConstants.name).setValue(GIDSignIn.sharedInstance().currentUser.profile.name!) //same for name
             }
-            
-            self.performSegue(withIdentifier: FirebaseConstants.SignInSegueID, sender: nil) //Segues to OrderScreen
+            if(bannedUntil != nil){
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateStyle = DateFormatter.Style.full
+                let bannedUntilString = dateFormatter.string(from: bannedUntil!)
+                self.createAlert(title: "You've Been Banned!", message: "Due to not picking up 5 orders, you have been temporarily banned from using YaleGrill. This ban will expire on \n\n\(bannedUntilString).\n\n This is an automated ban. If you think this is a mistake, please contact philip.vasseur@yale.edu.")
+                
+                print("LOGGING OUT")
+                GIDSignIn.sharedInstance().signOut()
+                let firebaseAuth = FIRAuth.auth()
+                do {
+                    try firebaseAuth?.signOut()
+                } catch let signOutError as NSError {
+                    print ("Error signing out: %@", signOutError)
+                }
+                self.stopLoadAnimation()
+            }else {
+                self.performSegue(withIdentifier: GlobalConstants.SignInSegueID, sender: nil) //Segues to OrderScreen
+            }
+        })
+    }
+    
+    //Gets the last dining hall from firebase server, used for autologin
+    func pullDiningHall() {
+        let dHallRef = FIRDatabase.database().reference().child(GlobalConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!).child(GlobalConstants.prevDining)
+        dHallRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+            let pastDHall = snapshot.value as? String
+            if((pastDHall != nil) && (GlobalConstants.GrillIDS[pastDHall!] != nil)){
+                self.diningHallTextField.text = pastDHall
+                self.loadUserAndSegue()
+            }else { //Should never happen unless someone messes with database
+                GIDSignIn.sharedInstance().signOut()
+                self.stopLoadAnimation()
+                self.createAlert(title: "Sorry about that!", message: "We can't find a previously selected dining hall or the dining hall we found is not activated. If you think this is an error, contact philip.vasseur@yale.edu.")
+                print("No Accessible Dining Hall")
+            }
         })
     }
     
@@ -144,28 +164,16 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, 
         self.loadingIndicator.startAnimating()
         self.loadingIndicator.isHidden = false
         self.loadingView.isHidden = false
+        pickerView.isHidden = true
     }
     
     func stopLoadAnimation(){
         self.loadingIndicator.stopAnimating()
         self.loadingIndicator.isHidden = true
         self.loadingView.isHidden = true
+        pickerView.isHidden = false
     }
-    
-    func pullDiningHall() {
-        let dHallRef = FIRDatabase.database().reference().child(FirebaseConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!).child(FirebaseConstants.prevDining)
-        dHallRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
-            let pastDHall = snapshot.value as? String
-            if((pastDHall != nil) && (FirebaseConstants.GrillIDS[pastDHall!] != nil)){
-                self.diningHallTextField.text = pastDHall
-                self.loadUsersAndSegue()
-            }else { //Should never happen unless someone messes with database
-                GIDSignIn.sharedInstance().signOut()
-                self.createAlert(title: "Sorry about that!", message: "We can't find a previously selected dining hall or the dining hall we found is not activated. If you think this is an error, contact philip.vasseur@yale.edu.")
-                print("No Accessible Dining Hall")
-            }
-        })
-    }
+
     
     //Alert Function to create an alert
     func createAlert (title : String, message : String){
@@ -190,7 +198,7 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, 
     //PickerView function, which checks if the college has a grillID (which means it is activated), is used for dining hall selection
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.diningHallTextField.text=pickerDataSource[row]
-        if(FirebaseConstants.GrillIDS[pickerDataSource[row]] != nil){ //Checks GrillIDs dictionary for the college
+        if(GlobalConstants.GrillIDS[pickerDataSource[row]] != nil){ //Checks GrillIDs dictionary for the college
             GSignInButton.isEnabled=true
         }else{
             GSignInButton.isEnabled=false //If not, deactivates signIn button
@@ -201,7 +209,7 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         self.currentLocation = locations.last!
         var closestDiningHall = ["DiningHall": "None","Distance" : CLLocationDistanceMax] as [String : Any]
-        for college in FirebaseConstants.coordinates{ //Loops through the colleges and checks which dining hall is closest
+        for college in GlobalConstants.coordinates{ //Loops through the colleges and checks which dining hall is closest
             let dis = college.value.distance(from: currentLocation)
             if(dis < closestDiningHall["Distance"] as! CLLocationDistance && dis<=100){
                 closestDiningHall["DiningHall"] = college.key
@@ -209,7 +217,7 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, 
             }
         }
         if(closestDiningHall["DiningHall"] as! String != "None"){ //If there is a closest dining hall, updates the DiningHall string
-            let row = FirebaseConstants.PickerData.index(of :closestDiningHall["DiningHall"] as! String)!
+            let row = GlobalConstants.PickerData.index(of :closestDiningHall["DiningHall"] as! String)!
             pickerView.selectRow(row, inComponent: 0, animated: false)
             pickerView(pickerView, didSelectRow: row, inComponent: 1)
         }
@@ -245,9 +253,9 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, 
      
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(segue.identifier==FirebaseConstants.SignInSegueID){
+        if(segue.identifier==GlobalConstants.SignInSegueID){
             let destinationNav = segue.destination as! UINavigationController
-            let destinationVC = destinationNav.viewControllers.first as! OrderScreenTableViewController
+            let destinationVC = destinationNav.viewControllers.first as! CustomerTableViewController
             destinationVC.selectedDiningHall = self.diningHallTextField.text
             destinationVC.allActiveIDs = self.allActiveIDs
             destinationVC.tableView.reloadData()
