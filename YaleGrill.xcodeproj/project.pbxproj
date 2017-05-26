@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2D6E9801B1B20A709363705C /* Pods_YaleGrill.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBE7E0123717574065AA7A01 /* Pods_YaleGrill.framework */; };
 		CD1A13DE1E1E1356003AFBCE /* Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1A13DD1E1E1356003AFBCE /* Gif.swift */; };
 		CD3EEFB21ECB958E00A86A52 /* CustomerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3EEFB11ECB958E00A86A52 /* CustomerTableViewController.swift */; };
 		CD3EEFB61ECB971C00A86A52 /* NSLayoutConstraintExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3EEFB51ECB971C00A86A52 /* NSLayoutConstraintExtension.swift */; };
@@ -47,7 +46,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		9A753CD321527598C2A4A49A /* Pods-YaleGrill.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YaleGrill.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YaleGrill/Pods-YaleGrill.debug.xcconfig"; sourceTree = "<group>"; };
 		CD1A13DD1E1E1356003AFBCE /* Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gif.swift; sourceTree = "<group>"; };
 		CD3EEFB11ECB958E00A86A52 /* CustomerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerTableViewController.swift; sourceTree = "<group>"; };
 		CD3EEFB51ECB971C00A86A52 /* NSLayoutConstraintExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraintExtension.swift; sourceTree = "<group>"; };
@@ -77,8 +75,6 @@
 		CDE5C00E1E1F0F4900226D71 /* GlobalConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		CDF25A111E16E9C100818379 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		CDF25A131E16E9CC00818379 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		D3F3C9E4986110BD99DE40C8 /* Pods-YaleGrill.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YaleGrill.release.xcconfig"; path = "Pods/Target Support Files/Pods-YaleGrill/Pods-YaleGrill.release.xcconfig"; sourceTree = "<group>"; };
-		DBE7E0123717574065AA7A01 /* Pods_YaleGrill.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YaleGrill.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,7 +82,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D6E9801B1B20A709363705C /* Pods_YaleGrill.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,18 +93,8 @@
 			children = (
 				CDF25A131E16E9CC00818379 /* libz.tbd */,
 				CDF25A111E16E9C100818379 /* libsqlite3.tbd */,
-				DBE7E0123717574065AA7A01 /* Pods_YaleGrill.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		6594511DF833872D95724E73 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				9A753CD321527598C2A4A49A /* Pods-YaleGrill.debug.xcconfig */,
-				D3F3C9E4986110BD99DE40C8 /* Pods-YaleGrill.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 		CD179F0C1E15F71400496D5F /* Gifs */ = {
@@ -181,7 +166,6 @@
 			children = (
 				CD9E14E21E130C7E000E21C0 /* YaleGrill */,
 				CD9E14E11E130C7E000E21C0 /* Products */,
-				6594511DF833872D95724E73 /* Pods */,
 				61EEF952E70F989ACF04CCDE /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -218,12 +202,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CD9E14F21E130C7E000E21C0 /* Build configuration list for PBXNativeTarget "YaleGrill" */;
 			buildPhases = (
-				662024C544074BF86D9A1A9D /* [CP] Check Pods Manifest.lock */,
 				CD9E14DC1E130C7E000E21C0 /* Sources */,
 				CD9E14DD1E130C7E000E21C0 /* Frameworks */,
 				CD9E14DE1E130C7E000E21C0 /* Resources */,
-				BC1D219E1867C479F400B70D /* [CP] Embed Pods Frameworks */,
-				1EF745D5A4FE504184A22B8E /* [CP] Copy Pods Resources */,
 				CDF25A061E16E7EF00818379 /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -298,54 +279,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		1EF745D5A4FE504184A22B8E /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YaleGrill/Pods-YaleGrill-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		662024C544074BF86D9A1A9D /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		BC1D219E1867C479F400B70D /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YaleGrill/Pods-YaleGrill-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CD9E14DC1E130C7E000E21C0 /* Sources */ = {
@@ -483,7 +416,6 @@
 		};
 		CD9E14F31E130C7E000E21C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9A753CD321527598C2A4A49A /* Pods-YaleGrill.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -507,7 +439,6 @@
 		};
 		CD9E14F41E130C7E000E21C0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D3F3C9E4986110BD99DE40C8 /* Pods-YaleGrill.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
