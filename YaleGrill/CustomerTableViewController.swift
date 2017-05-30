@@ -45,7 +45,7 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
                 for placedOrder in tempOrderArray{
                     allActiveIDs.append(placedOrder.orderID!) //Adds new orders to local orderIDs array
                     placedOrder.insertIntoDatabase(AllActiveIDs: self.allActiveIDs) //Inserts order into Database   
-                    FIRDatabase.database().reference().child(GlobalConstants.grills).child(GlobalConstants.GrillIDS[self.selectedDiningHall]!).child(GlobalConstants.orders).child(placedOrder.orderID).setValue(placedOrder.orderID)
+                    FIRDatabase.database().reference().child(GlobalConstants.grills).child(GlobalConstants.GrillIDS[self.selectedDiningHall]!).child(GlobalConstants.orders).child(placedOrder.orderID).setValue(placedOrder.orderStatus)
                     
                     FIRDatabase.database().reference().child(GlobalConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!).child(GlobalConstants.activeOrders).child(placedOrder.orderID).setValue(placedOrder.orderID)
                     indexPaths.append(IndexPath(row: allActiveIDs.count-1, section: 0))

@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import OneSignal
 
 
 
@@ -32,6 +33,7 @@ class CookTableViewCell: UITableViewCell{
     var orderRef : FIRDatabaseReference?
     var delegate:CookTableViewController?
     var task : DispatchWorkItem?
+    var playerID : String!
     
     // MARK: - Actions
     @IBAction func ChangeStatusPressed(_ sender: UIButton) {
@@ -49,11 +51,20 @@ class CookTableViewCell: UITableViewCell{
                 self.NameLabel.text = "Anyone (was \(self.cOrder.name!))"
             }
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + READYTIMER*60, execute: task!)
+            /*DispatchQueue.main.async { //sends push notification to user that their food is ready
+                self.sendPushNotif()
+            }*/
         }else if(cOrder?.orderStatus==2){
             cOrder.orderStatus=3
             removeOrder()
         }
         orderRef?.child(GlobalConstants.orderStatus).setValue(cOrder?.orderStatus)
+        
+        if(cOrder.orderStatus != 3) {
+            //Updates the order status in the grill's active orders array
+            FIRDatabase.database().reference().child(GlobalConstants.grills).child(self.grillUserID).child(GlobalConstants.orders).child(cOrder.orderID).setValue(cOrder.orderStatus)
+        }
+        
     }
     
     // MARK: - Functions
@@ -83,6 +94,21 @@ class CookTableViewCell: UITableViewCell{
             OrderStatusButton.setTitle(GlobalConstants.delete, for: .normal)
         }
         self.grillUserID = grillUserID
+        
+        /*let playerRef = FIRDatabase.database().reference().child(GlobalConstants.users).child(cOrder.userID!).child("playerID")
+        playerRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+            if snapshot.exists() {
+                self.playerID = snapshot.value as! String
+            }
+        })
+        
+        
+    }
+    
+    private func sendPushNotif() {
+        let title = "Your Food is Ready!"
+        let message = "Please come pick it up at the grill!"
+        OneSignal.postNotification(["headings": ["en": title], "contents": ["en": message], "include_player_ids": [playerID]])*/
     }
     
     private func removeOrder(){

@@ -8,24 +8,55 @@
 
 import UIKit
 import Firebase
+import OneSignal
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     static var dBaseRef = FIRDatabase.database().reference()
     var window: UIWindow?
-    
-    override init(){
-        FIRApp.configure()
 
-    }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        FIRApp.configure()
+        /*let onesignalInitSettings = [kOSSettingsKeyAutoPrompt : false,
+                                      kOSSettingsKeyInFocusDisplayOption: OSNotificationDisplayType.notification.rawValue] as [String : Any]
+        
+        OneSignal.initWithLaunchOptions(launchOptions,
+                                        appId: "e8f9cfce-9f0c-4a84-8147-10407a10170e",
+                                        handleNotificationReceived: { (notification) in
+        },
+                                        handleNotificationAction: { (result) in
+            let payload: OSNotificationPayload? = result?.notification.payload
+            print(payload ?? "")
+            
+        },
+                                        settings: onesignalInitSettings)
+        
+        /*OneSignal.initWithLaunchOptions(launchOptions,
+                                        appId: "e8f9cfce-9f0c-4a84-8147-10407a10170e",
+                                        handleNotificationAction: nil,
+                                        settings: onesignalInitSettings)
+        
+        OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification;*/
+        
+        // Recommend moving the below line to prompt for push after informing the user about
+        //   how your app will use them.
+        OneSignal.promptForPushNotifications(userResponse: { accepted in
+            print("User accepted notifications: \(accepted)")
+        })
+        
+        // Sync hashed email if you have a login system or collect it.
+        //   Will be used to reach the user at the most optimal time of day.
+        // OneSignal.syncHashedEmail(userEmail)*/
+        
+        
         // Override point for customization after application launch.
         var configureError: NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)
         if(configureError != nil){
             print("We have an error!")
         }
+        
         return true
     }
     

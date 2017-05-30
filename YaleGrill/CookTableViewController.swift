@@ -103,7 +103,6 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
         let orderIndex = indexPath.row
         cell.setByOrder(cOrder: allActiveOrders[orderIndex], grillUserID : GIDSignIn.sharedInstance().currentUser.userID!)
 
-        //let newCell = setOrderInfo(cell: cell, index: orderIndex)
         cell.delegate = self
         return cell
     }
@@ -149,7 +148,7 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
             }
         
             ordersRef.queryOrderedByKey().observe(FIRDataEventType.childAdded, with: { (snapshot) in
-                let newOrderID = snapshot.value as! String
+                let newOrderID = snapshot.key
                 self.allActiveIDs.append(newOrderID)
                 let singleOrderRef = FIRDatabase.database().reference().child(GlobalConstants.orders).child(newOrderID as String)
                 singleOrderRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
@@ -173,7 +172,7 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
         })
         
         ordersRef.queryOrderedByKey().observe(FIRDataEventType.childRemoved, with: { (snapshot) in
-            let orderID = snapshot.value as! String
+            let orderID = snapshot.key
             let removedIndex = self.allActiveIDs.index(of: orderID)
             let newIndexPath = IndexPath(row: removedIndex!, section: 0)
             self.allActiveIDs.remove(at: removedIndex!)
@@ -181,12 +180,7 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
             self.tableView.deleteRows(at: [newIndexPath], with: .automatic)
         })
 
-        //Grills > JE(or other grills) > array of all the IDs
-        //Call Observe for childAdded on activeOrders if it exists, if not create it then call it
-        //when a child is added, use the ID to add it to allActiveOrders array using singleEventObserve
-        //This should create a new tableviewcell which should then get set to allactiveorders.
-        //Use indexPath to get what order it is in allActiveOrders
-
+        
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)

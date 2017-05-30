@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import OneSignal
 import CoreLocation
 
 class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, CLLocationManagerDelegate{
@@ -121,7 +122,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
                 for (key, _) in ordersValue! {
                     self.allActiveIDs.append(key)
                 }
-                
+                //self.uploadPlayerID()
             }else{
                 user.child(GlobalConstants.name).setValue(GIDSignIn.sharedInstance().currentUser.profile.name!) //same for name
             }
@@ -144,7 +145,33 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
                 self.performSegue(withIdentifier: GlobalConstants.SignInSegueID, sender: nil) //Segues to OrderScreen
             }
         })
+        
     }
+    
+    /*private func uploadPlayerID() {
+        
+        OneSignal.promptForPushNotifications(userResponse: nil)
+        
+        let status: OSPermissionSubscriptionState = OneSignal.getPermissionSubscriptionState()
+        
+        let hasPrompted = status.permissionStatus.hasPrompted
+        print("hasPrompted = \(hasPrompted)")
+        let userStatus = status.permissionStatus.status
+        print("userStatus = \(userStatus)")
+        
+        let isSubscribed = status.subscriptionStatus.subscribed
+        print("isSubscribed = \(isSubscribed)")
+        let userSubscriptionSetting = status.subscriptionStatus.userSubscriptionSetting
+        print("userSubscriptionSetting = \(userSubscriptionSetting)")
+        guard let userID = status.subscriptionStatus.userId else {
+            print("NIL - CANT FIND USERID")
+            return
+        }
+        let pushToken = status.subscriptionStatus.pushToken
+        print("pushToken = \(pushToken ?? "NIL - CANT FIND PUSHTOKEN")")
+        user.child("playerID").setValue(userID)
+        
+    }*/
     
     //Gets the last dining hall from firebase server, used for autologin
     func pullDiningHall() {
