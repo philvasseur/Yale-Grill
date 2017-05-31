@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UIApplication.shared.registerForRemoteNotifications()
         }
         application.registerForRemoteNotifications()
-        
+                
         
         return true
     }

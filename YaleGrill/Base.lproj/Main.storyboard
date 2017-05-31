@@ -37,7 +37,7 @@
                                             </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Cheese" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f7m-vT-DEN">
-                                            <rect key="frame" x="8" y="47" width="75" height="18"/>
+                                            <rect key="frame" x="8" y="47.5" width="75" height="17.5"/>
                                             <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -46,7 +46,7 @@
                                             </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Tomatoes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vjs-CX-ciB">
-                                            <rect key="frame" x="8" y="67" width="92" height="18"/>
+                                            <rect key="frame" x="8" y="67.5" width="91.5" height="17.5"/>
                                             <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -55,7 +55,7 @@
                                             </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Sauce" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZfW-Y9-mfJ">
-                                            <rect key="frame" x="149.5" y="47" width="67" height="18"/>
+                                            <rect key="frame" x="131" y="47.5" width="66.5" height="17.5"/>
                                             <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -63,8 +63,8 @@
                                                 <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="17"/>
                                             </variation>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Lettuce" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vC7-jv-0dJ">
-                                            <rect key="frame" x="149.5" y="67" width="76" height="18"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Lettuce" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vC7-jv-0dJ">
+                                            <rect key="frame" x="131" y="67.5" width="76" height="17.5"/>
                                             <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -73,7 +73,7 @@
                                             </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order Placed" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XdF-BC-ryG">
-                                            <rect key="frame" x="260" y="47" width="102" height="18"/>
+                                            <rect key="frame" x="250" y="47.5" width="101.5" height="17.5"/>
                                             <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -82,7 +82,7 @@
                                             </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Bun" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DRy-fX-3es">
-                                            <rect key="frame" x="260" y="67" width="52" height="18"/>
+                                            <rect key="frame" x="250" y="67.5" width="51.5" height="17.5"/>
                                             <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -92,7 +92,7 @@
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FqH-gU-C8t">
                                             <rect key="frame" x="250" y="5" width="120" height="36"/>
-                                            <color key="backgroundColor" red="0.29803921568627451" green="0.54509803921568623" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <color key="backgroundColor" red="0.29840123653411865" green="0.54416894912719727" blue="0.96475684642791748" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="200" id="Ysc-zX-Dz1"/>
                                             </constraints>
@@ -108,7 +108,7 @@
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- #100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eG2-uC-62S">
-                                            <rect key="frame" x="64" y="24" width="58" height="19"/>
+                                            <rect key="frame" x="64" y="24.5" width="57.5" height="18.5"/>
                                             <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -117,7 +117,7 @@
                                             </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eU5-lf-na5">
-                                            <rect key="frame" x="8" y="24" width="49" height="19"/>
+                                            <rect key="frame" x="8" y="24.5" width="49" height="18.5"/>
                                             <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -132,13 +132,12 @@
                                         <constraint firstItem="eG2-uC-62S" firstAttribute="centerY" secondItem="eU5-lf-na5" secondAttribute="centerY" id="10l-Ce-gCd"/>
                                         <constraint firstItem="FqH-gU-C8t" firstAttribute="height" secondItem="I5h-u9-F9I" secondAttribute="height" multiplier="0.4" id="2U6-ry-bRH"/>
                                         <constraint firstItem="vjs-CX-ciB" firstAttribute="centerY" secondItem="I5h-u9-F9I" secondAttribute="centerY" multiplier="1.71" id="4SG-gF-cU5"/>
-                                        <constraint firstItem="vC7-jv-0dJ" firstAttribute="centerX" secondItem="I5h-u9-F9I" secondAttribute="centerX" id="88H-y9-swh"/>
-                                        <constraint firstItem="XdF-BC-ryG" firstAttribute="centerX" secondItem="FqH-gU-C8t" secondAttribute="centerX" id="IDj-6D-q0H"/>
+                                        <constraint firstItem="vC7-jv-0dJ" firstAttribute="centerX" secondItem="I5h-u9-F9I" secondAttribute="centerX" multiplier="0.9" id="88H-y9-swh"/>
+                                        <constraint firstItem="DRy-fX-3es" firstAttribute="leading" secondItem="FqH-gU-C8t" secondAttribute="leading" id="8NN-sr-4UL"/>
                                         <constraint firstItem="ZfW-Y9-mfJ" firstAttribute="leading" secondItem="vC7-jv-0dJ" secondAttribute="leading" id="Jnv-5i-Sdq"/>
                                         <constraint firstAttribute="trailing" secondItem="FqH-gU-C8t" secondAttribute="trailing" constant="5" id="KNI-rI-UkR"/>
                                         <constraint firstItem="XdF-BC-ryG" firstAttribute="centerY" secondItem="ZfW-Y9-mfJ" secondAttribute="centerY" id="Lhk-Y3-EoO"/>
                                         <constraint firstItem="ZfW-Y9-mfJ" firstAttribute="centerY" secondItem="f7m-vT-DEN" secondAttribute="centerY" id="Mi0-jz-DTz"/>
-                                        <constraint firstItem="DRy-fX-3es" firstAttribute="leading" secondItem="XdF-BC-ryG" secondAttribute="leading" id="Mjm-0C-QVx"/>
                                         <constraint firstItem="eU5-lf-na5" firstAttribute="leading" secondItem="f7m-vT-DEN" secondAttribute="leading" id="N7K-bD-eSC"/>
                                         <constraint firstItem="vjs-CX-ciB" firstAttribute="leading" secondItem="f7m-vT-DEN" secondAttribute="leading" id="Rkc-Xf-gnk"/>
                                         <constraint firstItem="f7m-vT-DEN" firstAttribute="centerY" secondItem="I5h-u9-F9I" secondAttribute="centerY" multiplier="1.25" id="Url-J4-gkz"/>
@@ -146,6 +145,7 @@
                                         <constraint firstItem="HqK-i6-cs1" firstAttribute="top" secondItem="I5h-u9-F9I" secondAttribute="top" id="cgN-lv-40o"/>
                                         <constraint firstItem="DRy-fX-3es" firstAttribute="centerY" secondItem="vC7-jv-0dJ" secondAttribute="centerY" id="eLx-di-zdC"/>
                                         <constraint firstItem="FqH-gU-C8t" firstAttribute="top" secondItem="I5h-u9-F9I" secondAttribute="top" constant="5" id="gST-p4-z3C"/>
+                                        <constraint firstItem="XdF-BC-ryG" firstAttribute="leading" secondItem="DRy-fX-3es" secondAttribute="leading" id="hDY-x6-z8s"/>
                                         <constraint firstItem="HqK-i6-cs1" firstAttribute="leading" secondItem="eU5-lf-na5" secondAttribute="leading" id="kIV-bT-KGg"/>
                                         <constraint firstItem="FqH-gU-C8t" firstAttribute="width" secondItem="I5h-u9-F9I" secondAttribute="width" multiplier="0.32" priority="900" id="kqX-Dd-GUY"/>
                                         <constraint firstAttribute="leadingMargin" secondItem="f7m-vT-DEN" secondAttribute="leading" id="sPM-ao-1tb"/>
@@ -205,7 +205,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="YaleImage" translatesAutoresizingMaskIntoConstraints="NO" id="3fh-YX-xub" userLabel="YaleImage">
-                                <rect key="frame" x="39" y="82" width="297" height="230"/>
+                                <rect key="frame" x="39" y="81.5" width="297" height="230.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="3fh-YX-xub" secondAttribute="height" multiplier="297:230" id="DWx-lY-bAZ"/>
                                 </constraints>
@@ -337,19 +337,19 @@
                                 <color key="tintColor" red="0.29840123653411865" green="0.54416894912719727" blue="0.96475684642791748" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </imageView>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5Fj-G3-UWF">
-                                <rect key="frame" x="237.5" y="180" width="123" height="92.5"/>
+                                <rect key="frame" x="237.5" y="180.5" width="123" height="92"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="5Fj-G3-UWF" secondAttribute="height" multiplier="123:92" id="qZu-MW-TOJ"/>
                                 </constraints>
                             </imageView>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mme-0a-GLw">
-                                <rect key="frame" x="237.5" y="374" width="123" height="92"/>
+                                <rect key="frame" x="237.5" y="373" width="123" height="92.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Mme-0a-GLw" secondAttribute="height" multiplier="123:92" id="J5W-uF-DgF"/>
                                 </constraints>
                             </imageView>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WpI-2V-Am0">
-                                <rect key="frame" x="237.5" y="564.5" width="123" height="92"/>
+                                <rect key="frame" x="237.5" y="565" width="123" height="91.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="WpI-2V-Am0" secondAttribute="height" multiplier="123:92" id="7sE-IR-nIg"/>
                                 </constraints>
@@ -630,19 +630,19 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xWg-In-Jl0">
-                                <rect key="frame" x="94" y="253" width="20.5" height="19.5"/>
+                                <rect key="frame" x="94" y="253.5" width="20.5" height="19.5"/>
                                 <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order#:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RwJ-zY-vVA">
-                                <rect key="frame" x="21" y="447.5" width="67.5" height="18.5"/>
+                                <rect key="frame" x="21" y="447" width="67.5" height="18.5"/>
                                 <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
                                 <color key="textColor" red="0.2984012365" green="0.54416894910000002" blue="0.96475684640000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IGd-xl-OgT" userLabel="01">
-                                <rect key="frame" x="91" y="447.5" width="20.5" height="19.5"/>
+                                <rect key="frame" x="91" y="446.5" width="20.5" height="19.5"/>
                                 <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -654,7 +654,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="02" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wWC-ge-qJI" userLabel="02">
-                                <rect key="frame" x="91" y="638" width="20.5" height="19.5"/>
+                                <rect key="frame" x="91" y="637.5" width="20.5" height="19.5"/>
                                 <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1156,45 +1156,37 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5MX-0p-me1">
-                                            <rect key="frame" x="237.5" y="85.5" width="123" height="92"/>
+                                            <rect key="frame" x="247" y="84" width="116" height="95"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" secondItem="5MX-0p-me1" secondAttribute="height" multiplier="123:92" id="uaw-O7-5SQ"/>
-                                            </constraints>
-                                        </imageView>
-                                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gdd-ll-mdG">
-                                            <rect key="frame" x="99" y="112" width="214.5" height="39"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" secondItem="gdd-ll-mdG" secondAttribute="height" multiplier="215:39" id="Fxm-Na-PvM"/>
-                                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="39" id="MQx-sy-Juz"/>
-                                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="215" id="zBT-aU-ev4"/>
+                                                <constraint firstAttribute="width" secondItem="5MX-0p-me1" secondAttribute="height" multiplier="123:100" id="uaw-O7-5SQ"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OdE-J3-qRy">
-                                            <rect key="frame" x="13" y="121.5" width="60" height="18.5"/>
+                                            <rect key="frame" x="12" y="121.5" width="60" height="18.5"/>
                                             <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
                                             <color key="textColor" red="0.29803921570000003" green="0.5450980392" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nlc-Uh-R7I">
-                                            <rect key="frame" x="86" y="162.5" width="20.5" height="19.5"/>
+                                            <rect key="frame" x="85" y="162.5" width="20.5" height="19.5"/>
                                             <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ready For Pickup!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eUK-LC-MQQ">
-                                            <rect key="frame" x="120" y="121" width="172.5" height="21"/>
-                                            <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="17"/>
-                                            <nil key="textColor"/>
+                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ready!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="eUK-LC-MQQ">
+                                            <rect key="frame" x="85" y="119.5" width="73.5" height="23.5"/>
+                                            <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="19"/>
+                                            <color key="textColor" red="1" green="0.17925438745623379" blue="0.089901531858617711" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order#:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UdW-k8-VRx">
-                                            <rect key="frame" x="13" y="162.5" width="67.5" height="18.5"/>
+                                            <rect key="frame" x="12" y="162.5" width="67.5" height="18.5"/>
                                             <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
                                             <color key="textColor" red="0.2984012365" green="0.54416894910000002" blue="0.96475684640000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preparing..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQh-xB-B67">
-                                            <rect key="frame" x="86" y="121.5" width="94.5" height="19.5"/>
+                                            <rect key="frame" x="85" y="121.5" width="94.5" height="19.5"/>
                                             <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <nil key="highlightedColor"/>
@@ -1263,27 +1255,22 @@
                                     <constraints>
                                         <constraint firstItem="nlc-Uh-R7I" firstAttribute="centerY" secondItem="UdW-k8-VRx" secondAttribute="centerY" id="5P5-T8-QUK"/>
                                         <constraint firstItem="ORw-FO-C17" firstAttribute="centerY" secondItem="u16-cG-Axu" secondAttribute="centerY" multiplier="0.2" id="5XU-Mf-mQQ"/>
-                                        <constraint firstItem="OdE-J3-qRy" firstAttribute="leading" secondItem="u16-cG-Axu" secondAttribute="leadingMargin" constant="5" id="9gm-QW-jT9"/>
+                                        <constraint firstItem="OdE-J3-qRy" firstAttribute="leading" secondItem="u16-cG-Axu" secondAttribute="leadingMargin" constant="4" id="9gm-QW-jT9"/>
                                         <constraint firstItem="UdW-k8-VRx" firstAttribute="centerY" secondItem="u16-cG-Axu" secondAttribute="centerY" multiplier="1.7" id="HWE-K7-Tk3"/>
-                                        <constraint firstItem="5MX-0p-me1" firstAttribute="width" secondItem="5MX-0p-me1" secondAttribute="height" multiplier="123:92" id="SYz-6b-OED"/>
                                         <constraint firstItem="fLW-gF-Qfu" firstAttribute="centerY" secondItem="u16-cG-Axu" secondAttribute="centerY" multiplier="0.6" id="TAA-cM-kzL"/>
                                         <constraint firstItem="BQh-xB-B67" firstAttribute="leading" secondItem="OdE-J3-qRy" secondAttribute="trailing" constant="13" id="Ucs-Dy-sp7"/>
                                         <constraint firstItem="ORw-FO-C17" firstAttribute="centerX" secondItem="u16-cG-Axu" secondAttribute="centerX" id="Ycq-vy-jWk"/>
+                                        <constraint firstItem="eUK-LC-MQQ" firstAttribute="centerY" secondItem="OdE-J3-qRy" secondAttribute="centerY" id="ZCB-Vg-tFa"/>
+                                        <constraint firstItem="eUK-LC-MQQ" firstAttribute="leading" secondItem="BQh-xB-B67" secondAttribute="leading" id="a0I-ZU-TOb"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="fLW-gF-Qfu" secondAttribute="trailing" constant="10" id="aAG-vW-OKZ"/>
-                                        <constraint firstItem="gdd-ll-mdG" firstAttribute="centerY" secondItem="eUK-LC-MQQ" secondAttribute="centerY" id="aTb-eR-vrg"/>
                                         <constraint firstItem="UdW-k8-VRx" firstAttribute="leading" secondItem="OdE-J3-qRy" secondAttribute="leading" id="aoI-Rt-bQv"/>
-                                        <constraint firstItem="gdd-ll-mdG" firstAttribute="centerX" secondItem="eUK-LC-MQQ" secondAttribute="centerX" id="bpX-fm-bf2"/>
-                                        <constraint firstItem="gdd-ll-mdG" firstAttribute="width" secondItem="gdd-ll-mdG" secondAttribute="height" multiplier="215:39" id="bst-5g-fkU"/>
+                                        <constraint firstItem="5MX-0p-me1" firstAttribute="centerY" secondItem="OdE-J3-qRy" secondAttribute="centerY" id="dqD-9c-aBl"/>
                                         <constraint firstItem="BQh-xB-B67" firstAttribute="centerY" secondItem="OdE-J3-qRy" secondAttribute="centerY" id="ji0-rW-lKB"/>
-                                        <constraint firstItem="5MX-0p-me1" firstAttribute="centerY" secondItem="gdd-ll-mdG" secondAttribute="centerY" id="k6K-il-a1V"/>
-                                        <constraint firstItem="5MX-0p-me1" firstAttribute="width" secondItem="u16-cG-Axu" secondAttribute="width" multiplier="0.328" id="mfy-lz-xrc"/>
+                                        <constraint firstItem="5MX-0p-me1" firstAttribute="width" secondItem="u16-cG-Axu" secondAttribute="width" multiplier="0.31" id="mfy-lz-xrc"/>
                                         <constraint firstItem="fLW-gF-Qfu" firstAttribute="leading" secondItem="u16-cG-Axu" secondAttribute="leadingMargin" constant="10" id="nsx-bU-VmR"/>
-                                        <constraint firstItem="gdd-ll-mdG" firstAttribute="width" secondItem="u16-cG-Axu" secondAttribute="width" multiplier="0.5733" id="qZK-ih-R3D"/>
-                                        <constraint firstItem="5MX-0p-me1" firstAttribute="centerX" secondItem="u16-cG-Axu" secondAttribute="centerX" multiplier="1.595" id="rea-BW-Oxt"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="5MX-0p-me1" secondAttribute="trailing" constant="4" id="q8z-es-Idm"/>
                                         <constraint firstItem="nlc-Uh-R7I" firstAttribute="leading" secondItem="BQh-xB-B67" secondAttribute="leading" id="rlx-h9-U7x"/>
                                         <constraint firstItem="OdE-J3-qRy" firstAttribute="centerY" secondItem="u16-cG-Axu" secondAttribute="centerY" multiplier="1.3" id="rmg-Vs-HGp"/>
-                                        <constraint firstItem="eUK-LC-MQQ" firstAttribute="centerY" secondItem="BQh-xB-B67" secondAttribute="centerY" id="sV6-iq-wUf"/>
-                                        <constraint firstItem="eUK-LC-MQQ" firstAttribute="centerX" secondItem="u16-cG-Axu" secondAttribute="centerX" multiplier="1.1" id="tQW-0B-ysI"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1298,7 +1285,6 @@
                                     <outlet property="orderTitle" destination="ORw-FO-C17" id="vlY-F9-kex"/>
                                     <outlet property="preparingGIF" destination="5MX-0p-me1" id="tG2-Ug-wvD"/>
                                     <outlet property="readyForPickupText" destination="eUK-LC-MQQ" id="edj-qG-cNX"/>
-                                    <outlet property="readyGIF" destination="gdd-ll-mdG" id="omG-pl-BfK"/>
                                     <outlet property="statusLabel" destination="BQh-xB-B67" id="Sdz-tA-PyD"/>
                                     <outlet property="statusText" destination="OdE-J3-qRy" id="H9Z-xi-Xha"/>
                                 </connections>

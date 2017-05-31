@@ -11,8 +11,9 @@ import CoreLocation
 
 class GlobalConstants {
     //Grill Constants
-    static let GrillIDS = ["Jonathan Edwards" : "105206071860987390121"] //pvass153@gmail.com
+    //add to this array to activate new cook accounts, make sure to add the emailID to the grillIDs array too
     static let CookEmailArray = ["pvass153@gmail.com"]
+    static let GrillIDS = ["Jonathan Edwards" : "105206071860987390121"] //pvass153@gmail.com
     static let coordinates  = [
         "Jonathan Edwards": CLLocation(latitude: 41.308839, longitude: -72.929976),
         "Branford" : CLLocation(latitude: 41.310051, longitude: -72.930137),
@@ -23,6 +24,14 @@ class GlobalConstants {
         "Silliman":CLLocation(latitude: 41.311213, longitude: -72.924982)
     ]
     
+    enum Status: Int {
+        case Placed, Preparing, Ready, PickedUp
+    }
+    
+    static let READYTIMER : Double = 0.25 //minutes left ready till user is given a strike
+    static let strikeBanLimit = 5 //strikes until user gets a ban
+    static let banLength = 10 //day long ban length
+    
     static let orders = "Orders"
     static let grills = "Grills"
     static let grillStat = "GrillIsOn"
@@ -32,9 +41,6 @@ class GlobalConstants {
     static let turnGrillOnText = "Turn Grill On"
     static let turnGrillOffText = "Turn Grill Off"
     static let orderStatus = "orderStatus"
-    static let ready = "Ready"
-    static let delete = "Mark Picked Up"
-    static let markAsReady = "Mark Ready"
     static let prevDining = "PreviousDiningHall"
     
     //FOOD CONSTANTS

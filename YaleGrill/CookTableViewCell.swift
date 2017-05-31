@@ -26,38 +26,41 @@ class CookTableViewCell: UITableViewCell{
     @IBOutlet weak var OrderStatusButton: UIButton!
     
     // MARK: - Global Variables
-    final var READYTIMER : Double = 8 //Amount of time (in minutes) before user gets a strike
     var grillUserID : String!
     var cOrder : Orders!
     var orderRef : FIRDatabaseReference?
-    var delegate:CookTableViewController?
+    var delegate: CookTableViewController?
     var task : DispatchWorkItem?
     var playerID : String!
+    let status = GlobalConstants.Status.self
     
     // MARK: - Actions
     @IBAction func ChangeStatusPressed(_ sender: UIButton) {
-        if(cOrder?.orderStatus==0){
-            cOrder?.orderStatus = 1
+        if(cOrder?.orderStatus == status.Placed.rawValue){
+            cOrder?.orderStatus = status.Preparing.rawValue
             OrderStatusLabel.text = GlobalConstants.preparingTexts[3]
             OrderStatusButton.setTitle("Mark Ready", for: .normal)
-        }else if(cOrder?.orderStatus==1){
-            cOrder.orderStatus=2
-            OrderStatusLabel.text = GlobalConstants.ready
-            OrderStatusButton.setTitle(GlobalConstants.delete, for: .normal)
+            OrderStatusButton.backgroundColor = UIColor(hex: "#009900") //dark green
+            
+        }else if(cOrder?.orderStatus == status.Preparing.rawValue){
+            cOrder.orderStatus = status.Ready.rawValue
+            OrderStatusLabel.text = "Ready"
+            OrderStatusButton.setTitle("Mark Picked Up", for: .normal)
+            OrderStatusButton.backgroundColor = UIColor.red
             task = DispatchWorkItem {
                 print("Running Task")
                 self.delegate?.giveStrike(userID : self.cOrder.userID!,name : self.cOrder.name)
                 self.NameLabel.text = "Anyone (was \(self.cOrder.name!))"
             }
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + READYTIMER*60, execute: task!)
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GlobalConstants.READYTIMER*60, execute: task!)
             
-        }else if(cOrder?.orderStatus==2){
-            cOrder.orderStatus=3
+        }else if(cOrder?.orderStatus == status.Ready.rawValue){
+            cOrder.orderStatus = status.PickedUp.rawValue
             removeOrder()
         }
         orderRef?.child(GlobalConstants.orderStatus).setValue(cOrder?.orderStatus)
         
-        if(cOrder.orderStatus != 3) {
+        if(cOrder.orderStatus != status.PickedUp.rawValue) {
             //Updates the order status in the grill's active orders array
             FIRDatabase.database().reference().child(GlobalConstants.grills).child(self.grillUserID).child(GlobalConstants.orders).child(cOrder.orderID).child(GlobalConstants.orderStatus).setValue(cOrder.orderStatus)
         }
@@ -80,15 +83,18 @@ class CookTableViewCell: UITableViewCell{
         }else{
              OrderNumLabel.text = "- #0\(cOrder.orderNum!)"
         }
-        if(cOrder.orderStatus==0){
+        if(cOrder.orderStatus == status.Placed.rawValue){
             OrderStatusLabel.text = "Order Placed"
             OrderStatusButton.setTitle("Mark Preparing", for: .normal)
-        }else if(cOrder.orderStatus==1){
+            OrderStatusButton.backgroundColor = UIColor(hex: "#4C8BF6") //blue
+        }else if(cOrder.orderStatus == status.Preparing.rawValue){
+            OrderStatusButton.backgroundColor = UIColor(hex: "#009900") //dark green
             OrderStatusLabel.text = GlobalConstants.preparingTexts[3]
-            OrderStatusButton.setTitle(GlobalConstants.markAsReady, for: .normal)
-        }else if(cOrder.orderStatus==2){
-            OrderStatusLabel.text = GlobalConstants.ready
-            OrderStatusButton.setTitle(GlobalConstants.delete, for: .normal)
+            OrderStatusButton.setTitle("Mark as Ready", for: .normal)
+        }else if(cOrder.orderStatus == status.Ready.rawValue){
+            OrderStatusButton.backgroundColor = UIColor.red
+            OrderStatusLabel.text = "Ready"
+            OrderStatusButton.setTitle("Mark Picked Up", for: .normal)
         }
         self.grillUserID = grillUserID
         
@@ -111,12 +117,6 @@ class CookTableViewCell: UITableViewCell{
         super.awakeFromNib()
         OrderStatusButton.layer.cornerRadius = 9
         // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: false)
-
-        // Configure the view for the selected state
     }
 
 }

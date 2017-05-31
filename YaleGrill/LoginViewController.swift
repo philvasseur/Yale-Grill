@@ -100,10 +100,9 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         let user = FIRDatabase.database().reference().child(GlobalConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!)
         user.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in //Gets initial info for user
             var bannedUntil : Date? = nil
-            if(snapshot.hasChild(GlobalConstants.activeOrders)){
+            if(snapshot.hasChild("Name")) {
                 let userDic = snapshot.value as! NSDictionary
                 let bannedUntilString = userDic["BannedUntil"] as? String
-                
                 //Checks if user has bannedUntil property in their account, if so checks if still banned
                 if(bannedUntilString != nil){
                     let dateFormatter = DateFormatter()
@@ -117,8 +116,8 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
                     print("Banned for: \(timeUntil!)") //debugging
                 }
                 
-                let ordersValue = userDic[GlobalConstants.activeOrders] as? [String: String]
-                for (key, _) in ordersValue! {
+                let ordersValue = userDic[GlobalConstants.activeOrders] as? [String: String] ?? [:]
+                for (key, _) in ordersValue {
                     self.allActiveIDs.append(key)
                 }
             }else{

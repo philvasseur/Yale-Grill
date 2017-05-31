@@ -1,6 +1,7 @@
 //Imports the Firebase Cloud Functions and Firebase Admin SDKs
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
+
 //Initializes the admin SDK
 admin.initializeApp(functions.config().firebase);
 
@@ -8,12 +9,17 @@ admin.initializeApp(functions.config().firebase);
 exports.sendPushNotification = functions.database.ref('/Grills/{grillID}/Orders/{orderID}')
     .onWrite(event => {
 
-    	//Checks that the data isn't null, has changed, and that the order state is 2 (meaning ready)
-    	//If any of these are false, returns.
-    	if(!event.data.exists() || !event.data.changed() || event.data.val().orderStatus != 2) {
-    		console.log("No Action Taken");
+    	
+    	if (!event.data.exists()) { //Checks that order exists (onWrite is called by deletions), if not returns
+    		console.log("No Data Exists (Order Deleted) - No Action Taken");
+    		return;
+    	} if(event.data.val().orderStatus != 2) { //Checks that orderStatus is 2 (ready status), if not returns
+    		console.log("OrderStatus not set to ready - No Action Taken");
       		return;
-    	} 
+    	} else if (!event.data.val().pushToken) { //Checks that a pushToken exists, if not returns
+    		console.log("PushToken does not exist (DB/Client Error ??) - No Action Taken");
+    		return;
+    	}
 	    
 	    //Creates the payload for the notification
 	    let payload = {
@@ -28,10 +34,8 @@ exports.sendPushNotification = functions.database.ref('/Grills/{grillID}/Orders/
         let token = event.data.val().pushToken;
 
 	    console.log('Notifying token: ',token);
-	    console.log(payload.notification.body);
 
 	    //admin.messaging().sendToDevice([token],payload);
-	    
 	    return admin.messaging().sendToDevice([token], payload).then(response => {
 	        //check if there was an error.
 	        const error = response.results[0].error;

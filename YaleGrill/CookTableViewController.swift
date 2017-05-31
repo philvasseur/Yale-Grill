@@ -17,8 +17,6 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
     @IBOutlet weak var NavBar: UINavigationItem!
     
     // MARK: - Global Variables
-    final var strikeBanLimit = 5
-    final var banLength = 10
     var orderNumCount: Int = -1
     var grillRef = FIRDatabase.database().reference().child("Grills").child(GIDSignIn.sharedInstance().currentUser.userID).child("GrillIsOn")
     var grillIsOn : Bool = false
@@ -79,9 +77,9 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
                 FIRDatabase.database().reference().child(GlobalConstants.users).child(userID).child("Strikes").setValue(1)
             }else{
                 FIRDatabase.database().reference().child(GlobalConstants.users).child(userID).child("Strikes").setValue(strikes!+1)
-                if(((strikes!+1) % self.strikeBanLimit) == 0) {
+                if(((strikes!+1) % GlobalConstants.strikeBanLimit) == 0) {
                     var bannedUntil : String?
-                    let banEndsDate = NSCalendar.current.date(byAdding: .day, value: self.banLength, to: date)
+                    let banEndsDate = NSCalendar.current.date(byAdding: .day, value: GlobalConstants.banLength, to: date)
                     bannedUntil = banEndsDate?.description
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateStyle = DateFormatter.Style.full

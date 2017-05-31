@@ -13,7 +13,6 @@ import Firebase
 class CustomerTableViewCell: UITableViewCell{
     
     // MARK: - Outlets
-    @IBOutlet weak var readyGIF: UIImageView!
     @IBOutlet weak var preparingGIF: UIImageView!
     
     @IBOutlet weak var orderTitle: UILabel!
@@ -36,6 +35,7 @@ class CustomerTableViewCell: UITableViewCell{
     var delegate: CustomerTableViewController?
     var timer = Timer()
     var orderLabels: [UILabel]!
+    let status = GlobalConstants.Status.self
     
     
     // MARK: - Actions
@@ -68,20 +68,17 @@ class CustomerTableViewCell: UITableViewCell{
                 label.isHidden = false
             }
             
-            //Order Status 0 means placed, 1 means preparing, and 2 means Ready
-            if(self.cOrder.orderStatus == 0 || self.cOrder.orderStatus == 1){
+            //If order is before ready status (placed or preparing)
+            if (self.cOrder.orderStatus < self.status.Ready.rawValue) {
                 self.statusLabel.text=notFinishedTexts[self.cOrder.orderStatus] //Sets to either Preparing or Order Placed
                 self.statusLabel.isHidden = false //Unhides the "preparing/order placed" label
                 self.readyForPickupText.isHidden = true //Hides the "Ready for Pickup" label
                 self.preparingGIF.isHidden = false
-                self.readyGIF.isHidden = true
-            }else if(self.cOrder.orderStatus == 2 || self.cOrder.orderStatus == 3){
+            } else { //If order is Ready
                 self.statusLabel.isHidden=true //Hides 'Preparing...' Label
-                self.readyGIF.image = UIImage.gif(name: "finished") //Done here to make place order snappier
-                self.readyGIF.layer.cornerRadius = 9
+                
                 self.readyForPickupText.isHidden=false //Unhides the "Ready For Pickup" Label
-                self.preparingGIF.isHidden = true
-                self.readyGIF.isHidden = false
+                
             }
             
             if(self.cOrder.orderNum > 0 && self.cOrder.orderNum < 10){
@@ -121,13 +118,6 @@ class CustomerTableViewCell: UITableViewCell{
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.updatePrep), userInfo: nil, repeats: true)
         //Creates the timer for animations
         // Initialization code
-    }
-    
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: false)
-        
-        // Configure the view for the selected state
     }
     
 }

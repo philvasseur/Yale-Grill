@@ -156,9 +156,11 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
         
         //Observes for any deletions in the user active order array
         user.child(GlobalConstants.activeOrders).queryOrderedByKey().observe(FIRDataEventType.childRemoved, with: { (snapshot) in
-            let orderID = snapshot.value as! String
+            let orderID = snapshot.key
+            //Finds the index of the orderID to be removed
             let removedIndex = self.allActiveIDs.index(of: orderID)
             let newIndexPath = IndexPath(row: removedIndex!, section: 0)
+            //Removes it from the activeIDs and then removes it from the tableView
             self.allActiveIDs.remove(at: removedIndex!)
             self.tableView.deleteRows(at: [newIndexPath], with: .automatic)
         })
