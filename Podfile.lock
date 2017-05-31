@@ -62,16 +62,13 @@ PODS:
   - GTMSessionFetcher/Full (1.1.10):
     - GTMSessionFetcher/Core (= 1.1.10)
   - Protobuf (3.3.0)
-  - SwiftGifOrigin (1.6.1)
 
 DEPENDENCIES:
   - Firebase
   - Firebase/Auth
-  - Firebase/Core
   - Firebase/Database
   - Firebase/Messaging
   - Google/SignIn
-  - SwiftGifOrigin
 
 SPEC CHECKSUMS:
   Firebase: 4b66b5b59c43edac745b87f0c87e42cdd0279c13
@@ -87,8 +84,7 @@ SPEC CHECKSUMS:
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: 30d874b96d0d76028f61fbd122801e3f030d47db
   Protobuf: d582fecf68201eac3d79ed61369ef45734394b9c
-  SwiftGifOrigin: d6679d3ebe9df2e049a84bc52582635107b581f6
 
-PODFILE CHECKSUM: 1cc14261daad180eb91cd21e1082dee249e1add3
+PODFILE CHECKSUM: 7c420414c3fea41a506eaeb56d5d30365f295947
 
 COCOAPODS: 1.2.0
