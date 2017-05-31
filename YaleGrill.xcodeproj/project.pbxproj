@@ -27,7 +27,6 @@
 		CD9E14EE1E130C7E000E21C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD9E14EC1E130C7E000E21C0 /* LaunchScreen.storyboard */; };
 		CDC1A0DA1E177B49009C2538 /* Orders.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC1A0D91E177B49009C2538 /* Orders.swift */; };
 		CDC64C9A1E1FF52D002959BA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDC64C991E1FF52D002959BA /* GoogleService-Info.plist */; };
-		CDCFD5931E1329B100065E87 /* OrderScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCFD5921E1329B100065E87 /* OrderScreen.swift */; };
 		CDCFD5951E1359AE00065E87 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCFD5941E1359AE00065E87 /* MenuViewController.swift */; };
 		CDE5C00D1E1EEA5A00226D71 /* CookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE5C00C1E1EEA5A00226D71 /* CookTableViewCell.swift */; };
 		CDE5C00F1E1F0F4900226D71 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE5C00E1E1F0F4900226D71 /* GlobalConstants.swift */; };
@@ -72,7 +71,6 @@
 		CDC1A0D91E177B49009C2538 /* Orders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Orders.swift; sourceTree = "<group>"; };
 		CDC64C991E1FF52D002959BA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CDC748D01ED4FF3700370350 /* YaleGrill.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YaleGrill.entitlements; sourceTree = "<group>"; };
-		CDCFD5921E1329B100065E87 /* OrderScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderScreen.swift; sourceTree = "<group>"; };
 		CDCFD5941E1359AE00065E87 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		CDD92A2B1E130E5B005C091B /* YaleGrill-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YaleGrill-Bridging-Header.h"; sourceTree = "<group>"; };
 		CDE5C00C1E1EEA5A00226D71 /* CookTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CookTableViewCell.swift; sourceTree = "<group>"; };
@@ -148,14 +146,6 @@
 			name = "App Files";
 			sourceTree = "<group>";
 		};
-		CD58B0EB1ED899C000C6F02C /* Legacy Code */ = {
-			isa = PBXGroup;
-			children = (
-				CDCFD5921E1329B100065E87 /* OrderScreen.swift */,
-			);
-			name = "Legacy Code";
-			sourceTree = "<group>";
-		};
 		CD58B0EC1ED899FD00C6F02C /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -206,7 +196,6 @@
 				CD58B0ED1ED89BA400C6F02C /* TableView Cells */,
 				CD58B0EA1ED8998A00C6F02C /* App Files */,
 				CD179F0D1E15F74C00496D5F /* Extensions */,
-				CD58B0EB1ED899C000C6F02C /* Legacy Code */,
 			);
 			path = YaleGrill;
 			sourceTree = "<group>";
@@ -362,7 +351,6 @@
 				CD9E14E41E130C7E000E21C0 /* AppDelegate.swift in Sources */,
 				CD3EEFB61ECB971C00A86A52 /* NSLayoutConstraintExtension.swift in Sources */,
 				CDE5C00F1E1F0F4900226D71 /* GlobalConstants.swift in Sources */,
-				CDCFD5931E1329B100065E87 /* OrderScreen.swift in Sources */,
 				CD1A13DE1E1E1356003AFBCE /* UIImageExtension.swift in Sources */,
 				CDCFD5951E1359AE00065E87 /* MenuViewController.swift in Sources */,
 			);

@@ -121,9 +121,9 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
                 for (key, _) in ordersValue! {
                     self.allActiveIDs.append(key)
                 }
-                //self.uploadPlayerID()
             }else{
-                user.child(GlobalConstants.name).setValue(GIDSignIn.sharedInstance().currentUser.profile.name!) //same for name
+                //Sets name if user doesn't exist yet.
+                user.child(GlobalConstants.name).setValue(GIDSignIn.sharedInstance().currentUser.profile.name!)
             }
             if(bannedUntil != nil){
                 let dateFormatter = DateFormatter()
@@ -147,30 +147,6 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         
     }
     
-    /*private func uploadPlayerID() {
-        
-        OneSignal.promptForPushNotifications(userResponse: nil)
-        
-        let status: OSPermissionSubscriptionState = OneSignal.getPermissionSubscriptionState()
-        
-        let hasPrompted = status.permissionStatus.hasPrompted
-        print("hasPrompted = \(hasPrompted)")
-        let userStatus = status.permissionStatus.status
-        print("userStatus = \(userStatus)")
-        
-        let isSubscribed = status.subscriptionStatus.subscribed
-        print("isSubscribed = \(isSubscribed)")
-        let userSubscriptionSetting = status.subscriptionStatus.userSubscriptionSetting
-        print("userSubscriptionSetting = \(userSubscriptionSetting)")
-        guard let userID = status.subscriptionStatus.userId else {
-            print("NIL - CANT FIND USERID")
-            return
-        }
-        let pushToken = status.subscriptionStatus.pushToken
-        print("pushToken = \(pushToken ?? "NIL - CANT FIND PUSHTOKEN")")
-        user.child("playerID").setValue(userID)
-        
-    }*/
     
     //Gets the last dining hall from firebase server, used for autologin
     func pullDiningHall() {

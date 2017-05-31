@@ -36,6 +36,7 @@ class Orders : NSObject {
         static let orderID = "orderID"
         static let userID = "userID"
         static let orderNum = "orderNum"
+        static let grillID = "grillID"
     }
     
     //Creates a new Orders object
@@ -75,7 +76,7 @@ class Orders : NSObject {
     //Inserts a new order into fireBase database
     func insertIntoDatabase(selectedDiningHall : String){
         let currentOrder = FIRDatabase.database().reference().child("Orders").child(orderID)
-        currentOrder.setValue(convToJSON())
+        currentOrder.setValue(convToJSON(selectedDiningHall: selectedDiningHall))
         
         //Inserts orderID/OrderStatus/OrderPushToken into Grills active orders
         let grillOrderInfo: [String: AnyObject] = [
@@ -86,12 +87,12 @@ class Orders : NSObject {
         
         
         //Inserts OrderID into Users active orders
-        FIRDatabase.database().reference().child(GlobalConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!).child(GlobalConstants.activeOrders).child(self.orderID).setValue(self.orderID)
+        FIRDatabase.database().reference().child(GlobalConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!).child(GlobalConstants.activeOrders).child(self.orderID).setValue(GlobalConstants.GrillIDS[selectedDiningHall]!)
         
     }
     
     //Changes current Orders object into a json object to be uploaded to firebase
-    private func convToJSON() -> [String : AnyObject] {
+    private func convToJSON(selectedDiningHall : String) -> [String : AnyObject] {
         let jsonObject: [String: AnyObject] = [
             DatabaseKeys.name : name as AnyObject,
             DatabaseKeys.foodServing: foodServing as AnyObject,
@@ -103,7 +104,8 @@ class Orders : NSObject {
             DatabaseKeys.orderStatus: orderStatus as AnyObject,
             DatabaseKeys.orderID: orderID as AnyObject,
             DatabaseKeys.userID: userID as AnyObject,
-            DatabaseKeys.orderNum: orderNum as AnyObject
+            DatabaseKeys.orderNum: orderNum as AnyObject,
+            DatabaseKeys.grillID : GlobalConstants.GrillIDS[selectedDiningHall]! as AnyObject
         ]
         
         return jsonObject

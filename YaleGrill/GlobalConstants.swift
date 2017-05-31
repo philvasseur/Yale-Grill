@@ -52,7 +52,6 @@ class GlobalConstants {
     static let ControlScreenSegueID = "ControlScreenSegue"
     static let ComposeOrderSegueID = "ComposeOrder"
     static let ViewControllerID = "ViewController"
-    static let prepGifIDs = ["preparing","preparing2","preparing3"]
     
     //Other
     static let PickerData = ["Select Dining Hall","Jonathan Edwards", "Branford", "Ezra Stiles","Trumbull","Davenport","Timothy Dwight","Morse","Hopper", "Pierson","Saybrook","Berkeley","Silliman"]
