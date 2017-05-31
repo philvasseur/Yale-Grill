@@ -44,14 +44,15 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
                 var indexPaths : [IndexPath] = []
                 for placedOrder in tempOrderArray{
                     allActiveIDs.append(placedOrder.orderID!) //Adds new orders to local orderIDs array
-                    placedOrder.insertIntoDatabase(AllActiveIDs: self.allActiveIDs) //Inserts order into Database   
-                    FIRDatabase.database().reference().child(GlobalConstants.grills).child(GlobalConstants.GrillIDS[self.selectedDiningHall]!).child(GlobalConstants.orders).child(placedOrder.orderID).setValue(placedOrder.orderStatus)
                     
-                    FIRDatabase.database().reference().child(GlobalConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!).child(GlobalConstants.activeOrders).child(placedOrder.orderID).setValue(placedOrder.orderID)
+                    //Inserts order into Database (all 3 locations)
+                    placedOrder.insertIntoDatabase(selectedDiningHall: self.selectedDiningHall)
+                    
+                    //Adds orders indexPath in table to array
                     indexPaths.append(IndexPath(row: allActiveIDs.count-1, section: 0))
                     
-                    //Above: Inserts orderID into grill's active orders
                 }
+                //Inserts the index paths of the orders into the table
                 self.tableView.insertRows(at: indexPaths, with: .none)
             }
         }
@@ -121,7 +122,10 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.rowHeight = self.tableView.frame.height/3.3
+        GIDSignIn.sharedInstance().uiDelegate = self
+        self.title=selectedDiningHall //Sets title as dining hall, which is set in ViewController screen
+        tableView.rowHeight = (tableView.frame.height - (self.navigationController?.navigationBar.frame.height)!
+            - UIApplication.shared.statusBarFrame.height)/3
         tableView.allowsSelection = false
         tableView.tableFooterView = UIView() //gets rid of dividers below empty cells
         
@@ -129,23 +133,17 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
         noOrdersLabel.text = "No Active Orders"
         noOrdersLabel.sizeToFit()
         noOrdersLabel.font = UIFont(name: "Verdana-Bold", size: 17)
-        //let newView = UIView()
-        //newView.backgroundColor = UIColor(hex: "#F6F6F6")
         let newView = UIImageView(image: UIImage(named: "bg2"))
         self.tableView.backgroundView = newView
         self.tableView.backgroundView?.addSubview(noOrdersLabel)
         NSLayoutConstraint.useAndActivate(constraints:
             [noOrdersLabel.centerXAnchor.constraint(equalTo: (tableView.backgroundView?.centerXAnchor)!), noOrdersLabel.centerYAnchor.constraint(equalTo: (tableView.backgroundView?.centerYAnchor)!)])
         
-        
-        
-        GIDSignIn.sharedInstance().uiDelegate = self
-        self.title=selectedDiningHall //Sets title as dining hall, which is set in ViewController screen
-        
+        //Checks and continues to observe if grill is on or off
         let grillStatus = FIRDatabase.database().reference().child(GlobalConstants.grills).child(GlobalConstants.GrillIDS[selectedDiningHall]!).child(GlobalConstants.grillStat)
-        grillStatus.observe(FIRDataEventType.value, with: { (snapshot) in //Used to check if grill is on or off.
+        grillStatus.observe(FIRDataEventType.value, with: { (snapshot) in
             let status = snapshot.value as? Bool
-            if(status==nil){
+            if(status==nil){ //No status has been set yet, defaults to off.
                 grillStatus.setValue(false)
                 self.grillIsOn=false
             }else{

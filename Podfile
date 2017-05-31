@@ -9,6 +9,7 @@ target 'YaleGrill' do
   pod 'Google/SignIn'
   pod 'SwiftGifOrigin'
   pod 'Firebase'
+  pod 'Firebase/Core'
   pod 'Firebase/Database'
   pod 'Firebase/Auth'
   pod 'Firebase/Messaging'

@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 import Firebase
 
-class Orders {
+class Orders : NSObject {
     var userID: String!
     var orderID: String!
     var name: String!
@@ -38,13 +38,55 @@ class Orders {
         static let orderNum = "orderNum"
     }
     
-    //Inserts a new order into fireBase database, also sets value of ActiveOrders in firebase database (as empty string if no active orders)
-    func insertIntoDatabase(AllActiveIDs : [String]){
-        /*let activeOrders = FIRDatabase.database().reference().child("Users").child(userID).child("ActiveOrders")
-        let totalIDs = AllActiveIDs.joined(separator: " ")
-        activeOrders.setValue(totalIDs)*/
+    //Creates a new Orders object
+    init(_userID: String,_name : String, _foodServing : String, _bunSetting : String, _cheeseSetting : String, _sauceSetting : String, _lettuceSetting : String, _tomatoSetting: String, _orderStatus : Int,
+          _orderID : String?, _orderNum : Int?) {
+        self.userID = _userID
+        let uuid = CFUUIDCreateString(nil, CFUUIDCreate(nil)) as String?
+        self.orderID = _orderID ?? uuid
+        self.name = _name
+        self.foodServing = _foodServing
+        self.bunSetting = _bunSetting
+        self.cheeseSetting = _cheeseSetting
+        self.sauceSetting = _sauceSetting
+        self.lettuceSetting = _lettuceSetting
+        self.tomatoSetting = _tomatoSetting
+        self.orderStatus = _orderStatus
+        self.orderNum = _orderNum ?? 0
+    }
+    
+    //Returns an Orders object from a firebase JSON
+    convenience init(json : [String : AnyObject]){
+        let userID = json[DatabaseKeys.userID] as! String
+        let orderID = json[DatabaseKeys.orderID] as! String
+        let name = json[DatabaseKeys.name] as! String
+        let foodServing = json[DatabaseKeys.foodServing] as! String
+        let bunSetting = json[DatabaseKeys.bunSetting] as! String
+        let cheeseSetting = json[DatabaseKeys.cheeseSetting] as! String
+        let sauceSetting = json[DatabaseKeys.sauceSetting] as! String
+        let lettuceSetting = json[DatabaseKeys.lettuceSetting] as! String
+        let tomatoSetting = json[DatabaseKeys.tomatoSetting] as! String
+        let orderStatus = json[DatabaseKeys.orderStatus] as! Int
+        let orderNum = json[DatabaseKeys.orderNum] as! Int
+        self.init(_userID: userID, _name: name, _foodServing: foodServing, _bunSetting: bunSetting, _cheeseSetting: cheeseSetting, _sauceSetting: sauceSetting, _lettuceSetting: lettuceSetting, _tomatoSetting: tomatoSetting, _orderStatus: orderStatus, _orderID : orderID, _orderNum: orderNum)
+        
+    }
+    
+    //Inserts a new order into fireBase database
+    func insertIntoDatabase(selectedDiningHall : String){
         let currentOrder = FIRDatabase.database().reference().child("Orders").child(orderID)
         currentOrder.setValue(convToJSON())
+        
+        //Inserts orderID/OrderStatus/OrderPushToken into Grills active orders
+        let grillOrderInfo: [String: AnyObject] = [
+            GlobalConstants.orderStatus : self.orderStatus as AnyObject,
+            "pushToken": FIRInstanceID.instanceID().token() as AnyObject,
+            ]
+        FIRDatabase.database().reference().child(GlobalConstants.grills).child(GlobalConstants.GrillIDS[selectedDiningHall]!).child(GlobalConstants.orders).child(self.orderID).setValue(grillOrderInfo)
+        
+        
+        //Inserts OrderID into Users active orders
+        FIRDatabase.database().reference().child(GlobalConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!).child(GlobalConstants.activeOrders).child(self.orderID).setValue(self.orderID)
         
     }
     
@@ -67,40 +109,4 @@ class Orders {
         return jsonObject
     }
     
-    //Returns an Orders object from a firebase JSON
-    class func convFromJSON(json : [String : AnyObject]) -> Orders {
-        let order = Orders()
-        order.userID = json[DatabaseKeys.userID] as! String
-        order.orderID = json[DatabaseKeys.orderID] as! String
-        order.name = json[DatabaseKeys.name] as! String
-        order.foodServing = json[DatabaseKeys.foodServing] as! String
-        order.bunSetting = json[DatabaseKeys.bunSetting] as! String
-        order.cheeseSetting = json[DatabaseKeys.cheeseSetting] as! String
-        order.sauceSetting = json[DatabaseKeys.sauceSetting] as! String
-        order.lettuceSetting = json[DatabaseKeys.lettuceSetting] as! String
-        order.tomatoSetting = json[DatabaseKeys.tomatoSetting] as! String
-        order.orderStatus = json[DatabaseKeys.orderStatus] as! Int
-        order.orderNum = json[DatabaseKeys.orderNum] as! Int
-        
-        return order
-    }
-    
-    //Creates a new Orders object
-    class func createNewObject(_userID: String,_name : String, _foodServing : String, _bunSetting : String, _cheeseSetting : String, _sauceSetting : String, _lettuceSetting : String, _tomatoSetting: String, _orderStatus : Int) -> Orders {
-        let order = Orders()
-        order.userID = _userID
-        let uuid = CFUUIDCreateString(nil, CFUUIDCreate(nil))
-        order.orderID = uuid as String?
-        order.name = _name
-        order.foodServing = _foodServing
-        order.bunSetting = _bunSetting
-        order.cheeseSetting = _cheeseSetting
-        order.sauceSetting = _sauceSetting
-        order.lettuceSetting = _lettuceSetting
-        order.tomatoSetting = _tomatoSetting
-        order.orderStatus = _orderStatus
-        order.orderNum = 0
-
-        return order
-    }
 }

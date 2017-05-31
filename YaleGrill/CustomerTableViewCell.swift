@@ -33,7 +33,7 @@ class CustomerTableViewCell: UITableViewCell{
     // MARK: - Global Variables
     var cOrder : Orders!
     var orderRef : FIRDatabaseReference!
-    var delegate:CustomerTableViewController?
+    var delegate: CustomerTableViewController?
     var timer = Timer()
     var orderLabels: [UILabel]!
     
@@ -50,9 +50,10 @@ class CustomerTableViewCell: UITableViewCell{
         
         orderRef = FIRDatabase.database().reference().child(GlobalConstants.orders).child(orderID)
         
-        orderRef.observe(FIRDataEventType.value, with: { (snapshot) in //Observes the specific order
+        orderRef.observe(FIRDataEventType.value, with: { (snapshot) in //Observes the order for changes
             let orderDic = snapshot.value as! NSDictionary
-            let order = Orders.convFromJSON(json: orderDic as! [String : AnyObject]) //Converts the JSON from database
+            //
+            let order = Orders(json: orderDic as! [String : AnyObject]) //Converts from JSON to order object
             self.cOrder = order
             
             //Sets all the info in the cell

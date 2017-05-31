@@ -8,7 +8,6 @@
 
 import UIKit
 import Firebase
-import OneSignal
 import CoreLocation
 
 class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, CLLocationManagerDelegate{

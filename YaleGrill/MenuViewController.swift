@@ -107,8 +107,7 @@ class MenuViewController: UIViewController, GIDSignInUIDelegate{
                         }
                     }
                 }
-                
-                let tempOrder = Orders.createNewObject(_userID: cUser, _name: cName, _foodServing: orderInfo[0], _bunSetting: orderInfo[1], _cheeseSetting: orderInfo[2], _sauceSetting: orderInfo[3], _lettuceSetting: orderInfo[4], _tomatoSetting: orderInfo[5], _orderStatus: 0)
+                let tempOrder = Orders(_userID: cUser, _name: cName, _foodServing: orderInfo[0], _bunSetting: orderInfo[1], _cheeseSetting: orderInfo[2], _sauceSetting: orderInfo[3], _lettuceSetting: orderInfo[4], _tomatoSetting: orderInfo[5], _orderStatus: 0, _orderID : nil, _orderNum: nil)
                 orderArray.append(tempOrder)
             }
         }

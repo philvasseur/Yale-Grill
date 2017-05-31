@@ -8,7 +8,6 @@
 
 import UIKit
 import Firebase
-import OneSignal
 
 
 
@@ -27,7 +26,7 @@ class CookTableViewCell: UITableViewCell{
     @IBOutlet weak var OrderStatusButton: UIButton!
     
     // MARK: - Global Variables
-    final var READYTIMER : Double = 0.25
+    final var READYTIMER : Double = 8 //Amount of time (in minutes) before user gets a strike
     var grillUserID : String!
     var cOrder : Orders!
     var orderRef : FIRDatabaseReference?
@@ -51,9 +50,7 @@ class CookTableViewCell: UITableViewCell{
                 self.NameLabel.text = "Anyone (was \(self.cOrder.name!))"
             }
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + READYTIMER*60, execute: task!)
-            /*DispatchQueue.main.async { //sends push notification to user that their food is ready
-                self.sendPushNotif()
-            }*/
+            
         }else if(cOrder?.orderStatus==2){
             cOrder.orderStatus=3
             removeOrder()
@@ -62,7 +59,7 @@ class CookTableViewCell: UITableViewCell{
         
         if(cOrder.orderStatus != 3) {
             //Updates the order status in the grill's active orders array
-            FIRDatabase.database().reference().child(GlobalConstants.grills).child(self.grillUserID).child(GlobalConstants.orders).child(cOrder.orderID).setValue(cOrder.orderStatus)
+            FIRDatabase.database().reference().child(GlobalConstants.grills).child(self.grillUserID).child(GlobalConstants.orders).child(cOrder.orderID).child(GlobalConstants.orderStatus).setValue(cOrder.orderStatus)
         }
         
     }
@@ -95,30 +92,17 @@ class CookTableViewCell: UITableViewCell{
         }
         self.grillUserID = grillUserID
         
-        /*let playerRef = FIRDatabase.database().reference().child(GlobalConstants.users).child(cOrder.userID!).child("playerID")
-        playerRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
-            if snapshot.exists() {
-                self.playerID = snapshot.value as! String
-            }
-        })
-        
-        
-    }
-    
-    private func sendPushNotif() {
-        let title = "Your Food is Ready!"
-        let message = "Please come pick it up at the grill!"
-        OneSignal.postNotification(["headings": ["en": title], "contents": ["en": message], "include_player_ids": [playerID]])*/
     }
     
     private func removeOrder(){
+        //Cancels the task which after a set amount of time of being ready gives customer a strike
         task?.cancel()
         let cOrderID = self.cOrder.orderID!
-        let userRef = FIRDatabase.database().reference().child(GlobalConstants.users).child(cOrder.userID!).child(GlobalConstants.activeOrders)
-        userRef.child(cOrderID).setValue(nil)
         
+        //Removes the order from the users's active orders
+        FIRDatabase.database().reference().child(GlobalConstants.users).child(cOrder.userID!).child(GlobalConstants.activeOrders).child(cOrderID).setValue(nil)
+        //Removes the order from the grill's active orders
         FIRDatabase.database().reference().child(GlobalConstants.grills).child(self.grillUserID).child(GlobalConstants.orders).child(cOrderID).setValue(nil)
-        
         
     }
     

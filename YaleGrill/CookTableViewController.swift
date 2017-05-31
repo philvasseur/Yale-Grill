@@ -153,7 +153,7 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
                 let singleOrderRef = FIRDatabase.database().reference().child(GlobalConstants.orders).child(newOrderID as String)
                 singleOrderRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
                     let newJson = snapshot.value as! NSDictionary
-                    let newOrder = Orders.convFromJSON(json: newJson as! [String : AnyObject])
+                    let newOrder = Orders(json: newJson as! [String : AnyObject]) //Converts from JSON to order object
                     if(newOrder.orderNum == 0){
                         newOrder.orderNum = self.orderNumCount
                         self.orderNumCount += 1

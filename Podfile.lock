@@ -67,6 +67,7 @@ PODS:
 DEPENDENCIES:
   - Firebase
   - Firebase/Auth
+  - Firebase/Core
   - Firebase/Database
   - Firebase/Messaging
   - Google/SignIn
@@ -88,6 +89,6 @@ SPEC CHECKSUMS:
   Protobuf: d582fecf68201eac3d79ed61369ef45734394b9c
   SwiftGifOrigin: d6679d3ebe9df2e049a84bc52582635107b581f6
 
-PODFILE CHECKSUM: f10d3170b145956735cf82f777c8f254f61e3d3f
+PODFILE CHECKSUM: 1cc14261daad180eb91cd21e1082dee249e1add3
 
 COCOAPODS: 1.2.0

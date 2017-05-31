@@ -337,7 +337,7 @@
                                 <color key="tintColor" red="0.29840123653411865" green="0.54416894912719727" blue="0.96475684642791748" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </imageView>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5Fj-G3-UWF">
-                                <rect key="frame" x="237.5" y="181" width="123" height="91.5"/>
+                                <rect key="frame" x="237.5" y="180" width="123" height="92.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="5Fj-G3-UWF" secondAttribute="height" multiplier="123:92" id="qZu-MW-TOJ"/>
                                 </constraints>
@@ -349,7 +349,7 @@
                                 </constraints>
                             </imageView>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WpI-2V-Am0">
-                                <rect key="frame" x="237.5" y="564.5" width="123" height="91.5"/>
+                                <rect key="frame" x="237.5" y="564.5" width="123" height="92"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="WpI-2V-Am0" secondAttribute="height" multiplier="123:92" id="7sE-IR-nIg"/>
                                 </constraints>
@@ -606,19 +606,19 @@
                                 </subviews>
                             </stackView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ready For Pickup!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BwP-Ce-aXI">
-                                <rect key="frame" x="139" y="216.5" width="172.5" height="21"/>
+                                <rect key="frame" x="139" y="216" width="172.5" height="21"/>
                                 <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ready For Pickup!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Sn-RB-sr2">
-                                <rect key="frame" x="139" y="409" width="172.5" height="21"/>
+                                <rect key="frame" x="139" y="410" width="172.5" height="21"/>
                                 <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ready For Pickup!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ciw-DR-MBy">
-                                <rect key="frame" x="139" y="600" width="172.5" height="21"/>
+                                <rect key="frame" x="139" y="599.5" width="172.5" height="21"/>
                                 <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -648,19 +648,19 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order#:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WC9-27-fD1">
-                                <rect key="frame" x="21" y="637.5" width="67.5" height="18.5"/>
+                                <rect key="frame" x="21" y="638" width="67.5" height="18.5"/>
                                 <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
                                 <color key="textColor" red="0.2984012365" green="0.54416894910000002" blue="0.96475684640000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="02" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wWC-ge-qJI" userLabel="02">
-                                <rect key="frame" x="91" y="637.5" width="20.5" height="19.5"/>
+                                <rect key="frame" x="91" y="638" width="20.5" height="19.5"/>
                                 <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OUT OF ORDER - LEGACY CODE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7rN-4P-s77">
-                                <rect key="frame" x="19" y="320.5" width="338" height="26.5"/>
+                                <rect key="frame" x="18.5" y="321" width="338" height="26.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1105,10 +1105,10 @@
         <!--Customer NavController-->
         <scene sceneID="MJZ-9b-7gP">
             <objects>
-                <navigationController storyboardIdentifier="NavControl" title="Customer NavController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" hidesBarsWhenKeyboardAppears="YES" id="CYl-rG-eM0" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavControl" title="Customer NavController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CYl-rG-eM0" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="0S0-rn-29S"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="3L9-0H-vua">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3L9-0H-vua">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1126,7 +1126,7 @@
             <objects>
                 <navigationController title="Cook NavController" automaticallyAdjustsScrollViewInsets="NO" id="Txg-YN-yko" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="yZ9-AK-vnH">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yZ9-AK-vnH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1162,7 +1162,7 @@
                                             </constraints>
                                         </imageView>
                                         <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gdd-ll-mdG">
-                                            <rect key="frame" x="98.5" y="112" width="214.5" height="39"/>
+                                            <rect key="frame" x="98" y="112" width="215" height="39"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="gdd-ll-mdG" secondAttribute="height" multiplier="215:39" id="Fxm-Na-PvM"/>
                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="39" id="MQx-sy-Juz"/>
@@ -1324,7 +1324,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VK3-bf-OhV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1436" y="34"/>
+            <point key="canvasLocation" x="1436" y="33.733133433283363"/>
         </scene>
     </scenes>
     <resources>

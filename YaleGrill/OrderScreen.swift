@@ -71,8 +71,7 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
             if(grillIsOn){ //Only goes through orders if the grill is on
                 for placedOrder in tempOrderArray{
                     allActiveOrders.append(placedOrder.orderID!) //Adds new orders to local orderIDs array
-                    placedOrder.insertIntoDatabase(AllActiveIDs: self.allActiveOrders) //Inserts order into Database
-                    FIRDatabase.database().reference().child(GlobalConstants.grills).child(GlobalConstants.GrillIDS[self.selectedDiningHall]!).child(GlobalConstants.orders).child(placedOrder.orderID).setValue(placedOrder.orderID)
+                    placedOrder.insertIntoDatabase(selectedDiningHall: self.selectedDiningHall) //Inserts order into Database
                     //Above: Inserts orderID into grill's active orders
                 }
             }
@@ -257,7 +256,7 @@ class OrderScreen: UIViewController, GIDSignInUIDelegate{
                     orderRef.removeAllObservers()
                     orderRef.observe(FIRDataEventType.value, with: { (snapshot) in //Observes the specific order
                         let orderDic = snapshot.value as! NSDictionary
-                        let order = Orders.convFromJSON(json: orderDic as! [String : AnyObject]) //Converts the JSON from database
+                        let order = Orders(json: orderDic as! [String : AnyObject]) //Converts from JSON to order object
                         self.setSingleOrder(cOrder: order, index: self.allActiveOrders.index(of: orderID)!)
                         if(self.allActiveOrders.last==orderID){ //If the active order is the last one, hides loading stuff
                             self.changeFromLoading()
