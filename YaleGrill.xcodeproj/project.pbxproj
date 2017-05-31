@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5722132A3B3F10708C7361B8 /* Pods_YaleGrill.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 302ED5095DCF94E1BBB98435 /* Pods_YaleGrill.framework */; };
-		CD1A13DE1E1E1356003AFBCE /* Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1A13DD1E1E1356003AFBCE /* Gif.swift */; };
+		CD1A13DE1E1E1356003AFBCE /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1A13DD1E1E1356003AFBCE /* UIImageExtension.swift */; };
 		CD3EEFB21ECB958E00A86A52 /* CustomerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3EEFB11ECB958E00A86A52 /* CustomerTableViewController.swift */; };
 		CD3EEFB61ECB971C00A86A52 /* NSLayoutConstraintExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3EEFB51ECB971C00A86A52 /* NSLayoutConstraintExtension.swift */; };
 		CD3EEFB81ECB977B00A86A52 /* CustomerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3EEFB71ECB977B00A86A52 /* CustomerTableViewCell.swift */; };
@@ -50,7 +50,7 @@
 		1054201CBD0AAE2FE215C308 /* Pods-YaleGrill.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YaleGrill.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YaleGrill/Pods-YaleGrill.debug.xcconfig"; sourceTree = "<group>"; };
 		302ED5095DCF94E1BBB98435 /* Pods_YaleGrill.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YaleGrill.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4039CFECDAAAD910CABA87E0 /* Pods-YaleGrill.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YaleGrill.release.xcconfig"; path = "Pods/Target Support Files/Pods-YaleGrill/Pods-YaleGrill.release.xcconfig"; sourceTree = "<group>"; };
-		CD1A13DD1E1E1356003AFBCE /* Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gif.swift; sourceTree = "<group>"; };
+		CD1A13DD1E1E1356003AFBCE /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		CD3EEFB11ECB958E00A86A52 /* CustomerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerTableViewController.swift; sourceTree = "<group>"; };
 		CD3EEFB51ECB971C00A86A52 /* NSLayoutConstraintExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraintExtension.swift; sourceTree = "<group>"; };
 		CD3EEFB71ECB977B00A86A52 /* CustomerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerTableViewCell.swift; sourceTree = "<group>"; };
@@ -129,7 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				CDD92A2B1E130E5B005C091B /* YaleGrill-Bridging-Header.h */,
-				CD1A13DD1E1E1356003AFBCE /* Gif.swift */,
+				CD1A13DD1E1E1356003AFBCE /* UIImageExtension.swift */,
 				CD3EEFB51ECB971C00A86A52 /* NSLayoutConstraintExtension.swift */,
 				CD58B0E81ED88CB700C6F02C /* UIColorExtensions.swift */,
 			);
@@ -363,7 +363,7 @@
 				CD3EEFB61ECB971C00A86A52 /* NSLayoutConstraintExtension.swift in Sources */,
 				CDE5C00F1E1F0F4900226D71 /* GlobalConstants.swift in Sources */,
 				CDCFD5931E1329B100065E87 /* OrderScreen.swift in Sources */,
-				CD1A13DE1E1E1356003AFBCE /* Gif.swift in Sources */,
+				CD1A13DE1E1E1356003AFBCE /* UIImageExtension.swift in Sources */,
 				CDCFD5951E1359AE00065E87 /* MenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
