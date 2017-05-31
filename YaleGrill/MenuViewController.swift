@@ -31,6 +31,7 @@ class MenuViewController: UIViewController, GIDSignInUIDelegate{
     // MARK: = Actions
     //Changes the veggieBurger text whenever the VeggieStepCount is changed.
     @IBAction func VeggieStepper(_ sender: UIStepper) {
+        checkAllCounts()
         if((sender.value)==0){
             for item in VeggieSwitches {
                 item.isEnabled=false
@@ -48,6 +49,7 @@ class MenuViewController: UIViewController, GIDSignInUIDelegate{
     
     //Updates the ChickenCount label whenever the ChickenStepCount is changed
     @IBAction func StepperCount(_ sender: UIStepper) {
+        checkAllCounts()
         if((sender.value)==0){
             ChickenCount.text="----"
         }else if((sender.value)==1){
@@ -63,6 +65,7 @@ class MenuViewController: UIViewController, GIDSignInUIDelegate{
    
     //Changes the hamburger text whenever the BurgerStepCount is changed.
     @IBAction func HamburgerStepper(_ sender: UIStepper) {
+        checkAllCounts()
         if((sender.value)==0){
             for item in HamburgerSwitches {
                 item.isEnabled=false
@@ -77,6 +80,8 @@ class MenuViewController: UIViewController, GIDSignInUIDelegate{
             HamburgerCount1.text="Double"
         }
     }
+    
+    
     
     // MARK: - Functions
     
@@ -115,6 +120,17 @@ class MenuViewController: UIViewController, GIDSignInUIDelegate{
         return orderArray
     }
     
+    //checks if all the food counts are 0, if so disables the place order button
+    func checkAllCounts() {
+        if(BurgerStepCount.value == 0 && VeggieStepCount.value == 0 && ChickenStepCount.value == 0) {
+            PlaceButton.isEnabled = false
+            PlaceButton.alpha = 0.5
+        } else {
+            PlaceButton.isEnabled = true
+            PlaceButton.alpha = 1.0
+        }
+    }
+    
     //CreateAlert method just like in orderScreen class. Used here to stop user from having more than 3 total orders.
     func createAlert (title : String, message : String){
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
@@ -130,6 +146,7 @@ class MenuViewController: UIViewController, GIDSignInUIDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         PlaceButton.layer.cornerRadius = 12
+        checkAllCounts()
         GIDSignIn.sharedInstance().uiDelegate = self
     }
     
