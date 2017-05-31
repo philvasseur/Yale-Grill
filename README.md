@@ -6,11 +6,11 @@ Only usable by those with a valid Yale email address.
 
 ## Features
 
-* Keeps track of and updates the orders in realtime using Google's Firebase Database.
-* Uses Google/SignIn, allowing only students with Yale emails to access the app and place orders.
-* Special accounts for the cooks allow them to see all orders, mark them as they finished, and delete them as they get picked up.
-* Sends a push notification to the student when their order is marked finished, lowering the amount of food waste from students forgetting to pick up their orders.
-* Strikes are given if students don't pick up their order within a set amount of time, temporarily banning users from the app if they reach a set amount of strikes (which stops any possible griefing).
+* Keeps track of and updates the order using Google Firebase's Realtime Database and Authentication.
+* Uses Google Signin, allowing only students with Yale emails to access the app and place orders.
+* Premade accounts for cooks allow them to see all orders, mark them as they finished, and delete them as they get picked up.
+* Uses Google Firebase's Cloud Functions and Cloud Messaging to send push notifications when the order is ready for pickup, lowering the amount of food wasted by students forgetting to pickup their orders.
+* A strike is given when a student doesn't pick up their order within a set amount of time, temporarily banning the user from if they reach a set amount of strikes (which stops any possible griefing).
 * Uses location services to automatically suggest the dining hall which you are closest to.
 
 
