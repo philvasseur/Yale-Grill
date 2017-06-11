@@ -169,6 +169,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         self.loadingIndicator.isHidden = false
         self.loadingView.isHidden = false
         pickerView.isHidden = true
+        UIApplication.shared.beginIgnoringInteractionEvents()
     }
     
     func stopLoadAnimation(){
@@ -176,6 +177,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         self.loadingIndicator.isHidden = true
         self.loadingView.isHidden = true
         pickerView.isHidden = false
+        UIApplication.shared.endIgnoringInteractionEvents()
     }
 
     
