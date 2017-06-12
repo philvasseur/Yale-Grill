@@ -44,8 +44,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UIApplication.shared.registerForRemoteNotifications()
         }
         application.registerForRemoteNotifications()
-                
-        
+        //Loads the cook grillIDs and corresponding emails from database
+        let grillRef = FIRDatabase.database().reference().child(GlobalConstants.grills).child("GrillEmails")
+        grillRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+            GlobalConstants.GrillEmails = snapshot.value as! [String : String]
+            for(key,_) in GlobalConstants.GrillEmails {
+                GlobalConstants.PickerData.append(key)
+            }
+            GIDSignIn.sharedInstance().signInSilently()
+        })
         return true
     }
 

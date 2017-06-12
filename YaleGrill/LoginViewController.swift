@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import CoreLocation
 
-class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, CLLocationManagerDelegate{
+class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, UIPickerViewDelegate, UIPickerViewDataSource, CLLocationManagerDelegate{
     
     
     //LOCATION SERVICES NOT TURNED ON ATM
@@ -26,142 +26,154 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     let pickerView = UIPickerView()
     let locationManager = CLLocationManager()
     var currentLocation : CLLocation!
-    var pickerDataSource = GlobalConstants.PickerData
     var allActiveIDs : [String] = []
+    var selectedDiningHall : String?
+    var cEmail : String!
     
     
     // MARK: - Functions
     
     /*
-     Method for googleSign in. Is called when you press the button and when the application loads. Checks if there is authentication in keychain cached, if so checks if a yale email. If it has a yale email then moves to OrderScreen page with active orders. If not a yale email then logs out.
+     Method for googleSign in. Is called when you press the button and when the application loads. Checks if there is authentication in keychain cached, if so gets the dining hall and then checks if the email is a yale/cook email.
      */
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        /* check for user's token */
         
-        let selectedDiningHall = diningHallTextField.text //When sign in pressed, gets what the current Dining hall is set to
+        /* check for user's token */
         if GIDSignIn.sharedInstance().hasAuthInKeychain() {
             self.startLoadAnimation()
-            print("\(GIDSignIn.sharedInstance().currentUser.profile.email!) TRYING TO SIGN IN - AUTH")
-            let cEmail = GIDSignIn.sharedInstance().currentUser.profile.email!
-            if(cEmail.lowercased().range(of: "@yale.edu") != nil){ //Checks if email is a Yale email
-                guard let authentication = user.authentication else { return }
-                let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
-                FIRAuth.auth()?.signIn(with: credential) { (user, error) in //Firebase then authenticates user
-                    if let error = error {
-                        print("Firebase Auth Error: \(error)")
-                        return
-                    }
-                    
-                    if(selectedDiningHall=="Select Dining Hall"){ //Should Only happen if autologin, thus it pulls the last dHall logged into from the database
-                        self.pullDiningHall()
-                    }else{ //If Dining Hall selected is actual dining hall
-                        if(GlobalConstants.GrillIDS[selectedDiningHall!] != nil){ //Checks that dining hall is activated
+            cEmail = GIDSignIn.sharedInstance().currentUser.profile.email!
+            print("\(cEmail!): Attempting Signing In")
+            
+            guard let authentication = user.authentication else { return }
+            let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
+            FIRAuth.auth()?.signIn(with: credential) { (_, error) in //Firebase then authenticates user
+                if let error = error {
+                    print("Firebase Auth Error: \(error)")
+                    self.signOutGoogleAndFirebase()
+                    return
+                }
+                
+                
+                //If checks emails, if a student then gets the dining hall
+                if(self.isYaleEmail(user: user)) {
+                    self.getDiningHall { success in
+                        //Checks to make sure a dining hall is actually chosen
+                        if(success) {
                             let dHallRef = FIRDatabase.database().reference().child(GlobalConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!).child(GlobalConstants.prevDining)
-                            dHallRef.setValue(selectedDiningHall) //Updates last dining hall logged into
+                            dHallRef.setValue(self.selectedDiningHall) //Updates last dining hall logged into
                             self.loadUserAndSegue()
-                            
-                        }else{ //Happens during a bug with pickerView, rare, but took into account just in case
-                            GIDSignIn.sharedInstance().signOut()
+                        
+                        } else { //Happens during a bug with pickerView, rare, but taken into account just in case
+                            self.signOutGoogleAndFirebase()
                             self.stopLoadAnimation()
-                            self.createAlert(title: "\(selectedDiningHall!) Dining Hall isn't activated!", message: "Please select another dining hall. If you think this is an error, contact philip.vasseur@yale.edu.")
+                            self.createAlert(title: "Sorry, cannot load the dining hall!", message: "Please select another dining hall. If you think this is an error, contact philip.vasseur@yale.edu.")
                         }
                     }
                 }
-
-                
-            }else if(GlobalConstants.CookEmailArray.contains(cEmail.lowercased())){ //If not a yale email, checks if the account is a cook's account
-                guard let authentication = user.authentication else { return }
-                let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
-                FIRAuth.auth()?.signIn(with: credential) { (user, error) in //If so authenticates the cooks account
-                    if let error = error {
-                        print("Firebase Auth Error: \(error)")
-                        return
-                    }
-                    self.performSegue(withIdentifier: GlobalConstants.ControlScreenSegueID, sender: nil) //Then segues to the ControlScreenView
-                }
-            }else{ //Not a yale email, so signs user out
-                print("Non-Yale Email, LOGGING OUT")
-                stopLoadAnimation()
-                GIDSignIn.sharedInstance().signOut()
-                createAlert(title: "Invalid Email Address!", message: "You must use a Yale email address to sign in!")
             }
+            
+            //If there was an error authenticating google keychain
         }else if(error != nil){
-            print("Sign In Error: \(error)")
-            stopLoadAnimation()
-            self.locationManager.delegate = self //still need to fully implement location services
-            self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            self.locationManager.requestWhenInUseAuthorization()
-            self.locationManager.startUpdatingLocation()
+            print("Couldn't sign in, Error: \(error!)")
+        }
+        
+    }
+    
+    //Gets the last dining hall from firebase server, used for autologin as only autologins in if previous
+    //dining hall exists
+    func getDiningHall(completion : @escaping (Bool) -> ()) {
+        if(GlobalConstants.GrillEmails[diningHallTextField.text!] != nil) {
+            selectedDiningHall = diningHallTextField.text
+            completion(true)
+            return
+        }
+        let dHallRef = FIRDatabase.database().reference().child(GlobalConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!).child(GlobalConstants.prevDining)
+        
+        dHallRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+            
+            let pastDHall = snapshot.value as? String ?? "Select Dining Hall"
+            if (GlobalConstants.GrillEmails[pastDHall] != nil)  {
+                self.selectedDiningHall = pastDHall
+                self.diningHallTextField.text = self.selectedDiningHall
+                completion(true)
+            } else {
+                completion(false)
+            }
+            
+        })
+        
+    }
+    
+    //Checks if the emailed used to login is a valid email
+    func isYaleEmail(user: GIDGoogleUser!) -> Bool {
+        //Checks if email is a Yale email
+        if(cEmail.lowercased().range(of: "@yale.edu") != nil){
+            return true
+            
+            //If not a yale email, checks if the email is contained in the cooks email array (case insensitively)
+        }else if (GlobalConstants.GrillEmails.values.contains(where: {$0.caseInsensitiveCompare(cEmail) == .orderedSame})) {
+            self.performSegue(withIdentifier: GlobalConstants.ControlScreenSegueID, sender: nil) //Then segues to the ControlScreenView
+            return false
+            
+            //Not a yale email, so signs user out
+        }else{
+            print("Non-Yale Email, LOGGING OUT")
+            signOutGoogleAndFirebase()
+            self.stopLoadAnimation()
+            createAlert(title: "Invalid Email Address!", message: "You must use a Yale email address to sign in!")
+            return false
         }
     }
     
-    
-    func loadUserAndSegue() { //Loads the user orders and ban info, for CUSTOMERS only. Cooks don't need this checked.
+    //Loads the user orders and ban info, for CUSTOMERS only. Cooks don't need this checked.
+    func loadUserAndSegue() {
         let user = FIRDatabase.database().reference().child(GlobalConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!)
         user.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in //Gets initial info for user
-            var bannedUntil : Date? = nil
             if(snapshot.hasChild("Name")) {
                 let userDic = snapshot.value as! NSDictionary
-                let bannedUntilString = userDic["BannedUntil"] as? String
-                //Checks if user has bannedUntil property in their account, if so checks if still banned
-                if(bannedUntilString != nil){
-                    let dateFormatter = DateFormatter()
-                    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss zzz"
-                    bannedUntil = dateFormatter.date(from: bannedUntilString!)
-                    let timeUntil = bannedUntil?.timeIntervalSinceNow
-                    if(timeUntil?.isLessThanOrEqualTo(0))!{ //Checks if users banUntil date has passed, if so removes ban
-                        bannedUntil = nil
-                        user.child("BannedUntil").setValue(nil)
-                    }
-                    print("Banned for: \(timeUntil!)") //debugging
+                //If the user has an active ban, returns and does not login
+                if(self.isBanned(bannedUntilString: userDic["BannedUntil"] as? String, user: user)) {
+                    return
                 }
-                
                 let ordersValue = userDic[GlobalConstants.activeOrders] as? [String: String] ?? [:]
                 for (key, _) in ordersValue {
                     self.allActiveIDs.append(key)
                 }
+                
             }else{
                 //Sets name if user doesn't exist yet.
                 user.child(GlobalConstants.name).setValue(GIDSignIn.sharedInstance().currentUser.profile.name!)
             }
-            if(bannedUntil != nil){
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateStyle = DateFormatter.Style.full
-                let bannedUntilString = dateFormatter.string(from: bannedUntil!)
-                self.createAlert(title: "You've Been Banned!", message: "Due to not picking up 5 orders, you have been temporarily banned from using YaleGrill. This ban will expire on \n\n\(bannedUntilString).\n\n This is an automated ban. If you think this is a mistake, please contact philip.vasseur@yale.edu.")
-                
-                print("LOGGING OUT")
-                GIDSignIn.sharedInstance().signOut()
-                let firebaseAuth = FIRAuth.auth()
-                do {
-                    try firebaseAuth?.signOut()
-                } catch let signOutError as NSError {
-                    print ("Error signing out: %@", signOutError)
-                }
-                self.stopLoadAnimation()
-            }else {
-                self.performSegue(withIdentifier: GlobalConstants.SignInSegueID, sender: nil) //Segues to OrderScreen
-            }
+            
+            self.performSegue(withIdentifier: GlobalConstants.SignInSegueID, sender: nil) //Segues to OrderScreen
         })
         
     }
     
-    
-    //Gets the last dining hall from firebase server, used for autologin
-    func pullDiningHall() {
-        let dHallRef = FIRDatabase.database().reference().child(GlobalConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!).child(GlobalConstants.prevDining)
-        dHallRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
-            let pastDHall = snapshot.value as? String
-            if((pastDHall != nil) && (GlobalConstants.GrillIDS[pastDHall!] != nil)){
-                self.diningHallTextField.text = pastDHall
-                self.loadUserAndSegue()
-            }else { //Should never happen unless someone messes with database
-                GIDSignIn.sharedInstance().signOut()
-                self.stopLoadAnimation()
-                self.createAlert(title: "Sorry about that!", message: "We can't find a previously selected dining hall or the dining hall we found is not activated. If you think this is an error, contact philip.vasseur@yale.edu.")
-                print("No Accessible Dining Hall")
-            }
-        })
+    //Takes the bannedUntil format in the database and checks if it has passed already or not
+    func isBanned(bannedUntilString : String?, user: FIRDatabaseReference) -> Bool {
+        var bannedUntil : Date?
+        //Checks if user has bannedUntil property in their account, if so checks if still banned
+        if(bannedUntilString == nil){
+            return false
+        }
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss zzz"
+        bannedUntil = dateFormatter.date(from: bannedUntilString!)
+        let timeUntil = bannedUntil?.timeIntervalSinceNow
+        if(timeUntil?.isLessThanOrEqualTo(0))!{ //Checks if users banUntil date has passed, if so removes ban
+            user.child("BannedUntil").setValue(nil)
+            return false
+        }
+        
+        let dateFormatter2 = DateFormatter()
+        dateFormatter2.dateStyle = DateFormatter.Style.full
+        let banEndString = dateFormatter2.string(from: bannedUntil!)
+        self.createAlert(title: "You've Been Banned!", message: "Due to not picking up 5 orders, you have been temporarily banned from using YaleGrill. This ban will expire on \n\n\(banEndString).\n\n This is an automated ban. If you think this is a mistake, please contact philip.vasseur@yale.edu.")
+        self.stopLoadAnimation()
+        self.signOutGoogleAndFirebase()
+        return true
     }
     
     func startLoadAnimation(){
@@ -179,7 +191,18 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         pickerView.isHidden = false
         UIApplication.shared.endIgnoringInteractionEvents()
     }
-
+    
+    func signOutGoogleAndFirebase() {
+        GIDSignIn.sharedInstance().signOut()
+        let firebaseAuth = FIRAuth.auth()
+        do {
+            try firebaseAuth?.signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+        
+    }
+    
     
     //Alert Function to create an alert
     func createAlert (title : String, message : String){
@@ -195,19 +218,19 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     }
     //PickerView function which returns the college based on what row is selected, is used for dining hall selection
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerDataSource[row]
+        return GlobalConstants.PickerData[row]
     }
     //PickerView function which returns the number of rows (number of colleges), is used for dining hall selection
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerDataSource.count
+        return GlobalConstants.PickerData.count
     }
     //PickerView function, which checks if the college has a grillID (which means it is activated), is used for dining hall selection
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.diningHallTextField.text=pickerDataSource[row]
-        if(GlobalConstants.GrillIDS[pickerDataSource[row]] != nil){ //Checks GrillIDs dictionary for the college
-            GSignInButton.isEnabled=true
+        self.diningHallTextField.text=GlobalConstants.PickerData[row]
+        if(GlobalConstants.PickerData[row] == "Select Dining Hall"){ //Checks GrillIDs dictionary for the college
+            GSignInButton.isEnabled = false
         }else{
-            GSignInButton.isEnabled=false //If not, deactivates signIn button
+            GSignInButton.isEnabled = true //If not the default, enables the dining hall
         }
     }
     
@@ -255,16 +278,17 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self
-        GIDSignIn.sharedInstance().signInSilently()
-     
+
+        
     }
     
     //Sets the customers order information before segueing
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        stopLoadAnimation()
         if(segue.identifier==GlobalConstants.SignInSegueID){
             let destinationNav = segue.destination as! UINavigationController
             let destinationVC = destinationNav.viewControllers.first as! CustomerTableViewController
-            destinationVC.selectedDiningHall = self.diningHallTextField.text
+            destinationVC.selectedDiningHall = self.selectedDiningHall
             destinationVC.allActiveIDs = self.allActiveIDs
             destinationVC.tableView.reloadData()
         }
@@ -274,16 +298,5 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         self.view.endEditing(true)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-
 }
 

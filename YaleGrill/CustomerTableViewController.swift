@@ -140,7 +140,7 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
             [noOrdersLabel.centerXAnchor.constraint(equalTo: (tableView.backgroundView?.centerXAnchor)!), noOrdersLabel.centerYAnchor.constraint(equalTo: (tableView.backgroundView?.centerYAnchor)!)])
         
         //Checks and continues to observe if grill is on or off
-        let grillStatus = FIRDatabase.database().reference().child(GlobalConstants.grills).child(GlobalConstants.GrillIDS[selectedDiningHall]!).child(GlobalConstants.grillStat)
+        let grillStatus = FIRDatabase.database().reference().child(GlobalConstants.grills).child(selectedDiningHall!).child(GlobalConstants.grillStat)
         grillStatus.observe(FIRDataEventType.value, with: { (snapshot) in
             let status = snapshot.value as? Bool
             if(status==nil){ //No status has been set yet, defaults to off.

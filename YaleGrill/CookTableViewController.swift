@@ -18,7 +18,8 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
     
     // MARK: - Global Variables
     var orderNumCount: Int = -1
-    var grillRef = FIRDatabase.database().reference().child("Grills").child(GIDSignIn.sharedInstance().currentUser.userID).child("GrillIsOn")
+    var grillName: String!
+    var grillSwitch : FIRDatabaseReference!
     var grillIsOn : Bool = false
     var allActiveOrders : [Orders] = []
     var allActiveIDs : [String] = []
@@ -27,9 +28,9 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
     // MARK: - Actions
     @IBAction func GrillButtonPressed(_ sender: UIBarButtonItem) {
         if(!grillIsOn){
-            grillRef.setValue(true)            
+            grillSwitch.setValue(true)
         }else if(grillIsOn){
-            grillRef.setValue(false)
+            grillSwitch.setValue(false)
         }
     }
     
@@ -99,7 +100,7 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
                 fatalError("BAD ERROR... ORDER CONTROL TABLE CELL")
         }
         let orderIndex = indexPath.row
-        cell.setByOrder(cOrder: allActiveOrders[orderIndex], grillUserID : GIDSignIn.sharedInstance().currentUser.userID!)
+        cell.setByOrder(cOrder: allActiveOrders[orderIndex], grillName: grillName)
 
         cell.delegate = self
         return cell
@@ -119,10 +120,20 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
         tableView.allowsSelection = false
         GIDSignIn.sharedInstance().uiDelegate = self
         
-        grillRef.observe(FIRDataEventType.value, with: { (snapshot) in
+        for (grill, email) in GlobalConstants.GrillEmails {
+            if(email.lowercased()  == GIDSignIn.sharedInstance().currentUser.profile.email.lowercased()) {
+                grillName = grill
+                break
+            }
+        }
+        
+        grillSwitch = FIRDatabase.database().reference().child("Grills").child(grillName).child("GrillIsOn")
+
+        
+        grillSwitch.observe(FIRDataEventType.value, with: { (snapshot) in
             let grillStatus = snapshot.value as? Bool
             if(grillStatus==nil){
-                self.grillRef.setValue(false)
+                self.grillSwitch.setValue(false)
                 self.grillIsOn = false
                 self.GrillToggleButton.title = GlobalConstants.turnGrillOnText
             }else if(grillStatus==true){
@@ -134,8 +145,8 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
             }
         })
         
-        let ordersRef = FIRDatabase.database().reference().child(GlobalConstants.grills).child(GIDSignIn.sharedInstance().currentUser.userID).child(GlobalConstants.orders)
-        let orderNumRef = FIRDatabase.database().reference().child(GlobalConstants.grills).child(GIDSignIn.sharedInstance().currentUser.userID).child("OrderNumCount")
+        let ordersRef = FIRDatabase.database().reference().child(GlobalConstants.grills).child(grillName).child(GlobalConstants.orders)
+        let orderNumRef = FIRDatabase.database().reference().child(GlobalConstants.grills).child(grillName).child("OrderNumCount")
         orderNumRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
             let orderNum = snapshot.value as? Int
             if(orderNum == nil) {

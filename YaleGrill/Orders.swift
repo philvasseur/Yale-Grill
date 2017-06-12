@@ -36,7 +36,7 @@ class Orders : NSObject {
         static let orderID = "orderID"
         static let userID = "userID"
         static let orderNum = "orderNum"
-        static let grillID = "grillID"
+        static let grill = "grill"
     }
     
     //Creates a new Orders object
@@ -83,11 +83,11 @@ class Orders : NSObject {
             GlobalConstants.orderStatus : self.orderStatus as AnyObject,
             "pushToken": FIRInstanceID.instanceID().token() as AnyObject,
             ]
-        FIRDatabase.database().reference().child(GlobalConstants.grills).child(GlobalConstants.GrillIDS[selectedDiningHall]!).child(GlobalConstants.orders).child(self.orderID).setValue(grillOrderInfo)
+        FIRDatabase.database().reference().child(GlobalConstants.grills).child(selectedDiningHall).child(GlobalConstants.orders).child(self.orderID).setValue(grillOrderInfo)
         
         
         //Inserts OrderID into Users active orders
-        FIRDatabase.database().reference().child(GlobalConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!).child(GlobalConstants.activeOrders).child(self.orderID).setValue(GlobalConstants.GrillIDS[selectedDiningHall]!)
+        FIRDatabase.database().reference().child(GlobalConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!).child(GlobalConstants.activeOrders).child(self.orderID).setValue(selectedDiningHall)
         
     }
     
@@ -105,7 +105,7 @@ class Orders : NSObject {
             DatabaseKeys.orderID: orderID as AnyObject,
             DatabaseKeys.userID: userID as AnyObject,
             DatabaseKeys.orderNum: orderNum as AnyObject,
-            DatabaseKeys.grillID : GlobalConstants.GrillIDS[selectedDiningHall]! as AnyObject
+            DatabaseKeys.grill : selectedDiningHall as AnyObject
         ]
         
         return jsonObject

@@ -26,7 +26,7 @@ class CookTableViewCell: UITableViewCell{
     @IBOutlet weak var OrderStatusButton: UIButton!
     
     // MARK: - Global Variables
-    var grillUserID : String!
+    var grillName : String!
     var cOrder : Orders!
     var orderRef : FIRDatabaseReference?
     var delegate: CookTableViewController?
@@ -62,13 +62,13 @@ class CookTableViewCell: UITableViewCell{
         
         if(cOrder.orderStatus != status.PickedUp.rawValue) {
             //Updates the order status in the grill's active orders array
-            FIRDatabase.database().reference().child(GlobalConstants.grills).child(self.grillUserID).child(GlobalConstants.orders).child(cOrder.orderID).child(GlobalConstants.orderStatus).setValue(cOrder.orderStatus)
+            FIRDatabase.database().reference().child(GlobalConstants.grills).child(self.grillName).child(GlobalConstants.orders).child(cOrder.orderID).child(GlobalConstants.orderStatus).setValue(cOrder.orderStatus)
         }
         
     }
     
     // MARK: - Functions
-    func setByOrder(cOrder : Orders, grillUserID : String){
+    func setByOrder(cOrder : Orders, grillName : String){
         self.cOrder = cOrder
         orderRef = FIRDatabase.database().reference().child(GlobalConstants.orders).child(cOrder.orderID)
         FoodServingLabel.text = cOrder.foodServing
@@ -96,7 +96,7 @@ class CookTableViewCell: UITableViewCell{
             OrderStatusLabel.text = "Ready"
             OrderStatusButton.setTitle("Mark Picked Up", for: .normal)
         }
-        self.grillUserID = grillUserID
+        self.grillName = grillName
         
     }
     
@@ -108,7 +108,7 @@ class CookTableViewCell: UITableViewCell{
         //Removes the order from the users's active orders
         FIRDatabase.database().reference().child(GlobalConstants.users).child(cOrder.userID!).child(GlobalConstants.activeOrders).child(cOrderID).setValue(nil)
         //Removes the order from the grill's active orders
-        FIRDatabase.database().reference().child(GlobalConstants.grills).child(self.grillUserID).child(GlobalConstants.orders).child(cOrderID).setValue(nil)
+        FIRDatabase.database().reference().child(GlobalConstants.grills).child(self.grillName).child(GlobalConstants.orders).child(cOrderID).setValue(nil)
         
     }
     

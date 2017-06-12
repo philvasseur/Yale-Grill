@@ -12,8 +12,8 @@ import CoreLocation
 class GlobalConstants {
     //Grill Constants
     //add to this array to activate new cook accounts, make sure to add the emailID to the grillIDs array too
-    static let CookEmailArray = ["pvass153@gmail.com"]
-    static let GrillIDS = ["Jonathan Edwards" : "105206071860987390121"] //pvass153@gmail.com
+    static var GrillEmails : [String : String] = [:]
+    static var PickerData = ["Select Dining Hall"]
     static let coordinates  = [
         "Jonathan Edwards": CLLocation(latitude: 41.308839, longitude: -72.929976),
         "Branford" : CLLocation(latitude: 41.310051, longitude: -72.930137),
@@ -60,7 +60,6 @@ class GlobalConstants {
     static let ViewControllerID = "ViewController"
     
     //Other
-    static let PickerData = ["Select Dining Hall","Jonathan Edwards", "Branford", "Ezra Stiles","Trumbull","Davenport","Timothy Dwight","Morse","Hopper", "Pierson","Saybrook","Berkeley","Silliman"]
     static let UserReadyText = "Ready for Pickup!"
     
 }
