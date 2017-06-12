@@ -111,7 +111,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
             return true
             
             //If not a yale email, checks if the email is contained in the cooks email array (case insensitively)
-        }else if (GlobalConstants.GrillEmails.values.contains(where: {$0.caseInsensitiveCompare(cEmail) == .orderedSame})) {
+        }else if (GlobalConstants.GrillEmails.values.contains(where: {$0.caseInsensitiveCompare(cEmail) == .orderedSame})) {
             self.performSegue(withIdentifier: GlobalConstants.ControlScreenSegueID, sender: nil) //Then segues to the ControlScreenView
             return false
             
