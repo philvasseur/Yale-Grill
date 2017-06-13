@@ -32,6 +32,7 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let signInScreen = sb.instantiateViewController(withIdentifier: GlobalConstants.ViewControllerID) as? LoginViewController
         signInScreen?.launchView.isHidden=true
+        signInScreen?.firstTime = false
         self.present(signInScreen!, animated:true, completion:nil)
     }
 

@@ -30,6 +30,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     var allActiveIDs : [String] = []
     var selectedDiningHall : String?
     var cEmail : String!
+    var firstTime : Bool = true
     
     
     // MARK: - Functions
@@ -303,20 +304,22 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
              launchImage.heightAnchor.constraint(equalTo: (launchImage.widthAnchor))
             ])
         
-        //Loads the cook grillIDs and corresponding emails from database
-        let grillRef = FIRDatabase.database().reference().child(GlobalConstants.grills).child("GrillEmails")
-        grillRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
-            GlobalConstants.GrillEmails = snapshot.value as! [String : String]
-            for(key,_) in GlobalConstants.GrillEmails {
-                GlobalConstants.PickerData.append(key)
-            }
-            
-            UIView.animate(withDuration: 0.25, delay: 0,
-                           options: UIViewAnimationOptions.curveEaseOut, animations: {
-                            self.launchView.alpha = 0.0
+        if(firstTime) {
+            //Loads the cook grillIDs and corresponding emails from database
+            let grillRef = FIRDatabase.database().reference().child(GlobalConstants.grills).child("GrillEmails")
+            grillRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+                GlobalConstants.GrillEmails = snapshot.value as! [String : String]
+                for(key,_) in GlobalConstants.GrillEmails {
+                    GlobalConstants.PickerData.append(key)
+                }
+                //Hides the launch screen, makes autologin more smooth
+                UIView.animate(withDuration: 0.25, delay: 0,
+                               options: UIViewAnimationOptions.curveEaseOut, animations: {
+                                self.launchView.alpha = 0.0
+                })
+                
             })
-            
-        })
+        }
     }
     
     //Sets the customers order information before segueing
