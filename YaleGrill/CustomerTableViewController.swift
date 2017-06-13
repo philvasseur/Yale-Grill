@@ -16,12 +16,18 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
     var selectedDiningHall : String!
     var grillIsOn = false
     var noOrdersLabel = UILabel()
+    var grillStatusHandle : UInt!
+    
+    var grillStatusRef : FIRDatabaseReference!
+    var userOrdersRef : FIRDatabaseReference!
+    
     
     // MARK: - Actions
     
     
     @IBAction func signOutPressed(_ sender: UIBarButtonItem) {
         print("LOGGING OUT")
+        removeActiveObservers()
         GIDSignIn.sharedInstance().signOut()
         let firebaseAuth = FIRAuth.auth()
         do {
@@ -68,6 +74,14 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: { (action) in alert.dismiss(animated: true, completion: nil)}))
         
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func removeActiveObservers(){
+        grillStatusRef.removeAllObservers()
+        userOrdersRef.removeAllObservers()
+        for orderID in allActiveIDs {
+            FIRDatabase.database().reference().child(GlobalConstants.orders).child(orderID).removeAllObservers()
+        }
     }
     
     
@@ -145,11 +159,11 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
             [noOrdersLabel.centerXAnchor.constraint(equalTo: (tableView.backgroundView?.centerXAnchor)!), noOrdersLabel.centerYAnchor.constraint(equalTo: (tableView.backgroundView?.centerYAnchor)!)])
         
         //Checks and continues to observe if grill is on or off
-        let grillStatus = FIRDatabase.database().reference().child(GlobalConstants.grills).child(selectedDiningHall!).child(GlobalConstants.grillStat)
-        grillStatus.observe(FIRDataEventType.value, with: { (snapshot) in
+        grillStatusRef = FIRDatabase.database().reference().child(GlobalConstants.grills).child(selectedDiningHall!).child(GlobalConstants.grillStat)
+        grillStatusRef.observe(FIRDataEventType.value, with: { (snapshot) in
             let status = snapshot.value as? Bool
             if(status==nil){ //No status has been set yet, defaults to off.
-                grillStatus.setValue(false)
+                self.grillStatusRef.setValue(false)
                 self.grillIsOn=false
             }else{
                 self.grillIsOn=status!
@@ -157,10 +171,10 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
         })
         
         //Reference to the user's specific account
-        let user = FIRDatabase.database().reference().child(GlobalConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!)
+        userOrdersRef = FIRDatabase.database().reference().child(GlobalConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!).child(GlobalConstants.activeOrders)
         
         //Observes for any deletions in the user active order array
-        user.child(GlobalConstants.activeOrders).queryOrderedByKey().observe(FIRDataEventType.childRemoved, with: { (snapshot) in
+        userOrdersRef.queryOrderedByKey().observe(FIRDataEventType.childRemoved, with: { (snapshot) in
             let orderID = snapshot.key
             //Finds the index of the orderID to be removed
             let removedIndex = self.allActiveIDs.index(of: orderID)
@@ -168,7 +182,9 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
             //Removes it from the activeIDs and then removes it from the tableView
             self.allActiveIDs.remove(at: removedIndex!)
             self.tableView.deleteRows(at: [newIndexPath], with: .automatic)
+            FIRDatabase.database().reference().child(GlobalConstants.orders).child(orderID).removeAllObservers()
         })
+        
         
     }
     
