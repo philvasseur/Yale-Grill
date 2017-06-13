@@ -25,6 +25,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     // MARK: - Global Variables
     let pickerView = UIPickerView()
     let locationManager = CLLocationManager()
+    let launchView = UIView()
     var currentLocation : CLLocation!
     var allActiveIDs : [String] = []
     var selectedDiningHall : String?
@@ -38,7 +39,6 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
      */
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         
-        /* check for user's token */
         if GIDSignIn.sharedInstance().hasAuthInKeychain() {
             self.startLoadAnimation()
             cEmail = GIDSignIn.sharedInstance().currentUser.profile.email!
@@ -262,6 +262,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     // MARK: - Overridden Functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         pickerView.showsSelectionIndicator = true
         pickerView.dataSource = self
         pickerView.delegate = self
@@ -278,8 +279,44 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self
-
+        loadDiningHalls()
         
+    }
+    
+    func loadDiningHalls() {
+        //Keeps the launchScreen while loading the dining hall names
+        self.view.addSubview(launchView)
+        NSLayoutConstraint.useAndActivate(constraints:
+            [launchView.centerXAnchor.constraint(equalTo: (self.view.centerXAnchor)),
+             launchView.centerYAnchor.constraint(equalTo: (self.view.centerYAnchor)),
+             launchView.heightAnchor.constraint(equalTo: (self.view.heightAnchor)),
+             launchView.widthAnchor.constraint(equalTo: (self.view.widthAnchor))
+            ])
+        launchView.backgroundColor = UIColor.white
+        let launchImage = UIImageView()
+        launchImage.image = UIImage(named: "finalIconFull")
+        launchView.addSubview(launchImage)
+        NSLayoutConstraint.useAndActivate(constraints:
+            [launchImage.centerXAnchor.constraint(equalTo: (launchView.centerXAnchor)),
+             launchImage.centerYAnchor.constraint(equalTo: (launchView.centerYAnchor)),
+             launchImage.widthAnchor.constraint(equalTo: (launchView.widthAnchor)),
+             launchImage.heightAnchor.constraint(equalTo: (launchImage.widthAnchor))
+            ])
+        
+        //Loads the cook grillIDs and corresponding emails from database
+        let grillRef = FIRDatabase.database().reference().child(GlobalConstants.grills).child("GrillEmails")
+        grillRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+            GlobalConstants.GrillEmails = snapshot.value as! [String : String]
+            for(key,_) in GlobalConstants.GrillEmails {
+                GlobalConstants.PickerData.append(key)
+            }
+            
+            UIView.animate(withDuration: 0.25, delay: 0,
+                           options: UIViewAnimationOptions.curveEaseOut, animations: {
+                            self.launchView.alpha = 0.0
+            })
+            
+        })
     }
     
     //Sets the customers order information before segueing

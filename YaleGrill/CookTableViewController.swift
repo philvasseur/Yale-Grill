@@ -123,6 +123,7 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
         for (grill, email) in GlobalConstants.GrillEmails {
             if(email.lowercased()  == GIDSignIn.sharedInstance().currentUser.profile.email.lowercased()) {
                 grillName = grill
+                self.title = "Orders - \(grillName!)"
                 break
             }
         }

@@ -31,6 +31,7 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
         }
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let signInScreen = sb.instantiateViewController(withIdentifier: GlobalConstants.ViewControllerID) as? LoginViewController
+        signInScreen?.launchView.isHidden=true
         self.present(signInScreen!, animated:true, completion:nil)
     }
 
@@ -130,8 +131,11 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
         tableView.tableFooterView = UIView() //gets rid of dividers below empty cells
         
         //Sets up background image and no active orders label for when user has no orders placed
-        noOrdersLabel.text = "No Active Orders"
+        let firstName = GIDSignIn.sharedInstance().currentUser.profile.givenName
+        noOrdersLabel.numberOfLines = 0
+        noOrdersLabel.text = "Hi \(firstName ?? "Student"),\nYou Have No Active Orders"
         noOrdersLabel.sizeToFit()
+        noOrdersLabel.textAlignment = .center
         noOrdersLabel.font = UIFont(name: "Verdana-Bold", size: 17)
         let newView = UIImageView(image: UIImage(named: "bg2"))
         self.tableView.backgroundView = newView
