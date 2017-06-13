@@ -85,7 +85,7 @@ class MenuViewController: UIViewController, GIDSignInUIDelegate{
     
     // MARK: - Functions
     
-    //Looping function which goes through all the stepCounts and switches and creates SingleOrder objects. Appends them to the ordersPlaced array
+    //Looping function which goes through all the stepCounts and switches and creates Orders objects. Appends them to the ordersPlaced array
     //This is called indirectly by placeOrder button. PlaceorderButton is set to unwindSegue, but before it segues it checks shouldPerformSegue.
     //If conditions are met, then sets the ordersPlaced array to the array returned here. The unwindSegue method in OrderScreen can then access ordersPlaced
     //to get the orders which were just placed and set the corresponding labels in the active orders screen (OrderScreen.swift)
@@ -94,21 +94,19 @@ class MenuViewController: UIViewController, GIDSignInUIDelegate{
         let cUser = GIDSignIn.sharedInstance().currentUser.userID!
         var orderArray = [Orders]()
         let StepCountArray : [UIStepper] = [BurgerStepCount,VeggieStepCount,ChickenStepCount]
-        var toppings = GlobalConstants.toppingsArray
         let switchesArray : [[UISwitch]] = [HamburgerSwitches,VeggieSwitches]
-        let foodServingArray : [[String]] = GlobalConstants.foodServingArray
-        for index in 0...2{
+        for foodSection in 0...2{ //loops through the 3 types of foods
             var orderInfo : [String] = []
-            if(StepCountArray[index].value != 0){
-                orderInfo.append(foodServingArray[index][lround(StepCountArray[index].value)-1])
-                for cSwitch in 0...4{
-                    if(index==2){
+            if(StepCountArray[foodSection].value != 0){ //0 means none of the food was ordered
+                orderInfo.append(GlobalConstants.foodServingArray[foodSection][lround(StepCountArray[foodSection].value)-1])
+                for cSwitch in 0...4{ //Loops through the options of each type of food
+                    if(foodSection==2){
                         orderInfo.append("")
                     }else{
-                        if(switchesArray[index][cSwitch].isOn){
-                            orderInfo.append("\(toppings[cSwitch])")
+                        if(switchesArray[foodSection][cSwitch].isOn){
+                            orderInfo.append("\(GlobalConstants.toppingsArray[cSwitch])")
                         }else{
-                            orderInfo.append("No \(toppings[cSwitch])")
+                            orderInfo.append("No \(GlobalConstants.toppingsArray[cSwitch])")
                         }
                     }
                 }

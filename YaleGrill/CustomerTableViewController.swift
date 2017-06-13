@@ -65,7 +65,6 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
             }
         }
     }
-
     
     
     // MARK: - Functions
