@@ -107,7 +107,7 @@
                                                 <action selector="ChangeStatusPressed:" destination="lEX-Lm-rlD" eventType="touchUpInside" id="0Iw-gb-iGX"/>
                                             </connections>
                                         </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- #100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eG2-uC-62S">
+                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- #100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eG2-uC-62S">
                                             <rect key="frame" x="64" y="24.5" width="57.5" height="18.5"/>
                                             <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
                                             <nil key="textColor"/>
@@ -982,7 +982,7 @@
                                 <rect key="frame" x="95.5" y="447" width="51" height="31"/>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chicken Breast" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="Fcd-aT-iXy" userLabel="Chicken Breast Label">
-                                <rect key="frame" x="99" y="497.5" width="177" height="26"/>
+                                <rect key="frame" x="99" y="497.5" width="177" height="25.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Fcd-aT-iXy" secondAttribute="height" multiplier="177:26" id="N61-kV-Aqi"/>
                                 </constraints>

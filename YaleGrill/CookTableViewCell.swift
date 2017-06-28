@@ -68,36 +68,44 @@ class CookTableViewCell: UITableViewCell{
     }
     
     // MARK: - Functions
-    func setByOrder(cOrder : Orders, grillName : String){
-        self.cOrder = cOrder
-        orderRef = FIRDatabase.database().reference().child(GlobalConstants.orders).child(cOrder.orderID)
-        FoodServingLabel.text = cOrder.foodServing
-        BunLabel.text = cOrder.bunSetting
-        CheeseLabel.text = cOrder.cheeseSetting
-        SauceLabel.text = cOrder.sauceSetting
-        TomatoLabel.text = cOrder.tomatoSetting
-        LettuceLabel.text = cOrder.lettuceSetting
-        NameLabel.text = cOrder.name
-        if(cOrder.orderNum > 9) {
-            OrderNumLabel.text = "- #\(cOrder.orderNum!)"
-        }else{
-             OrderNumLabel.text = "- #0\(cOrder.orderNum!)"
-        }
-        if(cOrder.orderStatus == status.Placed.rawValue){
-            OrderStatusLabel.text = "Order Placed"
-            OrderStatusButton.setTitle("Mark Preparing", for: .normal)
-            OrderStatusButton.backgroundColor = UIColor(hex: "#4C8BF6") //blue
-        }else if(cOrder.orderStatus == status.Preparing.rawValue){
-            OrderStatusButton.backgroundColor = UIColor(hex: "#009900") //dark green
-            OrderStatusLabel.text = GlobalConstants.preparingTexts[3]
-            OrderStatusButton.setTitle("Mark as Ready", for: .normal)
-        }else if(cOrder.orderStatus == status.Ready.rawValue){
-            OrderStatusButton.backgroundColor = UIColor.red
-            OrderStatusLabel.text = "Ready"
-            OrderStatusButton.setTitle("Mark Picked Up", for: .normal)
-        }
-        self.grillName = grillName
-        
+    func setByOrder(orderID : String, grillName : String){
+        orderRef = FIRDatabase.database().reference().child(GlobalConstants.orders).child(orderID)
+        orderRef?.observe(FIRDataEventType.value, with: { (snapshot) in
+            let newJson = snapshot.value as! NSDictionary
+            self.cOrder = Orders(json: newJson as! [String : AnyObject]) //Converts from JSON to order object
+            
+            self.FoodServingLabel.text = self.cOrder.foodServing
+            self.BunLabel.text = self.cOrder.bunSetting
+            self.CheeseLabel.text = self.cOrder.cheeseSetting
+            self.SauceLabel.text = self.cOrder.sauceSetting
+            self.TomatoLabel.text = self.cOrder.tomatoSetting
+            self.LettuceLabel.text = self.cOrder.lettuceSetting
+            self.NameLabel.text = self.cOrder.name
+            
+            if(self.cOrder.orderNum != 0) {
+                self.orderRef?.removeAllObservers()
+                self.OrderNumLabel.isHidden = false
+            }
+            if(self.cOrder.orderNum > 9) {
+                self.OrderNumLabel.text = "- #\(self.cOrder.orderNum!)"
+            } else {
+                self.OrderNumLabel.text = "- #0\(self.cOrder.orderNum!)"
+            } 
+            if(self.cOrder.orderStatus == self.status.Placed.rawValue){
+                self.OrderStatusLabel.text = "Order Placed"
+                self.OrderStatusButton.setTitle("Mark Preparing", for: .normal)
+                self.OrderStatusButton.backgroundColor = UIColor(hex: "#4C8BF6") //blue
+            }else if(self.cOrder.orderStatus == self.status.Preparing.rawValue){
+                self.OrderStatusButton.backgroundColor = UIColor(hex: "#009900") //dark green
+                self.OrderStatusLabel.text = GlobalConstants.preparingTexts[3]
+                self.OrderStatusButton.setTitle("Mark as Ready", for: .normal)
+            }else if(self.cOrder.orderStatus == self.status.Ready.rawValue){
+                self.OrderStatusButton.backgroundColor = UIColor.red
+                self.OrderStatusLabel.text = "Ready"
+                self.OrderStatusButton.setTitle("Mark Picked Up", for: .normal)
+            }
+            self.grillName = grillName
+        })
     }
     
     private func removeOrder(){

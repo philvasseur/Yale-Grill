@@ -11,7 +11,7 @@ import UIKit
 import Firebase
 
 class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
-   
+    
     // MARK: - Outlets
     @IBOutlet weak var GrillToggleButton: UIBarButtonItem!
     @IBOutlet weak var NavBar: UINavigationItem!
@@ -21,7 +21,6 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
     var grillName: String!
     var grillSwitch : FIRDatabaseReference!
     var grillIsOn : Bool = false
-    var allActiveOrders : [Orders] = []
     var allActiveIDs : [String] = []
     
     
@@ -37,7 +36,7 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
     
     @IBAction func signOutPressed2(_ sender: UIBarButtonItem) {
         print("LOGGING OUT")
-        GIDSignIn.sharedInstance().signOut() 
+        GIDSignIn.sharedInstance().signOut()
         let firebaseAuth = FIRAuth.auth()
         do {
             try firebaseAuth?.signOut()
@@ -102,14 +101,14 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
                 fatalError("BAD ERROR... ORDER CONTROL TABLE CELL")
         }
         let orderIndex = indexPath.row
-        cell.setByOrder(cOrder: allActiveOrders[orderIndex], grillName: grillName)
-
+        cell.setByOrder(orderID: allActiveIDs[orderIndex], grillName: grillName)
+        
         cell.delegate = self
         return cell
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allActiveOrders.count
+        return allActiveIDs.count
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -131,7 +130,7 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
         }
         
         grillSwitch = FIRDatabase.database().reference().child("Grills").child(grillName).child("GrillIsOn")
-
+        
         
         grillSwitch.observe(FIRDataEventType.value, with: { (snapshot) in
             let grillStatus = snapshot.value as? Bool
@@ -149,38 +148,11 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
         })
         
         let ordersRef = FIRDatabase.database().reference().child(GlobalConstants.grills).child(grillName).child(GlobalConstants.orders)
-        let orderNumRef = FIRDatabase.database().reference().child(GlobalConstants.grills).child(grillName).child("OrderNumCount")
-        orderNumRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
-            let orderNum = snapshot.value as? Int
-            if(orderNum == nil) {
-                orderNumRef.setValue(1);
-                self.orderNumCount = 1
-            }else{
-                self.orderNumCount = orderNum!
-            }
         
-            ordersRef.queryOrderedByKey().observe(FIRDataEventType.childAdded, with: { (snapshot) in
-                let newOrderID = snapshot.key
-                self.allActiveIDs.append(newOrderID)
-                let singleOrderRef = FIRDatabase.database().reference().child(GlobalConstants.orders).child(newOrderID as String)
-                singleOrderRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
-                    let newJson = snapshot.value as! NSDictionary
-                    let newOrder = Orders(json: newJson as! [String : AnyObject]) //Converts from JSON to order object
-                    if(newOrder.orderNum == 0){
-                        newOrder.orderNum = self.orderNumCount
-                        self.orderNumCount += 1
-                        orderNumRef.setValue(self.orderNumCount)
-                        singleOrderRef.child("orderNum").setValue(newOrder.orderNum)
-                    }
-                    if(self.orderNumCount >= 100){
-                        orderNumRef.setValue(1);
-                        self.orderNumCount = 1
-                    }
-                    let newIndexPath = IndexPath(row: self.allActiveOrders.count, section: 0)
-                    self.allActiveOrders.append(newOrder)
-                    self.tableView.insertRows(at: [newIndexPath], with: .automatic)
-                })
-            })
+        ordersRef.queryOrderedByKey().observe(FIRDataEventType.childAdded, with: { (snapshot) in
+            self.allActiveIDs.append(snapshot.key)
+            let newIndexPath = IndexPath(row: self.allActiveIDs.count-1, section: 0)
+            self.tableView.insertRows(at: [newIndexPath], with: .automatic)
         })
         
         ordersRef.queryOrderedByKey().observe(FIRDataEventType.childRemoved, with: { (snapshot) in
@@ -188,10 +160,9 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
             let removedIndex = self.allActiveIDs.index(of: orderID)
             let newIndexPath = IndexPath(row: removedIndex!, section: 0)
             self.allActiveIDs.remove(at: removedIndex!)
-            self.allActiveOrders.remove(at: removedIndex!)
             self.tableView.deleteRows(at: [newIndexPath], with: .automatic)
         })
-
+        
         
     }
     override func viewDidAppear(_ animated: Bool) {
