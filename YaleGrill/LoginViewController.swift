@@ -95,7 +95,6 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
             let pastDHall = snapshot.value as? String ?? "Select Dining Hall"
             if (GlobalConstants.GrillEmails[pastDHall] != nil)  {
                 self.selectedDiningHall = pastDHall
-                self.diningHallTextField.text = self.selectedDiningHall
                 completion(true)
             } else {
                 completion(false)

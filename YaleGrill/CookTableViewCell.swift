@@ -82,15 +82,15 @@ class CookTableViewCell: UITableViewCell{
             self.LettuceLabel.text = self.cOrder.lettuceSetting
             self.NameLabel.text = self.cOrder.name
             
-            if(self.cOrder.orderNum != 0) {
-                self.orderRef?.removeAllObservers()
-                self.OrderNumLabel.isHidden = false
-            }
             if(self.cOrder.orderNum > 9) {
                 self.OrderNumLabel.text = "- #\(self.cOrder.orderNum!)"
             } else {
                 self.OrderNumLabel.text = "- #0\(self.cOrder.orderNum!)"
-            } 
+            }
+            if(self.cOrder.orderNum != 0) {
+                self.orderRef?.removeAllObservers()
+                self.OrderNumLabel.isHidden = false
+            }
             if(self.cOrder.orderStatus == self.status.Placed.rawValue){
                 self.OrderStatusLabel.text = "Order Placed"
                 self.OrderStatusButton.setTitle("Mark Preparing", for: .normal)

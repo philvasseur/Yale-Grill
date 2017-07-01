@@ -28,7 +28,7 @@ class GlobalConstants {
         case Placed, Preparing, Ready, PickedUp
     }
     
-    static let READYTIMER : Double = 0.25 //minutes left ready till user is given a strike
+    static let READYTIMER : Double = 8 //minutes left ready till user is given a strike
     static let strikeBanLimit = 5 //strikes until user gets a ban
     static let banLength = 10 //day long ban length
     
