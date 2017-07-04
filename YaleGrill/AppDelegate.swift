@@ -43,7 +43,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UIApplication.shared.registerForRemoteNotifications()
         }
         application.registerForRemoteNotifications()
-        GIDSignIn.sharedInstance().signInSilently()
         
         return true
     }

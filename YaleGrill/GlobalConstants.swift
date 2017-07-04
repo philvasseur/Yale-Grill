@@ -13,6 +13,7 @@ class GlobalConstants {
     //Grill Constants
     //add to this array to activate new cook accounts, make sure to add the emailID to the grillIDs array too
     static var GrillEmails : [String : String] = [:]
+    static var appJustOpened = true;
     static var PickerData = ["Select Dining Hall"]
     static let coordinates  = [
         "Jonathan Edwards": CLLocation(latitude: 41.308839, longitude: -72.929976),

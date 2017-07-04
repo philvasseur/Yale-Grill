@@ -48,7 +48,6 @@ class CookTableViewCell: UITableViewCell{
             OrderStatusButton.setTitle("Mark Picked Up", for: .normal)
             OrderStatusButton.backgroundColor = UIColor.red
             task = DispatchWorkItem {
-                print("Running Task")
                 self.delegate?.giveStrike(userID : self.cOrder.userID!,name : self.cOrder.name)
                 self.NameLabel.text = "Anyone (was \(self.cOrder.name!))"
             }

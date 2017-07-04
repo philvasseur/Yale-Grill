@@ -9,9 +9,9 @@
 import UIKit
 import Firebase
 import CoreLocation
+import NVActivityIndicatorView
 
 class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, UIPickerViewDelegate, UIPickerViewDataSource, CLLocationManagerDelegate{
-    
     
     //LOCATION SERVICES NOT TURNED ON ATM
     
@@ -21,6 +21,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     @IBOutlet weak var GSignInButton: GIDSignInButton!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var loadingView: UIView!
+    @IBOutlet weak var loadAnimation: NVActivityIndicatorView!
     
     // MARK: - Global Variables
     let pickerView = UIPickerView()
@@ -30,7 +31,6 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     var allActiveIDs : [String] = []
     var selectedDiningHall : String?
     var cEmail : String!
-    var firstTime : Bool = true
     
     
     // MARK: - Functions
@@ -63,7 +63,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
                             let dHallRef = FIRDatabase.database().reference().child(GlobalConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!).child(GlobalConstants.prevDining)
                             dHallRef.setValue(self.selectedDiningHall) //Updates last dining hall logged into
                             self.loadUserAndSegue()
-                        
+                            
                         } else { //Happens during a bug with pickerView, rare, but taken into account just in case
                             self.signOutGoogleAndFirebase()
                             self.stopLoadAnimation()
@@ -144,7 +144,6 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
                 //Sets name if user doesn't exist yet.
                 user.child(GlobalConstants.name).setValue(GIDSignIn.sharedInstance().currentUser.profile.name!)
             }
-            
             self.performSegue(withIdentifier: GlobalConstants.SignInSegueID, sender: nil) //Segues to OrderScreen
         })
         
@@ -193,6 +192,10 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     }
     
     func signOutGoogleAndFirebase() {
+        UIView.animate(withDuration: 0.25, delay: 0,
+                       options: UIViewAnimationOptions.curveEaseOut, animations: {
+                        self.launchView.alpha = 0.0
+        })
         GIDSignIn.sharedInstance().signOut()
         let firebaseAuth = FIRAuth.auth()
         do {
@@ -262,7 +265,6 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     // MARK: - Overridden Functions
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         pickerView.showsSelectionIndicator = true
         pickerView.dataSource = self
         pickerView.delegate = self
@@ -279,7 +281,18 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self
-        loadDiningHalls()
+        
+        //only want to load dining halls when app is opened, not on logout
+        if(GlobalConstants.appJustOpened) {
+            GlobalConstants.appJustOpened = false
+            loadDiningHalls()
+        }
+        
+        if(GIDSignIn.sharedInstance().hasAuthInKeychain()) {
+            GIDSignIn.sharedInstance().signInSilently()
+        } else {
+            self.launchView.isHidden=true
+        }
         
     }
     
@@ -296,29 +309,25 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         let launchImage = UIImageView()
         launchImage.image = UIImage(named: "finalIconFull")
         launchView.addSubview(launchImage)
+        
         NSLayoutConstraint.useAndActivate(constraints:
             [launchImage.centerXAnchor.constraint(equalTo: (launchView.centerXAnchor)),
-             launchImage.centerYAnchor.constraint(equalTo: (launchView.centerYAnchor)),
+             NSLayoutConstraint(item: launchImage, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: launchView, attribute: NSLayoutAttribute.centerY, multiplier: 0.8, constant: 0),
              launchImage.widthAnchor.constraint(equalTo: (launchView.widthAnchor)),
              launchImage.heightAnchor.constraint(equalTo: (launchImage.widthAnchor))
             ])
+        launchView.addSubview(loadAnimation)
+        loadAnimation.startAnimating()
         
-        if(firstTime) {
-            //Loads the cook grillIDs and corresponding emails from database
-            let grillRef = FIRDatabase.database().reference().child(GlobalConstants.grills).child("GrillEmails")
-            grillRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
-                GlobalConstants.GrillEmails = snapshot.value as! [String : String]
-                for(key,_) in GlobalConstants.GrillEmails {
-                    GlobalConstants.PickerData.append(key)
-                }
-                //Hides the launch screen, makes autologin more smooth
-                UIView.animate(withDuration: 0.25, delay: 0,
-                               options: UIViewAnimationOptions.curveEaseOut, animations: {
-                                self.launchView.alpha = 0.0
-                })
-                
-            })
-        }
+        //Loads the cook grillIDs and corresponding emails from database
+        let grillRef = FIRDatabase.database().reference().child(GlobalConstants.grills).child("GrillEmails")
+        grillRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+            GlobalConstants.GrillEmails = snapshot.value as! [String : String]
+            for(key,_) in GlobalConstants.GrillEmails {
+                GlobalConstants.PickerData.append(key)
+            }
+            
+        })
     }
     
     //Sets the customers order information before segueing
@@ -336,6 +345,8 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
+    
+    
     
 }
 

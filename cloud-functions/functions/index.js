@@ -7,8 +7,9 @@ admin.initializeApp(functions.config().firebase);
 
 //Defines the grillOrderChange function to be called every time the path below is written to
 exports.grillOrderChange = functions.database.ref('/Grills/{grillID}/Orders/{orderID}').onWrite(event => {
+	var orderIDForLog = event.params.orderID.substring(0,8);
 	if (!event.data.exists()) { //Checks that order exists (onWrite is called by deletions)
-		console.log("No Data Exists (Order Deleted) - No Action Taken");
+		console.log(orderIDForLog + ': No Data Exists (Order Deleted) - No Action Taken');
 
 	} else if(event.data.val().orderStatus != 2) { //Checks that orderStatus is 2 (ready status)
 		//If it isn't 2, but is 0 then we know the order was just placed and should increment the orderNumCount
@@ -24,17 +25,17 @@ exports.grillOrderChange = functions.database.ref('/Grills/{grillID}/Orders/{ord
 		   		count = newCount;
 		    	return newCount;
 			}).then(()=>{
-				console.log('Setting OrderNum to: ',count);
+				console.log(orderIDForLog + ': Order Created - Setting OrderNum to: ' + count);
 				//Sets the orderNum in the actual order once the orderNum counter is sucessfully incremented
 				admin.database().ref('/Orders/'+event.params.orderID+'/orderNum').set(count);
 			});
 		} else {
-  			console.log('OrderStatus not set to ready and not set to orderPlaced - No Action Taken');
+  			console.log(orderIDForLog + ': OrderStatus set to preparing - No Action Taken');
   		}
 
 	} else if (!event.data.val().pushToken) { //Checks that a pushToken exists, if not returns
-		console.error("PushToken does not exist (DB/Client Error ??) - No Action Taken");
-		
+		console.error(orderIDForLog + ': PushToken does not exist (DB/Client Error ??) - No Action Taken');
+
 	} else { //Data exists, push token exists, and orderStatus == 2, so should send food is ready push notification
 	    //Creates the payload for the notification
 	    let payload = {
@@ -47,12 +48,12 @@ exports.grillOrderChange = functions.database.ref('/Grills/{grillID}/Orders/{ord
 	    };
 
 	    let token = event.data.val().pushToken;
-	    console.log('Notifying token: ',token);
+	    console.log(orderIDForLog + ': OrderStatus set to ready - Notifying token: ' + token);
 	    return admin.messaging().sendToDevice([token], payload).then(response => {
 	        //check if there was an error.
 	        const error = response.results[0].error;
 	        if (error) {
-	        	console.error('Failure sending notification to', token, error);
+	        	console.error(orderIDForLog + ': Failure sending notification to', token, error);
 	        }
 		});
 	}

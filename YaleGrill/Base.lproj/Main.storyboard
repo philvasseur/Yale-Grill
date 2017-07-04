@@ -264,16 +264,32 @@
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="rHD-UZ-naE">
                                 <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
                             </activityIndicatorView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3xX-Nc-Gkz" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
+                                <rect key="frame" x="162.5" y="442" width="50" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="JUK-6J-uy4"/>
+                                    <constraint firstAttribute="height" constant="50" id="OYO-rb-tFt"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="typeName" value="ballRotateChase"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                        <color key="value" red="0.13725490196078433" green="0.29803921568627451" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.10588235294117647" green="0.30980392156862746" blue="0.62352941176470589" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="GFl-ZW-WQc" firstAttribute="top" secondItem="x8Q-2e-89c" secondAttribute="bottom" constant="5" id="06q-eK-RK5"/>
                             <constraint firstItem="x8Q-2e-89c" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0i9-nT-O0K"/>
+                            <constraint firstItem="3xX-Nc-Gkz" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="1.4" id="Cyr-m3-q6I"/>
                             <constraint firstItem="Gw9-Jt-OwV" firstAttribute="top" secondItem="Prv-Si-nvN" secondAttribute="bottom" constant="6" id="DMD-qS-ngG"/>
                             <constraint firstItem="xTe-bi-vpj" firstAttribute="height" secondItem="VIN-Hj-NQE" secondAttribute="height" id="NsJ-9K-pQe"/>
                             <constraint firstItem="VIN-Hj-NQE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Nxn-dX-Ol7"/>
                             <constraint firstItem="x8Q-2e-89c" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="1.15" id="OUN-9x-ug6"/>
                             <constraint firstItem="xTe-bi-vpj" firstAttribute="width" secondItem="VIN-Hj-NQE" secondAttribute="width" id="Pu2-3J-wKG"/>
+                            <constraint firstItem="3xX-Nc-Gkz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="QAu-6b-Zwr"/>
                             <constraint firstItem="rHD-UZ-naE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="S0H-NH-AvD"/>
                             <constraint firstItem="xTe-bi-vpj" firstAttribute="centerY" secondItem="VIN-Hj-NQE" secondAttribute="centerY" id="UD7-DX-DiX"/>
                             <constraint firstItem="Prv-Si-nvN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ZaD-3V-k7k"/>
@@ -295,6 +311,7 @@
                         <outlet property="DisabledSignInColor" destination="4r6-q8-vo8" id="okx-G1-b3Y"/>
                         <outlet property="GSignInButton" destination="VIN-Hj-NQE" id="GDW-Cd-weg"/>
                         <outlet property="diningHallTextField" destination="GFl-ZW-WQc" id="skK-68-f5t"/>
+                        <outlet property="loadAnimation" destination="3xX-Nc-Gkz" id="fbi-Ed-bzt"/>
                         <outlet property="loadingIndicator" destination="rHD-UZ-naE" id="V6w-Mj-jma"/>
                         <outlet property="loadingView" destination="0B7-Lh-0B6" id="GUq-kU-3kE"/>
                         <segue destination="CYl-rG-eM0" kind="presentation" identifier="SignInSegue" id="pNU-dT-IA1"/>
@@ -982,7 +999,7 @@
                                 <rect key="frame" x="95.5" y="447" width="51" height="31"/>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chicken Breast" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="Fcd-aT-iXy" userLabel="Chicken Breast Label">
-                                <rect key="frame" x="99" y="497.5" width="177" height="25.5"/>
+                                <rect key="frame" x="99" y="497.5" width="177" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Fcd-aT-iXy" secondAttribute="height" multiplier="177:26" id="N61-kV-Aqi"/>
                                 </constraints>
@@ -1128,7 +1145,7 @@
                 <navigationController storyboardIdentifier="NavControl" title="Customer NavController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CYl-rG-eM0" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="0S0-rn-29S"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3L9-0H-vua">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="3L9-0H-vua">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1146,7 +1163,7 @@
             <objects>
                 <navigationController title="Cook NavController" automaticallyAdjustsScrollViewInsets="NO" id="Txg-YN-yko" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yZ9-AK-vnH">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="yZ9-AK-vnH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
