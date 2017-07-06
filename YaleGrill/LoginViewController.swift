@@ -136,7 +136,8 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
                 if(self.isBanned(bannedUntilString: userDic["BannedUntil"] as? String, user: user)) {
                     return
                 }
-                orderIDs = Array((userDic[GlobalConstants.activeOrders] as? [String: String] ?? [:]).keys)
+                //Keys are timeStamp based, so we can sort to make sure orders are shown in same order they're placed
+                orderIDs = Array((userDic[GlobalConstants.activeOrders] as? [String: String] ?? [:]).keys).sorted()
                 
             }else{
                 //Sets name if user doesn't exist yet.

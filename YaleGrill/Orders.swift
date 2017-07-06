@@ -42,8 +42,11 @@ class Orders : NSObject {
     //Creates a new Orders object
     init(_userID: String,_name : String, _foodServing : String, _bunSetting : String, _cheeseSetting : String, _sauceSetting : String, _lettuceSetting : String, _tomatoSetting: String, _orderID : String?, _orderNum : Int?, _grill : String) {
         self.userID = _userID
-        let uuid = CFUUIDCreateString(nil, CFUUIDCreate(nil)) as String?
-        self.orderID = _orderID ?? uuid
+        
+        
+        let uuid = CFUUIDCreateString(nil, CFUUIDCreate(nil))! as String
+        let index = uuid.index(uuid.startIndex, offsetBy: 8)
+        self.orderID = _orderID ?? "\(String(Date().ticks))-\(uuid.substring(to: index))"
         self.name = _name
         self.foodServing = _foodServing
         self.bunSetting = _bunSetting
@@ -79,13 +82,13 @@ class Orders : NSObject {
         //Inserts orderID/OrderStatus/OrderPushToken into Grills active orders
         let grillOrderInfo: [String: AnyObject] = [
             GlobalConstants.orderStatus : 0 as AnyObject,
-            "pushToken": FIRInstanceID.instanceID().token() as AnyObject,
-            ]
+            "pushToken": FIRInstanceID.instanceID().token() as AnyObject]
         FIRDatabase.database().reference().child(GlobalConstants.grills).child(grill).child(GlobalConstants.orders).child(self.orderID).setValue(grillOrderInfo)
         
         
         //Inserts OrderID into Users active orders
-        FIRDatabase.database().reference().child(GlobalConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!).child(GlobalConstants.activeOrders).child(self.orderID).setValue(grill)
+        let cUserId = GIDSignIn.sharedInstance().currentUser.userID!
+        FIRDatabase.database().reference().child(GlobalConstants.users).child(cUserId).child(GlobalConstants.activeOrders).child(self.orderID).setValue(grill)
         
     }
     

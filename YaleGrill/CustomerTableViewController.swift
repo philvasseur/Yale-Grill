@@ -46,11 +46,8 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
             if(grillIsOn){ //Only goes through orders if the grill is on
                 var indexPaths : [IndexPath] = []
                 
-                //Inserts the orders all at onces, makes it so orderNum lines up better to actual order of the orders
                 for placedOrder in tempOrderArray{
                     placedOrder.insertIntoDatabase()
-                }
-                for placedOrder in tempOrderArray{
                     allActiveOrders.append(placedOrder) //Adds new orders to local orderIDs array
                     indexPaths.append(IndexPath(row: allActiveOrders.count-1, section: 0) ) //Adds orders indexPath in table to array
                 }
