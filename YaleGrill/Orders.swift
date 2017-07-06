@@ -21,7 +21,6 @@ class Orders : NSObject {
     var sauceSetting: String!
     var lettuceSetting: String!
     var tomatoSetting: String!
-    var orderStatus: Int!
     var orderNum: Int!
     var grill : String!
     

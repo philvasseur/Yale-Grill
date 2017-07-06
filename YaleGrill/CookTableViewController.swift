@@ -129,7 +129,6 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
         
         grillSwitch = FIRDatabase.database().reference().child("Grills").child(grillName).child("GrillIsOn")
         
-        
         grillSwitch.observe(FIRDataEventType.value, with: { (snapshot) in
             let grillStatus = snapshot.value as? Bool
             if(grillStatus==nil){
@@ -160,15 +159,5 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
             self.allActiveIDs.remove(at: removedIndex!)
             self.tableView.deleteRows(at: [newIndexPath], with: .automatic)
         })
-        
-        
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }

@@ -152,7 +152,6 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
         grillStatusRef.observe(FIRDataEventType.value, with: { (snapshot) in
             let status = snapshot.value as? Bool
             if(status==nil){ //No status has been set yet, defaults to off.
-                self.grillStatusRef.setValue(false)
                 self.grillIsOn=false
             }else{
                 self.grillIsOn=status!

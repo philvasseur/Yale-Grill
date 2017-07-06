@@ -35,14 +35,12 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     
     // MARK: - Functions
     
-    /*
-     Method for googleSign in. Is called when you press the button and when the application loads. Checks if there is authentication in keychain cached, if so gets the dining hall and then checks if the email is a yale/cook email.
-     */
+    
+    //Method for googleSign in. Is called when you press GIDSignInButton and on openif user is already logged in (silentSignIn)
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        
-        if GIDSignIn.sharedInstance().hasAuthInKeychain() {
+        if GIDSignIn.sharedInstance().hasAuthInKeychain() { //Confirms user is signed into google account
             self.startLoadAnimation()
-            cEmail = GIDSignIn.sharedInstance().currentUser.profile.email!
+            cEmail = GIDSignIn.sharedInstance().currentUser.profile.email! //Users email
             print("\(cEmail!): Attempting Signing In")
             
             guard let authentication = user.authentication else { return }
@@ -54,17 +52,13 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
                     return
                 }
                 
-                
-                //If checks emails, if a student then gets the dining hall
+                //Checks emails, if a student then gets the dining hall, if cook then segues, if neither logs out
                 if(self.isYaleEmail(user: user)) {
                     self.getDiningHall { success in
-                        //Checks to make sure a dining hall is actually chosen
+                        //Completion handler used to make sure a dining hall is actually set
                         if(success) {
-                            let dHallRef = FIRDatabase.database().reference().child(GlobalConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!).child(GlobalConstants.prevDining)
-                            dHallRef.setValue(self.selectedDiningHall) //Updates last dining hall logged into
-                            self.loadUserAndSegue()
-                            
-                        } else { //Happens during a bug with pickerView, rare, but taken into account just in case
+                            self.loadOrdersAndSegue()
+                        } else { //Happens during a bug with pickerView or if user's prevDiningHall is no longer available
                             self.signOutGoogleAndFirebase()
                             self.stopLoadAnimation()
                             self.createAlert(title: "Sorry, cannot load the dining hall!", message: "Please select another dining hall. If you think this is an error, contact philip.vasseur@yale.edu.")
@@ -73,8 +67,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
                 }
             }
             
-            //If there was an error authenticating google keychain
-        }else if(error != nil){
+        }else if(error != nil){ //If there was an error authenticating google keychain
             print("Couldn't sign in, Error: \(error!)")
         }
         
@@ -83,20 +76,21 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     //Gets the last dining hall from firebase server, used for autologin as only autologins in if previous
     //dining hall exists
     func getDiningHall(completion : @escaping (Bool) -> ()) {
+        let dHallRef = FIRDatabase.database().reference().child(GlobalConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!).child(GlobalConstants.prevDining)
         if(GlobalConstants.GrillEmails[diningHallTextField.text!] != nil) {
             selectedDiningHall = diningHallTextField.text
+            dHallRef.setValue(self.selectedDiningHall) //Updates last dining hall logged into for user
             completion(true)
             return
         }
-        let dHallRef = FIRDatabase.database().reference().child(GlobalConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!).child(GlobalConstants.prevDining)
         
         dHallRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
-            
             let pastDHall = snapshot.value as? String ?? "Select Dining Hall"
             if (GlobalConstants.GrillEmails[pastDHall] != nil)  {
                 self.selectedDiningHall = pastDHall
                 completion(true)
             } else {
+                dHallRef.removeValue()
                 completion(false)
             }
             
@@ -112,11 +106,11 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
             
             //If not a yale email, checks if the email is contained in the cooks email array (case insensitively)
         }else if (GlobalConstants.GrillEmails.values.contains(where: {$0.caseInsensitiveCompare(cEmail) == .orderedSame})) {
-            self.performSegue(withIdentifier: GlobalConstants.ControlScreenSegueID, sender: nil) //Then segues to the ControlScreenView
+            //If it is a cooks email then segues right away
+            self.performSegue(withIdentifier: GlobalConstants.ControlScreenSegueID, sender: nil)
             return false
             
-            //Not a yale email, so signs user out
-        }else{
+        }else{ //Not a yale email, so signs user out
             print("Non-Yale Email, LOGGING OUT")
             signOutGoogleAndFirebase()
             self.stopLoadAnimation()
@@ -126,7 +120,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     }
     
     //Loads the user orders and ban info, for CUSTOMERS only. Cooks don't need this checked.
-    func loadUserAndSegue() {
+    func loadOrdersAndSegue() {
         let user = FIRDatabase.database().reference().child(GlobalConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!)
         user.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in //Gets initial info for user
             var orderIDs : [String] = []
@@ -137,8 +131,11 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
                     return
                 }
                 //Keys are timeStamp based, so we can sort to make sure orders are shown in same order they're placed
-                orderIDs = Array((userDic[GlobalConstants.activeOrders] as? [String: String] ?? [:]).keys).sorted()
-                
+                for (key,value) in userDic[GlobalConstants.activeOrders] as? [String: String] ?? [:] {
+                    if(value == self.selectedDiningHall) {
+                        orderIDs.append(key)
+                    }
+                }
             }else{
                 //Sets name if user doesn't exist yet.
                 user.child(GlobalConstants.name).setValue(GIDSignIn.sharedInstance().currentUser.profile.name!)
@@ -148,7 +145,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
                 self.performSegue(withIdentifier: GlobalConstants.SignInSegueID, sender: nil)
             }
             
-            for key in orderIDs {
+            for key in orderIDs.sorted() {
                 FIRDatabase.database().reference().child(GlobalConstants.orders).child(key).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
                     self.allActiveOrders.append(Orders.init(orderID: snapshot.key, json: snapshot.value as! Dictionary))
                     if(self.allActiveOrders.count == orderIDs.count) {
@@ -186,6 +183,42 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         return true
     }
     
+    //Loads the Dining Hall names and emails for the pickerView from firebase
+    func loadDiningHalls() {
+        //Keeps the launchScreen while loading the dining hall names
+        self.view.addSubview(launchView)
+        NSLayoutConstraint.useAndActivate(constraints:
+            [launchView.centerXAnchor.constraint(equalTo: (self.view.centerXAnchor)),
+             launchView.centerYAnchor.constraint(equalTo: (self.view.centerYAnchor)),
+             launchView.heightAnchor.constraint(equalTo: (self.view.heightAnchor)),
+             launchView.widthAnchor.constraint(equalTo: (self.view.widthAnchor))
+            ])
+        launchView.backgroundColor = UIColor.white
+        let launchImage = UIImageView()
+        launchImage.image = UIImage(named: "finalIconFull")
+        launchView.addSubview(launchImage)
+        
+        NSLayoutConstraint.useAndActivate(constraints:
+            [launchImage.centerXAnchor.constraint(equalTo: (launchView.centerXAnchor)),
+             NSLayoutConstraint(item: launchImage, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: launchView, attribute: NSLayoutAttribute.centerY, multiplier: 0.8, constant: 0),
+             launchImage.widthAnchor.constraint(equalTo: (launchView.widthAnchor)),
+             launchImage.heightAnchor.constraint(equalTo: (launchImage.widthAnchor))
+            ])
+        launchView.addSubview(loadAnimation)
+        loadAnimation.startAnimating()
+        
+        //Loads the cook grillIDs and corresponding emails from database
+        let grillRef = FIRDatabase.database().reference().child(GlobalConstants.grills).child("GrillEmails")
+        grillRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+            GlobalConstants.GrillEmails = snapshot.value as! [String : String]
+            for(key,_) in GlobalConstants.GrillEmails {
+                GlobalConstants.PickerData.append(key)
+            }
+            
+        })
+    }
+    
+    //Starts the animation for NORMAL signin
     func startLoadAnimation(){
         self.loadingIndicator.startAnimating()
         self.loadingIndicator.isHidden = false
@@ -193,7 +226,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         pickerView.isHidden = true
         UIApplication.shared.beginIgnoringInteractionEvents()
     }
-    
+    //Stops the animation for NORMAL signin
     func stopLoadAnimation(){
         self.loadingIndicator.stopAnimating()
         self.loadingIndicator.isHidden = true
@@ -217,7 +250,6 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         
     }
     
-    
     //Alert Function to create an alert
     func createAlert (title : String, message : String){
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
@@ -225,6 +257,9 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         
         self.present(alert, animated: true, completion: nil)
     }
+    
+    
+    // MARK: - PickerView and LocationManager delegates
     
     //PickerView function which sets the number of components (to 1), is used for dining hall selection
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -299,6 +334,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
             loadDiningHalls()
         }
         
+        //If user has no previous authentication hides the longer loading screen
         if(GIDSignIn.sharedInstance().hasAuthInKeychain()) {
             GIDSignIn.sharedInstance().signInSilently()
         } else {
@@ -307,39 +343,6 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         
     }
     
-    func loadDiningHalls() {
-        //Keeps the launchScreen while loading the dining hall names
-        self.view.addSubview(launchView)
-        NSLayoutConstraint.useAndActivate(constraints:
-            [launchView.centerXAnchor.constraint(equalTo: (self.view.centerXAnchor)),
-             launchView.centerYAnchor.constraint(equalTo: (self.view.centerYAnchor)),
-             launchView.heightAnchor.constraint(equalTo: (self.view.heightAnchor)),
-             launchView.widthAnchor.constraint(equalTo: (self.view.widthAnchor))
-            ])
-        launchView.backgroundColor = UIColor.white
-        let launchImage = UIImageView()
-        launchImage.image = UIImage(named: "finalIconFull")
-        launchView.addSubview(launchImage)
-        
-        NSLayoutConstraint.useAndActivate(constraints:
-            [launchImage.centerXAnchor.constraint(equalTo: (launchView.centerXAnchor)),
-             NSLayoutConstraint(item: launchImage, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: launchView, attribute: NSLayoutAttribute.centerY, multiplier: 0.8, constant: 0),
-             launchImage.widthAnchor.constraint(equalTo: (launchView.widthAnchor)),
-             launchImage.heightAnchor.constraint(equalTo: (launchImage.widthAnchor))
-            ])
-        launchView.addSubview(loadAnimation)
-        loadAnimation.startAnimating()
-        
-        //Loads the cook grillIDs and corresponding emails from database
-        let grillRef = FIRDatabase.database().reference().child(GlobalConstants.grills).child("GrillEmails")
-        grillRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
-            GlobalConstants.GrillEmails = snapshot.value as! [String : String]
-            for(key,_) in GlobalConstants.GrillEmails {
-                GlobalConstants.PickerData.append(key)
-            }
-            
-        })
-    }
     
     //Sets the customers order information before segueing
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

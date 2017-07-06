@@ -41,13 +41,9 @@ class CustomerTableViewCell: UITableViewCell{
     
     // MARK: - Functions
     func setByOrder(order : Orders){
-        let notFinishedTexts = ["Order Placed",GlobalConstants.preparingTexts[0]]
-        
         //Loads a random preparing gif
         preparingGIF.loadGif(name: GlobalConstants.gifArray[Int(arc4random_uniform(UInt32(GlobalConstants.gifArray.count)))])
         preparingGIF.layer.cornerRadius = 10
-        
-        
         self.cOrder = order
         
         //Sets all the info in the cell
@@ -57,7 +53,7 @@ class CustomerTableViewCell: UITableViewCell{
         self.attributeThreeLabel.text = self.cOrder.bunSetting
         self.attributeFourLabel.text = self.cOrder.sauceSetting
         self.attributeFiveLabel.text = self.cOrder.tomatoSetting
-        orderNumLabel.isHidden = true
+        orderNumLabel.isHidden = true //Hides the orderNumLabel until it gets set as non-zero
         for label in self.orderLabels { //unhides once info shows, makes it look snappier
             label.isHidden = false
         }
@@ -80,16 +76,18 @@ class CustomerTableViewCell: UITableViewCell{
         
         let orderStatusRef = FIRDatabase.database().reference().child(GlobalConstants.grills).child(order.grill).child(GlobalConstants.orders).child(order.orderID).child(GlobalConstants.orderStatus)
         orderStatusRef.observe(FIRDataEventType.value, with: {(snapshot) in
-            let orderStatus = snapshot.value as? Int ?? 0
+            let orderStatus = snapshot.value as? Int ?? 3
+            
             //If order is before ready status (placed or preparing)
             if (orderStatus < self.status.Ready.rawValue) {
+                let notFinishedTexts = ["Order Placed",GlobalConstants.preparingTexts[0]]
                 self.statusLabel.text=notFinishedTexts[orderStatus] //Sets to either Preparing or Order Placed
                 self.statusLabel.isHidden = false //Unhides the "preparing/order placed" label
                 self.readyForPickupText.isHidden = true //Hides the "Ready for Pickup" label
                 self.preparingGIF.isHidden = false
             } else { //If order is Ready
                 self.statusLabel.isHidden=true //Hides 'Preparing...' Label
-                self.readyForPickupText.isHidden=false //Unhides the "Ready For Pickup" Label
+                self.readyForPickupText.isHidden=false //Unhides the "Ready" Label
             }
         })
         
