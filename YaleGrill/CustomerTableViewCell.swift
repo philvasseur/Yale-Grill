@@ -31,7 +31,6 @@ class CustomerTableViewCell: UITableViewCell{
     
     // MARK: - Global Variables
     var cOrder : Orders!
-    var orderRef : FIRDatabaseReference!
     var delegate: CustomerTableViewController?
     var timer = Timer()
     var orderLabels: [UILabel]!
@@ -41,56 +40,61 @@ class CustomerTableViewCell: UITableViewCell{
     // MARK: - Actions
     
     // MARK: - Functions
-    func setByOrderID(orderID : String){
+    func setByOrder(order : Orders){
         let notFinishedTexts = ["Order Placed",GlobalConstants.preparingTexts[0]]
         
         //Loads a random preparing gif
         preparingGIF.loadGif(name: GlobalConstants.gifArray[Int(arc4random_uniform(UInt32(GlobalConstants.gifArray.count)))])
         preparingGIF.layer.cornerRadius = 10
         
-        orderRef = FIRDatabase.database().reference().child(GlobalConstants.orders).child(orderID)
         
-        orderRef.observe(FIRDataEventType.value, with: { (snapshot) in //Observes the order for changes
-            let orderDic = snapshot.value as! NSDictionary
-            //
-            let order = Orders(json: orderDic as! [String : AnyObject]) //Converts from JSON to order object
-            self.cOrder = order
-            
-            //Sets all the info in the cell
-            self.orderTitle.text = self.cOrder.foodServing
-            self.attributeOneLabel.text = self.cOrder.cheeseSetting
-            self.attributeTwoLabel.text = self.cOrder.lettuceSetting
-            self.attributeThreeLabel.text = self.cOrder.bunSetting
-            self.attributeFourLabel.text = self.cOrder.sauceSetting
-            self.attributeFiveLabel.text = self.cOrder.tomatoSetting
-            
-            for label in self.orderLabels { //unhides once info shows, makes it look snappier
-                label.isHidden = false
+        self.cOrder = order
+        
+        //Sets all the info in the cell
+        self.orderTitle.text = self.cOrder.foodServing
+        self.attributeOneLabel.text = self.cOrder.cheeseSetting
+        self.attributeTwoLabel.text = self.cOrder.lettuceSetting
+        self.attributeThreeLabel.text = self.cOrder.bunSetting
+        self.attributeFourLabel.text = self.cOrder.sauceSetting
+        self.attributeFiveLabel.text = self.cOrder.tomatoSetting
+        orderNumLabel.isHidden = true
+        for label in self.orderLabels { //unhides once info shows, makes it look snappier
+            label.isHidden = false
+        }
+        
+        let orderNumRef = FIRDatabase.database().reference().child(GlobalConstants.orders).child(order.orderID)
+        
+        orderNumRef.observe(FIRDataEventType.value, with: { (snapshot) in //Observes the order for changes
+            let orderNum = (snapshot.value as! [String : AnyObject])["orderNum"] as! Int
+            if(orderNum != 0) {
+                self.orderNumLabel.isHidden = false
+                self.cOrder.orderNum = orderNum
+                orderNumRef.removeAllObservers()
+                if(orderNum < 10){
+                    self.orderNumLabel.text = "0\(orderNum)"
+                }else {
+                    self.orderNumLabel.text = "\(orderNum)"
+                }
             }
-            
+        })
+        
+        let orderStatusRef = FIRDatabase.database().reference().child(GlobalConstants.grills).child(order.grill).child(GlobalConstants.orders).child(order.orderID).child(GlobalConstants.orderStatus)
+        orderStatusRef.observe(FIRDataEventType.value, with: {(snapshot) in
+            let orderStatus = snapshot.value as? Int ?? 0
             //If order is before ready status (placed or preparing)
-            if (self.cOrder.orderStatus < self.status.Ready.rawValue) {
-                self.statusLabel.text=notFinishedTexts[self.cOrder.orderStatus] //Sets to either Preparing or Order Placed
+            if (orderStatus < self.status.Ready.rawValue) {
+                self.statusLabel.text=notFinishedTexts[orderStatus] //Sets to either Preparing or Order Placed
                 self.statusLabel.isHidden = false //Unhides the "preparing/order placed" label
                 self.readyForPickupText.isHidden = true //Hides the "Ready for Pickup" label
                 self.preparingGIF.isHidden = false
             } else { //If order is Ready
                 self.statusLabel.isHidden=true //Hides 'Preparing...' Label
-                
                 self.readyForPickupText.isHidden=false //Unhides the "Ready For Pickup" Label
-                
-            }
-            
-            if(self.cOrder.orderNum > 0 && self.cOrder.orderNum < 10){
-                self.orderNumLabel.text = "0\(self.cOrder.orderNum!)"
-                self.orderNumLabel.isHidden = false //The actual order Number label
-            }else if(self.cOrder.orderNum != 0) {
-                self.orderNumLabel.text = "\(self.cOrder.orderNum!)"
-                self.orderNumLabel.isHidden = false //The actual order Number label
-            } else {
-                self.orderNumLabel.isHidden = true
             }
         })
+        
+        
+        
         
         
     }
@@ -115,6 +119,7 @@ class CustomerTableViewCell: UITableViewCell{
         for label in orderLabels { //hides labels until they info is loaded
             label.isHidden = true
         }
+        
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.updatePrep), userInfo: nil, repeats: true)
         //Creates the timer for animations
         // Initialization code

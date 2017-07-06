@@ -25,6 +25,7 @@ class MenuViewController: UIViewController, GIDSignInUIDelegate{
     // MARK: - Global Variables
     var totalOrdersCount: Int = 0 //Used to keep track of how many orders already exist, so user can't accidently order more than 3.
     var ordersPlaced: [Orders] = [] //Returned to OrderScreen class when placeOrder button is pressed.
+    var selectedDiningHall : String!
     
     
     
@@ -110,7 +111,7 @@ class MenuViewController: UIViewController, GIDSignInUIDelegate{
                         }
                     }
                 }
-                let tempOrder = Orders(_userID: cUser, _name: cName, _foodServing: orderInfo[0], _bunSetting: orderInfo[1], _cheeseSetting: orderInfo[2], _sauceSetting: orderInfo[3], _lettuceSetting: orderInfo[4], _tomatoSetting: orderInfo[5], _orderStatus: 0, _orderID : nil, _orderNum: nil)
+                let tempOrder = Orders(_userID: cUser, _name: cName, _foodServing: orderInfo[0], _bunSetting: orderInfo[1], _cheeseSetting: orderInfo[2], _sauceSetting: orderInfo[3], _lettuceSetting: orderInfo[4], _tomatoSetting: orderInfo[5], _orderID : nil, _orderNum: nil, _grill : selectedDiningHall)
                 orderArray.append(tempOrder)
             }
         }

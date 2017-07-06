@@ -28,7 +28,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     let locationManager = CLLocationManager()
     let launchView = UIView()
     var currentLocation : CLLocation!
-    var allActiveIDs : [String] = []
+    var allActiveOrders : [Orders] = []
     var selectedDiningHall : String?
     var cEmail : String!
     
@@ -129,22 +129,32 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     func loadUserAndSegue() {
         let user = FIRDatabase.database().reference().child(GlobalConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!)
         user.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in //Gets initial info for user
+            var orderIDs : [String] = []
             if(snapshot.hasChild("Name")) {
                 let userDic = snapshot.value as! NSDictionary
                 //If the user has an active ban, returns and does not login
                 if(self.isBanned(bannedUntilString: userDic["BannedUntil"] as? String, user: user)) {
                     return
                 }
-                let ordersValue = userDic[GlobalConstants.activeOrders] as? [String: String] ?? [:]
-                for (key, _) in ordersValue {
-                    self.allActiveIDs.append(key)
-                }
+                orderIDs = Array((userDic[GlobalConstants.activeOrders] as? [String: String] ?? [:]).keys)
                 
             }else{
                 //Sets name if user doesn't exist yet.
                 user.child(GlobalConstants.name).setValue(GIDSignIn.sharedInstance().currentUser.profile.name!)
             }
-            self.performSegue(withIdentifier: GlobalConstants.SignInSegueID, sender: nil) //Segues to OrderScreen
+            
+            if(orderIDs.count == 0) {
+                self.performSegue(withIdentifier: GlobalConstants.SignInSegueID, sender: nil)
+            }
+            
+            for key in orderIDs {
+                FIRDatabase.database().reference().child(GlobalConstants.orders).child(key).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+                    self.allActiveOrders.append(Orders.init(orderID: snapshot.key, json: snapshot.value as! Dictionary))
+                    if(self.allActiveOrders.count == orderIDs.count) {
+                        self.performSegue(withIdentifier: GlobalConstants.SignInSegueID, sender: nil) //Segues to OrderScreen
+                    }
+                })
+            }
         })
         
     }
@@ -337,7 +347,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
             let destinationNav = segue.destination as! UINavigationController
             let destinationVC = destinationNav.viewControllers.first as! CustomerTableViewController
             destinationVC.selectedDiningHall = self.selectedDiningHall
-            destinationVC.allActiveIDs = self.allActiveIDs
+            destinationVC.allActiveOrders = self.allActiveOrders
             destinationVC.tableView.reloadData()
         }
     }

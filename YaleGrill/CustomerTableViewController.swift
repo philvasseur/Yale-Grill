@@ -12,12 +12,11 @@ import Firebase
 
 class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
     
-    var allActiveIDs : [String] = []
+    var allActiveOrders : [Orders] = []
     var selectedDiningHall : String!
     var grillIsOn = false
     var noOrdersLabel = UILabel()
     var grillStatusHandle : UInt!
-    
     var grillStatusRef : FIRDatabaseReference!
     var userOrdersRef : FIRDatabaseReference!
     
@@ -40,26 +39,22 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
         self.present(signInScreen!, animated:true, completion:nil)
     }
 
-    
-    
     //Used to transfer data when user unwinds from the foodScreen. Called when user pressed the "placeOrder" button, loops through the orders placed
     @IBAction func unwindToOrderScreen(_ sender: UIStoryboardSegue) {
         if let makeOrderController = sender.source as? MenuViewController {
             let tempOrderArray = makeOrderController.ordersPlaced //Gets the placed orders when user Unwinds from FoodScreen
             if(grillIsOn){ //Only goes through orders if the grill is on
                 var indexPaths : [IndexPath] = []
+                
+                //Inserts the orders all at onces, makes it so orderNum lines up better to actual order of the orders
                 for placedOrder in tempOrderArray{
-                    allActiveIDs.append(placedOrder.orderID!) //Adds new orders to local orderIDs array
-                    
-                    //Inserts order into Database (all 3 locations)
-                    placedOrder.insertIntoDatabase(selectedDiningHall: self.selectedDiningHall)
-                    
-                    //Adds orders indexPath in table to array
-                    indexPaths.append(IndexPath(row: allActiveIDs.count-1, section: 0))
-                    
+                    placedOrder.insertIntoDatabase()
                 }
-                //Inserts the index paths of the orders into the table
-                self.tableView.insertRows(at: indexPaths, with: .none)
+                for placedOrder in tempOrderArray{
+                    allActiveOrders.append(placedOrder) //Adds new orders to local orderIDs array
+                    indexPaths.append(IndexPath(row: allActiveOrders.count-1, section: 0) ) //Adds orders indexPath in table to array
+                }
+                self.tableView.insertRows(at: indexPaths, with: .none) //Inserts the index paths of the orders into the table
             }
         }
     }
@@ -73,11 +68,12 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
         self.present(alert, animated: true, completion: nil)
     }
     
+    //Removes the Firebase observers to get rid of errors upon logout when auth is revoked
     func removeActiveObservers(){
         grillStatusRef.removeAllObservers()
         userOrdersRef.removeAllObservers()
-        for orderID in allActiveIDs {
-            FIRDatabase.database().reference().child(GlobalConstants.orders).child(orderID).removeAllObservers()
+        for order in allActiveOrders {
+            FIRDatabase.database().reference().child(GlobalConstants.grills).child(order.grill).child(GlobalConstants.orders).child(order.orderID).child(GlobalConstants.orderStatus).removeAllObservers()
         }
     }
     
@@ -88,20 +84,19 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == GlobalConstants.ComposeOrderSegueID){
             let destinationVC = (segue.destination as! MenuViewController)
-            destinationVC.totalOrdersCount = allActiveIDs.count //sets num of orders variable in FoodScreen
+            destinationVC.totalOrdersCount = allActiveOrders.count //sets num of orders variable in FoodScreen
+            destinationVC.selectedDiningHall = selectedDiningHall
         }
     }
     
-    //Stops segue if 3 orders are already placed, if the grill is off, or if the user has been banned. Creates alert for each one.
+    //Stops segue if 3 orders are already placed or if the grill is off. Creates alert for each
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if(!grillIsOn){
             createAlert(title: "Sorry!", message: "The \(selectedDiningHall!) grill is currently off! Please try again later during Dining Hall hours.")
             return false
-            
-        }else if(allActiveIDs.count>=3){
+        }else if(allActiveOrders.count>=3){
             createAlert(title: "Order Limit Reached!", message: "You can't place more than 3 orders! Please wait for your current orders to be finished!")
             return false
-            
         }else{
             return true
         }
@@ -115,17 +110,17 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
         }
         let index = indexPath.row
         
-        cell.setByOrderID(orderID: allActiveIDs[index]) //Sets all the info in the cell
+        cell.setByOrder(order: allActiveOrders[index]) //Sets all the info in the cell
         cell.delegate = self
         return cell
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allActiveIDs.count
+        return allActiveOrders.count
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        if(allActiveIDs.count == 0) { //shows the no active orders label if there are no orders
+        if(allActiveOrders.count == 0) { //shows the no active orders label if there are no orders
             noOrdersLabel.isHidden = false
         } else {
             noOrdersLabel.isHidden = true
@@ -170,29 +165,16 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
         //Reference to the user's specific account
         userOrdersRef = FIRDatabase.database().reference().child(GlobalConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!).child(GlobalConstants.activeOrders)
         
-        //Observes for any deletions in the user active order array
+        //Observes for any deletions in the user active order array in order to remove the order in realtime
         userOrdersRef.queryOrderedByKey().observe(FIRDataEventType.childRemoved, with: { (snapshot) in
             let orderID = snapshot.key
             //Finds the index of the orderID to be removed
-            let removedIndex = self.allActiveIDs.index(of: orderID)
+            let removedIndex = self.allActiveOrders.map{$0.orderID}.index(of: orderID)
             let newIndexPath = IndexPath(row: removedIndex!, section: 0)
             //Removes it from the activeIDs and then removes it from the tableView
-            self.allActiveIDs.remove(at: removedIndex!)
+            self.allActiveOrders.remove(at: removedIndex!)
             self.tableView.deleteRows(at: [newIndexPath], with: .automatic)
-            FIRDatabase.database().reference().child(GlobalConstants.orders).child(orderID).removeAllObservers()
+            FIRDatabase.database().reference().child(GlobalConstants.grills).child(self.selectedDiningHall).child(GlobalConstants.orders).child(orderID).child(GlobalConstants.orderStatus).removeAllObservers()
         })
-        
-        
-    }
-    
-    
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }
