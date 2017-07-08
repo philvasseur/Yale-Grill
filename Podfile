@@ -12,4 +12,5 @@ target 'YaleGrill' do
   pod 'Firebase/Auth'
   pod 'Firebase/Messaging'
   pod 'NVActivityIndicatorView'
+  pod 'SCLAlertView'
 end

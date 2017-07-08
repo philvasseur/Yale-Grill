@@ -35,7 +35,7 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
             print ("Error signing out: %@", signOutError)
         }
         let sb = UIStoryboard(name: "Main", bundle: nil)
-        let signInScreen = sb.instantiateViewController(withIdentifier: GlobalConstants.ViewControllerID) as? LoginViewController
+        let signInScreen = sb.instantiateViewController(withIdentifier: Constants.ViewControllerID) as? LoginViewController
         self.present(signInScreen!, animated:true, completion:nil)
     }
 
@@ -70,7 +70,7 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
         grillStatusRef.removeAllObservers()
         userOrdersRef.removeAllObservers()
         for order in allActiveOrders {
-            FIRDatabase.database().reference().child(GlobalConstants.grills).child(order.grill).child(GlobalConstants.orders).child(order.orderID).child(GlobalConstants.orderStatus).removeAllObservers()
+            FIRDatabase.database().reference().child(Constants.grills).child(order.grill).child(Constants.orders).child(order.orderID).child(Constants.orderStatus).removeAllObservers()
         }
     }
     
@@ -79,7 +79,7 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
     
     //When you hit the composeOrder button tells the foodScreen class how many orders have already been placed. Used to stop user from accidently placing more than 3 orders.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(segue.identifier == GlobalConstants.ComposeOrderSegueID){
+        if(segue.identifier == Constants.ComposeOrderSegueID){
             let destinationVC = (segue.destination as! MenuViewController)
             destinationVC.totalOrdersCount = allActiveOrders.count //sets num of orders variable in FoodScreen
             destinationVC.selectedDiningHall = selectedDiningHall
@@ -148,7 +148,7 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
             [noOrdersLabel.centerXAnchor.constraint(equalTo: (tableView.backgroundView?.centerXAnchor)!), noOrdersLabel.centerYAnchor.constraint(equalTo: (tableView.backgroundView?.centerYAnchor)!)])
         
         //Checks and continues to observe if grill is on or off
-        grillStatusRef = FIRDatabase.database().reference().child(GlobalConstants.grills).child(selectedDiningHall!).child(GlobalConstants.grillStat)
+        grillStatusRef = FIRDatabase.database().reference().child(Constants.grills).child(selectedDiningHall!).child(Constants.grillStat)
         grillStatusRef.observe(FIRDataEventType.value, with: { (snapshot) in
             let status = snapshot.value as? Bool
             if(status==nil){ //No status has been set yet, defaults to off.
@@ -159,7 +159,7 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
         })
         
         //Reference to the user's specific account
-        userOrdersRef = FIRDatabase.database().reference().child(GlobalConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!).child(GlobalConstants.activeOrders)
+        userOrdersRef = FIRDatabase.database().reference().child(Constants.users).child(GIDSignIn.sharedInstance().currentUser.userID!).child(Constants.activeOrders)
         
         //Observes for any deletions in the user active order array in order to remove the order in realtime
         userOrdersRef.queryOrderedByKey().observe(FIRDataEventType.childRemoved, with: { (snapshot) in
@@ -170,7 +170,7 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
             //Removes it from the activeIDs and then removes it from the tableView
             self.allActiveOrders.remove(at: removedIndex!)
             self.tableView.deleteRows(at: [newIndexPath], with: .automatic)
-            FIRDatabase.database().reference().child(GlobalConstants.grills).child(self.selectedDiningHall).child(GlobalConstants.orders).child(orderID).child(GlobalConstants.orderStatus).removeAllObservers()
+            FIRDatabase.database().reference().child(Constants.grills).child(self.selectedDiningHall).child(Constants.orders).child(orderID).child(Constants.orderStatus).removeAllObservers()
         })
     }
 }

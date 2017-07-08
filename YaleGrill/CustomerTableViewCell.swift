@@ -34,7 +34,7 @@ class CustomerTableViewCell: UITableViewCell{
     var delegate: CustomerTableViewController?
     var timer = Timer()
     var orderLabels: [UILabel]!
-    let status = GlobalConstants.Status.self
+    let status = Constants.Status.self
     
     
     // MARK: - Actions
@@ -42,7 +42,7 @@ class CustomerTableViewCell: UITableViewCell{
     // MARK: - Functions
     func setByOrder(order : Orders){
         //Loads a random preparing gif
-        preparingGIF.loadGif(name: GlobalConstants.gifArray[Int(arc4random_uniform(UInt32(GlobalConstants.gifArray.count)))])
+        preparingGIF.loadGif(name: Constants.gifArray[Int(arc4random_uniform(UInt32(Constants.gifArray.count)))])
         preparingGIF.layer.cornerRadius = 10
         self.cOrder = order
         
@@ -58,7 +58,7 @@ class CustomerTableViewCell: UITableViewCell{
             label.isHidden = false
         }
         
-        let orderNumRef = FIRDatabase.database().reference().child(GlobalConstants.orders).child(order.orderID)
+        let orderNumRef = FIRDatabase.database().reference().child(Constants.orders).child(order.orderID)
         
         orderNumRef.observe(FIRDataEventType.value, with: { (snapshot) in //Observes the order for changes
             let orderNum = (snapshot.value as! [String : AnyObject])["orderNum"] as! Int
@@ -74,13 +74,13 @@ class CustomerTableViewCell: UITableViewCell{
             }
         })
         
-        let orderStatusRef = FIRDatabase.database().reference().child(GlobalConstants.grills).child(order.grill).child(GlobalConstants.orders).child(order.orderID).child(GlobalConstants.orderStatus)
+        let orderStatusRef = FIRDatabase.database().reference().child(Constants.grills).child(order.grill).child(Constants.orders).child(order.orderID).child(Constants.orderStatus)
         orderStatusRef.observe(FIRDataEventType.value, with: {(snapshot) in
             let orderStatus = snapshot.value as? Int ?? 3
             
             //If order is before ready status (placed or preparing)
             if (orderStatus < self.status.Ready.rawValue) {
-                let notFinishedTexts = ["Order Placed",GlobalConstants.preparingTexts[0]]
+                let notFinishedTexts = ["Order Placed",Constants.preparingTexts[0]]
                 self.statusLabel.text=notFinishedTexts[orderStatus] //Sets to either Preparing or Order Placed
                 self.statusLabel.isHidden = false //Unhides the "preparing/order placed" label
                 self.readyForPickupText.isHidden = true //Hides the "Ready for Pickup" label
@@ -99,12 +99,12 @@ class CustomerTableViewCell: UITableViewCell{
     
     //Called by the timer every second starting from when view first loaded. Only does anything if it isn't hidden and the text is set as the Preparing loop. Gives "Preparing..." animation.
     @objc private func updatePrep(){
-            if(statusLabel.text==GlobalConstants.preparingTexts[2]){
-                statusLabel.text=GlobalConstants.preparingTexts[1]
-            }else if(statusLabel.text==GlobalConstants.preparingTexts[1]){
-                statusLabel.text=GlobalConstants.preparingTexts[0]
-            }else if(statusLabel.text==GlobalConstants.preparingTexts[0]){
-                statusLabel.text=GlobalConstants.preparingTexts[2]
+            if(statusLabel.text==Constants.preparingTexts[2]){
+                statusLabel.text=Constants.preparingTexts[1]
+            }else if(statusLabel.text==Constants.preparingTexts[1]){
+                statusLabel.text=Constants.preparingTexts[0]
+            }else if(statusLabel.text==Constants.preparingTexts[0]){
+                statusLabel.text=Constants.preparingTexts[2]
             } else if(statusLabel.text != "Order Placed"){
                 timer.invalidate() //Gets rid of timer after preparing status
         }

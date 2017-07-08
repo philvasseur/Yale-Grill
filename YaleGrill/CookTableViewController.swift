@@ -44,7 +44,7 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
             print ("Error signing out: %@", signOutError)
         }
         let sb = UIStoryboard(name: "Main", bundle: nil)
-        let signInScreen = sb.instantiateViewController(withIdentifier: GlobalConstants.ViewControllerID) as? LoginViewController
+        let signInScreen = sb.instantiateViewController(withIdentifier: Constants.ViewControllerID) as? LoginViewController
         self.present(signInScreen!, animated:true, completion:nil)
     }
     
@@ -71,20 +71,20 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
     func giveStrike(userID : String, name: String){
         let date = Date()
         self.createAlert(title: "Strike Given", message: "Due to not picking up their food, \(name) has been given a strike.")
-        FIRDatabase.database().reference().child(GlobalConstants.users).child(userID).child("Strikes").observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+        FIRDatabase.database().reference().child(Constants.users).child(userID).child("Strikes").observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
             let strikes = snapshot.value as? Int
             if(strikes == nil) {
-                FIRDatabase.database().reference().child(GlobalConstants.users).child(userID).child("Strikes").setValue(1)
+                FIRDatabase.database().reference().child(Constants.users).child(userID).child("Strikes").setValue(1)
             }else{
-                FIRDatabase.database().reference().child(GlobalConstants.users).child(userID).child("Strikes").setValue(strikes!+1)
-                if(((strikes!+1) % GlobalConstants.strikeBanLimit) == 0) {
+                FIRDatabase.database().reference().child(Constants.users).child(userID).child("Strikes").setValue(strikes!+1)
+                if(((strikes!+1) % Constants.strikeBanLimit) == 0) {
                     var bannedUntil : String?
-                    let banEndsDate = NSCalendar.current.date(byAdding: .day, value: GlobalConstants.banLength, to: date)
+                    let banEndsDate = NSCalendar.current.date(byAdding: .day, value: Constants.banLength, to: date)
                     bannedUntil = banEndsDate?.description
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateStyle = DateFormatter.Style.full
                     print("\(userID) is banned until \(banEndsDate!)")
-                    FIRDatabase.database().reference().child(GlobalConstants.users).child(userID).child("BannedUntil").setValue(bannedUntil)
+                    FIRDatabase.database().reference().child(Constants.users).child(userID).child("BannedUntil").setValue(bannedUntil)
                 }
             }
         })
@@ -119,8 +119,8 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
         tableView.allowsSelection = false
         GIDSignIn.sharedInstance().uiDelegate = self
         
-        for (grill, email) in GlobalConstants.GrillEmails {
-            if(email.lowercased()  == GIDSignIn.sharedInstance().currentUser.profile.email.lowercased()) {
+        for (grill, grillEmail) in Constants.ActiveGrills {
+            if(grillEmail.lowercased()  == GIDSignIn.sharedInstance().currentUser.profile.email.lowercased()) {
                 grillName = grill
                 self.title = "Orders - \(grillName!)"
                 break
@@ -134,17 +134,17 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
             if(grillStatus==nil){
                 self.grillSwitch.setValue(false)
                 self.grillIsOn = false
-                self.GrillToggleButton.title = GlobalConstants.turnGrillOnText
+                self.GrillToggleButton.title = Constants.turnGrillOnText
             }else if(grillStatus==true){
                 self.grillIsOn = true
-                self.GrillToggleButton.title = GlobalConstants.turnGrillOffText
+                self.GrillToggleButton.title = Constants.turnGrillOffText
             }else if(grillStatus==false){
                 self.grillIsOn = false
-                self.GrillToggleButton.title = GlobalConstants.turnGrillOnText
+                self.GrillToggleButton.title = Constants.turnGrillOnText
             }
         })
         
-        let ordersRef = FIRDatabase.database().reference().child(GlobalConstants.grills).child(grillName).child(GlobalConstants.orders)
+        let ordersRef = FIRDatabase.database().reference().child(Constants.grills).child(grillName).child(Constants.orders)
         
         ordersRef.queryOrderedByKey().observe(FIRDataEventType.childAdded, with: { (snapshot) in
             self.allActiveIDs.append(snapshot.key)

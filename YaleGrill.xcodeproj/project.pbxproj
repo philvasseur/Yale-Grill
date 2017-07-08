@@ -29,7 +29,7 @@
 		CDC64C9A1E1FF52D002959BA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDC64C991E1FF52D002959BA /* GoogleService-Info.plist */; };
 		CDCFD5951E1359AE00065E87 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCFD5941E1359AE00065E87 /* MenuViewController.swift */; };
 		CDE5C00D1E1EEA5A00226D71 /* CookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE5C00C1E1EEA5A00226D71 /* CookTableViewCell.swift */; };
-		CDE5C00F1E1F0F4900226D71 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE5C00E1E1F0F4900226D71 /* GlobalConstants.swift */; };
+		CDE5C00F1E1F0F4900226D71 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE5C00E1E1F0F4900226D71 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -52,8 +52,8 @@
 		CD1A13DD1E1E1356003AFBCE /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		CD3EEFB11ECB958E00A86A52 /* CustomerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerTableViewController.swift; sourceTree = "<group>"; };
 		CD3EEFB51ECB971C00A86A52 /* NSLayoutConstraintExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraintExtension.swift; sourceTree = "<group>"; };
-		CD3EEFB71ECB977B00A86A52 /* CustomerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerTableViewCell.swift; sourceTree = "<group>"; };
-		CD460E2C1E1B6368007C8588 /* CookTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CookTableViewController.swift; sourceTree = "<group>"; };
+		CD3EEFB71ECB977B00A86A52 /* CustomerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CustomerTableViewCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		CD460E2C1E1B6368007C8588 /* CookTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CookTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CD58B0E81ED88CB700C6F02C /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		CD58B0EE1ED89CA800C6F02C /* preparing2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = preparing2.gif; sourceTree = "<group>"; };
 		CD58B0EF1ED89CA800C6F02C /* preparing1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = preparing1.gif; sourceTree = "<group>"; };
@@ -73,8 +73,8 @@
 		CDC748D01ED4FF3700370350 /* YaleGrill.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YaleGrill.entitlements; sourceTree = "<group>"; };
 		CDCFD5941E1359AE00065E87 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		CDD92A2B1E130E5B005C091B /* YaleGrill-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YaleGrill-Bridging-Header.h"; sourceTree = "<group>"; };
-		CDE5C00C1E1EEA5A00226D71 /* CookTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CookTableViewCell.swift; sourceTree = "<group>"; };
-		CDE5C00E1E1F0F4900226D71 /* GlobalConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
+		CDE5C00C1E1EEA5A00226D71 /* CookTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CookTableViewCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		CDE5C00E1E1F0F4900226D71 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CDF25A111E16E9C100818379 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		CDF25A131E16E9CC00818379 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -137,7 +137,7 @@
 		CD58B0EA1ED8998A00C6F02C /* App Files */ = {
 			isa = PBXGroup;
 			children = (
-				CDE5C00E1E1F0F4900226D71 /* GlobalConstants.swift */,
+				CDE5C00E1E1F0F4900226D71 /* Constants.swift */,
 				CDC64C991E1FF52D002959BA /* GoogleService-Info.plist */,
 				CD9E14EF1E130C7E000E21C0 /* Info.plist */,
 				CD9E14EA1E130C7E000E21C0 /* Assets.xcassets */,
@@ -350,7 +350,7 @@
 				CD3EEFB21ECB958E00A86A52 /* CustomerTableViewController.swift in Sources */,
 				CD9E14E41E130C7E000E21C0 /* AppDelegate.swift in Sources */,
 				CD3EEFB61ECB971C00A86A52 /* NSLayoutConstraintExtension.swift in Sources */,
-				CDE5C00F1E1F0F4900226D71 /* GlobalConstants.swift in Sources */,
+				CDE5C00F1E1F0F4900226D71 /* Constants.swift in Sources */,
 				CD1A13DE1E1E1356003AFBCE /* UIImageExtension.swift in Sources */,
 				CDCFD5951E1359AE00065E87 /* MenuViewController.swift in Sources */,
 			);

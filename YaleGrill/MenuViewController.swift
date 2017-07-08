@@ -99,15 +99,15 @@ class MenuViewController: UIViewController, GIDSignInUIDelegate{
         for foodSection in 0...2{ //loops through the 3 types of foods
             var orderInfo : [String] = []
             if(StepCountArray[foodSection].value != 0){ //0 means none of the food was ordered
-                orderInfo.append(GlobalConstants.foodServingArray[foodSection][lround(StepCountArray[foodSection].value)-1])
+                orderInfo.append(Constants.foodServingArray[foodSection][lround(StepCountArray[foodSection].value)-1])
                 for cSwitch in 0...4{ //Loops through the options of each type of food
                     if(foodSection==2){
                         orderInfo.append("")
                     }else{
                         if(switchesArray[foodSection][cSwitch].isOn){
-                            orderInfo.append("\(GlobalConstants.toppingsArray[cSwitch])")
+                            orderInfo.append("\(Constants.toppingsArray[cSwitch])")
                         }else{
-                            orderInfo.append("No \(GlobalConstants.toppingsArray[cSwitch])")
+                            orderInfo.append("No \(Constants.toppingsArray[cSwitch])")
                         }
                     }
                 }

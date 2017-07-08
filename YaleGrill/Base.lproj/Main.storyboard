@@ -257,14 +257,14 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0B7-Lh-0B6">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0B7-Lh-0B6" userLabel="LoggingInView">
                                 <rect key="frame" x="167.5" y="313.5" width="40" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="rHD-UZ-naE">
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="rHD-UZ-naE" userLabel="LoggingInIndicator">
                                 <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
                             </activityIndicatorView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3xX-Nc-Gkz" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3xX-Nc-Gkz" userLabel="LaunchAnimation" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
                                 <rect key="frame" x="162.5" y="442" width="50" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -311,9 +311,9 @@
                         <outlet property="DisabledSignInColor" destination="4r6-q8-vo8" id="okx-G1-b3Y"/>
                         <outlet property="GSignInButton" destination="VIN-Hj-NQE" id="GDW-Cd-weg"/>
                         <outlet property="diningHallTextField" destination="GFl-ZW-WQc" id="skK-68-f5t"/>
-                        <outlet property="loadAnimation" destination="3xX-Nc-Gkz" id="fbi-Ed-bzt"/>
-                        <outlet property="loadingIndicator" destination="rHD-UZ-naE" id="V6w-Mj-jma"/>
-                        <outlet property="loadingView" destination="0B7-Lh-0B6" id="GUq-kU-3kE"/>
+                        <outlet property="launchAnimation" destination="3xX-Nc-Gkz" id="FDX-pr-5XR"/>
+                        <outlet property="loggingInIndicator" destination="rHD-UZ-naE" id="SRg-25-Cv0"/>
+                        <outlet property="loggingInView" destination="0B7-Lh-0B6" id="F57-AI-LPh"/>
                         <segue destination="CYl-rG-eM0" kind="presentation" identifier="SignInSegue" id="pNU-dT-IA1"/>
                         <segue destination="Txg-YN-yko" kind="presentation" identifier="ControlScreenSegue" id="hLo-to-9X3"/>
                     </connections>

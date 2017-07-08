@@ -19,9 +19,9 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     @IBOutlet weak var diningHallTextField: UITextField!
     @IBOutlet weak var DisabledSignInColor: UIImageView!
     @IBOutlet weak var GSignInButton: GIDSignInButton!
-    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var loadingView: UIView!
-    @IBOutlet weak var loadAnimation: NVActivityIndicatorView!
+    @IBOutlet weak var loggingInIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var loggingInView: UIView!
+    @IBOutlet weak var launchAnimation: NVActivityIndicatorView!
     
     // MARK: - Global Variables
     let pickerView = UIPickerView()
@@ -30,7 +30,6 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     var currentLocation : CLLocation!
     var allActiveOrders : [Orders] = []
     var selectedDiningHall : String?
-    var cEmail : String!
     
     
     // MARK: - Functions
@@ -38,46 +37,55 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     
     //Method for googleSign in. Is called when you press GIDSignInButton and on openif user is already logged in (silentSignIn)
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        if GIDSignIn.sharedInstance().hasAuthInKeychain() { //Confirms user is signed into google account
-            self.startLoadAnimation()
-            cEmail = GIDSignIn.sharedInstance().currentUser.profile.email! //Users email
-            print("\(cEmail!): Attempting Signing In")
-            
-            guard let authentication = user.authentication else { return }
-            let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
-            FIRAuth.auth()?.signIn(with: credential) { (_, error) in //Firebase then authenticates user
-                if let error = error {
-                    print("Firebase Auth Error: \(error)")
-                    self.signOutGoogleAndFirebase()
-                    return
-                }
-                
-                //Checks emails, if a student then gets the dining hall, if cook then segues, if neither logs out
-                if(self.isYaleEmail(user: user)) {
-                    self.getDiningHall { success in
-                        //Completion handler used to make sure a dining hall is actually set
-                        if(success) {
-                            self.loadOrdersAndSegue()
-                        } else { //Happens during a bug with pickerView or if user's prevDiningHall is no longer available
-                            self.signOutGoogleAndFirebase()
-                            self.stopLoadAnimation()
-                            self.createAlert(title: "Sorry, cannot load the dining hall!", message: "Please select another dining hall. If you think this is an error, contact philip.vasseur@yale.edu.")
-                        }
-                    }
-                }
+        if(error != nil){ //If there was an error authenticating google keychain
+            print("Couldn't sign in, Error: \(error.localizedDescription)")
+            return;
+        }
+        
+        self.startLoginAnimation()
+        print("Attempting Signing In")
+        
+        guard let authentication = user.authentication else { return }
+        let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
+        FIRAuth.auth()?.signIn(with: credential) { (user, error) in //Firebase then authenticates user
+            if let error = error {
+                print("Firebase Auth Error: \(error)")
+                self.signOutGoogleAndFirebase()
+                return
             }
             
-        }else if(error != nil){ //If there was an error authenticating google keychain
-            print("Couldn't sign in, Error: \(error!)")
+            //Checks emails, if a student then gets the dining hall, if cook then segues, if neither logs out
+            let emailType = self.checkEmail(email: user!.email!)
+            
+            if(emailType == .Yale){
+                //If it's a yale email, gets the currently selected dining hall
+                self.getDiningHall { success in //Completion handler used to make sure a dining hall is actually set
+                    if(success) {
+                        self.loadOrdersAndSegue()
+                    } else { //Happens during a bug with pickerView or if user's prevDiningHall is no longer available
+                        self.signOutGoogleAndFirebase()
+                        self.stopLoginAnimation()
+                        self.createAlert(title: "Sorry, cannot load the dining hall!", message: "Please select another dining hall. If you think this is an error, contact philip.vasseur@yale.edu.")
+                    }
+                }
+            } else if (emailType == .Cook) {
+                //If it is a cooks email then segues right away
+                self.performSegue(withIdentifier: Constants.ControlScreenSegueID, sender: nil)
+            } else if (emailType == .Other) {
+                //Not a yale email, so signs user out
+                print("Non-Yale Email, LOGGING OUT")
+                self.signOutGoogleAndFirebase()
+                self.stopLoginAnimation()
+                self.createAlert(title: "Invalid Email Address!", message: "You must use a Yale email address to sign in!")
+            }
         }
         
     }
     
-    //Gets the last dining hall from firebase server, used for autologin as only autologins in if previous
-    //dining hall exists
+    //Checks if a dining hall is selected, if not grabs previously logged in dining hall from database
     func getDiningHall(completion : @escaping (Bool) -> ()) {
-        let dHallRef = FIRDatabase.database().reference().child(GlobalConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!).child(GlobalConstants.prevDining)
-        if(GlobalConstants.GrillEmails[diningHallTextField.text!] != nil) {
+        let dHallRef = FIRDatabase.database().reference().child(Constants.users).child(GIDSignIn.sharedInstance().currentUser.userID!).child(Constants.prevDining)
+        if(Constants.ActiveGrills[diningHallTextField.text!] != nil) {
             selectedDiningHall = diningHallTextField.text
             dHallRef.setValue(self.selectedDiningHall) //Updates last dining hall logged into for user
             completion(true)
@@ -86,42 +94,33 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         
         dHallRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
             let pastDHall = snapshot.value as? String ?? "Select Dining Hall"
-            if (GlobalConstants.GrillEmails[pastDHall] != nil)  {
+            if (Constants.ActiveGrills[pastDHall] != nil)  {
                 self.selectedDiningHall = pastDHall
                 completion(true)
             } else {
                 dHallRef.removeValue()
+                //There is no active dining hall selected, cannot login
                 completion(false)
             }
-            
         })
-        
     }
     
-    //Checks if the emailed used to login is a valid email
-    func isYaleEmail(user: GIDGoogleUser!) -> Bool {
+    //Checks if the emailed used to login is a valid Yale/Cook email
+    func checkEmail(email: String) -> Constants.EmailType {
         //Checks if email is a Yale email
-        if(cEmail.lowercased().range(of: "@yale.edu") != nil){
-            return true
-            
+        if(email.lowercased().range(of: "@yale.edu") != nil){
+            return .Yale
             //If not a yale email, checks if the email is contained in the cooks email array (case insensitively)
-        }else if (GlobalConstants.GrillEmails.values.contains(where: {$0.caseInsensitiveCompare(cEmail) == .orderedSame})) {
-            //If it is a cooks email then segues right away
-            self.performSegue(withIdentifier: GlobalConstants.ControlScreenSegueID, sender: nil)
-            return false
-            
-        }else{ //Not a yale email, so signs user out
-            print("Non-Yale Email, LOGGING OUT")
-            signOutGoogleAndFirebase()
-            self.stopLoadAnimation()
-            createAlert(title: "Invalid Email Address!", message: "You must use a Yale email address to sign in!")
-            return false
+        }else if (Constants.ActiveGrills.values.contains(where: {$0.caseInsensitiveCompare(email) == .orderedSame})) {
+            return .Cook
+        }else{
+            return .Other
         }
     }
     
     //Loads the user orders and ban info, for CUSTOMERS only. Cooks don't need this checked.
     func loadOrdersAndSegue() {
-        let user = FIRDatabase.database().reference().child(GlobalConstants.users).child(GIDSignIn.sharedInstance().currentUser.userID!)
+        let user = FIRDatabase.database().reference().child(Constants.users).child(GIDSignIn.sharedInstance().currentUser.userID!)
         user.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in //Gets initial info for user
             var orderIDs : [String] = []
             if(snapshot.hasChild("Name")) {
@@ -131,25 +130,25 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
                     return
                 }
                 //Keys are timeStamp based, so we can sort to make sure orders are shown in same order they're placed
-                for (key,value) in userDic[GlobalConstants.activeOrders] as? [String: String] ?? [:] {
-                    if(value == self.selectedDiningHall) {
-                        orderIDs.append(key)
+                for (orderID, grillName) in userDic[Constants.activeOrders] as? [String: String] ?? [:] {
+                    if(grillName == self.selectedDiningHall) {
+                        orderIDs.append(orderID)
                     }
                 }
             }else{
                 //Sets name if user doesn't exist yet.
-                user.child(GlobalConstants.name).setValue(GIDSignIn.sharedInstance().currentUser.profile.name!)
+                user.child(Constants.name).setValue(GIDSignIn.sharedInstance().currentUser.profile.name!)
             }
             
             if(orderIDs.count == 0) {
-                self.performSegue(withIdentifier: GlobalConstants.SignInSegueID, sender: nil)
+                self.performSegue(withIdentifier: Constants.SignInSegueID, sender: nil)
             }
             
             for key in orderIDs.sorted() {
-                FIRDatabase.database().reference().child(GlobalConstants.orders).child(key).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+                FIRDatabase.database().reference().child(Constants.orders).child(key).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
                     self.allActiveOrders.append(Orders.init(orderID: snapshot.key, json: snapshot.value as! Dictionary))
-                    if(self.allActiveOrders.count == orderIDs.count) {
-                        self.performSegue(withIdentifier: GlobalConstants.SignInSegueID, sender: nil) //Segues to OrderScreen
+                    if(self.allActiveOrders.count == orderIDs.count) { //Onces all the orders have been loaded
+                        self.performSegue(withIdentifier: Constants.SignInSegueID, sender: nil) //Segues to OrderScreen
                     }
                 })
             }
@@ -178,41 +177,19 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         dateFormatter2.dateStyle = DateFormatter.Style.full
         let banEndString = dateFormatter2.string(from: bannedUntil!)
         self.createAlert(title: "You've Been Banned!", message: "Due to not picking up 5 orders, you have been temporarily banned from using YaleGrill. This ban will expire on \n\n\(banEndString).\n\n This is an automated ban. If you think this is a mistake, please contact philip.vasseur@yale.edu.")
-        self.stopLoadAnimation()
+        self.stopLoginAnimation()
         self.signOutGoogleAndFirebase()
         return true
     }
     
-    //Loads the Dining Hall names and emails for the pickerView from firebase
+    //Loads the Dining Hall grill names and emails for the pickerView from firebase
     func loadDiningHalls(completion: @escaping () -> ()) {
-        //Keeps the launchScreen while loading the dining hall names
-        self.view.addSubview(launchView)
-        NSLayoutConstraint.useAndActivate(constraints:
-            [launchView.centerXAnchor.constraint(equalTo: (self.view.centerXAnchor)),
-             launchView.centerYAnchor.constraint(equalTo: (self.view.centerYAnchor)),
-             launchView.heightAnchor.constraint(equalTo: (self.view.heightAnchor)),
-             launchView.widthAnchor.constraint(equalTo: (self.view.widthAnchor))
-            ])
-        launchView.backgroundColor = UIColor.white
-        let launchImage = UIImageView()
-        launchImage.image = UIImage(named: "finalIconFull")
-        launchView.addSubview(launchImage)
-        
-        NSLayoutConstraint.useAndActivate(constraints:
-            [launchImage.centerXAnchor.constraint(equalTo: (launchView.centerXAnchor)),
-             NSLayoutConstraint(item: launchImage, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: launchView, attribute: NSLayoutAttribute.centerY, multiplier: 0.8, constant: 0),
-             launchImage.widthAnchor.constraint(equalTo: (launchView.widthAnchor)),
-             launchImage.heightAnchor.constraint(equalTo: (launchImage.widthAnchor))
-            ])
-        launchView.addSubview(loadAnimation)
-        loadAnimation.startAnimating()
-        
         //Loads the cook grillIDs and corresponding emails from database
-        let grillRef = FIRDatabase.database().reference().child(GlobalConstants.grills).child("GrillEmails")
+        let grillRef = FIRDatabase.database().reference().child(Constants.grills).child("ActiveGrills")
         grillRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
-            GlobalConstants.GrillEmails = snapshot.value as! [String : String]
-            for(key,_) in GlobalConstants.GrillEmails {
-                GlobalConstants.PickerData.append(key)
+            Constants.ActiveGrills = snapshot.value as! [String : String]
+            for(grillName,_) in Constants.ActiveGrills {
+                Constants.PickerData.append(grillName)
             }
             completion();
             
@@ -220,26 +197,26 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     }
     
     //Starts the animation for NORMAL signin
-    func startLoadAnimation(){
-        self.loadingIndicator.startAnimating()
-        self.loadingIndicator.isHidden = false
-        self.loadingView.isHidden = false
+    func startLoginAnimation(){
+        self.loggingInIndicator.startAnimating()
+        self.loggingInIndicator.isHidden = false
+        self.loggingInView.isHidden = false
         pickerView.isHidden = true
         UIApplication.shared.beginIgnoringInteractionEvents()
     }
     //Stops the animation for NORMAL signin
-    func stopLoadAnimation(){
-        self.loadingIndicator.stopAnimating()
-        self.loadingIndicator.isHidden = true
-        self.loadingView.isHidden = true
+    func stopLoginAnimation(){
+        self.loggingInIndicator.stopAnimating()
+        self.loggingInIndicator.isHidden = true
+        self.loggingInView.isHidden = true
         pickerView.isHidden = false
         UIApplication.shared.endIgnoringInteractionEvents()
     }
     
+    //Signs out of both google and firebase authentication, also hides potential launchView
     func signOutGoogleAndFirebase() {
-        UIView.animate(withDuration: 0.25, delay: 0,
-                       options: UIViewAnimationOptions.curveEaseOut, animations: {
-                        self.launchView.alpha = 0.0
+        UIView.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+            self.launchView.alpha = 0.0
         })
         GIDSignIn.sharedInstance().signOut()
         let firebaseAuth = FIRAuth.auth()
@@ -251,7 +228,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         
     }
     
-    //Alert Function to create an alert
+    //Function to create an alert
     func createAlert (title : String, message : String){
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: { (action) in alert.dismiss(animated: true, completion: nil)}))
@@ -268,16 +245,16 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     }
     //PickerView function which returns the college based on what row is selected, is used for dining hall selection
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return GlobalConstants.PickerData[row]
+        return Constants.PickerData[row]
     }
     //PickerView function which returns the number of rows (number of colleges), is used for dining hall selection
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return GlobalConstants.PickerData.count
+        return Constants.PickerData.count
     }
     //PickerView function, which checks if the college has a grillID (which means it is activated), is used for dining hall selection
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.diningHallTextField.text=GlobalConstants.PickerData[row]
-        if(GlobalConstants.PickerData[row] == "Select Dining Hall"){ //Checks GrillIDs dictionary for the college
+        self.diningHallTextField.text=Constants.PickerData[row]
+        if(Constants.PickerData[row] == "Select Dining Hall"){ //Checks GrillIDs dictionary for the college
             GSignInButton.isEnabled = false
         }else{
             GSignInButton.isEnabled = true //If not the default, enables the dining hall
@@ -288,7 +265,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         self.currentLocation = locations.last!
         var closestDiningHall = ["DiningHall": "None","Distance" : CLLocationDistanceMax] as [String : Any]
-        for college in GlobalConstants.coordinates{ //Loops through the colleges and checks which dining hall is closest
+        for college in Constants.coordinates{ //Loops through the colleges and checks which dining hall is closest
             let dis = college.value.distance(from: currentLocation)
             if(dis < closestDiningHall["Distance"] as! CLLocationDistance && dis<=100){
                 closestDiningHall["DiningHall"] = college.key
@@ -296,7 +273,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
             }
         }
         if(closestDiningHall["DiningHall"] as! String != "None"){ //If there is a closest dining hall, updates the DiningHall string
-            let row = GlobalConstants.PickerData.index(of :closestDiningHall["DiningHall"] as! String)!
+            let row = Constants.PickerData.index(of :closestDiningHall["DiningHall"] as! String)!
             pickerView.selectRow(row, inComponent: 0, animated: false)
             pickerView(pickerView, didSelectRow: row, inComponent: 1)
         }
@@ -306,6 +283,30 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     //Location function to check for failing.
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Failed with error: \(error)")
+    }
+    
+    func createLaunchView() {
+        //Keeps the launchScreen while loading the dining hall names
+        self.view.addSubview(launchView)
+        NSLayoutConstraint.useAndActivate(constraints:
+        [launchView.centerXAnchor.constraint(equalTo: (self.view.centerXAnchor)),
+        launchView.centerYAnchor.constraint(equalTo: (self.view.centerYAnchor)),
+        launchView.heightAnchor.constraint(equalTo: (self.view.heightAnchor)),
+        launchView.widthAnchor.constraint(equalTo: (self.view.widthAnchor))
+        ])
+        launchView.backgroundColor = UIColor.white
+        let launchImage = UIImageView()
+        launchImage.image = UIImage(named: "finalIconFull")
+        launchView.addSubview(launchImage)
+        
+        NSLayoutConstraint.useAndActivate(constraints:
+            [launchImage.centerXAnchor.constraint(equalTo: (launchView.centerXAnchor)),
+             NSLayoutConstraint(item: launchImage, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: launchView, attribute: NSLayoutAttribute.centerY, multiplier: 0.8, constant: 0),
+             launchImage.widthAnchor.constraint(equalTo: (launchView.widthAnchor)),
+             launchImage.heightAnchor.constraint(equalTo: (launchImage.widthAnchor))
+            ])
+        launchView.addSubview(launchAnimation)
+        launchAnimation.startAnimating()
     }
     
     
@@ -321,36 +322,35 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         self.diningHallTextField.text = "Select Dining Hall"
         
         //Style for the loading indicator when someone logs in
-        loadingIndicator.activityIndicatorViewStyle = .whiteLarge
-        loadingView.backgroundColor = UIColor.darkGray.withAlphaComponent(0.8)
-        loadingView.layer.cornerRadius = 10.0
-        loadingIndicator.hidesWhenStopped = true
+        loggingInIndicator.activityIndicatorViewStyle = .whiteLarge
+        loggingInView.backgroundColor = UIColor.darkGray.withAlphaComponent(0.8)
+        loggingInView.layer.cornerRadius = 10.0
+        loggingInIndicator.hidesWhenStopped = true
         
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self
         
         //only want to load dining halls when app is opened, not on logout
-        if(GlobalConstants.appJustOpened) {
-            GlobalConstants.appJustOpened = false
-            loadDiningHalls {_ in //On success of loading dining halls, either hides launch view or signsInSilently for autologin   
+        if(Constants.appJustOpened) {
+            Constants.appJustOpened = false
+            createLaunchView()
+            loadDiningHalls {_ in //On success of loading dining halls, either hides launch view or signsInSilently for autologin
                 if(GIDSignIn.sharedInstance().hasAuthInKeychain()) {
                     GIDSignIn.sharedInstance().signInSilently()
-                } else {
-                    self.launchView.isHidden=true
+                } else { //If user has no authentication on app open, hides the loading screen
+                    UIView.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+                        self.launchView.alpha = 0.0
+                    })
                 }
             }
         }
-        
-        //If user has no previous authentication hides the longer loading screen
-        
-        
     }
     
     
     //Sets the customers order information before segueing
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        stopLoadAnimation()
-        if(segue.identifier==GlobalConstants.SignInSegueID){
+        stopLoginAnimation()
+        if(segue.identifier==Constants.SignInSegueID){
             let destinationNav = segue.destination as! UINavigationController
             let destinationVC = destinationNav.viewControllers.first as! CustomerTableViewController
             destinationVC.selectedDiningHall = self.selectedDiningHall
@@ -362,8 +362,5 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
-    
-    
-    
 }
 

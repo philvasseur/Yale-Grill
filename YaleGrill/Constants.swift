@@ -9,10 +9,10 @@
 import Foundation
 import CoreLocation
 
-class GlobalConstants {
+class Constants {
     //Grill Constants
     //add to this array to activate new cook accounts, make sure to add the emailID to the grillIDs array too
-    static var GrillEmails : [String : String] = [:]
+    static var ActiveGrills : [String : String] = [:]
     static var appJustOpened = true;
     static var PickerData = ["Select Dining Hall"]
     static let coordinates  = [
@@ -27,6 +27,10 @@ class GlobalConstants {
     
     enum Status: Int {
         case Placed, Preparing, Ready, PickedUp
+    }
+    
+    enum EmailType: Int {
+        case Yale, Cook, Other
     }
     
     static let READYTIMER : Double = 8 //minutes left ready till user is given a strike

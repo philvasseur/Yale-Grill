@@ -33,13 +33,13 @@ class CookTableViewCell: UITableViewCell{
     var delegate: CookTableViewController?
     var task : DispatchWorkItem?
     var playerID : String!
-    let status = GlobalConstants.Status.self
+    let status = Constants.Status.self
     
     // MARK: - Actions
     @IBAction func ChangeStatusPressed(_ sender: UIButton) {
         if(orderStatus == status.Placed.rawValue){
             orderStatus = status.Preparing.rawValue
-            OrderStatusLabel.text = GlobalConstants.preparingTexts[3]
+            OrderStatusLabel.text = Constants.preparingTexts[3]
             OrderStatusButton.setTitle("Mark Ready", for: .normal)
             OrderStatusButton.backgroundColor = UIColor(hex: "#009900") //dark green
             
@@ -52,7 +52,7 @@ class CookTableViewCell: UITableViewCell{
                 self.delegate?.giveStrike(userID : self.cOrder.userID!,name : self.cOrder.name)
                 self.NameLabel.text = "Anyone (was \(self.cOrder.name!))"
             }
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GlobalConstants.READYTIMER*60, execute: task!)
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Constants.READYTIMER*60, execute: task!)
             
         }else if(orderStatus == status.Ready.rawValue){
             orderStatus = status.PickedUp.rawValue
@@ -61,7 +61,7 @@ class CookTableViewCell: UITableViewCell{
         
         if(orderStatus != status.PickedUp.rawValue) {
             //Updates the order status in the grill's active orders array
-            FIRDatabase.database().reference().child(GlobalConstants.grills).child(self.grillName).child(GlobalConstants.orders).child(cOrder.orderID).child(GlobalConstants.orderStatus).setValue(orderStatus)
+            FIRDatabase.database().reference().child(Constants.grills).child(self.grillName).child(Constants.orders).child(cOrder.orderID).child(Constants.orderStatus).setValue(orderStatus)
         }
         
     }
@@ -69,7 +69,7 @@ class CookTableViewCell: UITableViewCell{
     // MARK: - Functions
     func setByOrder(orderID : String, grillName : String){
         self.OrderNumLabel.isHidden = true //Hides the orderNumber while waiting for it to be set
-        let orderStatusRef = FIRDatabase.database().reference().child(GlobalConstants.grills).child(grillName).child(GlobalConstants.orders).child(orderID).child(GlobalConstants.orderStatus)
+        let orderStatusRef = FIRDatabase.database().reference().child(Constants.grills).child(grillName).child(Constants.orders).child(orderID).child(Constants.orderStatus)
         orderStatusRef.observeSingleEvent(of: FIRDataEventType.value, with: {(snapshot) in
             let orderStatus = snapshot.value as? Int ?? 0
             if(orderStatus == self.status.Placed.rawValue){
@@ -78,7 +78,7 @@ class CookTableViewCell: UITableViewCell{
                 self.OrderStatusButton.backgroundColor = UIColor(hex: "#4C8BF6") //blue
             }else if(orderStatus == self.status.Preparing.rawValue){
                 self.OrderStatusButton.backgroundColor = UIColor(hex: "#009900") //dark green
-                self.OrderStatusLabel.text = GlobalConstants.preparingTexts[3]
+                self.OrderStatusLabel.text = Constants.preparingTexts[3]
                 self.OrderStatusButton.setTitle("Mark as Ready", for: .normal)
             }else if(orderStatus == self.status.Ready.rawValue){
                 self.OrderStatusButton.backgroundColor = UIColor.red
@@ -88,7 +88,7 @@ class CookTableViewCell: UITableViewCell{
             self.orderStatus = orderStatus
         })
         
-        orderRef = FIRDatabase.database().reference().child(GlobalConstants.orders).child(orderID)
+        orderRef = FIRDatabase.database().reference().child(Constants.orders).child(orderID)
         orderRef?.observe(FIRDataEventType.value, with: { (snapshot) in
             let newJson = snapshot.value as! NSDictionary
             self.cOrder = Orders(orderID: snapshot.key, json: newJson as! [String : AnyObject]) //Converts from JSON to order object
@@ -120,10 +120,10 @@ class CookTableViewCell: UITableViewCell{
         let cOrderID = self.cOrder.orderID!
         
         //Removes the order from the users's active orders
-        FIRDatabase.database().reference().child(GlobalConstants.users).child(cOrder.userID!).child(GlobalConstants.activeOrders).child(cOrderID).removeValue() {(error, reference) in
+        FIRDatabase.database().reference().child(Constants.users).child(cOrder.userID!).child(Constants.activeOrders).child(cOrderID).removeValue() {(error, reference) in
                 //Removes the order from the grill's active orders once it is removed from the user's
                 if(error == nil) {
-                    FIRDatabase.database().reference().child(GlobalConstants.grills).child(self.grillName).child(GlobalConstants.orders).child(cOrderID).removeValue()
+                    FIRDatabase.database().reference().child(Constants.grills).child(self.grillName).child(Constants.orders).child(cOrderID).removeValue()
                 }
             }
         
