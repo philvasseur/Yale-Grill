@@ -130,14 +130,6 @@ class MenuViewController: UIViewController, GIDSignInUIDelegate{
         }
     }
     
-    //CreateAlert method just like in orderScreen class. Used here to stop user from having more than 3 total orders.
-    func createAlert (title : String, message : String){
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: { (action) in alert.dismiss(animated: true, completion: nil)}))
-        
-        self.present(alert, animated: true, completion: nil)
-    }
-    
     
     // MARK: - Overridden Functions
     
@@ -153,11 +145,7 @@ class MenuViewController: UIViewController, GIDSignInUIDelegate{
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         ordersPlaced = getOrderInfo()
         if(ordersPlaced.count+totalOrdersCount > 3){
-            var plural = ""
-            if(totalOrdersCount != 1){
-                plural = "s"
-            }
-            createAlert(title: "Wow, you're hungry!", message: "Sorry, \(ordersPlaced.count) more orders sets you over the limit! You have already placed \(totalOrdersCount) order\(plural) and the limit is 3!")
+            Constants.createAlert(title: "Wow, you're hungry!", message: "Sorry, you can only place three orders at a time!", style: .notice)
             return false
         }else if(ordersPlaced.count==0){
             return false

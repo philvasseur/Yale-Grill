@@ -7,7 +7,7 @@ admin.initializeApp(functions.config().firebase);
 
 //Defines the grillOrderChange function to be called every time the path below is written to
 exports.grillOrderChange = functions.database.ref('/Grills/{grillID}/Orders/{orderID}').onWrite(event => {
-	var orderIDForLog = event.params.orderID.substring(0,8);
+	var orderIDForLog = event.params.orderID.substring(19);
 	if (!event.data.exists()) { //Checks that order exists (onWrite is called by deletions)
 		console.log(orderIDForLog + ': No Data Exists (Order Deleted) - No Action Taken');
 

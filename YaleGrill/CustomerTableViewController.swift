@@ -58,12 +58,6 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
     
     
     // MARK: - Functions
-    func createAlert (title : String, message : String){
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: { (action) in alert.dismiss(animated: true, completion: nil)}))
-        
-        self.present(alert, animated: true, completion: nil)
-    }
     
     //Removes the Firebase observers to get rid of errors upon logout when auth is revoked
     func removeActiveObservers(){
@@ -89,10 +83,12 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
     //Stops segue if 3 orders are already placed or if the grill is off. Creates alert for each
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if(!grillIsOn){
-            createAlert(title: "Sorry!", message: "The \(selectedDiningHall!) grill is currently off! Please try again later during Dining Hall hours.")
+            Constants.createAlert(title: "Sorry, The Grill is Off!", message: "Please try again later during Dining Hall hours. If you think this is an error, contact your respective dining hall staff.",
+                style: .wait)
             return false
         }else if(allActiveOrders.count>=3){
-            createAlert(title: "Order Limit Reached!", message: "You can't place more than 3 orders! Please wait for your current orders to be finished!")
+            Constants.createAlert(title: "Order Limit Reached", message: "You can't place more than 3 orders! Please wait for your current orders to be finished!",
+                style: .wait)
             return false
         }else{
             return true

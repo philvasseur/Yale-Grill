@@ -50,19 +50,28 @@ class CustomerTableViewCell: UITableViewCell{
         self.orderTitle.text = self.cOrder.foodServing
         self.attributeOneLabel.text = self.cOrder.cheeseSetting
         self.attributeTwoLabel.text = self.cOrder.lettuceSetting
-        self.attributeThreeLabel.text = self.cOrder.bunSetting
+        self.attributeThreeLabel.text = self.cOrder.bunSetting  
         self.attributeFourLabel.text = self.cOrder.sauceSetting
         self.attributeFiveLabel.text = self.cOrder.tomatoSetting
-        orderNumLabel.isHidden = true //Hides the orderNumLabel until it gets set as non-zero
+        orderNumLabel.isHidden = true //Hides the orderNumLabel until it gets set
         for label in self.orderLabels { //unhides once info shows, makes it look snappier
             label.isHidden = false
         }
         
-        let orderNumRef = FIRDatabase.database().reference().child(Constants.orders).child(order.orderID)
-        
-        orderNumRef.observe(FIRDataEventType.value, with: { (snapshot) in //Observes the order for changes
-            let orderNum = (snapshot.value as! [String : AnyObject])["orderNum"] as! Int
-            if(orderNum != 0) {
+        if(self.cOrder.orderNum > 0) {
+            self.orderNumLabel.isHidden = false
+            if(self.cOrder.orderNum < 10){
+                self.orderNumLabel.text = "0\(self.cOrder.orderNum!)"
+            }else {
+                self.orderNumLabel.text = "\(self.cOrder.orderNum!)"
+            }
+        } else {
+            let orderNumRef = FIRDatabase.database().reference().child(Constants.orders).child(order.orderID).child("orderNum")
+            orderNumRef.observe(FIRDataEventType.value, with: { (snapshot) in //Observes the order for changes
+                if (!snapshot.exists()) {
+                    return
+                }
+                let orderNum = snapshot.value  as! Int
                 self.orderNumLabel.isHidden = false
                 self.cOrder.orderNum = orderNum
                 orderNumRef.removeAllObservers()
@@ -71,9 +80,9 @@ class CustomerTableViewCell: UITableViewCell{
                 }else {
                     self.orderNumLabel.text = "\(orderNum)"
                 }
-            }
-        })
-        
+            })
+        }
+    
         let orderStatusRef = FIRDatabase.database().reference().child(Constants.grills).child(order.grill).child(Constants.orders).child(order.orderID).child(Constants.orderStatus)
         orderStatusRef.observe(FIRDataEventType.value, with: {(snapshot) in
             let orderStatus = snapshot.value as? Int ?? 3

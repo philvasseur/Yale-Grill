@@ -103,7 +103,6 @@ class Orders : NSObject {
             DatabaseKeys.lettuceSetting: lettuceSetting as AnyObject,
             DatabaseKeys.tomatoSetting: tomatoSetting as AnyObject,
             DatabaseKeys.userID: userID as AnyObject,
-            DatabaseKeys.orderNum: orderNum as AnyObject,
             DatabaseKeys.grill : grill as AnyObject
         ]
         

@@ -50,27 +50,10 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
     
     
     // MARK: - Functions
-    func createAlert (title : String, message : String){
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: { (action) in alert.dismiss(animated: true, completion: nil)}))
-        let attributedString = NSAttributedString(string: title, attributes: [
-            NSFontAttributeName : UIFont.systemFont(ofSize: 19), //your font here
-            NSForegroundColorAttributeName : UIColor.black
-            ])
-        let attributedString2 = NSAttributedString(string: message, attributes: [
-            NSFontAttributeName : UIFont.systemFont(ofSize: 16), //your font here
-            NSForegroundColorAttributeName : UIColor.black
-            ])
-        alert.setValue(attributedString, forKey: "attributedTitle")
-        alert.setValue(attributedString2, forKey: "attributedMessage")
-        if(self.presentedViewController == nil) {
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
     
     func giveStrike(userID : String, name: String){
         let date = Date()
-        self.createAlert(title: "Strike Given", message: "Due to not picking up their food, \(name) has been given a strike.")
+        Constants.createAlert(title: "Strike Given", message: "Due to not picking up their food, \(name) has been given a strike.",style: .notice)
         FIRDatabase.database().reference().child(Constants.users).child(userID).child("Strikes").observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
             let strikes = snapshot.value as? Int
             if(strikes == nil) {

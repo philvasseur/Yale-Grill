@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreLocation
+import SCLAlertView
 
 class Constants {
     //Grill Constants
@@ -66,5 +67,26 @@ class Constants {
     
     //Other
     static let UserReadyText = "Ready for Pickup!"
+    
+    static func createAlert (title : String, message : String, style: SCLAlertViewStyle){
+        let alertAppearance = SCLAlertView.SCLAppearance(kWindowWidth: 300, kWindowHeight: 200, contentViewCornerRadius: 10, buttonCornerRadius: 8)
+        let alert = SCLAlertView(appearance: alertAppearance)
+        switch style {
+        case .error:
+            alert.showError(title, subTitle: message, closeButtonTitle: "Okay")
+        case .warning:
+            alert.showWarning(title, subTitle: message, closeButtonTitle: "Okay")
+        case .notice:
+            alert.showNotice(title, subTitle: message, closeButtonTitle: "Okay")
+        case .success:
+            alert.showSuccess(title, subTitle: message, closeButtonTitle: "Okay")
+        case .info:
+            alert.showInfo(title, subTitle: message, closeButtonTitle: "Okay")
+        case .edit:
+            alert.showEdit(title, subTitle: message, closeButtonTitle: "Okay")
+        case .wait:
+            alert.showWait(title, subTitle: message, closeButtonTitle: "Okay")
+        }
+    }
     
 }

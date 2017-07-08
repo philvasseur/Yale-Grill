@@ -41,23 +41,22 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
             print("Couldn't sign in, Error: \(error.localizedDescription)")
             return;
         }
-        
-        self.startLoginAnimation()
+
         print("Attempting Signing In")
         
+        //Checks emails, if a student then gets the dining hall, if cook then segues, if neither logs out
+        let emailType = self.checkEmail(email: user.profile.email)
         guard let authentication = user.authentication else { return }
         let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
-        FIRAuth.auth()?.signIn(with: credential) { (user, error) in //Firebase then authenticates user
-            if let error = error {
-                print("Firebase Auth Error: \(error)")
-                self.signOutGoogleAndFirebase()
-                return
-            }
-            
-            //Checks emails, if a student then gets the dining hall, if cook then segues, if neither logs out
-            let emailType = self.checkEmail(email: user!.email!)
-            
-            if(emailType == .Yale){
+        
+        if(emailType == .Yale){
+            self.startLoginAnimation()
+            FIRAuth.auth()?.signIn(with: credential) { (user, error) in //Firebase then authenticates user
+                if let error = error {
+                    print("Firebase Auth Error: \(error)")
+                    self.signOutGoogleAndFirebase()
+                    return
+                }
                 //If it's a yale email, gets the currently selected dining hall
                 self.getDiningHall { success in //Completion handler used to make sure a dining hall is actually set
                     if(success) {
@@ -65,19 +64,27 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
                     } else { //Happens during a bug with pickerView or if user's prevDiningHall is no longer available
                         self.signOutGoogleAndFirebase()
                         self.stopLoginAnimation()
-                        self.createAlert(title: "Sorry, cannot load the dining hall!", message: "Please select another dining hall. If you think this is an error, contact philip.vasseur@yale.edu.")
+                        Constants.createAlert(title: "Cannot Load Dining Hall", message: "Please select another dining hall. If you think this is an error, contact philip.vasseur@yale.edu.", style: .error)
                     }
                 }
-            } else if (emailType == .Cook) {
+            }
+        } else if (emailType == .Cook) {
+            self.startLoginAnimation()
+            FIRAuth.auth()?.signIn(with: credential) { (user, error) in //Firebase then authenticates user
+                if let error = error {
+                    print("Firebase Auth Error: \(error)")
+                    self.signOutGoogleAndFirebase()
+                    return
+                }
                 //If it is a cooks email then segues right away
                 self.performSegue(withIdentifier: Constants.ControlScreenSegueID, sender: nil)
-            } else if (emailType == .Other) {
-                //Not a yale email, so signs user out
-                print("Non-Yale Email, LOGGING OUT")
-                self.signOutGoogleAndFirebase()
-                self.stopLoginAnimation()
-                self.createAlert(title: "Invalid Email Address!", message: "You must use a Yale email address to sign in!")
             }
+        } else if (emailType == .Other) {
+            //Not a yale email, so signs user out
+            print("Non-Yale Email, LOGGING OUT")
+            self.signOutGoogleAndFirebase()
+            self.stopLoginAnimation()
+            Constants.createAlert(title: "Invalid Email Address", message: "This app is for Yale students only. Use a valid Yale email address to login.",style: .error)
         }
         
     }
@@ -176,7 +183,8 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         let dateFormatter2 = DateFormatter()
         dateFormatter2.dateStyle = DateFormatter.Style.full
         let banEndString = dateFormatter2.string(from: bannedUntil!)
-        self.createAlert(title: "You've Been Banned!", message: "Due to not picking up 5 orders, you have been temporarily banned from using YaleGrill. This ban will expire on \n\n\(banEndString).\n\n This is an automated ban. If you think this is a mistake, please contact philip.vasseur@yale.edu.")
+        Constants.createAlert(title: "You've Been Banned!", message: "Due to not picking up 5 orders, you have been temporarily banned from using YaleGrill. This ban will expire on \n\n\(banEndString).\n\n This is an automated ban. If you think this is a mistake, please contact philip.vasseur@yale.edu.",
+            style: .error)
         self.stopLoginAnimation()
         self.signOutGoogleAndFirebase()
         return true
@@ -226,14 +234,6 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
             print ("Error signing out: %@", signOutError)
         }
         
-    }
-    
-    //Function to create an alert
-    func createAlert (title : String, message : String){
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: { (action) in alert.dismiss(animated: true, completion: nil)}))
-        
-        self.present(alert, animated: true, completion: nil)
     }
     
     
@@ -289,11 +289,11 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         //Keeps the launchScreen while loading the dining hall names
         self.view.addSubview(launchView)
         NSLayoutConstraint.useAndActivate(constraints:
-        [launchView.centerXAnchor.constraint(equalTo: (self.view.centerXAnchor)),
-        launchView.centerYAnchor.constraint(equalTo: (self.view.centerYAnchor)),
-        launchView.heightAnchor.constraint(equalTo: (self.view.heightAnchor)),
-        launchView.widthAnchor.constraint(equalTo: (self.view.widthAnchor))
-        ])
+            [launchView.centerXAnchor.constraint(equalTo: (self.view.centerXAnchor)),
+             launchView.centerYAnchor.constraint(equalTo: (self.view.centerYAnchor)),
+             launchView.heightAnchor.constraint(equalTo: (self.view.heightAnchor)),
+             launchView.widthAnchor.constraint(equalTo: (self.view.widthAnchor))
+            ])
         launchView.backgroundColor = UIColor.white
         let launchImage = UIImageView()
         launchImage.image = UIImage(named: "finalIconFull")
