@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CD9E14DF1E130C7E000E21C0"
-               BuildableName = "YaleGrill.app"
-               BlueprintName = "YaleGrill"
-               ReferencedContainer = "container:YaleGrill.xcodeproj">
+               BuildableName = "Yale Grill.app"
+               BlueprintName = "Yale Grill"
+               ReferencedContainer = "container:Yale Grill.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CD9E14DF1E130C7E000E21C0"
-            BuildableName = "YaleGrill.app"
-            BlueprintName = "YaleGrill"
-            ReferencedContainer = "container:YaleGrill.xcodeproj">
+            BuildableName = "Yale Grill.app"
+            BlueprintName = "Yale Grill"
+            ReferencedContainer = "container:Yale Grill.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CD9E14DF1E130C7E000E21C0"
-            BuildableName = "YaleGrill.app"
-            BlueprintName = "YaleGrill"
-            ReferencedContainer = "container:YaleGrill.xcodeproj">
+            BuildableName = "Yale Grill.app"
+            BlueprintName = "Yale Grill"
+            ReferencedContainer = "container:Yale Grill.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -75,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CD9E14DF1E130C7E000E21C0"
-            BuildableName = "YaleGrill.app"
-            BlueprintName = "YaleGrill"
-            ReferencedContainer = "container:YaleGrill.xcodeproj">
+            BuildableName = "Yale Grill.app"
+            BlueprintName = "Yale Grill"
+            ReferencedContainer = "container:Yale Grill.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

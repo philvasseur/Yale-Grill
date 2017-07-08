@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -14,13 +14,13 @@
         <!--Cook Orders-->
         <scene sceneID="l97-cy-9fo">
             <objects>
-                <tableViewController title="Cook Orders" id="Qtw-aa-nCw" customClass="CookTableViewController" customModule="YaleGrill" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Cook Orders" id="Qtw-aa-nCw" customClass="CookTableViewController" customModule="Yale_Grill" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="XT6-2U-dEp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cookCell" rowHeight="90" id="lEX-Lm-rlD" customClass="CookTableViewCell" customModule="YaleGrill" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cookCell" rowHeight="90" id="lEX-Lm-rlD" customClass="CookTableViewCell" customModule="Yale_Grill" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lEX-Lm-rlD" id="I5h-u9-F9I">
@@ -195,7 +195,7 @@
         <!--Login View-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="ViewController" title="Login View" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="LoginViewController" customModule="YaleGrill" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" title="Login View" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="LoginViewController" customModule="Yale_Grill" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Zuz-hs-Mwr"/>
                         <viewControllerLayoutGuide type="bottom" id="Gw9-Jt-OwV"/>
@@ -336,7 +336,7 @@
         <!--DO NOT USE-->
         <scene sceneID="SIu-QJ-Md8">
             <objects>
-                <viewController storyboardIdentifier="LoggedInScreen" title="DO NOT USE" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Xnt-PY-nOB" customClass="OrderScreen" customModule="YaleGrill" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoggedInScreen" title="DO NOT USE" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Xnt-PY-nOB" customClass="OrderScreen" customModule="Yale_Grill" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yXN-qZ-zOm"/>
                         <viewControllerLayoutGuide type="bottom" id="fwT-oK-Cgh"/>
@@ -848,7 +848,7 @@
         <!--Customer Menu-->
         <scene sceneID="wnc-WG-0NI">
             <objects>
-                <viewController title="Customer Menu" id="0M2-0t-HgQ" customClass="MenuViewController" customModule="YaleGrill" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Customer Menu" id="0M2-0t-HgQ" customClass="MenuViewController" customModule="Yale_Grill" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3AD-Bt-ovx"/>
                         <viewControllerLayoutGuide type="bottom" id="8rF-hq-GZ1"/>
@@ -1190,13 +1190,13 @@
         <!--Customer Orders-->
         <scene sceneID="j6F-ka-Q4e">
             <objects>
-                <tableViewController title="Customer Orders" id="oI0-JY-wm8" customClass="CustomerTableViewController" customModule="YaleGrill" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Customer Orders" id="oI0-JY-wm8" customClass="CustomerTableViewController" customModule="Yale_Grill" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="tHX-MW-vhW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="customerCell" rowHeight="202" id="KP1-Mz-dig" customClass="CustomerTableViewCell" customModule="YaleGrill" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="customerCell" rowHeight="202" id="KP1-Mz-dig" customClass="CustomerTableViewCell" customModule="Yale_Grill" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="202"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KP1-Mz-dig" id="u16-cG-Axu">
