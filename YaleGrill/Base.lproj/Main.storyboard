@@ -257,6 +257,12 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kLb-HX-SsP" userLabel="DiningHallText">
+                                <rect key="frame" x="90.5" y="399.5" width="194" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0B7-Lh-0B6" userLabel="LoggingInView">
                                 <rect key="frame" x="167.5" y="313.5" width="40" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -294,9 +300,13 @@
                             <constraint firstItem="xTe-bi-vpj" firstAttribute="centerY" secondItem="VIN-Hj-NQE" secondAttribute="centerY" id="UD7-DX-DiX"/>
                             <constraint firstItem="Prv-Si-nvN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ZaD-3V-k7k"/>
                             <constraint firstItem="3fh-YX-xub" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ZuP-M5-FL2"/>
+                            <constraint firstItem="kLb-HX-SsP" firstAttribute="centerY" secondItem="GFl-ZW-WQc" secondAttribute="centerY" id="bZa-Az-BsR"/>
                             <constraint firstItem="3fh-YX-xub" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="0.59" id="bqi-eL-7s0"/>
                             <constraint firstItem="rHD-UZ-naE" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="e7F-v2-0df"/>
                             <constraint firstItem="0B7-Lh-0B6" firstAttribute="centerX" secondItem="rHD-UZ-naE" secondAttribute="centerX" id="gfK-EI-gPe"/>
+                            <constraint firstItem="kLb-HX-SsP" firstAttribute="width" secondItem="GFl-ZW-WQc" secondAttribute="width" id="kQb-uX-655"/>
+                            <constraint firstItem="kLb-HX-SsP" firstAttribute="height" secondItem="GFl-ZW-WQc" secondAttribute="height" id="kRV-8W-CtF"/>
+                            <constraint firstItem="kLb-HX-SsP" firstAttribute="centerX" secondItem="GFl-ZW-WQc" secondAttribute="centerX" id="mF6-v2-N3o"/>
                             <constraint firstItem="0B7-Lh-0B6" firstAttribute="centerY" secondItem="rHD-UZ-naE" secondAttribute="centerY" id="oQg-ge-Mmr"/>
                             <constraint firstItem="VIN-Hj-NQE" firstAttribute="top" secondItem="3fh-YX-xub" secondAttribute="bottom" constant="-5" id="pfu-eD-I2B"/>
                             <constraint firstItem="0B7-Lh-0B6" firstAttribute="width" secondItem="rHD-UZ-naE" secondAttribute="width" multiplier="2" id="qPC-KU-awr"/>
@@ -310,6 +320,7 @@
                     <connections>
                         <outlet property="DisabledSignInColor" destination="4r6-q8-vo8" id="okx-G1-b3Y"/>
                         <outlet property="GSignInButton" destination="VIN-Hj-NQE" id="GDW-Cd-weg"/>
+                        <outlet property="diningHallText" destination="kLb-HX-SsP" id="XnI-wn-3bh"/>
                         <outlet property="diningHallTextField" destination="GFl-ZW-WQc" id="skK-68-f5t"/>
                         <outlet property="launchAnimation" destination="3xX-Nc-Gkz" id="FDX-pr-5XR"/>
                         <outlet property="loggingInIndicator" destination="rHD-UZ-naE" id="SRg-25-Cv0"/>
@@ -1145,7 +1156,7 @@
                 <navigationController storyboardIdentifier="NavControl" title="Customer NavController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CYl-rG-eM0" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="0S0-rn-29S"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3L9-0H-vua">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="3L9-0H-vua">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1163,7 +1174,7 @@
             <objects>
                 <navigationController title="Cook NavController" automaticallyAdjustsScrollViewInsets="NO" id="Txg-YN-yko" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yZ9-AK-vnH">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="yZ9-AK-vnH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

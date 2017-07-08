@@ -16,6 +16,8 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     //LOCATION SERVICES NOT TURNED ON ATM
     
     // MARK: - Outlets
+    
+    @IBOutlet weak var diningHallText: UILabel!
     @IBOutlet weak var diningHallTextField: UITextField!
     @IBOutlet weak var DisabledSignInColor: UIImageView!
     @IBOutlet weak var GSignInButton: GIDSignInButton!
@@ -43,14 +45,13 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         }
 
         print("Attempting Signing In")
-        
+        self.startLoginAnimation()
         //Checks emails, if a student then gets the dining hall, if cook then segues, if neither logs out
         let emailType = self.checkEmail(email: user.profile.email)
         guard let authentication = user.authentication else { return }
         let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
         
         if(emailType == .Yale){
-            self.startLoginAnimation()
             FIRAuth.auth()?.signIn(with: credential) { (user, error) in //Firebase then authenticates user
                 if let error = error {
                     print("Firebase Auth Error: \(error)")
@@ -69,7 +70,6 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
                 }
             }
         } else if (emailType == .Cook) {
-            self.startLoginAnimation()
             FIRAuth.auth()?.signIn(with: credential) { (user, error) in //Firebase then authenticates user
                 if let error = error {
                     print("Firebase Auth Error: \(error)")
@@ -92,8 +92,8 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     //Checks if a dining hall is selected, if not grabs previously logged in dining hall from database
     func getDiningHall(completion : @escaping (Bool) -> ()) {
         let dHallRef = FIRDatabase.database().reference().child(Constants.users).child(GIDSignIn.sharedInstance().currentUser.userID!).child(Constants.prevDining)
-        if(Constants.ActiveGrills[diningHallTextField.text!] != nil) {
-            selectedDiningHall = diningHallTextField.text
+        if(Constants.ActiveGrills[diningHallText.text!] != nil) {
+            selectedDiningHall = diningHallText.text
             dHallRef.setValue(self.selectedDiningHall) //Updates last dining hall logged into for user
             completion(true)
             return
@@ -253,7 +253,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     }
     //PickerView function, which checks if the college has a grillID (which means it is activated), is used for dining hall selection
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.diningHallTextField.text=Constants.PickerData[row]
+        self.diningHallText.text=Constants.PickerData[row]
         if(Constants.PickerData[row] == "Select Dining Hall"){ //Checks GrillIDs dictionary for the college
             GSignInButton.isEnabled = false
         }else{
@@ -316,10 +316,11 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         pickerView.showsSelectionIndicator = true
         pickerView.dataSource = self
         pickerView.delegate = self
+        diningHallText.layer.cornerRadius = 5
         diningHallTextField.inputView = pickerView
+        diningHallText.text = "Select Dining Hall"
         GSignInButton.isEnabled=false
         DisabledSignInColor.layer.cornerRadius = 2 //Used to set the color for when login button when disabled
-        self.diningHallTextField.text = "Select Dining Hall"
         
         //Style for the loading indicator when someone logs in
         loggingInIndicator.activityIndicatorViewStyle = .whiteLarge
