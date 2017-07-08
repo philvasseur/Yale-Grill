@@ -184,7 +184,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     }
     
     //Loads the Dining Hall names and emails for the pickerView from firebase
-    func loadDiningHalls() {
+    func loadDiningHalls(completion: @escaping () -> ()) {
         //Keeps the launchScreen while loading the dining hall names
         self.view.addSubview(launchView)
         NSLayoutConstraint.useAndActivate(constraints:
@@ -214,6 +214,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
             for(key,_) in GlobalConstants.GrillEmails {
                 GlobalConstants.PickerData.append(key)
             }
+            completion();
             
         })
     }
@@ -331,15 +332,17 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         //only want to load dining halls when app is opened, not on logout
         if(GlobalConstants.appJustOpened) {
             GlobalConstants.appJustOpened = false
-            loadDiningHalls()
+            loadDiningHalls {_ in //On success of loading dining halls, either hides launch view or signsInSilently for autologin   
+                if(GIDSignIn.sharedInstance().hasAuthInKeychain()) {
+                    GIDSignIn.sharedInstance().signInSilently()
+                } else {
+                    self.launchView.isHidden=true
+                }
+            }
         }
         
         //If user has no previous authentication hides the longer loading screen
-        if(GIDSignIn.sharedInstance().hasAuthInKeychain()) {
-            GIDSignIn.sharedInstance().signInSilently()
-        } else {
-            self.launchView.isHidden=true
-        }
+        
         
     }
     
