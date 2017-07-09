@@ -101,10 +101,10 @@ class CookTableViewCell: UITableViewCell{
             self.LettuceLabel.text = self.cOrder.lettuceSetting
             self.NameLabel.text = self.cOrder.name
             
-            if(self.cOrder.orderNum != 0) {
+            if(self.cOrder.orderNum != nil) {
                 self.OrderNumLabel.isHidden = false
                 self.orderRef?.removeAllObservers()
-                if(self.cOrder.orderNum < 10){
+                if(self.cOrder.orderNum! < 10){
                     self.OrderNumLabel.text = "- #0\(self.cOrder.orderNum!)"
                 }else {
                     self.OrderNumLabel.text = "- #\(self.cOrder.orderNum!)"

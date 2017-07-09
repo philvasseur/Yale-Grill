@@ -58,9 +58,9 @@ class CustomerTableViewCell: UITableViewCell{
             label.isHidden = false
         }
         
-        if(self.cOrder.orderNum > 0) {
+        if(self.cOrder.orderNum != nil) {
             self.orderNumLabel.isHidden = false
-            if(self.cOrder.orderNum < 10){
+            if(self.cOrder.orderNum! < 10){
                 self.orderNumLabel.text = "0\(self.cOrder.orderNum!)"
             }else {
                 self.orderNumLabel.text = "\(self.cOrder.orderNum!)"

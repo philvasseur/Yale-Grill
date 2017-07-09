@@ -83,7 +83,7 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
     //Stops segue if 3 orders are already placed or if the grill is off. Creates alert for each
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if(!grillIsOn){
-            Constants.createAlert(title: "Sorry, The Grill is Off!", message: "Please try again later during Dining Hall hours. If you think this is an error, contact your respective dining hall staff.",
+            Constants.createAlert(title: "The Grill Is Off!", message: "Please try again later during Dining Hall hours. If you think this is an error, contact your respective dining hall staff.",
                 style: .wait)
             return false
         }else if(allActiveOrders.count>=3){

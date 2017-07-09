@@ -44,7 +44,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
             return;
         }
 
-        print("Attempting Signing In")
+        print("Attempting to Sign In User: \(user.profile.email!)")
         self.startLoginAnimation()
         //Checks emails, if a student then gets the dining hall, if cook then segues, if neither logs out
         let emailType = self.checkEmail(email: user.profile.email)
@@ -64,7 +64,6 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
                         self.loadOrdersAndSegue()
                     } else { //Happens during a bug with pickerView or if user's prevDiningHall is no longer available
                         self.signOutGoogleAndFirebase()
-                        self.stopLoginAnimation()
                         Constants.createAlert(title: "Cannot Load Dining Hall", message: "Please select another dining hall. If you think this is an error, contact philip.vasseur@yale.edu.", style: .error)
                     }
                 }
@@ -83,7 +82,6 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
             //Not a yale email, so signs user out
             print("Non-Yale Email, LOGGING OUT")
             self.signOutGoogleAndFirebase()
-            self.stopLoginAnimation()
             Constants.createAlert(title: "Invalid Email Address", message: "This app is for Yale students only. Use a valid Yale email address to login.",style: .error)
         }
         
@@ -185,7 +183,6 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         let banEndString = dateFormatter2.string(from: bannedUntil!)
         Constants.createAlert(title: "You've Been Banned!", message: "Due to not picking up 5 orders, you have been temporarily banned from using YaleGrill. This ban will expire on \n\n\(banEndString).\n\n This is an automated ban. If you think this is a mistake, please contact philip.vasseur@yale.edu.",
             style: .error)
-        self.stopLoginAnimation()
         self.signOutGoogleAndFirebase()
         return true
     }
@@ -210,7 +207,6 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         self.loggingInIndicator.isHidden = false
         self.loggingInView.isHidden = false
         pickerView.isHidden = true
-        UIApplication.shared.beginIgnoringInteractionEvents()
     }
     //Stops the animation for NORMAL signin
     func stopLoginAnimation(){
@@ -218,7 +214,6 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         self.loggingInIndicator.isHidden = true
         self.loggingInView.isHidden = true
         pickerView.isHidden = false
-        UIApplication.shared.endIgnoringInteractionEvents()
     }
     
     //Signs out of both google and firebase authentication, also hides potential launchView
@@ -226,6 +221,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         UIView.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
             self.launchView.alpha = 0.0
         })
+        stopLoginAnimation()
         GIDSignIn.sharedInstance().signOut()
         let firebaseAuth = FIRAuth.auth()
         do {
@@ -350,7 +346,6 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     
     //Sets the customers order information before segueing
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        stopLoginAnimation()
         if(segue.identifier==Constants.SignInSegueID){
             let destinationNav = segue.destination as! UINavigationController
             let destinationVC = destinationNav.viewControllers.first as! CustomerTableViewController

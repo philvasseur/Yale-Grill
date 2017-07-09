@@ -258,7 +258,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kLb-HX-SsP" userLabel="DiningHallText">
-                                <rect key="frame" x="90.5" y="399.5" width="194" height="30"/>
+                                <rect key="frame" x="90.5" y="399" width="194" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1156,7 +1156,7 @@
                 <navigationController storyboardIdentifier="NavControl" title="Customer NavController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CYl-rG-eM0" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="0S0-rn-29S"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="3L9-0H-vua">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3L9-0H-vua">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1174,7 +1174,7 @@
             <objects>
                 <navigationController title="Cook NavController" automaticallyAdjustsScrollViewInsets="NO" id="Txg-YN-yko" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="yZ9-AK-vnH">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yZ9-AK-vnH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

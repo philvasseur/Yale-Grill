@@ -21,7 +21,7 @@ class Orders : NSObject {
     var sauceSetting: String!
     var lettuceSetting: String!
     var tomatoSetting: String!
-    var orderNum: Int!
+    var orderNum: Int?
     var grill : String!
     
     private struct DatabaseKeys {
@@ -39,7 +39,7 @@ class Orders : NSObject {
     }
     
     //Creates a new Orders object
-    init(_userID: String,_name : String, _foodServing : String, _bunSetting : String, _cheeseSetting : String, _sauceSetting : String, _lettuceSetting : String, _tomatoSetting: String, _orderID : String?, _orderNum : Int?, _grill : String) {
+    init(_userID: String,_name : String, _foodServing : String, _bunSetting : String, _cheeseSetting : String, _sauceSetting : String, _lettuceSetting : String, _tomatoSetting: String, _orderID : String? = nil, _orderNum : Int? = nil, _grill : String) {
         self.userID = _userID
         
         
@@ -54,7 +54,7 @@ class Orders : NSObject {
         self.sauceSetting = _sauceSetting
         self.lettuceSetting = _lettuceSetting
         self.tomatoSetting = _tomatoSetting
-        self.orderNum = _orderNum ?? 0
+        self.orderNum = _orderNum
         self.grill = _grill
     }
     
