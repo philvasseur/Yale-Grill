@@ -20,13 +20,13 @@
 		CD58B0F51ED89CA800C6F02C /* finished.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD58B0F11ED89CA800C6F02C /* finished.gif */; };
 		CD58B0FC1ED8A08900C6F02C /* preparing4.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD58B0F81ED8A08900C6F02C /* preparing4.gif */; };
 		CD58B1011ED8A83400C6F02C /* preparing5.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD58B1001ED8A83400C6F02C /* preparing5.gif */; };
+		CD5B27FF1F453E2D005CA2A5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD5B27FE1F453E2D005CA2A5 /* GoogleService-Info.plist */; };
 		CD9E14E41E130C7E000E21C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9E14E31E130C7E000E21C0 /* AppDelegate.swift */; };
 		CD9E14E61E130C7E000E21C0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9E14E51E130C7E000E21C0 /* LoginViewController.swift */; };
 		CD9E14E91E130C7E000E21C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD9E14E71E130C7E000E21C0 /* Main.storyboard */; };
 		CD9E14EB1E130C7E000E21C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD9E14EA1E130C7E000E21C0 /* Assets.xcassets */; };
 		CD9E14EE1E130C7E000E21C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD9E14EC1E130C7E000E21C0 /* LaunchScreen.storyboard */; };
 		CDC1A0DA1E177B49009C2538 /* Orders.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC1A0D91E177B49009C2538 /* Orders.swift */; };
-		CDC64C9A1E1FF52D002959BA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDC64C991E1FF52D002959BA /* GoogleService-Info.plist */; };
 		CDCFD5951E1359AE00065E87 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCFD5941E1359AE00065E87 /* MenuViewController.swift */; };
 		CDE5C00D1E1EEA5A00226D71 /* CookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE5C00C1E1EEA5A00226D71 /* CookTableViewCell.swift */; };
 		CDE5C00F1E1F0F4900226D71 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE5C00E1E1F0F4900226D71 /* Constants.swift */; };
@@ -61,6 +61,7 @@
 		CD58B0F11ED89CA800C6F02C /* finished.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = finished.gif; sourceTree = "<group>"; };
 		CD58B0F81ED8A08900C6F02C /* preparing4.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = preparing4.gif; sourceTree = "<group>"; };
 		CD58B1001ED8A83400C6F02C /* preparing5.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = preparing5.gif; sourceTree = "<group>"; };
+		CD5B27FE1F453E2D005CA2A5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CD9E14E01E130C7E000E21C0 /* Yale Grill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Yale Grill.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD9E14E31E130C7E000E21C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD9E14E51E130C7E000E21C0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -69,7 +70,6 @@
 		CD9E14ED1E130C7E000E21C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CD9E14EF1E130C7E000E21C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CDC1A0D91E177B49009C2538 /* Orders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Orders.swift; sourceTree = "<group>"; };
-		CDC64C991E1FF52D002959BA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CDC748D01ED4FF3700370350 /* YaleGrill.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YaleGrill.entitlements; sourceTree = "<group>"; };
 		CDCFD5941E1359AE00065E87 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		CDD92A2B1E130E5B005C091B /* YaleGrill-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YaleGrill-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -138,8 +138,8 @@
 			isa = PBXGroup;
 			children = (
 				CDE5C00E1E1F0F4900226D71 /* Constants.swift */,
-				CDC64C991E1FF52D002959BA /* GoogleService-Info.plist */,
 				CD9E14EF1E130C7E000E21C0 /* Info.plist */,
+				CD5B27FE1F453E2D005CA2A5 /* GoogleService-Info.plist */,
 				CD9E14EA1E130C7E000E21C0 /* Assets.xcassets */,
 				CD179F0C1E15F71400496D5F /* Gifs */,
 			);
@@ -276,11 +276,11 @@
 				CD58B0FC1ED8A08900C6F02C /* preparing4.gif in Resources */,
 				CD9E14EE1E130C7E000E21C0 /* LaunchScreen.storyboard in Resources */,
 				CD58B1011ED8A83400C6F02C /* preparing5.gif in Resources */,
-				CDC64C9A1E1FF52D002959BA /* GoogleService-Info.plist in Resources */,
 				CD58B0F31ED89CA800C6F02C /* preparing1.gif in Resources */,
 				CD58B0F51ED89CA800C6F02C /* finished.gif in Resources */,
 				CD9E14EB1E130C7E000E21C0 /* Assets.xcassets in Resources */,
 				CD9E14E91E130C7E000E21C0 /* Main.storyboard in Resources */,
+				CD5B27FF1F453E2D005CA2A5 /* GoogleService-Info.plist in Resources */,
 				CD58B0F41ED89CA800C6F02C /* preparing3.gif in Resources */,
 				CD58B0F21ED89CA800C6F02C /* preparing2.gif in Resources */,
 			);
