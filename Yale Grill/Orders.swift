@@ -68,7 +68,7 @@ class Orders : NSObject {
         let sauceSetting = json[DatabaseKeys.sauceSetting] as! String
         let lettuceSetting = json[DatabaseKeys.lettuceSetting] as! String
         let tomatoSetting = json[DatabaseKeys.tomatoSetting] as! String
-        let orderNum = json[DatabaseKeys.orderNum] as! Int
+        let orderNum = json[DatabaseKeys.orderNum] as? Int
         let grill = json[DatabaseKeys.grill] as! String
         self.init(_userID: userID, _name: name, _foodServing: foodServing, _bunSetting: bunSetting, _cheeseSetting: cheeseSetting, _sauceSetting: sauceSetting, _lettuceSetting: lettuceSetting, _tomatoSetting: tomatoSetting, _orderID : orderID, _orderNum: orderNum, _grill : grill)
         

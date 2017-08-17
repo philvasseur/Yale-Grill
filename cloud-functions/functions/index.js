@@ -1,4 +1,4 @@
-//Imports the Firebase Cloud Functions and Firebase Admin SDKs
+	//Imports the Firebase Cloud Functions and Firebase Admin SDKs
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 
@@ -6,8 +6,8 @@ const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 
 //Defines the grillOrderChange function to be called every time the path below is written to
-exports.grillOrderChange = functions.database.ref('/Grills/{grillID}/Orders/{orderID}').onWrite(event => {
-	var orderIDForLog = event.params.orderID.substring(19);
+exports.grillOrderChange = functions.database.ref('/Grills/{grillId}/Orders/{orderId}').onWrite(event => {
+	var orderIDForLog = event.params.orderId.substring(19);
 	if (!event.data.exists()) { //Checks that order exists (onWrite is called by deletions)
 		console.log(orderIDForLog + ': No Data Exists (Order Deleted) - No Action Taken');
 
@@ -27,7 +27,7 @@ exports.grillOrderChange = functions.database.ref('/Grills/{grillID}/Orders/{ord
 			}).then(()=>{
 				console.log(orderIDForLog + ': Order Created - Setting OrderNum to: ' + count);
 				//Sets the orderNum in the actual order once the orderNum counter is sucessfully incremented
-				admin.database().ref('/Orders/'+event.params.orderID+'/orderNum').set(count);
+				admin.database().ref('/Orders/'+event.params.orderId+'/orderNum').set(count);
 			});
 		} else {
   			console.log(orderIDForLog + ': OrderStatus set to preparing - No Action Taken');
@@ -40,8 +40,8 @@ exports.grillOrderChange = functions.database.ref('/Grills/{grillID}/Orders/{ord
 	    //Creates the payload for the notification
 	    let payload = {
 	        notification: {
-	            title: 'Hey!',
-	            body: "Your Food is Ready!",
+	            title: 'Your Order is Ready!',
+	            body: "Come pick it up at " + event.params.grillId +".",
 	            sound: 'default',
 	            badge: '1'
 	        }

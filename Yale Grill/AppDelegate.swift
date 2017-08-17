@@ -14,11 +14,11 @@ import UserNotifications
 class AppDelegate: UIResponder, UIApplicationDelegate {
     static var dBaseRef = FIRDatabase.database().reference()
     var window: UIWindow?
-        
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         FIRApp.configure()
-       
+        
         var configureError: NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)
         if(configureError != nil){
@@ -36,9 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UNUserNotificationCenter.current().delegate = self
             // For iOS 10 data message (sent via FCM)
             FIRMessaging.messaging().remoteMessageDelegate = self
-        }
-            // iOS 9 support
-        else if #available(iOS 9, *) {
+            
+        } else if #available(iOS 9, *) {
             UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil))
             UIApplication.shared.registerForRemoteNotifications()
         }
@@ -46,14 +45,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
-
     
-    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        
-        print("")
-        print("i am not available in simulator \(error)")
-        print("")
-        
+    
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.sandbox)
+        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.prod)
+    }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        UIApplication.shared.applicationIconBadgeNumber = 0
     }
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
@@ -63,25 +64,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 @available(iOS 10, *)
 extension AppDelegate : UNUserNotificationCenterDelegate {
-    
-    // Receive displayed notifications for iOS 10 devices.
-    
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        let userInfo = notification.request.content.userInfo
-        // Print message ID.
-        print("Message ID: \(userInfo["gcm.message_id"]!)")
-        
-        // Print full message.
-        print("%@", userInfo)
-        
+        completionHandler([.alert, .badge, .sound])
     }
     
 }
-
 extension AppDelegate : FIRMessagingDelegate {
-    // Receive data message on iOS 10 devices.
     func applicationReceivedRemoteMessage(_ remoteMessage: FIRMessagingRemoteMessage) {
-        print("%@", remoteMessage.appData)
+        print("%@ Data Message: ", remoteMessage.appData)
     }
 }
-
