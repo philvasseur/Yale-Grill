@@ -20,10 +20,10 @@ class MenuTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         menuItems.append(["image" : UIImage(named: "the-yale-burger")!, "title" : "The Yale Burger", "description" :
-            "A blend of finely chopped roasted mushrooms and ground beef, herbs and spices. Smashed on the grill for maximum char and then served with a custom sauce on a brioche bun."])
+            "A blend of finely chopped roasted mushrooms and ground beef. Smashed on the grill for maximum char and then served with a custom sauce on a brioche bun."])
         menuItems.append(["image" : UIImage(named: "the-beyond-burger")!, "title" : "Veggie Burger", "description" :
             "A vegan, plant based burger served with all the juicy, meat deliciousness of a traditional burger. Served on a locally crafted bun with lettuce, tomato, and a custom sauce."])
-        self.tableView.backgroundColor = UIColor(hex: "#e8e5e5")
+        self.tableView.backgroundColor = UIColor(hex: "#fafafa")
 
     }
 

@@ -138,7 +138,7 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
         noOrdersLabel.text = "Hi \(firstName ?? "Student"),\nYou Have No Active Orders"
         noOrdersLabel.sizeToFit()
         noOrdersLabel.textAlignment = .center
-        noOrdersLabel.font = UIFont(name: "Verdana-Bold", size: 17)
+        noOrdersLabel.font = UIFont(name: "Lato-Bold", size: 19)
         self.tableView.backgroundView = UIView()
         self.tableView.backgroundView?.addSubview(noOrdersLabel)
         NSLayoutConstraint.useAndActivate(constraints:

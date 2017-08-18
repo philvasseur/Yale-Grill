@@ -23,7 +23,17 @@
 		CD58B1011ED8A83400C6F02C /* preparing5.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD58B1001ED8A83400C6F02C /* preparing5.gif */; };
 		CD5B27FF1F453E2D005CA2A5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD5B27FE1F453E2D005CA2A5 /* GoogleService-Info.plist */; };
 		CD86294B1F467B9700DB328F /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD86294A1F467B9700DB328F /* MenuTableViewCell.swift */; };
-		CD8629641F46B83500DB328F /* Lato in Resources */ = {isa = PBXBuildFile; fileRef = CD8629631F46B83500DB328F /* Lato */; };
+		CD86298F1F46BEC900DB328F /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD8629841F46BEC900DB328F /* Lato-Black.ttf */; };
+		CD8629901F46BEC900DB328F /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD8629851F46BEC900DB328F /* Lato-BlackItalic.ttf */; };
+		CD8629911F46BEC900DB328F /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD8629861F46BEC900DB328F /* Lato-Bold.ttf */; };
+		CD8629921F46BEC900DB328F /* Lato-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD8629871F46BEC900DB328F /* Lato-BoldItalic.ttf */; };
+		CD8629931F46BEC900DB328F /* Lato-Hairline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD8629881F46BEC900DB328F /* Lato-Hairline.ttf */; };
+		CD8629941F46BEC900DB328F /* Lato-HairlineItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD8629891F46BEC900DB328F /* Lato-HairlineItalic.ttf */; };
+		CD8629951F46BEC900DB328F /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD86298A1F46BEC900DB328F /* Lato-Italic.ttf */; };
+		CD8629961F46BEC900DB328F /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD86298B1F46BEC900DB328F /* Lato-Light.ttf */; };
+		CD8629971F46BEC900DB328F /* Lato-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD86298C1F46BEC900DB328F /* Lato-LightItalic.ttf */; };
+		CD8629981F46BEC900DB328F /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD86298D1F46BEC900DB328F /* Lato-Regular.ttf */; };
+		CD8629991F46BEC900DB328F /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = CD86298E1F46BEC900DB328F /* OFL.txt */; };
 		CD9E14E41E130C7E000E21C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9E14E31E130C7E000E21C0 /* AppDelegate.swift */; };
 		CD9E14E61E130C7E000E21C0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9E14E51E130C7E000E21C0 /* LoginViewController.swift */; };
 		CD9E14E91E130C7E000E21C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD9E14E71E130C7E000E21C0 /* Main.storyboard */; };
@@ -67,7 +77,17 @@
 		CD58B1001ED8A83400C6F02C /* preparing5.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = preparing5.gif; sourceTree = "<group>"; };
 		CD5B27FE1F453E2D005CA2A5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CD86294A1F467B9700DB328F /* MenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
-		CD8629631F46B83500DB328F /* Lato */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Lato; sourceTree = "<group>"; };
+		CD8629841F46BEC900DB328F /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
+		CD8629851F46BEC900DB328F /* Lato-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-BlackItalic.ttf"; sourceTree = "<group>"; };
+		CD8629861F46BEC900DB328F /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
+		CD8629871F46BEC900DB328F /* Lato-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-BoldItalic.ttf"; sourceTree = "<group>"; };
+		CD8629881F46BEC900DB328F /* Lato-Hairline.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Hairline.ttf"; sourceTree = "<group>"; };
+		CD8629891F46BEC900DB328F /* Lato-HairlineItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-HairlineItalic.ttf"; sourceTree = "<group>"; };
+		CD86298A1F46BEC900DB328F /* Lato-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Italic.ttf"; sourceTree = "<group>"; };
+		CD86298B1F46BEC900DB328F /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
+		CD86298C1F46BEC900DB328F /* Lato-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-LightItalic.ttf"; sourceTree = "<group>"; };
+		CD86298D1F46BEC900DB328F /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
+		CD86298E1F46BEC900DB328F /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
 		CD9E14E01E130C7E000E21C0 /* Yale Grill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Yale Grill.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD9E14E31E130C7E000E21C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD9E14E51E130C7E000E21C0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -143,7 +163,7 @@
 		CD58B0EA1ED8998A00C6F02C /* App Files */ = {
 			isa = PBXGroup;
 			children = (
-				CD8629631F46B83500DB328F /* Lato */,
+				CD8629831F46BEC900DB328F /* Lato */,
 				CDE5C00E1E1F0F4900226D71 /* Constants.swift */,
 				CD9E14EF1E130C7E000E21C0 /* Info.plist */,
 				CD5B27FE1F453E2D005CA2A5 /* GoogleService-Info.plist */,
@@ -174,6 +194,24 @@
 			);
 			name = "TableView Cells";
 			sourceTree = "<group>";
+		};
+		CD8629831F46BEC900DB328F /* Lato */ = {
+			isa = PBXGroup;
+			children = (
+				CD8629841F46BEC900DB328F /* Lato-Black.ttf */,
+				CD8629851F46BEC900DB328F /* Lato-BlackItalic.ttf */,
+				CD8629861F46BEC900DB328F /* Lato-Bold.ttf */,
+				CD8629871F46BEC900DB328F /* Lato-BoldItalic.ttf */,
+				CD8629881F46BEC900DB328F /* Lato-Hairline.ttf */,
+				CD8629891F46BEC900DB328F /* Lato-HairlineItalic.ttf */,
+				CD86298A1F46BEC900DB328F /* Lato-Italic.ttf */,
+				CD86298B1F46BEC900DB328F /* Lato-Light.ttf */,
+				CD86298C1F46BEC900DB328F /* Lato-LightItalic.ttf */,
+				CD86298D1F46BEC900DB328F /* Lato-Regular.ttf */,
+				CD86298E1F46BEC900DB328F /* OFL.txt */,
+			);
+			path = Lato;
+			sourceTree = SOURCE_ROOT;
 		};
 		CD9E14D71E130C7E000E21C0 = {
 			isa = PBXGroup;
@@ -282,14 +320,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD8629991F46BEC900DB328F /* OFL.txt in Resources */,
 				CD58B0FC1ED8A08900C6F02C /* preparing4.gif in Resources */,
-				CD8629641F46B83500DB328F /* Lato in Resources */,
+				CD8629951F46BEC900DB328F /* Lato-Italic.ttf in Resources */,
 				CD9E14EE1E130C7E000E21C0 /* LaunchScreen.storyboard in Resources */,
+				CD8629961F46BEC900DB328F /* Lato-Light.ttf in Resources */,
+				CD8629941F46BEC900DB328F /* Lato-HairlineItalic.ttf in Resources */,
 				CD58B1011ED8A83400C6F02C /* preparing5.gif in Resources */,
 				CD58B0F31ED89CA800C6F02C /* preparing1.gif in Resources */,
+				CD8629981F46BEC900DB328F /* Lato-Regular.ttf in Resources */,
 				CD58B0F51ED89CA800C6F02C /* finished.gif in Resources */,
+				CD8629921F46BEC900DB328F /* Lato-BoldItalic.ttf in Resources */,
+				CD8629911F46BEC900DB328F /* Lato-Bold.ttf in Resources */,
 				CD9E14EB1E130C7E000E21C0 /* Assets.xcassets in Resources */,
+				CD86298F1F46BEC900DB328F /* Lato-Black.ttf in Resources */,
 				CD9E14E91E130C7E000E21C0 /* Main.storyboard in Resources */,
+				CD8629901F46BEC900DB328F /* Lato-BlackItalic.ttf in Resources */,
+				CD8629931F46BEC900DB328F /* Lato-Hairline.ttf in Resources */,
+				CD8629971F46BEC900DB328F /* Lato-LightItalic.ttf in Resources */,
 				CD5B27FF1F453E2D005CA2A5 /* GoogleService-Info.plist in Resources */,
 				CD58B0F41ED89CA800C6F02C /* preparing3.gif in Resources */,
 				CD58B0F21ED89CA800C6F02C /* preparing2.gif in Resources */,

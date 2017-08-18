@@ -43,6 +43,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         application.registerForRemoteNotifications()
         
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Lato-Regular", size: 17.0)!], for: .normal)
+        let attrs = [
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont(name: "Lato-Bold", size: 18)!
+        ]
+        UINavigationBar.appearance().titleTextAttributes = attrs
+        
         return true
     }
     
