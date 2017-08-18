@@ -74,9 +74,10 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
     //When you hit the composeOrder button tells the foodScreen class how many orders have already been placed. Used to stop user from accidently placing more than 3 orders.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == Constants.ComposeOrderSegueID){
-            let destinationVC = (segue.destination as! MenuViewController)
+            let destinationVC = (segue.destination as! MenuTableViewController)
             destinationVC.totalOrdersCount = allActiveOrders.count //sets num of orders variable in FoodScreen
             destinationVC.selectedDiningHall = selectedDiningHall
+            
         }
     }
     
@@ -125,6 +126,7 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
         super.viewDidLoad()
         GIDSignIn.sharedInstance().uiDelegate = self
         self.title=selectedDiningHall //Sets title as dining hall, which is set in ViewController screen
+        self.navigationController?.navigationBar.tintColor = UIColor.white
         tableView.rowHeight = (tableView.frame.height - (self.navigationController?.navigationBar.frame.height)!
             - UIApplication.shared.statusBarFrame.height)/3
         tableView.allowsSelection = false
@@ -137,8 +139,7 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
         noOrdersLabel.sizeToFit()
         noOrdersLabel.textAlignment = .center
         noOrdersLabel.font = UIFont(name: "Verdana-Bold", size: 17)
-        let newView = UIImageView(image: UIImage(named: "bg2"))
-        self.tableView.backgroundView = newView
+        self.tableView.backgroundView = UIView()
         self.tableView.backgroundView?.addSubview(noOrdersLabel)
         NSLayoutConstraint.useAndActivate(constraints:
             [noOrdersLabel.centerXAnchor.constraint(equalTo: (tableView.backgroundView?.centerXAnchor)!), noOrdersLabel.centerYAnchor.constraint(equalTo: (tableView.backgroundView?.centerYAnchor)!)])
