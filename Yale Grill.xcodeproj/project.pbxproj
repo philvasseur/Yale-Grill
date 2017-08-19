@@ -181,9 +181,6 @@
 			isa = PBXGroup;
 			children = (
 				CD9E14E51E130C7E000E21C0 /* LoginViewController.swift */,
-				CD0DA1401F467849000E36BF /* MenuTableViewController.swift */,
-				CD460E2C1E1B6368007C8588 /* CookTableViewController.swift */,
-				CD3EEFB11ECB958E00A86A52 /* CustomerTableViewController.swift */,
 				CD86299A1F47B12B00DB328F /* MenuItemViewController.swift */,
 			);
 			name = "View Controllers";
@@ -246,11 +243,22 @@
 				CDC1A0D91E177B49009C2538 /* Orders.swift */,
 				CD9E14E31E130C7E000E21C0 /* AppDelegate.swift */,
 				CD58B0EC1ED899FD00C6F02C /* View Controllers */,
+				CDBFCDD11F48A2100001B96B /* TableView Controllers */,
 				CD58B0ED1ED89BA400C6F02C /* TableView Cells */,
 				CD58B0EA1ED8998A00C6F02C /* App Files */,
 				CD179F0D1E15F74C00496D5F /* Extensions */,
 			);
 			path = "Yale Grill";
+			sourceTree = "<group>";
+		};
+		CDBFCDD11F48A2100001B96B /* TableView Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				CD3EEFB11ECB958E00A86A52 /* CustomerTableViewController.swift */,
+				CD0DA1401F467849000E36BF /* MenuTableViewController.swift */,
+				CD460E2C1E1B6368007C8588 /* CookTableViewController.swift */,
+			);
+			name = "TableView Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

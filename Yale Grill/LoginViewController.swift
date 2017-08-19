@@ -326,10 +326,6 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self
         
-        //TEMPORARY
-        self.performSegue(withIdentifier: Constants.ControlScreenSegueID, sender: nil)
-        return
-        
         //only want to load dining halls when app is opened, not on logout
         if(Constants.appJustOpened) {
             Constants.appJustOpened = false

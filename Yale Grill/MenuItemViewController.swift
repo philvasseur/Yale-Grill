@@ -34,27 +34,32 @@ class MenuItemViewController: UIViewController, UITableViewDataSource, UITableVi
         quantityBackground.layer.borderWidth = 1
         quantityBackground.layer.borderColor = UIColor(hex: "#e8e8e8").cgColor
         
-        stepper.minimumValue = 0
         stepper.maximumValue = Double(menuItem.quantities.count - 1)
         
         optionsTableView.delegate = self
         optionsTableView.dataSource = self
+        optionsTableView.tableFooterView = UIView()
 
         // Do any additional setup after loading the view.
     }
-
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard (sender as? UIButton) != nil else { return }
+        var options : [String : Bool]? = [:]
+        if (optionsTableView.visibleCells.count == 0) {
+            options = nil
+        } else {
+            for cell in (optionsTableView.visibleCells as? [FoodOptionTableViewCell])! {
+                options?[cell.optionLabel.text!] = cell.isChecked
+            }
+        }
+        placedOrder = Orders(_userID: GIDSignIn.sharedInstance().currentUser.userID!, _name: GIDSignIn.sharedInstance().currentUser.profile.name!, _foodServing: quantityLabel.text!, _options: options, _grill: Constants.selectedDiningHall)
+    }
+
     @IBAction func quantityChanged(_ sender: UIStepper) {
         quantityLabel.text = menuItem.quantities[Int(sender.value)]
     }
     
-    @IBAction func placeOrder(_ sender: UIButton) {
-        var options : [String : Bool] = [:]
-        for cell in (optionsTableView.visibleCells as? [FoodOptionTableViewCell])! {
-            options[cell.optionLabel.text!] = cell.isChecked
-        }
-        placedOrder = Orders(_userID: GIDSignIn.sharedInstance().currentUser.userID!, _name: GIDSignIn.sharedInstance().currentUser.profile.name!, _foodServing: quantityLabel.text!, _options: options, _grill: Constants.selectedDiningHall)
-    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return menuItem.options?.count ?? 0
