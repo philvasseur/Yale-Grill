@@ -19,7 +19,6 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     
     @IBOutlet weak var diningHallText: UILabel!
     @IBOutlet weak var diningHallTextField: UITextField!
-    @IBOutlet weak var DisabledSignInColor: UIImageView!
     @IBOutlet weak var GSignInButton: GIDSignInButton!
     @IBOutlet weak var loggingInIndicator: UIActivityIndicatorView!
     @IBOutlet weak var loggingInView: UIView!
@@ -30,11 +29,9 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     let locationManager = CLLocationManager()
     let launchView = UIView()
     var currentLocation : CLLocation!
-    var selectedDiningHall : String?
     
     
     // MARK: - Functions
-    
     
     //Method for googleSign in. Is called when you press GIDSignInButton and on openif user is already logged in (silentSignIn)
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
@@ -91,7 +88,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         let dHallRef = FIRDatabase.database().reference().child(Constants.users).child(GIDSignIn.sharedInstance().currentUser.userID!).child(Constants.prevDining)
         if(Constants.ActiveGrills[diningHallText.text!] != nil) {
             Constants.selectedDiningHall = diningHallText.text
-            dHallRef.setValue(self.selectedDiningHall) //Updates last dining hall logged into for user
+            dHallRef.setValue(Constants.selectedDiningHall) //Updates last dining hall logged into for user
             completion(true)
             return
         }
@@ -135,7 +132,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
                 }
                 //Keys are timeStamp based, so we can sort to make sure orders are shown in same order they're placed
                 for (orderID, grillName) in userDic[Constants.activeOrders] as? [String: String] ?? [:] {
-                    if(grillName == self.selectedDiningHall) {
+                    if(grillName == Constants.selectedDiningHall) {
                         orderIDs.append(orderID)
                     }
                 }
@@ -146,6 +143,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
             
             if(orderIDs.count == 0) {
                 self.performSegue(withIdentifier: Constants.SignInSegueID, sender: nil)
+                return
             }
             
             for key in orderIDs.sorted() {
@@ -311,21 +309,18 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         pickerView.showsSelectionIndicator = true
         pickerView.dataSource = self
         pickerView.delegate = self
-        diningHallText.layer.cornerRadius = 5
         diningHallTextField.inputView = pickerView
         diningHallText.text = "Select Dining Hall"
         GSignInButton.isEnabled=false
-        DisabledSignInColor.layer.cornerRadius = 2 //Used to set the color for when login button when disabled
         
         //Style for the loading indicator when someone logs in
         loggingInIndicator.activityIndicatorViewStyle = .whiteLarge
         loggingInView.backgroundColor = UIColor.darkGray.withAlphaComponent(0.8)
-        loggingInView.layer.cornerRadius = 10.0
         loggingInIndicator.hidesWhenStopped = true
         
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self
-        
+
         //only want to load dining halls when app is opened, not on logout
         if(Constants.appJustOpened) {
             Constants.appJustOpened = false

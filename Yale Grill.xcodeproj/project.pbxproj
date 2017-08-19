@@ -189,9 +189,9 @@
 		CD58B0ED1ED89BA400C6F02C /* TableView Cells */ = {
 			isa = PBXGroup;
 			children = (
-				CDE5C00C1E1EEA5A00226D71 /* CookTableViewCell.swift */,
 				CD3EEFB71ECB977B00A86A52 /* CustomerTableViewCell.swift */,
 				CD86294A1F467B9700DB328F /* MenuTableViewCell.swift */,
+				CDE5C00C1E1EEA5A00226D71 /* CookTableViewCell.swift */,
 				CD86299E1F4805A300DB328F /* FoodOptionTableViewCell.swift */,
 			);
 			name = "TableView Cells";

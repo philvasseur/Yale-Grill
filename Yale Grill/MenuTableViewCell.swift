@@ -19,7 +19,6 @@ class MenuTableViewCell: UITableViewCell {
     var menuItem : MenuItem!
     
     func setItemInfo(item : MenuItem) {
-        
         menuItemImage.image = item.image
         menuItemTitle.text = item.title
         menuItemDescription.text = item.info
@@ -30,11 +29,4 @@ class MenuTableViewCell: UITableViewCell {
         background.layer.borderColor = UIColor(hex: "#e8e8e8").cgColor
         super.awakeFromNib()
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

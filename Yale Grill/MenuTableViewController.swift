@@ -1,6 +1,6 @@
 //
 //  MenuTableViewController.swift
-//  
+//
 //
 //  Created by Phil Vasseur on 8/17/17.
 //
@@ -14,27 +14,14 @@ class MenuTableViewController: UITableViewController {
     
     // MARK: - Global Variables
     var totalOrdersCount: Int = 0 //Used to keep track of how many orders already exist, so user can't accidently order more than 3.
-    var grillIsOn: Bool = false
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.backgroundColor = UIColor(hex: "#fafafa")
-        
-        //Checks and continues to observe if grill is on or off
-        let grillStatusRef = FIRDatabase.database().reference().child(Constants.grills).child(Constants.selectedDiningHall).child(Constants.grillStat)
-        grillStatusRef.observe(FIRDataEventType.value, with: { (snapshot) in
-            let status = snapshot.value as? Bool
-            if(status==nil){ //No status has been set yet, defaults to off.
-                self.grillIsOn=false
-            }else{
-                self.grillIsOn=status!
-            }
-        })
-
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Constants.menuItems.count
     }
@@ -44,12 +31,12 @@ class MenuTableViewController: UITableViewController {
         performSegue(withIdentifier: "cellSelection", sender: indexPath)
         
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: "menuItemCell",
             for: indexPath) as? MenuTableViewCell else {
-                fatalError("BAD ERROR... ORDER CONTROL TABLE CELL")
+                fatalError("Cannot create MenuTableViewCell")
         }
         cell.setItemInfo(item: Constants.menuItems[indexPath.row])
         cell.delegate = self
@@ -65,9 +52,11 @@ class MenuTableViewController: UITableViewController {
     }
     
     @IBAction func unwindToMenu(_ sender: UIStoryboardSegue) {
-        if let placedOrderController = sender.source as? MenuItemViewController {
-            guard let newOrder = placedOrderController.placedOrder else {return} //Gets the placed orders when user Unwinds from FoodScreen
-            if (!grillIsOn) { //Only goes through orders if the grill is on
+        guard let placedOrderController = sender.source as? MenuItemViewController else { return }
+        guard let newOrder = placedOrderController.placedOrder else { return }
+        let grillStatusRef = FIRDatabase.database().reference().child(Constants.grills).child(Constants.selectedDiningHall).child(Constants.grillStatus)
+        grillStatusRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+            if (!(snapshot.value as? Bool ?? false)) { //Only goes through orders if the grill is on
                 Constants.createAlert(title: "The Grill Is Off!", message: "Please try again later during Dining Hall hours. If you think this is an error, contact your respective dining hall staff.",
                                       style: .wait)
             } else if(Constants.currentOrders.count > 2){
@@ -77,7 +66,7 @@ class MenuTableViewController: UITableViewController {
                 newOrder.insertIntoDatabase()
                 Constants.currentOrders.append(newOrder)
             }
-        }
+        })
     }
 }
 

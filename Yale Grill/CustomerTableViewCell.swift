@@ -37,7 +37,6 @@ class CustomerTableViewCell: UITableViewCell{
     func setByOrder(order : Orders){
         //Loads a random preparing gif
         preparingGIF.loadGif(name: Constants.gifArray[Int(arc4random_uniform(UInt32(Constants.gifArray.count)))])
-        preparingGIF.layer.cornerRadius = 10
         self.cOrder = order
         
         //Sets all the info in the cell
@@ -55,6 +54,7 @@ class CustomerTableViewCell: UITableViewCell{
             count += 1
         }
         
+        //Waits until orderNum is set and then displays it
         if(self.cOrder.orderNum != nil) {
             self.orderNumLabel.isHidden = false
             if(self.cOrder.orderNum! < 10){
@@ -64,7 +64,7 @@ class CustomerTableViewCell: UITableViewCell{
             }
         } else {
             let orderNumRef = FIRDatabase.database().reference().child(Constants.orders).child(order.orderID).child("orderNum")
-            orderNumRef.observe(FIRDataEventType.value, with: { (snapshot) in //Observes the order for changes
+            orderNumRef.observe(FIRDataEventType.value, with: { (snapshot) in
                 if (!snapshot.exists()) {
                     return
                 }
@@ -79,21 +79,23 @@ class CustomerTableViewCell: UITableViewCell{
                 }
             })
         }
-    
+        
+        //Keeps track of orderStatus and updates UI accordingly
         let orderStatusRef = FIRDatabase.database().reference().child(Constants.grills).child(order.grill).child(Constants.orders).child(order.orderID).child(Constants.orderStatus)
         orderStatusRef.observe(FIRDataEventType.value, with: {(snapshot) in
-            let orderStatus = snapshot.value as? Int ?? 3
-            
-            //If order is before ready status (placed or preparing)
-            if (orderStatus < self.status.Ready.rawValue) {
+            let orderStatus = Constants.Status(rawValue: snapshot.value as? Int ?? 3)!
+            if (orderStatus == self.status.Placed || orderStatus == self.status.Preparing) {
                 let notFinishedTexts = ["Order Placed",Constants.preparingTexts[0]]
-                self.statusLabel.text=notFinishedTexts[orderStatus] //Sets to either Preparing or Order Placed
-                self.statusLabel.isHidden = false //Unhides the "preparing/order placed" label
-                self.readyForPickupText.isHidden = true //Hides the "Ready for Pickup" label
+                self.statusLabel.text=notFinishedTexts[(orderStatus.rawValue)] //Text set to 'Preparing' or 'Order Placed'
+                self.statusLabel.isHidden = false
+                self.readyForPickupText.isHidden = true
                 self.preparingGIF.isHidden = false
-            } else { //If order is Ready
-                self.statusLabel.isHidden=true //Hides 'Preparing...' Label
-                self.readyForPickupText.isHidden=false //Unhides the "Ready" Label
+            } else if (orderStatus == self.status.Ready) {
+                self.statusLabel.isHidden=true
+                self.readyForPickupText.isHidden=false
+            } else if (orderStatus == self.status.PickedUp) {
+                orderStatusRef.removeAllObservers()
+                self.delegate?.deleteOrder(orderId: self.cOrder.orderID)
             }
         })
         

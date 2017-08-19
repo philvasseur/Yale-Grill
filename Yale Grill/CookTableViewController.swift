@@ -21,7 +21,7 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
     var grillName: String!
     var grillSwitch : FIRDatabaseReference!
     var grillIsOn : Bool = false
-    var allActiveIDs : [String] = []
+    var allActiveOrders : [Orders] = []
     
     
     // MARK: - Actions
@@ -79,17 +79,16 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: "cookCell",
             for: indexPath) as? CookTableViewCell else {
-                fatalError("BAD ERROR... ORDER CONTROL TABLE CELL")
+                fatalError("Cannot create CookTableViewCell...")
         }
         let orderIndex = indexPath.row
-        cell.setByOrder(orderID: allActiveIDs[orderIndex], grillName: grillName)
-        
+        cell.setByOrder(order: allActiveOrders[orderIndex], grillName: self.grillName)
         cell.delegate = self
         return cell
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allActiveIDs.count
+        return allActiveOrders.count
     }
     
     override func viewDidLoad() {
@@ -98,44 +97,42 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
         tableView.allowsSelection = false
         GIDSignIn.sharedInstance().uiDelegate = self
         
-        for (grill, grillEmail) in Constants.ActiveGrills {
-            if(grillEmail.lowercased()  == GIDSignIn.sharedInstance().currentUser.profile.email.lowercased()) {
-                grillName = grill
-                self.title = "Orders - \(grillName!)"
-                break
-            }
-        }
+        grillName = Constants.ActiveGrills.filter({ (grill: (grillName: String, grillEmail: String)) -> Bool in
+            return grill.grillEmail.lowercased()  == GIDSignIn.sharedInstance().currentUser.profile.email.lowercased()
+        }).first?.key
         
-        grillSwitch = FIRDatabase.database().reference().child("Grills").child(grillName).child("GrillIsOn")
         
-        grillSwitch.observe(FIRDataEventType.value, with: { (snapshot) in
-            let grillStatus = snapshot.value as? Bool
-            if(grillStatus==nil){
-                self.grillSwitch.setValue(false)
-                self.grillIsOn = false
-                self.GrillToggleButton.title = Constants.turnGrillOnText
-            }else if(grillStatus==true){
+        grillSwitch = FIRDatabase.database().reference().child(Constants.grills).child(grillName).child(Constants.grillStatus)
+        grillSwitch.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+            let grillStatus = snapshot.value as? Bool ?? false
+            if (grillStatus) {
                 self.grillIsOn = true
                 self.GrillToggleButton.title = Constants.turnGrillOffText
-            }else if(grillStatus==false){
+            }else {
                 self.grillIsOn = false
                 self.GrillToggleButton.title = Constants.turnGrillOnText
             }
         })
         
+        
         let ordersRef = FIRDatabase.database().reference().child(Constants.grills).child(grillName).child(Constants.orders)
-        
         ordersRef.queryOrderedByKey().observe(FIRDataEventType.childAdded, with: { (snapshot) in
-            self.allActiveIDs.append(snapshot.key)
-            let newIndexPath = IndexPath(row: self.allActiveIDs.count-1, section: 0)
-            self.tableView.insertRows(at: [newIndexPath], with: .automatic)
+            FIRDatabase.database().reference().child(Constants.orders).child(snapshot.key).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+                
+                let newJson = snapshot.value as! NSDictionary
+                let order = Orders(orderID: snapshot.key, json: newJson as! [String : AnyObject])
+                self.allActiveOrders.append(order)
+                let newIndexPath = IndexPath(row: self.allActiveOrders.count-1, section: 0)
+                self.tableView.insertRows(at: [newIndexPath], with: .automatic)
+            })
         })
-        
         ordersRef.queryOrderedByKey().observe(FIRDataEventType.childRemoved, with: { (snapshot) in
             let orderID = snapshot.key
-            let removedIndex = self.allActiveIDs.index(of: orderID)
+            //Finds the index of the orderID to be removed
+            let removedIndex = self.allActiveOrders.map{$0.orderID}.index(of: orderID)
             let newIndexPath = IndexPath(row: removedIndex!, section: 0)
-            self.allActiveIDs.remove(at: removedIndex!)
+            //Removes it from the activeIDs and then removes it from the tableView
+            self.allActiveOrders.remove(at: removedIndex!)
             self.tableView.deleteRows(at: [newIndexPath], with: .automatic)
         })
     }

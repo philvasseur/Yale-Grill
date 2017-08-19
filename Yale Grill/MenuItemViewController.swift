@@ -26,7 +26,6 @@ class MenuItemViewController: UIViewController, UITableViewDataSource, UITableVi
         menuItemImage.image = menuItem.image
         menuItemInfo.text = menuItem.info
         quantityLabel.text = menuItem.quantities[0]
-        
         self.title = menuItem.title
         
         textBackground.layer.borderWidth = 1
@@ -39,8 +38,6 @@ class MenuItemViewController: UIViewController, UITableViewDataSource, UITableVi
         optionsTableView.delegate = self
         optionsTableView.dataSource = self
         optionsTableView.tableFooterView = UIView()
-
-        // Do any additional setup after loading the view.
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -69,7 +66,7 @@ class MenuItemViewController: UIViewController, UITableViewDataSource, UITableVi
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: "optionCell",
             for: indexPath) as? FoodOptionTableViewCell else {
-                fatalError("BAD ERROR... ORDER CONTROL TABLE CELL")
+                fatalError("Cannot create FoodOptionTableViewCell")
         }
         cell.setCellLabel(option: (menuItem.options?[indexPath.row])!)
         return cell
