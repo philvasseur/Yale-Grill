@@ -30,7 +30,6 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     let locationManager = CLLocationManager()
     let launchView = UIView()
     var currentLocation : CLLocation!
-    var allActiveOrders : [Orders] = []
     var selectedDiningHall : String?
     
     
@@ -91,7 +90,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     func getDiningHall(completion : @escaping (Bool) -> ()) {
         let dHallRef = FIRDatabase.database().reference().child(Constants.users).child(GIDSignIn.sharedInstance().currentUser.userID!).child(Constants.prevDining)
         if(Constants.ActiveGrills[diningHallText.text!] != nil) {
-            selectedDiningHall = diningHallText.text
+            Constants.selectedDiningHall = diningHallText.text
             dHallRef.setValue(self.selectedDiningHall) //Updates last dining hall logged into for user
             completion(true)
             return
@@ -100,7 +99,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         dHallRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
             let pastDHall = snapshot.value as? String ?? "Select Dining Hall"
             if (Constants.ActiveGrills[pastDHall] != nil)  {
-                self.selectedDiningHall = pastDHall
+                Constants.selectedDiningHall = pastDHall
                 completion(true)
             } else {
                 dHallRef.removeValue()
@@ -151,8 +150,8 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
             
             for key in orderIDs.sorted() {
                 FIRDatabase.database().reference().child(Constants.orders).child(key).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
-                    self.allActiveOrders.append(Orders.init(orderID: snapshot.key, json: snapshot.value as! Dictionary))
-                    if(self.allActiveOrders.count == orderIDs.count) { //Onces all the orders have been loaded
+                    Constants.currentOrders.append(Orders.init(orderID: snapshot.key, json: snapshot.value as! Dictionary))
+                    if(Constants.currentOrders.count == orderIDs.count) { //Onces all the orders have been loaded
                         self.performSegue(withIdentifier: Constants.SignInSegueID, sender: nil) //Segues to OrderScreen
                     }
                 })
@@ -327,6 +326,10 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self
         
+        //TEMPORARY
+        self.performSegue(withIdentifier: Constants.ControlScreenSegueID, sender: nil)
+        return
+        
         //only want to load dining halls when app is opened, not on logout
         if(Constants.appJustOpened) {
             Constants.appJustOpened = false
@@ -340,18 +343,6 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
                     })
                 }
             }
-        }
-    }
-    
-    
-    //Sets the customers order information before segueing
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(segue.identifier==Constants.SignInSegueID){
-            let destinationNav = segue.destination as! UINavigationController
-            let destinationVC = destinationNav.viewControllers.first as! CustomerTableViewController
-            destinationVC.selectedDiningHall = self.selectedDiningHall
-            destinationVC.allActiveOrders = self.allActiveOrders
-            destinationVC.tableView.reloadData()
         }
     }
     

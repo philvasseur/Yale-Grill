@@ -19,6 +19,7 @@ class MenuItemViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var optionsTableView: UITableView!
     
     var menuItem : MenuItem!
+    var placedOrder : Orders?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +48,14 @@ class MenuItemViewController: UIViewController, UITableViewDataSource, UITableVi
         quantityLabel.text = menuItem.quantities[Int(sender.value)]
     }
     
+    @IBAction func placeOrder(_ sender: UIButton) {
+        var options : [String : Bool] = [:]
+        for cell in (optionsTableView.visibleCells as? [FoodOptionTableViewCell])! {
+            options[cell.optionLabel.text!] = cell.isChecked
+        }
+        placedOrder = Orders(_userID: GIDSignIn.sharedInstance().currentUser.userID!, _name: GIDSignIn.sharedInstance().currentUser.profile.name!, _foodServing: quantityLabel.text!, _options: options, _grill: Constants.selectedDiningHall)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return menuItem.options?.count ?? 0
     }
@@ -64,6 +73,5 @@ class MenuItemViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         (tableView.cellForRow(at: indexPath) as! FoodOptionTableViewCell).check()
-        
     }
 }

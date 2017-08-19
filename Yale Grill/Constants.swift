@@ -14,6 +14,8 @@ class Constants {
     //Grill Constants
     //add to this array to activate new cook accounts, make sure to add the emailID to the grillIDs array too
     static var ActiveGrills : [String : String] = [:]
+    static var selectedDiningHall : String!
+    static var currentOrders : [Orders] = []
     static var appJustOpened = true;
     static var PickerData = ["Select Dining Hall"]
     static let coordinates  = [

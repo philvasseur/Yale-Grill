@@ -16,14 +16,9 @@ class CustomerTableViewCell: UITableViewCell{
     @IBOutlet weak var preparingGIF: UIImageView!
     
     @IBOutlet weak var orderTitle: UILabel!
-    @IBOutlet weak var attributeOneLabel: UILabel!
-    @IBOutlet weak var attributeTwoLabel: UILabel!
-    @IBOutlet weak var attributeThreeLabel: UILabel!
-    @IBOutlet weak var attributeFourLabel: UILabel!
-    @IBOutlet weak var attributeFiveLabel: UILabel!
+    @IBOutlet var attributeLabels: [UILabel]!
     @IBOutlet weak var orderNumLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
-    
     @IBOutlet weak var statusText: UILabel!
     @IBOutlet weak var orderNumText: UILabel!
     @IBOutlet weak var readyForPickupText: UILabel!
@@ -33,7 +28,6 @@ class CustomerTableViewCell: UITableViewCell{
     var cOrder : Orders!
     var delegate: CustomerTableViewController?
     var timer = Timer()
-    var orderLabels: [UILabel]!
     let status = Constants.Status.self
     
     
@@ -48,14 +42,17 @@ class CustomerTableViewCell: UITableViewCell{
         
         //Sets all the info in the cell
         self.orderTitle.text = self.cOrder.foodServing
-        self.attributeOneLabel.text = self.cOrder.cheeseSetting
-        self.attributeTwoLabel.text = self.cOrder.lettuceSetting
-        self.attributeThreeLabel.text = self.cOrder.bunSetting  
-        self.attributeFourLabel.text = self.cOrder.sauceSetting
-        self.attributeFiveLabel.text = self.cOrder.tomatoSetting
+        self.orderTitle.isHidden = false
         orderNumLabel.isHidden = true //Hides the orderNumLabel until it gets set
-        for label in self.orderLabels { //unhides once info shows, makes it look snappier
-            label.isHidden = false
+        var count = 0
+        for option in order.options {
+            if(option.value) {
+                attributeLabels[count].text = option.key
+            } else {
+                attributeLabels[count].text = "No \(option.key)"
+            }
+            attributeLabels[count].isHidden = false
+            count += 1
         }
         
         if(self.cOrder.orderNum != nil) {
@@ -122,10 +119,10 @@ class CustomerTableViewCell: UITableViewCell{
     // MARK: - Overridden Functions
     override func awakeFromNib() {
         super.awakeFromNib()
-        orderLabels = [self.attributeOneLabel,self.attributeTwoLabel,self.attributeThreeLabel,self.attributeFourLabel,self.attributeFiveLabel,self.orderTitle]
-        for label in orderLabels { //hides labels until they info is loaded
+        for label in attributeLabels { //hides labels until they info is loaded
             label.isHidden = true
         }
+        self.orderTitle.isHidden = true
         
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.updatePrep), userInfo: nil, repeats: true)
         //Creates the timer for animations

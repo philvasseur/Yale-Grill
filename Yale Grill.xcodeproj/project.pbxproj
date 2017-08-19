@@ -43,7 +43,6 @@
 		CD9E14EB1E130C7E000E21C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD9E14EA1E130C7E000E21C0 /* Assets.xcassets */; };
 		CD9E14EE1E130C7E000E21C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD9E14EC1E130C7E000E21C0 /* LaunchScreen.storyboard */; };
 		CDC1A0DA1E177B49009C2538 /* Orders.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC1A0D91E177B49009C2538 /* Orders.swift */; };
-		CDCFD5951E1359AE00065E87 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCFD5941E1359AE00065E87 /* MenuViewController.swift */; };
 		CDE5C00D1E1EEA5A00226D71 /* CookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE5C00C1E1EEA5A00226D71 /* CookTableViewCell.swift */; };
 		CDE5C00F1E1F0F4900226D71 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE5C00E1E1F0F4900226D71 /* Constants.swift */; };
 /* End PBXBuildFile section */
@@ -103,7 +102,6 @@
 		CD9E14EF1E130C7E000E21C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CDC1A0D91E177B49009C2538 /* Orders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Orders.swift; sourceTree = "<group>"; };
 		CDC748D01ED4FF3700370350 /* YaleGrill.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YaleGrill.entitlements; sourceTree = "<group>"; };
-		CDCFD5941E1359AE00065E87 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		CDD92A2B1E130E5B005C091B /* YaleGrill-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YaleGrill-Bridging-Header.h"; sourceTree = "<group>"; };
 		CDE5C00C1E1EEA5A00226D71 /* CookTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CookTableViewCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CDE5C00E1E1F0F4900226D71 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -184,7 +182,6 @@
 			children = (
 				CD9E14E51E130C7E000E21C0 /* LoginViewController.swift */,
 				CD0DA1401F467849000E36BF /* MenuTableViewController.swift */,
-				CDCFD5941E1359AE00065E87 /* MenuViewController.swift */,
 				CD460E2C1E1B6368007C8588 /* CookTableViewController.swift */,
 				CD3EEFB11ECB958E00A86A52 /* CustomerTableViewController.swift */,
 				CD86299A1F47B12B00DB328F /* MenuItemViewController.swift */,
@@ -423,7 +420,6 @@
 				CDE5C00F1E1F0F4900226D71 /* Constants.swift in Sources */,
 				CD86299D1F47B71100DB328F /* MenuItem.swift in Sources */,
 				CD1A13DE1E1E1356003AFBCE /* UIImageExtension.swift in Sources */,
-				CDCFD5951E1359AE00065E87 /* MenuViewController.swift in Sources */,
 				CD86299F1F4805A300DB328F /* FoodOptionTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

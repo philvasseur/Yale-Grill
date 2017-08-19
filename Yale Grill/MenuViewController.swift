@@ -91,9 +91,9 @@ class MenuViewController: UIViewController, GIDSignInUIDelegate{
     //If conditions are met, then sets the ordersPlaced array to the array returned here. The unwindSegue method in OrderScreen can then access ordersPlaced
     //to get the orders which were just placed and set the corresponding labels in the active orders screen (OrderScreen.swift)
     func getOrderInfo() -> [Orders]{
-        let cName = GIDSignIn.sharedInstance().currentUser.profile.name!
-        let cUser = GIDSignIn.sharedInstance().currentUser.userID!
-        var orderArray = [Orders]()
+        _ = GIDSignIn.sharedInstance().currentUser.profile.name!
+        _ = GIDSignIn.sharedInstance().currentUser.userID!
+        let orderArray = [Orders]()
         let StepCountArray : [UIStepper] = [BurgerStepCount,VeggieStepCount,ChickenStepCount]
         let switchesArray : [[UISwitch]] = [HamburgerSwitches,VeggieSwitches]
         for foodSection in 0...2{ //loops through the 3 types of foods
@@ -111,8 +111,8 @@ class MenuViewController: UIViewController, GIDSignInUIDelegate{
                         }
                     }
                 }
-                let tempOrder = Orders(_userID: cUser, _name: cName, _foodServing: orderInfo[0], _bunSetting: orderInfo[1], _cheeseSetting: orderInfo[2], _sauceSetting: orderInfo[3], _lettuceSetting: orderInfo[4], _tomatoSetting: orderInfo[5], _grill : selectedDiningHall)
-                orderArray.append(tempOrder)
+                /*let tempOrder = Orders(_userID: cUser, _name: cName, _foodServing: orderInfo[0], _bunSetting: orderInfo[1], _cheeseSetting: orderInfo[2], _sauceSetting: orderInfo[3], _lettuceSetting: orderInfo[4], _tomatoSetting: orderInfo[5], _grill : selectedDiningHall)
+                orderArray.append(tempOrder)*/
             }
         }
         

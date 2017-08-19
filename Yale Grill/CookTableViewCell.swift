@@ -14,14 +14,10 @@ import Firebase
 class CookTableViewCell: UITableViewCell{
 
     // MARK: - Outlets
+    @IBOutlet weak var foodServingLabel: UILabel!
     @IBOutlet weak var OrderNumLabel: UILabel!
-    @IBOutlet weak var FoodServingLabel: UILabel!
-    @IBOutlet weak var BunLabel: UILabel!
-    @IBOutlet weak var CheeseLabel: UILabel!
+    @IBOutlet var attributeLabels: [UILabel]!
     @IBOutlet weak var NameLabel: UILabel!
-    @IBOutlet weak var SauceLabel: UILabel!
-    @IBOutlet weak var TomatoLabel: UILabel!
-    @IBOutlet weak var LettuceLabel: UILabel!
     @IBOutlet weak var OrderStatusLabel: UILabel!
     @IBOutlet weak var OrderStatusButton: UIButton!
     
@@ -93,12 +89,17 @@ class CookTableViewCell: UITableViewCell{
             let newJson = snapshot.value as! NSDictionary
             self.cOrder = Orders(orderID: snapshot.key, json: newJson as! [String : AnyObject]) //Converts from JSON to order object
             
-            self.FoodServingLabel.text = self.cOrder.foodServing
-            self.BunLabel.text = self.cOrder.bunSetting
-            self.CheeseLabel.text = self.cOrder.cheeseSetting
-            self.SauceLabel.text = self.cOrder.sauceSetting
-            self.TomatoLabel.text = self.cOrder.tomatoSetting
-            self.LettuceLabel.text = self.cOrder.lettuceSetting
+            self.foodServingLabel.text = self.cOrder.foodServing
+            var count = 0
+            for option in self.cOrder.options {
+                if(option.value) {
+                    self.attributeLabels[count].text = option.key
+                } else {
+                    self.attributeLabels[count].text = "No \(option.key)"
+                }
+                self.attributeLabels[count].isHidden = false
+                count += 1
+            }
             self.NameLabel.text = self.cOrder.name
             
             if(self.cOrder.orderNum != nil) {
