@@ -92,10 +92,6 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
         return allActiveIDs.count
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = 90

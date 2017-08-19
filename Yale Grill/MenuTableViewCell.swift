@@ -16,11 +16,13 @@ class MenuTableViewCell: UITableViewCell {
     @IBOutlet weak var background: UIView!
     
     var delegate: MenuTableViewController?
+    var menuItem : MenuItem!
     
-    func setItemInfo(itemDetails : [String : Any]) {
-        menuItemImage.image = itemDetails["image"] as? UIImage
-        menuItemTitle.text = itemDetails["title"] as? String
-        menuItemDescription.text = itemDetails["description"] as? String
+    func setItemInfo(item : MenuItem) {
+        
+        menuItemImage.image = item.image
+        menuItemTitle.text = item.title
+        menuItemDescription.text = item.info
     }
 
     override func awakeFromNib() {

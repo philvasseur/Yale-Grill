@@ -15,31 +15,22 @@ class MenuTableViewController: UITableViewController {
     var totalOrdersCount: Int = 0 //Used to keep track of how many orders already exist, so user can't accidently order more than 3.
     var ordersPlaced: [Orders] = [] //Returned to OrderScreen class when placeOrder button is pressed.
     var selectedDiningHall : String!
-    var menuItems : [[String : Any]] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        menuItems.append(["image" : UIImage(named: "the-yale-burger")!, "title" : "The Yale Burger", "description" :
-            "A blend of finely chopped roasted mushrooms and ground beef. Smashed on the grill for maximum char and then served with a custom sauce on a brioche bun."])
-        menuItems.append(["image" : UIImage(named: "the-beyond-burger")!, "title" : "Veggie Burger", "description" :
-            "A vegan, plant based burger served with all the juicy, meat deliciousness of a traditional burger. Served on a locally crafted bun with lettuce, tomato, and a custom sauce."])
         self.tableView.backgroundColor = UIColor(hex: "#fafafa")
-
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return menuItems.count
+        return Constants.menuItems.count
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: "cellSelection", sender: indexPath)
+        
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -48,9 +39,20 @@ class MenuTableViewController: UITableViewController {
             for: indexPath) as? MenuTableViewCell else {
                 fatalError("BAD ERROR... ORDER CONTROL TABLE CELL")
         }
-        cell.setItemInfo(itemDetails: menuItems[indexPath.row])
+        cell.setItemInfo(item: Constants.menuItems[indexPath.row])
         cell.delegate = self
         return cell
     }
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "cellSelection" {
+            let destination = (segue.destination as! UINavigationController).topViewController as! MenuItemViewController
+            let row = (sender as! IndexPath).row
+            destination.menuItem = Constants.menuItems[row]
+        }
+    }
+    
+    @IBAction func unwindToMenu(_ sender: UIStoryboardSegue) {
+    }
 }
+

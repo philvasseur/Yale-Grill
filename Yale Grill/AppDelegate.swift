@@ -49,6 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NSFontAttributeName: UIFont(name: "Lato-Bold", size: 18)!
         ]
         UINavigationBar.appearance().titleTextAttributes = attrs
+        UINavigationBar.appearance().tintColor = UIColor.white
         
         return true
     }
