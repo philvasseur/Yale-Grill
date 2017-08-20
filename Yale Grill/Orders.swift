@@ -16,7 +16,7 @@ class Orders : NSObject {
     var orderID: String!
     var name: String!
     var foodServing: String!
-    var options: [String: Bool]!
+    var options: [String: Bool]?
     var orderNum: Int?
     var grill : String!
     
@@ -76,8 +76,8 @@ class Orders : NSObject {
     }
     
     //Changes current Orders object into a json object to be uploaded to firebase
-    private func convToJSON() -> [String : AnyObject] {
-        let jsonObject: [String: AnyObject] = [
+    private func convToJSON() -> [String : AnyObject?] {
+        let jsonObject: [String: AnyObject?] = [
             DatabaseKeys.name : name as AnyObject,
             DatabaseKeys.foodServing: foodServing as AnyObject,
             DatabaseKeys.userID: userID as AnyObject,

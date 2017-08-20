@@ -20,12 +20,16 @@ class MenuItemViewController: UIViewController, UITableViewDataSource, UITableVi
     
     var menuItem : MenuItem!
     var placedOrder : Orders?
+    var options : [String : Bool]? = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         menuItemImage.image = menuItem.image
         menuItemInfo.text = menuItem.info
         quantityLabel.text = menuItem.quantities[0]
+        for option in menuItem.options! {
+            options?[option] = true
+        }
         self.title = menuItem.title
         
         textBackground.layer.borderWidth = 1
@@ -42,14 +46,7 @@ class MenuItemViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard (sender as? UIButton) != nil else { return }
-        var options : [String : Bool]? = [:]
-        if (optionsTableView.visibleCells.count == 0) {
-            options = nil
-        } else {
-            for cell in (optionsTableView.visibleCells as? [FoodOptionTableViewCell])! {
-                options?[cell.optionLabel.text!] = cell.isChecked
-            }
-        }
+        options = options?.count == 0 ? nil : options
         placedOrder = Orders(_userID: GIDSignIn.sharedInstance().currentUser.userID!, _name: GIDSignIn.sharedInstance().currentUser.profile.name!, _foodServing: quantityLabel.text!, _options: options, _grill: Constants.selectedDiningHall)
     }
 
@@ -68,12 +65,16 @@ class MenuItemViewController: UIViewController, UITableViewDataSource, UITableVi
             for: indexPath) as? FoodOptionTableViewCell else {
                 fatalError("Cannot create FoodOptionTableViewCell")
         }
-        cell.setCellLabel(option: (menuItem.options?[indexPath.row])!)
+        let optionName = menuItem.options?[indexPath.row]
+        cell.setCellLabel(option: optionName!, isChecked: (options?[optionName!])!)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-        (tableView.cellForRow(at: indexPath) as! FoodOptionTableViewCell).check()
+        let cell = (tableView.cellForRow(at: indexPath) as! FoodOptionTableViewCell)
+        cell.check()
+        let optionName = cell.optionLabel.text!
+        options?[optionName] = !(options?[optionName] ?? false)
     }
 }

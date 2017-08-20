@@ -15,7 +15,7 @@ class FoodOptionTableViewCell: UITableViewCell {
     
     var unchecked = UIImage(named: "unchecked")
     var checked = UIImage(named: "checked")
-    var isChecked: Bool = true
+    var isChecked: Bool!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,8 +31,14 @@ class FoodOptionTableViewCell: UITableViewCell {
         }
     }
 
-    func setCellLabel(option: String) {
+    func setCellLabel(option: String, isChecked: Bool) {
         optionLabel.text = option
+        self.isChecked = isChecked
+        if(isChecked) {
+            checkbox.image = checked
+        } else {
+            checkbox.image = unchecked
+        }
     }
 
 }

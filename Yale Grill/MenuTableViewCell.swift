@@ -26,7 +26,23 @@ class MenuTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         background.layer.borderWidth = 2
-        background.layer.borderColor = UIColor(hex: "#e8e8e8").cgColor
+        background.layer.borderColor = UIColor(hex: "#dbd9d9").cgColor
         super.awakeFromNib()
+    }
+    
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        if(highlighted) {
+            background.backgroundColor = UIColor(hex: "#dbd9d9")
+        } else {
+            background.backgroundColor = UIColor.white
+        }
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        if(selected) {
+            background.backgroundColor = UIColor(hex: "#dbd9d9x")
+        } else {
+            background.backgroundColor = UIColor.white
+        }
     }
 }

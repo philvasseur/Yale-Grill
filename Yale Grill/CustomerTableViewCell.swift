@@ -35,6 +35,10 @@ class CustomerTableViewCell: UITableViewCell{
     
     // MARK: - Functions
     func setByOrder(order : Orders){
+        for label in attributeLabels { //hides labels until they info is loaded
+            label.isHidden = true
+        }
+        
         //Loads a random preparing gif
         preparingGIF.loadGif(name: Constants.gifArray[Int(arc4random_uniform(UInt32(Constants.gifArray.count)))])
         self.cOrder = order
@@ -44,7 +48,7 @@ class CustomerTableViewCell: UITableViewCell{
         self.orderTitle.isHidden = false
         orderNumLabel.isHidden = true //Hides the orderNumLabel until it gets set
         var count = 0
-        for option in order.options {
+        for option in order.options ?? [:] {
             if(option.value) {
                 attributeLabels[count].text = option.key
             } else {
@@ -121,9 +125,6 @@ class CustomerTableViewCell: UITableViewCell{
     // MARK: - Overridden Functions
     override func awakeFromNib() {
         super.awakeFromNib()
-        for label in attributeLabels { //hides labels until they info is loaded
-            label.isHidden = true
-        }
         self.orderTitle.isHidden = true
         
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.updatePrep), userInfo: nil, repeats: true)

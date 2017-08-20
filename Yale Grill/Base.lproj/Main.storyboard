@@ -584,7 +584,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="menuItemCell" rowHeight="150" id="5om-Pl-c7p" customClass="MenuTableViewCell" customModule="Yale_Grill" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="menuItemCell" rowHeight="150" id="5om-Pl-c7p" customClass="MenuTableViewCell" customModule="Yale_Grill" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5om-Pl-c7p" id="R7Z-K6-yUM">
@@ -745,28 +745,28 @@
                                     <color key="titleColor" red="0.49803921568627452" green="0.68627450980392157" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <connections>
-                                    <segue destination="sXg-d4-t3X" kind="unwind" unwindAction="unwindToMenu:" id="qJ5-0L-0R2"/>
+                                    <segue destination="sXg-d4-t3X" kind="unwind" unwindAction="unwindToOrders:" id="nuv-ex-N3l"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="128" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="dir-GL-xCP">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="36" sectionHeaderHeight="20" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="dir-GL-xCP">
                                 <rect key="frame" x="0.0" y="416.5" width="375" height="195.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="optionCell" id="34B-EU-BzP" customClass="FoodOptionTableViewCell" customModule="Yale_Grill" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="10" width="375" height="128"/>
+                                        <rect key="frame" x="0.0" y="20" width="375" height="36"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="34B-EU-BzP" id="1gt-kL-DAZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="127.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="36"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ab-Tg-ha3">
-                                                    <rect key="frame" x="49" y="54" width="42" height="21"/>
+                                                    <rect key="frame" x="49" y="7.5" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checked" translatesAutoresizingMaskIntoConstraints="NO" id="3Qj-jj-vKZ">
-                                                    <rect key="frame" x="16" y="52" width="25" height="25"/>
+                                                    <rect key="frame" x="16" y="5.5" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="XS8-W4-BWY"/>
                                                         <constraint firstAttribute="width" constant="25" id="the-yK-Daw"/>
@@ -776,7 +776,7 @@
                                             <constraints>
                                                 <constraint firstItem="3Qj-jj-vKZ" firstAttribute="leading" secondItem="1gt-kL-DAZ" secondAttribute="leading" constant="16" id="269-tu-5aX"/>
                                                 <constraint firstItem="3Qj-jj-vKZ" firstAttribute="centerY" secondItem="1gt-kL-DAZ" secondAttribute="centerY" id="PHA-7h-7T6"/>
-                                                <constraint firstItem="6ab-Tg-ha3" firstAttribute="centerY" secondItem="1gt-kL-DAZ" secondAttribute="centerY" id="eX5-jw-Kt5"/>
+                                                <constraint firstItem="6ab-Tg-ha3" firstAttribute="centerY" secondItem="3Qj-jj-vKZ" secondAttribute="centerY" id="f40-kD-djv"/>
                                                 <constraint firstItem="6ab-Tg-ha3" firstAttribute="leading" secondItem="3Qj-jj-vKZ" secondAttribute="trailing" constant="8" id="ie6-A9-6va"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -813,7 +813,7 @@
                             <inset key="imageInsets" minX="-4" minY="0.0" maxX="0.0" maxY="0.0"/>
                             <color key="tintColor" red="0.99999058246612549" green="0.99999356269836426" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
-                                <segue destination="sXg-d4-t3X" kind="unwind" unwindAction="unwindToMenu:" id="20f-7N-Aem"/>
+                                <segue destination="sXg-d4-t3X" kind="unwind" unwindAction="unwindToMenu:" id="QzM-Wj-QpZ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -854,7 +854,7 @@
     </scenes>
     <resources>
         <image name="YaleImage" width="1953" height="1474"/>
-        <image name="checked" width="50" height="50"/>
+        <image name="checked" width="52" height="52"/>
         <image name="order-food" width="25" height="25"/>
         <image name="order-food-selected" width="25" height="25"/>
     </resources>

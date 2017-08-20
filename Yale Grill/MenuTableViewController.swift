@@ -52,21 +52,6 @@ class MenuTableViewController: UITableViewController {
     }
     
     @IBAction func unwindToMenu(_ sender: UIStoryboardSegue) {
-        guard let placedOrderController = sender.source as? MenuItemViewController else { return }
-        guard let newOrder = placedOrderController.placedOrder else { return }
-        let grillStatusRef = FIRDatabase.database().reference().child(Constants.grills).child(Constants.selectedDiningHall).child(Constants.grillStatus)
-        grillStatusRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
-            if (!(snapshot.value as? Bool ?? false)) { //Only goes through orders if the grill is on
-                Constants.createAlert(title: "The Grill Is Off!", message: "Please try again later during Dining Hall hours. If you think this is an error, contact your respective dining hall staff.",
-                                      style: .wait)
-            } else if(Constants.currentOrders.count > 2){
-                Constants.createAlert(title: "Order Limit Reached", message: "You can't place more than 3 orders! Please wait for your current orders to be finished!",
-                                      style: .wait)
-            } else {
-                newOrder.insertIntoDatabase()
-                Constants.currentOrders.append(newOrder)
-            }
-        })
     }
 }
 

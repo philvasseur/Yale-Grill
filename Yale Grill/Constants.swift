@@ -17,7 +17,7 @@ class Constants {
     static var selectedDiningHall : String!
     static var currentOrders : [Orders] = []
     static var appJustOpened = true;
-    static var PickerData = ["Select Dining Hall","Jonathan Edwards"]
+    static var PickerData = ["Select Dining Hall"]
     static let coordinates  = [
         "Jonathan Edwards": CLLocation(latitude: 41.308839, longitude: -72.929976),
         "Branford" : CLLocation(latitude: 41.310051, longitude: -72.930137),
@@ -64,19 +64,19 @@ class Constants {
     static let menuItems = [MenuItem(_title: "The Yale Burger",
                                      _info: "A blend of finely chopped roasted mushrooms and ground beef. Smashed on the grill for maximum char and then served with a custom sauce on a brioche bun.",
                                      _image: UIImage(named: "the-yale-burger")!,
-                                     _quantities: ["Single","Double"],
+                                     _quantities: ["Single Burger","Double Burger"],
                                      _options: ["Bun","Cheese","Sauce","Lettuce","Tomato"]),
                             
                             MenuItem(_title: "Veggie Burger",
                                      _info: "A vegan, plant based burger served with all the juicy, meat deliciousness of a traditional burger. Served on a locally crafted bun with lettuce, tomato, and a custom sauce.",
                                      _image: UIImage(named: "the-beyond-burger")!,
-                                     _quantities: ["Single","Double"],
+                                     _quantities: ["Single Burger","Double Burger"],
                                      _options: ["Bun","Cheese","Sauce","Lettuce","Tomato"]),
                             
                             MenuItem(_title: "Grilled Chicken",
                                      _info: "Boneless, skinless chicken breast which is seared on the grill to perfection.",
                                      _image: UIImage(named: "grilled-chicken")!,
-                                     _quantities: ["One Piece","Two Pieces","Three Pieces","Four Pieces"])
+                                     _quantities: ["One Piece of Chicken","Two Pieces of Chicken","Three Pieces of Chicken","Four Pieces of Chicken"])
                             ]
     
     //ID Constants

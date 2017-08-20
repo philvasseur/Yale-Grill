@@ -57,13 +57,16 @@ class CookTableViewCell: UITableViewCell{
         
         if(orderStatus != status.PickedUp) {
             //Updates the order status in the grill's active orders array
-            FIRDatabase.database().reference().child(Constants.grills).child(self.grillName).child(Constants.orders).child(cOrder.orderID).child(Constants.orderStatus).setValue(orderStatus)
+            FIRDatabase.database().reference().child(Constants.grills).child(self.grillName).child(Constants.orders).child(cOrder.orderID).child(Constants.orderStatus).setValue(orderStatus.rawValue)
         }
         
     }
     
     // MARK: - Functions
     func setByOrder(order : Orders, grillName : String){
+        for label in attributeLabels { //hides labels until they info is loaded
+            label.isHidden = true
+        }
         self.OrderNumLabel.isHidden = true //Hides the orderNumber while waiting for it to be set
         self.cOrder = order
         self.grillName = grillName
@@ -90,7 +93,7 @@ class CookTableViewCell: UITableViewCell{
         self.foodServingLabel.text = self.cOrder.foodServing
         self.NameLabel.text = self.cOrder.name
         var count = 0
-        for option in self.cOrder.options {
+        for option in self.cOrder.options ?? [:] {
             if(option.value) {
                 self.attributeLabels[count].text = option.key
             } else {
@@ -103,9 +106,9 @@ class CookTableViewCell: UITableViewCell{
         if(self.cOrder.orderNum != nil) {
             self.OrderNumLabel.isHidden = false
             if(self.cOrder.orderNum! < 10){
-                self.OrderNumLabel.text = "0\(self.cOrder.orderNum!)"
+                self.OrderNumLabel.text = "- #0\(self.cOrder.orderNum!)"
             }else {
-                self.OrderNumLabel.text = "\(self.cOrder.orderNum!)"
+                self.OrderNumLabel.text = "- #\(self.cOrder.orderNum!)"
             }
         } else {
             let orderNumRef = FIRDatabase.database().reference().child(Constants.orders).child(order.orderID).child("orderNum")
