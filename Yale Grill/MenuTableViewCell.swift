@@ -25,7 +25,7 @@ class MenuTableViewCell: UITableViewCell {
     }
 
     override func awakeFromNib() {
-        background.layer.borderWidth = 2
+        background.layer.borderWidth = 1
         background.layer.borderColor = UIColor(hex: "#dbd9d9").cgColor
         super.awakeFromNib()
     }

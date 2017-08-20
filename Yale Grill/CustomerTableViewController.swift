@@ -85,7 +85,6 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
                 fatalError("Cannot create CustomerTableViewCell")
         }
         let index = indexPath.row
-        
         cell.setByOrder(order: Constants.currentOrders[index]) //Sets all the info in the cell
         cell.delegate = self
         return cell
