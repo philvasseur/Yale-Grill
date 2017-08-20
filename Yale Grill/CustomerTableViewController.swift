@@ -31,6 +31,7 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
         }
+        Constants.currentOrders = []
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let signInScreen = sb.instantiateViewController(withIdentifier: Constants.ViewControllerID) as? LoginViewController
         self.present(signInScreen!, animated:true, completion:nil)

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MenuItemViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MenuItemViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
     @IBOutlet weak var menuItemImage: UIImageView!
     @IBOutlet weak var menuItemInfo: UILabel!
@@ -16,7 +16,7 @@ class MenuItemViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var quantityBackground: UIView!
     @IBOutlet weak var quantityLabel: UILabel!
     @IBOutlet weak var stepper: UIStepper!
-    @IBOutlet weak var optionsTableView: UITableView!
+    @IBOutlet weak var optionsCollectionView: UICollectionView!
     
     var menuItem : MenuItem!
     var placedOrder : Orders?
@@ -27,7 +27,7 @@ class MenuItemViewController: UIViewController, UITableViewDataSource, UITableVi
         menuItemImage.image = menuItem.image
         menuItemInfo.text = menuItem.info
         quantityLabel.text = menuItem.quantities[0]
-        for option in menuItem.options! {
+        for option in menuItem.options {
             options?[option] = true
         }
         self.title = menuItem.title
@@ -39,9 +39,8 @@ class MenuItemViewController: UIViewController, UITableViewDataSource, UITableVi
         
         stepper.maximumValue = Double(menuItem.quantities.count - 1)
         
-        optionsTableView.delegate = self
-        optionsTableView.dataSource = self
-        optionsTableView.tableFooterView = UIView()
+        optionsCollectionView.delegate = self
+        optionsCollectionView.dataSource = self
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -54,27 +53,22 @@ class MenuItemViewController: UIViewController, UITableViewDataSource, UITableVi
         quantityLabel.text = menuItem.quantities[Int(sender.value)]
     }
     
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return menuItem.options?.count ?? 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: "optionCell",
-            for: indexPath) as? FoodOptionTableViewCell else {
-                fatalError("Cannot create FoodOptionTableViewCell")
-        }
-        let optionName = menuItem.options?[indexPath.row]
-        cell.setCellLabel(option: optionName!, isChecked: (options?[optionName!])!)
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath as IndexPath) as! OptionCollectionViewCell
+        let option = menuItem.options[indexPath.row]
+        cell.setCellLabel(option: option, isChecked: options?[option] ?? true)
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: false)
-        let cell = (tableView.cellForRow(at: indexPath) as! FoodOptionTableViewCell)
-        cell.check()
-        let optionName = cell.optionLabel.text!
-        options?[optionName] = !(options?[optionName] ?? false)
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return menuItem.options.count
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! OptionCollectionViewCell
+        cell.check()
+        options?[cell.optionLabel.text ?? ""] = !(options?[cell.optionLabel.text ?? ""] ?? false)
+    }
+    
+    
 }

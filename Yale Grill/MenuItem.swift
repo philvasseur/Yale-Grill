@@ -15,7 +15,7 @@ class MenuItem : NSObject {
     var info: String!
     var image: UIImage!
     var quantities: [String]!
-    var options: [String]?
+    var options: [String]!
     
     //Creates a new Orders object
     init(_title : String, _info: String, _image : UIImage, _quantities: [String]!, _options: [String]! = []) {
