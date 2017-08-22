@@ -45,10 +45,10 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         //Checks emails, if a student then gets the dining hall, if cook then segues, if neither logs out
         let emailType = self.checkEmail(email: user.profile.email)
         guard let authentication = user.authentication else { return }
-        let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
+        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
         
         if(emailType == .Yale){
-            FIRAuth.auth()?.signIn(with: credential) { (user, error) in //Firebase then authenticates user
+            Auth.auth().signIn(with: credential) { (user, error) in //Firebase then authenticates user
                 if let error = error {
                     print("Firebase Auth Error: \(error)")
                     self.signOutGoogleAndFirebase()
@@ -65,7 +65,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
                 }
             }
         } else if (emailType == .Cook) {
-            FIRAuth.auth()?.signIn(with: credential) { (user, error) in //Firebase then authenticates user
+            Auth.auth().signIn(with: credential) { (user, error) in //Firebase then authenticates user
                 if let error = error {
                     print("Firebase Auth Error: \(error)")
                     self.signOutGoogleAndFirebase()
@@ -85,7 +85,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     
     //Checks if a dining hall is selected, if not grabs previously logged in dining hall from database
     func getDiningHall(completion : @escaping (Bool) -> ()) {
-        let dHallRef = FIRDatabase.database().reference().child(Constants.users).child(GIDSignIn.sharedInstance().currentUser.userID!).child(Constants.prevDining)
+        let dHallRef = Database.database().reference().child(Constants.users).child(GIDSignIn.sharedInstance().currentUser.userID!).child(Constants.prevDining)
         if(Constants.ActiveGrills[diningHallText.text!] != nil) {
             Constants.selectedDiningHall = diningHallText.text
             dHallRef.setValue(Constants.selectedDiningHall) //Updates last dining hall logged into for user
@@ -93,7 +93,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
             return
         }
         
-        dHallRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+        dHallRef.observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
             let pastDHall = snapshot.value as? String ?? "Select Dining Hall"
             if (Constants.ActiveGrills[pastDHall] != nil)  {
                 Constants.selectedDiningHall = pastDHall
@@ -121,45 +121,44 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     
     //Loads the user orders and ban info, for CUSTOMERS only. Cooks don't need this checked.
     func loadOrdersAndSegue() {
-        let user = FIRDatabase.database().reference().child(Constants.users).child(GIDSignIn.sharedInstance().currentUser.userID!)
-        user.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in //Gets initial info for user
+        let orderDG = DispatchGroup()
+        let user = Database.database().reference().child(Constants.users).child(GIDSignIn.sharedInstance().currentUser.userID!)
+        user.observeSingleEvent(of: DataEventType.value, with: { (snapshot) in //Gets initial info for user
             var orderIDs : [String] = []
-            if(snapshot.hasChild("Name")) {
-                let userDic = snapshot.value as! NSDictionary
-                //If the user has an active ban, returns and does not login
-                if(self.isBanned(bannedUntilString: userDic["BannedUntil"] as? String, user: user)) {
-                    return
-                }
-                //Keys are timeStamp based, so we can sort to make sure orders are shown in same order they're placed
-                for (orderID, grillName) in userDic[Constants.activeOrders] as? [String: String] ?? [:] {
-                    if(grillName == Constants.selectedDiningHall) {
-                        orderIDs.append(orderID)
-                    }
-                }
-            }else{
-                //Sets name if user doesn't exist yet.
-                user.child(Constants.name).setValue(GIDSignIn.sharedInstance().currentUser.profile.name!)
-            }
-            
-            if(orderIDs.count == 0) {
-                self.performSegue(withIdentifier: Constants.SignInSegueID, sender: nil)
+            let userDic = snapshot.value as! NSDictionary
+            if(self.isBanned(bannedUntilString: userDic["BannedUntil"] as? String, user: user)) {
                 return
             }
             
+            //Sets the user name
+            user.child(Constants.name).setValue(GIDSignIn.sharedInstance().currentUser.profile.name!)
+            //Loads the users active orderIds
+            
+            for (orderID, grillName) in userDic[Constants.activeOrders] as? [String: String] ?? [:] {
+                if(grillName == Constants.selectedDiningHall) {
+                    orderIDs.append(orderID)
+                }
+            }
+            
+            //Loads the users orders
+            //Keys are timeStamp based, so we can sort to make sure orders are shown in same order they're placed
             for key in orderIDs.sorted() {
-                FIRDatabase.database().reference().child(Constants.orders).child(key).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+                orderDG.enter()
+                Database.database().reference().child(Constants.orders).child(key).observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
                     Constants.currentOrders.append(Orders.init(orderID: snapshot.key, json: snapshot.value as! Dictionary))
-                    if(Constants.currentOrders.count == orderIDs.count) { //Onces all the orders have been loaded
-                        self.performSegue(withIdentifier: Constants.SignInSegueID, sender: nil) //Segues to OrderScreen
-                    }
+                    orderDG.leave()
                 })
             }
+            
+            orderDG.notify(queue: .main, execute: {
+                self.performSegue(withIdentifier: Constants.SignInSegueID, sender: nil) //Segues to OrderScreen
+            });
         })
         
     }
     
     //Takes the bannedUntil format in the database and checks if it has passed already or not
-    func isBanned(bannedUntilString : String?, user: FIRDatabaseReference) -> Bool {
+    func isBanned(bannedUntilString : String?, user: DatabaseReference) -> Bool {
         var bannedUntil : Date?
         //Checks if user has bannedUntil property in their account, if so checks if still banned
         if(bannedUntilString == nil){
@@ -187,8 +186,8 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     //Loads the Dining Hall grill names and emails for the pickerView from firebase
     func loadDiningHalls(completion: @escaping () -> ()) {
         //Loads the cook grillIDs and corresponding emails from database
-        let grillRef = FIRDatabase.database().reference().child(Constants.grills).child("ActiveGrills")
-        grillRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+        let grillRef = Database.database().reference().child(Constants.grills).child("ActiveGrills")
+        grillRef.observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
             Constants.ActiveGrills = snapshot.value as! [String : String]
             for(grillName,_) in Constants.ActiveGrills {
                 Constants.PickerData.append(grillName)
@@ -213,6 +212,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         pickerView.isHidden = false
     }
     
+    
     //Signs out of both google and firebase authentication, also hides potential launchView
     func signOutGoogleAndFirebase() {
         UIView.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
@@ -220,9 +220,9 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         })
         stopLoginAnimation()
         GIDSignIn.sharedInstance().signOut()
-        let firebaseAuth = FIRAuth.auth()
+        let firebaseAuth = Auth.auth()
         do {
-            try firebaseAuth?.signOut()
+            try firebaseAuth.signOut()
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
         }

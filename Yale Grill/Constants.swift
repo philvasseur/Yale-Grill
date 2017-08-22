@@ -36,9 +36,12 @@ class Constants {
         case Yale, Cook, Other
     }
     
-    static let READYTIMER : Double = 8 //minutes left ready till user is given a strike
-    static let strikeBanLimit = 5 //strikes until user gets a ban
-    static let banLength = 10 //day long ban length
+    
+    //Remote Config Defaults
+    static var READYTIMER : Double = 8 //minutes left ready till user is given a strike
+    static var strikeBanLimit = 5 //strikes until user gets a ban
+    static var banLength = 10 //day long ban length
+    //defaults end
     
     static let orders = "Orders"
     static let grills = "Grills"
@@ -61,7 +64,7 @@ class Constants {
     static let preparingTexts = ["Preparing...","Preparing..","Preparing.","Preparing"]
     static let gifArray = ["preparing1","preparing2","preparing3","preparing4","preparing5"]
     
-    static let menuItems = [MenuItem(_title: "The Yale Burger",
+    static var menuItems = [MenuItem(_title: "The Yale Burger",
                                      _info: "A blend of finely chopped roasted mushrooms and ground beef. Smashed on the grill for maximum char and then served with a custom sauce on a brioche bun.",
                                      _image: UIImage(named: "the-yale-burger")!,
                                      _quantities: ["Single Burger","Double Burger"],

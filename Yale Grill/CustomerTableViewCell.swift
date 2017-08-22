@@ -67,8 +67,8 @@ class CustomerTableViewCell: UITableViewCell{
                 self.orderNumLabel.text = "\(self.cOrder.orderNum!)"
             }
         } else {
-            let orderNumRef = FIRDatabase.database().reference().child(Constants.orders).child(order.orderID).child("orderNum")
-            orderNumRef.observe(FIRDataEventType.value, with: { (snapshot) in
+            let orderNumRef = Database.database().reference().child(Constants.orders).child(order.orderID).child("orderNum")
+            orderNumRef.observe(DataEventType.value, with: { (snapshot) in
                 if (!snapshot.exists()) {
                     return
                 }
@@ -85,8 +85,8 @@ class CustomerTableViewCell: UITableViewCell{
         }
         
         //Keeps track of orderStatus and updates UI accordingly
-        let orderStatusRef = FIRDatabase.database().reference().child(Constants.grills).child(order.grill).child(Constants.orders).child(order.orderID).child(Constants.orderStatus)
-        orderStatusRef.observe(FIRDataEventType.value, with: {(snapshot) in
+        let orderStatusRef = Database.database().reference().child(Constants.grills).child(order.grill).child(Constants.orders).child(order.orderID).child(Constants.orderStatus)
+        orderStatusRef.observe(DataEventType.value, with: {(snapshot) in
             let orderStatus = Constants.Status(rawValue: snapshot.value as? Int ?? 3)!
             if (orderStatus == self.status.Placed || orderStatus == self.status.Preparing) {
                 let notFinishedTexts = ["Order Placed",Constants.preparingTexts[0]]

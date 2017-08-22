@@ -19,7 +19,7 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
     // MARK: - Global Variables
     var orderNumCount: Int = -1
     var grillName: String!
-    var grillSwitch : FIRDatabaseReference!
+    var grillSwitch : DatabaseReference!
     var grillIsOn : Bool = false
     var allActiveOrders : [Orders] = []
     
@@ -37,9 +37,9 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
     @IBAction func signOutPressed2(_ sender: UIBarButtonItem) {
         print("LOGGING OUT")
         GIDSignIn.sharedInstance().signOut()
-        let firebaseAuth = FIRAuth.auth()
+        let firebaseAuth = Auth.auth()
         do {
-            try firebaseAuth?.signOut()
+            try firebaseAuth.signOut()
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
         }
@@ -54,12 +54,12 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
     func giveStrike(userID : String, name: String){
         let date = Date()
         Constants.createAlert(title: "Strike Given", message: "Due to not picking up their food, \(name) has been given a strike.",style: .notice)
-        FIRDatabase.database().reference().child(Constants.users).child(userID).child("Strikes").observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+        Database.database().reference().child(Constants.users).child(userID).child("Strikes").observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
             let strikes = snapshot.value as? Int
             if(strikes == nil) {
-                FIRDatabase.database().reference().child(Constants.users).child(userID).child("Strikes").setValue(1)
+                Database.database().reference().child(Constants.users).child(userID).child("Strikes").setValue(1)
             }else{
-                FIRDatabase.database().reference().child(Constants.users).child(userID).child("Strikes").setValue(strikes!+1)
+                Database.database().reference().child(Constants.users).child(userID).child("Strikes").setValue(strikes!+1)
                 if(((strikes!+1) % Constants.strikeBanLimit) == 0) {
                     var bannedUntil : String?
                     let banEndsDate = NSCalendar.current.date(byAdding: .day, value: Constants.banLength, to: date)
@@ -67,7 +67,7 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateStyle = DateFormatter.Style.full
                     print("\(userID) is banned until \(banEndsDate!)")
-                    FIRDatabase.database().reference().child(Constants.users).child(userID).child("BannedUntil").setValue(bannedUntil)
+                    Database.database().reference().child(Constants.users).child(userID).child("BannedUntil").setValue(bannedUntil)
                 }
             }
         })
@@ -96,14 +96,14 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
         tableView.rowHeight = 90
         tableView.allowsSelection = false
         GIDSignIn.sharedInstance().uiDelegate = self
-        
+                
         grillName = Constants.ActiveGrills.filter({ (grill: (grillName: String, grillEmail: String)) -> Bool in
             return grill.grillEmail.lowercased()  == GIDSignIn.sharedInstance().currentUser.profile.email.lowercased()
         }).first?.key
         
         
-        grillSwitch = FIRDatabase.database().reference().child(Constants.grills).child(grillName).child(Constants.grillStatus)
-        grillSwitch.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+        grillSwitch = Database.database().reference().child(Constants.grills).child(grillName).child(Constants.grillStatus)
+        grillSwitch.observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
             let grillStatus = snapshot.value as? Bool ?? false
             if (grillStatus) {
                 self.grillIsOn = true
@@ -115,9 +115,9 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
         })
         
         
-        let ordersRef = FIRDatabase.database().reference().child(Constants.grills).child(grillName).child(Constants.orders)
-        ordersRef.queryOrderedByKey().observe(FIRDataEventType.childAdded, with: { (snapshot) in
-            FIRDatabase.database().reference().child(Constants.orders).child(snapshot.key).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+        let ordersRef = Database.database().reference().child(Constants.grills).child(grillName).child(Constants.orders)
+        ordersRef.queryOrderedByKey().observe(DataEventType.childAdded, with: { (snapshot) in
+            Database.database().reference().child(Constants.orders).child(snapshot.key).observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
                 
                 let newJson = snapshot.value as! NSDictionary
                 let order = Orders(orderID: snapshot.key, json: newJson as! [String : AnyObject])
@@ -126,7 +126,7 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
                 self.tableView.insertRows(at: [newIndexPath], with: .automatic)
             })
         })
-        ordersRef.queryOrderedByKey().observe(FIRDataEventType.childRemoved, with: { (snapshot) in
+        ordersRef.queryOrderedByKey().observe(DataEventType.childRemoved, with: { (snapshot) in
             let orderID = snapshot.key
             //Finds the index of the orderID to be removed
             let removedIndex = self.allActiveOrders.map{$0.orderID}.index(of: orderID)

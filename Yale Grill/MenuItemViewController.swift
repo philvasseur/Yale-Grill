@@ -17,6 +17,7 @@ class MenuItemViewController: UIViewController, UICollectionViewDelegate, UIColl
     @IBOutlet weak var quantityLabel: UILabel!
     @IBOutlet weak var stepper: UIStepper!
     @IBOutlet weak var optionsCollectionView: UICollectionView!
+    @IBOutlet weak var orderFoodButton: UIButton!
     
     var menuItem : MenuItem!
     var placedOrder : Orders?
@@ -30,6 +31,7 @@ class MenuItemViewController: UIViewController, UICollectionViewDelegate, UIColl
         for option in menuItem.options {
             options?[option] = true
         }
+        
         self.title = menuItem.title
         
         textBackground.layer.borderWidth = 1

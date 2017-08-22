@@ -25,7 +25,7 @@ class CookTableViewCell: UITableViewCell{
     var grillName : String!
     var cOrder : Orders!
     var orderStatus : Constants.Status!
-    var orderRef : FIRDatabaseReference?
+    var orderRef : DatabaseReference?
     var delegate: CookTableViewController?
     var task : DispatchWorkItem?
     var playerID : String!
@@ -57,7 +57,7 @@ class CookTableViewCell: UITableViewCell{
         
         if(orderStatus != status.PickedUp) {
             //Updates the order status in the grill's active orders array
-            FIRDatabase.database().reference().child(Constants.grills).child(self.grillName).child(Constants.orders).child(cOrder.orderID).child(Constants.orderStatus).setValue(orderStatus.rawValue)
+            Database.database().reference().child(Constants.grills).child(self.grillName).child(Constants.orders).child(cOrder.orderID).child(Constants.orderStatus).setValue(orderStatus.rawValue)
         }
         
     }
@@ -71,8 +71,8 @@ class CookTableViewCell: UITableViewCell{
         self.cOrder = order
         self.grillName = grillName
         
-        let orderStatusRef = FIRDatabase.database().reference().child(Constants.grills).child(grillName).child(Constants.orders).child(self.cOrder.orderID).child(Constants.orderStatus)
-        orderStatusRef.observeSingleEvent(of: FIRDataEventType.value, with: {(snapshot) in
+        let orderStatusRef = Database.database().reference().child(Constants.grills).child(grillName).child(Constants.orders).child(self.cOrder.orderID).child(Constants.orderStatus)
+        orderStatusRef.observeSingleEvent(of: DataEventType.value, with: {(snapshot) in
             self.orderStatus = Constants.Status(rawValue: snapshot.value as? Int ?? 0)
             
             if(self.orderStatus == self.status.Placed){
@@ -111,8 +111,8 @@ class CookTableViewCell: UITableViewCell{
                 self.OrderNumLabel.text = "- #\(self.cOrder.orderNum!)"
             }
         } else {
-            let orderNumRef = FIRDatabase.database().reference().child(Constants.orders).child(order.orderID).child("orderNum")
-            orderNumRef.observe(FIRDataEventType.value, with: { (snapshot) in //Observes the order for changes
+            let orderNumRef = Database.database().reference().child(Constants.orders).child(order.orderID).child("orderNum")
+            orderNumRef.observe(DataEventType.value, with: { (snapshot) in //Observes the order for changes
                 if (!snapshot.exists()) {
                     return
                 }
@@ -136,10 +136,10 @@ class CookTableViewCell: UITableViewCell{
         let cOrderID = self.cOrder.orderID!
         
         //Removes the order from the users's active orders
-        FIRDatabase.database().reference().child(Constants.users).child(cOrder.userID!).child(Constants.activeOrders).child(cOrderID).removeValue() {(error, reference) in
+        Database.database().reference().child(Constants.users).child(cOrder.userID!).child(Constants.activeOrders).child(cOrderID).removeValue() {(error, reference) in
                 //Removes the order from the grill's active orders once it is removed from the user's
                 if(error == nil) {
-                    FIRDatabase.database().reference().child(Constants.grills).child(self.grillName).child(Constants.orders).child(cOrderID).removeValue()
+                    Database.database().reference().child(Constants.grills).child(self.grillName).child(Constants.orders).child(cOrderID).removeValue()
                 }
             }
         

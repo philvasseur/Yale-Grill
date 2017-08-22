@@ -9,14 +9,14 @@
 import Foundation
 import UIKit
 import Firebase
+import FirebaseRemoteConfig
 
 class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
     
     var noOrdersLabel = UILabel()
     var grillStatusHandle : UInt!
-    var userOrdersRef : FIRDatabaseReference!
+    var userOrdersRef : DatabaseReference!
     var GID = GIDSignIn.sharedInstance()!
-    
     
     // MARK: - Actions
     
@@ -25,9 +25,9 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
         print("LOGGING OUT")
         removeActiveObservers()
         GID.signOut()
-        let firebaseAuth = FIRAuth.auth()
+        let firebaseAuth = Auth.auth()
         do {
-            try firebaseAuth?.signOut()
+            try firebaseAuth.signOut()
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
         }
@@ -40,8 +40,8 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
     @IBAction func unwindToOrders(_ sender: UIStoryboardSegue) {
         guard let placedOrderController = sender.source as? MenuItemViewController else { return }
         guard let newOrder = placedOrderController.placedOrder else { return }
-        let grillStatusRef = FIRDatabase.database().reference().child(Constants.grills).child(Constants.selectedDiningHall).child(Constants.grillStatus)
-        grillStatusRef.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+        let grillStatusRef = Database.database().reference().child(Constants.grills).child(Constants.selectedDiningHall).child(Constants.grillStatus)
+        grillStatusRef.observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
             if (!(snapshot.value as? Bool ?? false)) { //Only goes through orders if the grill is on
                 Constants.createAlert(title: "The Grill Is Off!", message: "Please try again later during Dining Hall hours. If you think this is an error, contact your respective dining hall staff.",
                                       style: .wait)
@@ -63,7 +63,7 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
     //Removes the Firebase observers on each order's status to get rid of errors upon logout when auth is revoked
     func removeActiveObservers(){
         for order in Constants.currentOrders {
-            FIRDatabase.database().reference().child(Constants.grills).child(order.grill).child(Constants.orders).child(order.orderID).child(Constants.orderStatus).removeAllObservers()
+            Database.database().reference().child(Constants.grills).child(order.grill).child(Constants.orders).child(order.orderID).child(Constants.orderStatus).removeAllObservers()
         }
     }
     

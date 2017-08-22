@@ -59,19 +59,19 @@ class Orders : NSObject {
     
     //Inserts a new order into fireBase database
     func insertIntoDatabase(){
-        let currentOrder = FIRDatabase.database().reference().child("Orders").child(orderID)
+        let currentOrder = Database.database().reference().child("Orders").child(orderID)
         currentOrder.setValue(convToJSON())
         
         //Inserts orderID/OrderStatus/OrderPushToken into Grills active orders
         let grillOrderInfo: [String: AnyObject] = [
             Constants.orderStatus : 0 as AnyObject,
-            "pushToken": FIRInstanceID.instanceID().token() as AnyObject]
-        FIRDatabase.database().reference().child(Constants.grills).child(grill).child(Constants.orders).child(self.orderID).setValue(grillOrderInfo)
+            "pushToken": Messaging.messaging().fcmToken as AnyObject]
+        Database.database().reference().child(Constants.grills).child(grill).child(Constants.orders).child(self.orderID).setValue(grillOrderInfo)
         
         
         //Inserts OrderID into Users active orders
         let cUserId = GIDSignIn.sharedInstance().currentUser.userID!
-        FIRDatabase.database().reference().child(Constants.users).child(cUserId).child(Constants.activeOrders).child(self.orderID).setValue(grill)
+        Database.database().reference().child(Constants.users).child(cUserId).child(Constants.activeOrders).child(self.orderID).setValue(grill)
         
     }
     

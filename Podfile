@@ -7,10 +7,11 @@ target 'Yale Grill' do
 
   # Pods for YaleGrill
   pod 'Google/SignIn'
-  pod 'Firebase'
-  pod 'Firebase/Database'
-  pod 'Firebase/Auth'
-  pod 'Firebase/Messaging'
+  pod 'Firebase', '~> 4.0.0'
+  pod 'Firebase/RemoteConfig', '~> 4.0.0'
+  pod 'Firebase/Database', '~> 4.0.0'
+  pod 'Firebase/Auth', '~> 4.0.0'
+  pod 'Firebase/Messaging', '~> 4.0.0'
   pod 'NVActivityIndicatorView'
   pod 'SCLAlertView'
 end

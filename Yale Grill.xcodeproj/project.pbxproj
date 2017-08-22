@@ -22,6 +22,7 @@
 		CD58B0FC1ED8A08900C6F02C /* preparing4.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD58B0F81ED8A08900C6F02C /* preparing4.gif */; };
 		CD58B1011ED8A83400C6F02C /* preparing5.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD58B1001ED8A83400C6F02C /* preparing5.gif */; };
 		CD5B27FF1F453E2D005CA2A5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD5B27FE1F453E2D005CA2A5 /* GoogleService-Info.plist */; };
+		CD7F90111F4CD4E000B7CA9C /* RCValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7F90101F4CD4E000B7CA9C /* RCValues.swift */; };
 		CD86294B1F467B9700DB328F /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD86294A1F467B9700DB328F /* MenuTableViewCell.swift */; };
 		CD86298F1F46BEC900DB328F /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD8629841F46BEC900DB328F /* Lato-Black.ttf */; };
 		CD8629901F46BEC900DB328F /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD8629851F46BEC900DB328F /* Lato-BlackItalic.ttf */; };
@@ -78,6 +79,7 @@
 		CD58B0F81ED8A08900C6F02C /* preparing4.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = preparing4.gif; sourceTree = "<group>"; };
 		CD58B1001ED8A83400C6F02C /* preparing5.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = preparing5.gif; sourceTree = "<group>"; };
 		CD5B27FE1F453E2D005CA2A5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CD7F90101F4CD4E000B7CA9C /* RCValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RCValues.swift; sourceTree = "<group>"; };
 		CD86294A1F467B9700DB328F /* MenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		CD8629841F46BEC900DB328F /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
 		CD8629851F46BEC900DB328F /* Lato-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-BlackItalic.ttf"; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 		CD9E14EA1E130C7E000E21C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CD9E14ED1E130C7E000E21C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CD9E14EF1E130C7E000E21C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CDA5B4A31F4B9E5900662D5B /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		CDBFCDD21F491B7D0001B96B /* OptionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionCollectionViewCell.swift; sourceTree = "<group>"; };
 		CDC1A0D91E177B49009C2538 /* Orders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Orders.swift; sourceTree = "<group>"; };
 		CDC748D01ED4FF3700370350 /* YaleGrill.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YaleGrill.entitlements; sourceTree = "<group>"; };
@@ -124,6 +127,7 @@
 		61EEF952E70F989ACF04CCDE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CDA5B4A31F4B9E5900662D5B /* AdSupport.framework */,
 				CDF25A131E16E9CC00818379 /* libz.tbd */,
 				CDF25A111E16E9C100818379 /* libsqlite3.tbd */,
 				AD8F8663E5EB79F5A5AD6BB7 /* Pods_Yale_Grill.framework */,
@@ -197,6 +201,16 @@
 			name = "TableView Cells";
 			sourceTree = "<group>";
 		};
+		CD7F90121F4CD4F100B7CA9C /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				CD86299C1F47B71100DB328F /* MenuItem.swift */,
+				CDC1A0D91E177B49009C2538 /* Orders.swift */,
+				CD7F90101F4CD4E000B7CA9C /* RCValues.swift */,
+			);
+			name = Objects;
+			sourceTree = "<group>";
+		};
 		CD8629831F46BEC900DB328F /* Lato */ = {
 			isa = PBXGroup;
 			children = (
@@ -239,12 +253,11 @@
 				CDC748D01ED4FF3700370350 /* YaleGrill.entitlements */,
 				CD9E14E71E130C7E000E21C0 /* Main.storyboard */,
 				CD9E14EC1E130C7E000E21C0 /* LaunchScreen.storyboard */,
-				CD86299C1F47B71100DB328F /* MenuItem.swift */,
-				CDC1A0D91E177B49009C2538 /* Orders.swift */,
 				CD9E14E31E130C7E000E21C0 /* AppDelegate.swift */,
 				CD58B0EC1ED899FD00C6F02C /* View Controllers */,
 				CDBFCDD11F48A2100001B96B /* TableView Controllers */,
 				CD58B0ED1ED89BA400C6F02C /* TableView Cells */,
+				CD7F90121F4CD4F100B7CA9C /* Objects */,
 				CD58B0EA1ED8998A00C6F02C /* App Files */,
 				CD179F0D1E15F74C00496D5F /* Extensions */,
 			);
@@ -427,6 +440,7 @@
 				CD3EEFB61ECB971C00A86A52 /* NSLayoutConstraintExtension.swift in Sources */,
 				CDE5C00F1E1F0F4900226D71 /* Constants.swift in Sources */,
 				CD86299D1F47B71100DB328F /* MenuItem.swift in Sources */,
+				CD7F90111F4CD4E000B7CA9C /* RCValues.swift in Sources */,
 				CD1A13DE1E1E1356003AFBCE /* UIImageExtension.swift in Sources */,
 				CDBFCDD31F491B7D0001B96B /* OptionCollectionViewCell.swift in Sources */,
 			);
