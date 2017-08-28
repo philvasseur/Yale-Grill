@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Firebase
+import GoogleSignIn
 
 class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
     
@@ -26,10 +27,13 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
     
     // MARK: - Actions
     @IBAction func GrillButtonPressed(_ sender: UIBarButtonItem) {
-        if(!grillIsOn){
+        grillIsOn = !grillIsOn
+        if(grillIsOn) {
             grillSwitch.setValue(true)
-        }else if(grillIsOn){
+            GrillToggleButton.title = Constants.turnGrillOffText
+        }else if(!grillIsOn) {
             grillSwitch.setValue(false)
+            GrillToggleButton.title = Constants.turnGrillOnText
         }
     }
     
