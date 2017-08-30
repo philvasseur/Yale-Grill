@@ -16,6 +16,9 @@ PODS:
   - Firebase/RemoteConfig (4.0.4):
     - Firebase/Core
     - FirebaseRemoteConfig (= 2.0.1)
+  - Firebase/Storage (4.0.4):
+    - Firebase/Core
+    - FirebaseStorage (= 2.0.0)
   - FirebaseAnalytics (4.0.2):
     - FirebaseCore (~> 4.0)
     - FirebaseInstanceID (~> 2.0)
@@ -42,6 +45,10 @@ PODS:
     - FirebaseInstanceID (~> 2.0)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
     - Protobuf (~> 3.1)
+  - FirebaseStorage (2.0.0):
+    - FirebaseAnalytics (~> 4.0)
+    - FirebaseCore (~> 4.0)
+    - GTMSessionFetcher/Core (~> 1.1)
   - Google/Core (2.0.4):
     - GoogleInterchangeUtilities (~> 1.0)
     - GoogleNetworkingUtilities (~> 1.0)
@@ -97,6 +104,7 @@ DEPENDENCIES:
   - Firebase/Database (~> 4.0.0)
   - Firebase/Messaging (~> 4.0.0)
   - Firebase/RemoteConfig (~> 4.0.0)
+  - Firebase/Storage (~> 4.0.0)
   - Google/SignIn
   - NVActivityIndicatorView
   - SCLAlertView
@@ -110,6 +118,7 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: 0500e3cb54a1a4e01a8cffcc09323b8bb8fc7e1e
   FirebaseMessaging: 227406c05b0dc9290702d2e9f18ab5528f0c2cf2
   FirebaseRemoteConfig: 328244399f64226cfdfa32efee596bb010ef5665
+  FirebaseStorage: 8110a1ed2034c8fbfd83890d2acc9cdbbd99afec
   Google: d536877ec602555b755cc28ce6fed104825c693c
   GoogleAppUtilities: a8a552aa74f6597f805e45b5a3962766c3134973
   GoogleAuthUtilities: ccad2e0a9284699973ff57c0dd24c3893657fda4
@@ -125,6 +134,6 @@ SPEC CHECKSUMS:
   Protobuf: 03eef2ee0b674770735cf79d9c4d3659cf6908e8
   SCLAlertView: 8a14ffc40590c619e183eed2298b854385f30be1
 
-PODFILE CHECKSUM: 792684744e9ab455d2dad97df6c67581b87da316
+PODFILE CHECKSUM: 2212c83a746145081691b24215551b76a575c8da
 
 COCOAPODS: 1.2.0

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import Firebase
-import GoogleSignIn
+import AVFoundation
 
 class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
     
@@ -103,9 +103,10 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
                 
         grillName = Constants.ActiveGrills.filter({ (grill: (grillName: String, grillEmail: String)) -> Bool in
             return grill.grillEmail.lowercased()  == GIDSignIn.sharedInstance().currentUser.profile.email.lowercased()
-        }).first?.key
+        }).first?.key ?? "Grill Name"
+        self.title = "Orders - \(grillName!)"
         
-        
+        Database.database().reference().child(Constants.grills).child(grillName).child("PushToken").setValue(Messaging.messaging().fcmToken)
         grillSwitch = Database.database().reference().child(Constants.grills).child(grillName).child(Constants.grillStatus)
         grillSwitch.observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
             let grillStatus = snapshot.value as? Bool ?? false
@@ -117,12 +118,9 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
                 self.GrillToggleButton.title = Constants.turnGrillOnText
             }
         })
-        
-        
         let ordersRef = Database.database().reference().child(Constants.grills).child(grillName).child(Constants.orders)
         ordersRef.queryOrderedByKey().observe(DataEventType.childAdded, with: { (snapshot) in
             Database.database().reference().child(Constants.orders).child(snapshot.key).observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
-                
                 let newJson = snapshot.value as! NSDictionary
                 let order = Orders(orderID: snapshot.key, json: newJson as! [String : AnyObject])
                 self.allActiveOrders.append(order)

@@ -26,5 +26,25 @@ class MenuItem : NSObject {
         options = _options
     }
     
+    //Returns an Orders object from a firebase JSON
+    convenience init(json : [String : AnyObject]){
+        let title = json["Title"] as! String
+        let info = json["Info"] as! String
+        let options = json["Options"] as? [String] ?? []
+        let quantities = json["Quantities"] as? [String] ?? []
+        let imageName = json["ImageName"] as! String
+        self.init(_title: title,_info: info,_image: UIImage(), _quantities: quantities,_options: options)
+        Storage.storage().reference(withPath: "menu/\(imageName).jpg").getData(maxSize: 2097152) { data, error in
+            if let error = error {
+                print("Unable to download file for menu item: \(title). ERROR: \(error)")
+                print("Will be set to default image")
+            } else {
+                // Data for user image is returned
+                self.image = UIImage(data: data!)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "menuImageLoaded"), object: nil, userInfo: ["item": self])
+            }
+        }
+    }
+    
 }
 

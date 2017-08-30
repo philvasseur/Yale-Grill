@@ -15,6 +15,7 @@ exports.grillOrderChange = functions.database.ref('/Grills/{grillId}/Orders/{ord
 		//If it isn't 2, but is 0 then we know the order was just placed and should increment the orderNumCount
 		if (event.data.val().orderStatus == 0) {
 			var countRef = event.data.ref.parent.parent.child('OrderNumCount');
+			
 			//Uses transactions in the case of multiple orders placed at the same time.
 			var count;
 		    countRef.transaction(function(current) { //Transaction sets orderNumCount
@@ -28,7 +29,26 @@ exports.grillOrderChange = functions.database.ref('/Grills/{grillId}/Orders/{ord
 				console.log(orderIDForLog + ': Order Created - Setting OrderNum to: ' + count);
 				//Sets the orderNum in the actual order once the orderNum counter is sucessfully incremented
 				admin.database().ref('/Orders/'+event.params.orderId+'/orderNum').set(count);
-			});
+
+				//Sends notification to cook that a new order was placed
+				let payload = {
+			        notification: {
+			            body: 'New Order Placed - #'+count,
+			            sound: 'Glass.aiff',
+			        }
+		    	};
+		    	event.data.ref.parent.parent.child('PushToken').once('value', (snapshot) => {
+		    		let token = snapshot.val();
+				    console.log(orderIDForLog + ': New Order Placed - Notifying token: ' + token);
+				    return admin.messaging().sendToDevice([token], payload).then(response => {
+				        //check if there was an error.
+				        const error = response.results[0].error;
+				        if (error) {
+				        	console.error(orderIDForLog + ': Failure sending notification to', token, error);
+				        }
+					});
+				});
+			});	    	
 		} else {
   			console.log(orderIDForLog + ': OrderStatus set to preparing - No Action Taken');
   		}

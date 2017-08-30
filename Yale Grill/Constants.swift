@@ -41,6 +41,7 @@ class Constants {
     static var READYTIMER : Double = 8 //minutes left ready till user is given a strike
     static var strikeBanLimit = 5 //strikes until user gets a ban
     static var banLength = 10 //day long ban length
+    static var orderLimit = 3 //day long ban length
     //defaults end
     
     static let orders = "Orders"
@@ -64,23 +65,7 @@ class Constants {
     static let preparingTexts = ["Preparing...","Preparing..","Preparing.","Preparing"]
     static let gifArray = ["preparing1","preparing2","preparing3","preparing4","preparing5"]
     
-    static var menuItems = [MenuItem(_title: "The Yale Burger",
-                                     _info: "A blend of finely chopped roasted mushrooms and ground beef. Smashed on the grill for maximum char and then served with a custom sauce on a brioche bun.",
-                                     _image: UIImage(named: "the-yale-burger")!,
-                                     _quantities: ["Single Burger","Double Burger"],
-                                     _options: ["Bun","Cheese","Sauce","Lettuce","Tomato"]),
-                            
-                            MenuItem(_title: "Veggie Burger",
-                                     _info: "A vegan, plant based burger served with all the juicy, meat deliciousness of a traditional burger. Served on a locally crafted bun with lettuce, tomato, and a custom sauce.",
-                                     _image: UIImage(named: "the-beyond-burger")!,
-                                     _quantities: ["Single Burger","Double Burger"],
-                                     _options: ["Bun","Cheese","Sauce","Lettuce","Tomato"]),
-                            
-                            MenuItem(_title: "Grilled Chicken",
-                                     _info: "Boneless, skinless chicken breast which is seared on the grill to perfection.",
-                                     _image: UIImage(named: "grilled-chicken")!,
-                                     _quantities: ["One Piece of Chicken","Two Pieces of Chicken","Three Pieces of Chicken","Four Pieces of Chicken"])
-                            ]
+    static var menuItems: [MenuItem] = []
     
     //ID Constants
     static let SignInSegueID = "SignInSegue"

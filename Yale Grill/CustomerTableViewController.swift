@@ -45,8 +45,8 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
             if (!(snapshot.value as? Bool ?? false)) { //Only goes through orders if the grill is on
                 Constants.createAlert(title: "The Grill Is Off!", message: "Please try again later during Dining Hall hours. If you think this is an error, contact your respective dining hall staff.",
                                       style: .wait)
-            } else if(Constants.currentOrders.count > 2){
-                Constants.createAlert(title: "Order Limit Reached", message: "You can't place more than 3 orders! Please wait for your current orders to be finished!",
+            } else if(Constants.currentOrders.count >= Constants.orderLimit){
+                Constants.createAlert(title: "Order Limit Reached", message: "You can't place more than \(Constants.orderLimit) orders! Please wait for your current orders to be finished!",
                                       style: .wait)
             } else {
                 newOrder.insertIntoDatabase()
@@ -68,10 +68,10 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
     }
     
     func deleteOrder(orderId : String) {
-        let removedIndex = Constants.currentOrders.map{$0.orderID}.index(of: orderId)
-        let newIndexPath = IndexPath(row: removedIndex!, section: 0)
+        guard let removedIndex = (Constants.currentOrders.map{$0.orderID}.index(of: orderId)) else { return }
+        let newIndexPath = IndexPath(row: removedIndex, section: 0)
         //Removes it from the activeIDs and then removes it from the tableView
-        Constants.currentOrders.remove(at: removedIndex!)
+        Constants.currentOrders.remove(at: removedIndex)
         self.tableView.deleteRows(at: [newIndexPath], with: .automatic)
     }
     
@@ -102,6 +102,7 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
         }
         return 1
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -38,6 +38,7 @@ class CookTableViewCell: UITableViewCell{
             OrderStatusLabel.text = Constants.preparingTexts[3]
             OrderStatusButton.setTitle("Mark Ready", for: .normal)
             OrderStatusButton.backgroundColor = UIColor(hex: "#009900") //dark green
+            self.contentView.backgroundColor = UIColor.white
             
         }else if(orderStatus == status.Preparing){
             orderStatus = status.Ready
@@ -79,6 +80,7 @@ class CookTableViewCell: UITableViewCell{
                 self.OrderStatusLabel.text = "Order Placed"
                 self.OrderStatusButton.setTitle("Mark Preparing", for: .normal)
                 self.OrderStatusButton.backgroundColor = UIColor(hex: "#4C8BF6") //blue
+                self.contentView.backgroundColor = UIColor(hex: "#FFB19C")
             }else if(self.orderStatus == self.status.Preparing){
                 self.OrderStatusButton.backgroundColor = UIColor(hex: "#009900") //dark green
                 self.OrderStatusLabel.text = Constants.preparingTexts[3]

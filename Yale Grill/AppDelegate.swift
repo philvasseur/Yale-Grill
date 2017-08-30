@@ -52,8 +52,53 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ]
         UINavigationBar.appearance().titleTextAttributes = attrs
         UINavigationBar.appearance().tintColor = UIColor.white
+        
+        loadMenu()
+        loadDefaultValues()
+        fetchCloudValues()
                 
         return true
+    }
+    
+    func loadDefaultValues() {
+        let remoteConfigSettings = RemoteConfigSettings(developerModeEnabled: true)
+        RemoteConfig.remoteConfig().configSettings = remoteConfigSettings!
+        RemoteConfig.remoteConfig().setDefaults([
+            "READYTIMER" : 8 as NSObject,
+            "strikeBanLimit" : 5 as NSObject,
+            "banLength" : 10 as NSObject,
+            "orderLimit" : 3 as NSObject])
+    }
+    
+    func fetchCloudValues() {
+        var expirationDuration = 3600
+        if RemoteConfig.remoteConfig().configSettings.isDeveloperModeEnabled {
+            expirationDuration = 0
+        }
+        
+        RemoteConfig.remoteConfig().fetch(withExpirationDuration: TimeInterval(expirationDuration)) { (status, error) -> Void in
+            if status == .success {
+                print("Config fetched!")
+                RemoteConfig.remoteConfig().activateFetched()
+            } else {
+                print("Config not fetched")
+                print("Error \(error!.localizedDescription)")
+            }
+            Constants.READYTIMER = Double(RemoteConfig.remoteConfig().configValue(forKey: "READYTIMER").numberValue!)
+            Constants.strikeBanLimit = Int(RemoteConfig.remoteConfig().configValue(forKey: "strikeBanLimit").numberValue!)
+            Constants.banLength = Int(RemoteConfig.remoteConfig().configValue(forKey: "banLength").numberValue!)
+            Constants.orderLimit = Int(RemoteConfig.remoteConfig().configValue(forKey: "orderLimit").numberValue!)
+        }
+    }
+    
+    func loadMenu() {
+        Constants.menuItems = []
+        Database.database().reference().child("Menu").observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+            let json = snapshot.value as? [Any] ?? []
+            for menuItemjson in json {
+                Constants.menuItems.append(MenuItem(json: menuItemjson as? [String : AnyObject] ?? [:]))
+            }
+        })
     }
     
     

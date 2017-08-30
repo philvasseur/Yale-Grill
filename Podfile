@@ -12,6 +12,7 @@ target 'Yale Grill' do
   pod 'Firebase/Database', '~> 4.0.0'
   pod 'Firebase/Auth', '~> 4.0.0'
   pod 'Firebase/Messaging', '~> 4.0.0'
+  pod 'Firebase/Storage', '~> 4.0.0'
   pod 'NVActivityIndicatorView'
   pod 'SCLAlertView'
 end
