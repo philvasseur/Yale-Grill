@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class MenuItemViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
@@ -49,6 +50,14 @@ class MenuItemViewController: UIViewController, UICollectionViewDelegate, UIColl
         guard (sender as? UIButton) != nil else { return }
         options = options?.count == 0 ? nil : options
         placedOrder = Orders(_userID: GIDSignIn.sharedInstance().currentUser.userID!, _name: GIDSignIn.sharedInstance().currentUser.profile.name!, _foodServing: quantityLabel.text!, _options: options, _grill: Constants.selectedDiningHall)
+        var params = [
+            "food": self.menuItem.title as NSObject,
+            "quantity": quantityLabel.text! as NSObject
+        ]
+        for option in options ?? [:] {
+            params[option.key] = option.value as NSObject
+        }
+        Analytics.logEvent("orderPlaced", parameters: params)
     }
 
     @IBAction func quantityChanged(_ sender: UIStepper) {

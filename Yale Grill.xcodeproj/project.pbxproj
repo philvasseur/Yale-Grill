@@ -44,6 +44,7 @@
 		CD9E14EE1E130C7E000E21C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD9E14EC1E130C7E000E21C0 /* LaunchScreen.storyboard */; };
 		CDBFCDD31F491B7D0001B96B /* OptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBFCDD21F491B7D0001B96B /* OptionCollectionViewCell.swift */; };
 		CDC1A0DA1E177B49009C2538 /* Orders.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC1A0D91E177B49009C2538 /* Orders.swift */; };
+		CDDF9FFE1F567FCF001C1B16 /* yale-grill-firebase-crashreporting-z4rba-02de9e48bd.json in Resources */ = {isa = PBXBuildFile; fileRef = CDDF9FFD1F567FCF001C1B16 /* yale-grill-firebase-crashreporting-z4rba-02de9e48bd.json */; };
 		CDE5C00D1E1EEA5A00226D71 /* CookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE5C00C1E1EEA5A00226D71 /* CookTableViewCell.swift */; };
 		CDE5C00F1E1F0F4900226D71 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE5C00E1E1F0F4900226D71 /* Constants.swift */; };
 /* End PBXBuildFile section */
@@ -106,6 +107,7 @@
 		CDC1A0D91E177B49009C2538 /* Orders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Orders.swift; sourceTree = "<group>"; };
 		CDC748D01ED4FF3700370350 /* YaleGrill.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YaleGrill.entitlements; sourceTree = "<group>"; };
 		CDD92A2B1E130E5B005C091B /* YaleGrill-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YaleGrill-Bridging-Header.h"; sourceTree = "<group>"; };
+		CDDF9FFD1F567FCF001C1B16 /* yale-grill-firebase-crashreporting-z4rba-02de9e48bd.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "yale-grill-firebase-crashreporting-z4rba-02de9e48bd.json"; sourceTree = "<group>"; };
 		CDE5C00C1E1EEA5A00226D71 /* CookTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CookTableViewCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CDE5C00E1E1F0F4900226D71 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CDF25A111E16E9C100818379 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
@@ -175,6 +177,7 @@
 				CD8629831F46BEC900DB328F /* Lato */,
 				CDE5C00E1E1F0F4900226D71 /* Constants.swift */,
 				CD9E14EF1E130C7E000E21C0 /* Info.plist */,
+				CDDF9FFD1F567FCF001C1B16 /* yale-grill-firebase-crashreporting-z4rba-02de9e48bd.json */,
 				CD5B27FE1F453E2D005CA2A5 /* GoogleService-Info.plist */,
 				CD9E14EA1E130C7E000E21C0 /* Assets.xcassets */,
 				CD179F0C1E15F71400496D5F /* Gifs */,
@@ -288,6 +291,7 @@
 				CDF25A061E16E7EF00818379 /* Embed Frameworks */,
 				BAA0314AD227FE7D2A9987E7 /* [CP] Embed Pods Frameworks */,
 				FE6A3F43E542E967D535F7FF /* [CP] Copy Pods Resources */,
+				CDDF9FFC1F567F1B001C1B16 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -347,6 +351,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDDF9FFE1F567FCF001C1B16 /* yale-grill-firebase-crashreporting-z4rba-02de9e48bd.json in Resources */,
 				CD8629991F46BEC900DB328F /* OFL.txt in Resources */,
 				CD58B0FC1ED8A08900C6F02C /* preparing4.gif in Resources */,
 				CD8629951F46BEC900DB328F /* Lato-Italic.ttf in Resources */,
@@ -404,6 +409,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Yale Grill/Pods-Yale Grill-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		CDDF9FFC1F567F1B001C1B16 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Replace this with the GOOGLE_APP_ID from your GoogleService-Info.plist file\nGOOGLE_APP_ID=1:122523778140:ios:3e868f7e41a69228\n# Replace the /Path/To/ServiceAccount.json with the path to the key you just downloaded\n\"${PODS_ROOT}\"/FirebaseCrash/upload-sym \"${SRCROOT}\"/Yale\\ Grill/yale-grill-firebase-crashreporting-z4rba-02de9e48bd.json\n";
 		};
 		FE6A3F43E542E967D535F7FF /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
