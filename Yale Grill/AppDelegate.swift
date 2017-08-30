@@ -61,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func loadDefaultValues() {
-        let remoteConfigSettings = RemoteConfigSettings(developerModeEnabled: true)
+        let remoteConfigSettings = RemoteConfigSettings(developerModeEnabled: false)
         RemoteConfig.remoteConfig().configSettings = remoteConfigSettings!
         RemoteConfig.remoteConfig().setDefaults([
             "READYTIMER" : 8 as NSObject,

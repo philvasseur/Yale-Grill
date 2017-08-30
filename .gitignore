@@ -1,3 +1,4 @@
 *.plist
 Pods/
 *.xcworkspace
+*.log

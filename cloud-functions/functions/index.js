@@ -61,7 +61,7 @@ exports.grillOrderChange = functions.database.ref('/Grills/{grillId}/Orders/{ord
 	    let payload = {
 	        notification: {
 	            title: 'Your Order is Ready!',
-	            body: "Come pick it up at " + event.params.grillId +".",
+	            body: "Please come pick it up at " + event.params.grillId +".",
 	            sound: 'default',
 	            badge: '1'
 	        }
