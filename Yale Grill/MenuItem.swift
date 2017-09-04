@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Firebase
+import FirebaseStorage
 
 class MenuItem : NSObject {
     var title: String!
@@ -34,16 +35,20 @@ class MenuItem : NSObject {
         let quantities = json["Quantities"] as? [String] ?? []
         let imageName = json["ImageName"] as! String
         self.init(_title: title,_info: info,_image: UIImage(), _quantities: quantities,_options: options)
-        Storage.storage().reference(withPath: "menu/\(imageName).jpg").getData(maxSize: 2097152) { data, error in
-            if let error = error {
-                print("Unable to download file for menu item: \(title). ERROR: \(error)")
-                print("Will be set to default image")
-            } else {
-                // Data for user image is returned
-                self.image = UIImage(data: data!)
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "menuImageLoaded"), object: nil, userInfo: ["item": self])
+        guard let imageData = UserDefaults.standard.data(forKey: imageName) else {
+            Storage.storage().reference(withPath: "menu/\(imageName).jpg").getData(maxSize: 2097152) { data, error in
+                if let error = error {
+                    print("Unable to download file for menu item: \(title). ERROR: \(error)")
+                    print("Will be set to default image")
+                } else {
+                    // Data for user image is returned
+                    self.image = UIImage(data: data!)
+                    UserDefaults.standard.set(data, forKey: imageName)
+                }
             }
+            return
         }
+        self.image = UIImage(data: imageData)
     }
     
 }

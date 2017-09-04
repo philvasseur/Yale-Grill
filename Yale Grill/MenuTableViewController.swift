@@ -18,26 +18,6 @@ class MenuTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.backgroundColor = UIColor(hex: "#fafafa")
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(setCellPhoto(_:)), name: NSNotification.Name(rawValue: "menuImageLoaded"), object: nil)
-    }
-    
-    @objc private func setCellPhoto(_ notification: Notification) -> Void {
-        // Get the key of the book whose loaded photo triggered this notification
-        guard let userInfo = notification.userInfo, let menuItem = userInfo["item"] as? MenuItem else {
-            fatalError("Notification does not have an associated menuItem!")}
-        // Get the row and cell of that book
-        guard let cellRow = Constants.menuItems.index(of: menuItem) else {
-            print("cannot find menu item to set photo of")
-            return
-        }
-        guard let menuCell = self.tableView.cellForRow(at: IndexPath(row: cellRow, section: 0)) as? MenuTableViewCell else {
-            return
-        }
-        
-       
-        // Display photo (with animation)
-        menuCell.menuItemImage.image = menuItem.image
     }
     
     // MARK: - Table view data source

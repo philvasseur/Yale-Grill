@@ -17,6 +17,7 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
     var grillStatusHandle : UInt!
     var userOrdersRef : DatabaseReference!
     var GID = GIDSignIn.sharedInstance()!
+    var grillIsOn : Bool!
     
     // MARK: - Actions
     
@@ -40,21 +41,10 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
     @IBAction func unwindToOrders(_ sender: UIStoryboardSegue) {
         guard let placedOrderController = sender.source as? MenuItemViewController else { return }
         guard let newOrder = placedOrderController.placedOrder else { return }
-        let grillStatusRef = Database.database().reference().child(Constants.grills).child(Constants.selectedDiningHall).child(Constants.grillStatus)
-        grillStatusRef.observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
-            if (!(snapshot.value as? Bool ?? false)) { //Only goes through orders if the grill is on
-                Constants.createAlert(title: "The Grill Is Off!", message: "Please try again later during Dining Hall hours. If you think this is an error, contact your respective dining hall staff.",
-                                      style: .wait)
-            } else if(Constants.currentOrders.count >= Constants.orderLimit){
-                Constants.createAlert(title: "Order Limit Reached", message: "You can't place more than \(Constants.orderLimit) orders! Please wait for your current orders to be finished!",
-                                      style: .wait)
-            } else {
-                newOrder.insertIntoDatabase()
-                Constants.currentOrders.append(newOrder)
-                let indexPath = IndexPath(row: Constants.currentOrders.count - 1, section: 0)
-                self.tableView.insertRows(at: [indexPath], with: .automatic)
-            }
-        })
+        newOrder.insertIntoDatabase()
+        Constants.currentOrders.append(newOrder)
+        let indexPath = IndexPath(row: Constants.currentOrders.count - 1, section: 0)
+        self.tableView.insertRows(at: [indexPath], with: .automatic)
     }
     
     
@@ -103,6 +93,24 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
         return 1
     }
     
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if(identifier != "menuSegue") {
+            return true
+        }
+        if (!grillIsOn) { //Only goes through orders if the grill is on
+            Constants.createAlert(title: "The Grill Is Off!", message: "Please try again later during Dining Hall hours. If you think this is an error, contact your respective dining hall staff.",
+                                  style: .wait)
+            return false
+        } else if(Constants.currentOrders.count >= Constants.orderLimit){
+            Constants.createAlert(title: "Order Limit Reached", message: "You can't place more than \(Constants.orderLimit) orders! Please wait for your current orders to be finished!",
+                style: .wait)
+            return false
+        } else {
+            return true
+        }
+
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -125,5 +133,10 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
         self.tableView.backgroundView?.addSubview(noOrdersLabel)
         NSLayoutConstraint.useAndActivate(constraints:
             [noOrdersLabel.centerXAnchor.constraint(equalTo: (tableView.backgroundView?.centerXAnchor)!), noOrdersLabel.centerYAnchor.constraint(equalTo: (tableView.backgroundView?.centerYAnchor)!)])
+        
+        let grillStatusRef = Database.database().reference().child(Constants.grills).child(Constants.selectedDiningHall).child(Constants.grillStatus)
+        grillStatusRef.observe(DataEventType.value, with: { (snapshot) in
+            self.grillIsOn = snapshot.value as? Bool ?? false
+        })
     }
 }

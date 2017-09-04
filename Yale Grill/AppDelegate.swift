@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseConfiguration.shared.setLoggerLevel(.min)
         FirebaseApp.configure()
+        Database.database().isPersistenceEnabled = true
         
         var configureError: NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)

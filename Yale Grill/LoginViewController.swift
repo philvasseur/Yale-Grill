@@ -83,27 +83,34 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         
     }
     
-    //Checks if a dining hall is selected, if not grabs previously logged in dining hall from database
+    //Checks if a dining hall is selected, if not grabs previously logged in dining hall from local/database
     func getDiningHall(completion : @escaping (Bool) -> ()) {
         let dHallRef = Database.database().reference().child(Constants.users).child(GIDSignIn.sharedInstance().currentUser.userID!).child(Constants.prevDining)
         if(Constants.ActiveGrills[diningHallText.text!] != nil) {
             Constants.selectedDiningHall = diningHallText.text
             dHallRef.setValue(Constants.selectedDiningHall) //Updates last dining hall logged into for user
+            UserDefaults.standard.set(Constants.selectedDiningHall, forKey: Constants.prevDining)
             completion(true)
             return
         }
         
-        dHallRef.observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
-            let pastDHall = snapshot.value as? String ?? "Select Dining Hall"
-            if (Constants.ActiveGrills[pastDHall] != nil)  {
-                Constants.selectedDiningHall = pastDHall
-                completion(true)
-            } else {
-                dHallRef.removeValue()
-                //There is no active dining hall selected, cannot login
-                completion(false)
-            }
-        })
+        guard let diningHall = UserDefaults.standard.string(forKey: Constants.prevDining) else {
+            dHallRef.observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+                let pastDHall = snapshot.value as? String ?? "Select Dining Hall"
+                if (Constants.ActiveGrills[pastDHall] != nil)  {
+                    Constants.selectedDiningHall = pastDHall
+                    completion(true)
+                } else {
+                    dHallRef.removeValue()
+                    UserDefaults.standard.removeObject(forKey: Constants.prevDining)
+                    //There is no active dining hall selected, cannot login
+                    completion(false)
+                }
+            })
+            return
+        }
+        Constants.selectedDiningHall = diningHall
+        completion(true)
     }
     
     //Checks if the emailed used to login is a valid Yale/Cook email
@@ -155,6 +162,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
                 self.performSegue(withIdentifier: Constants.SignInSegueID, sender: nil) //Segues to OrderScreen
             });
         })
+        user.keepSynced(true)
         
     }
     
@@ -189,13 +197,14 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         //Loads the cook grillIDs and corresponding emails from database
         let grillRef = Database.database().reference().child(Constants.grills).child("ActiveGrills")
         grillRef.observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
-            Constants.ActiveGrills = snapshot.value as! [String : String]
+            Constants.ActiveGrills = snapshot.value as? [String : String] ?? [:]
             for(grillName,_) in Constants.ActiveGrills {
                 Constants.PickerData.append(grillName)
             }
             completion();
             
         })
+        grillRef.keepSynced(true)
     }
     
     //Starts the animation for NORMAL signin
