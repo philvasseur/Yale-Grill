@@ -19,7 +19,6 @@
 		CD58B0F21ED89CA800C6F02C /* preparing2.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD58B0EE1ED89CA800C6F02C /* preparing2.gif */; };
 		CD58B0F31ED89CA800C6F02C /* preparing1.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD58B0EF1ED89CA800C6F02C /* preparing1.gif */; };
 		CD58B0F41ED89CA800C6F02C /* preparing3.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD58B0F01ED89CA800C6F02C /* preparing3.gif */; };
-		CD58B0F51ED89CA800C6F02C /* finished.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD58B0F11ED89CA800C6F02C /* finished.gif */; };
 		CD58B0FC1ED8A08900C6F02C /* preparing4.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD58B0F81ED8A08900C6F02C /* preparing4.gif */; };
 		CD58B1011ED8A83400C6F02C /* preparing5.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD58B1001ED8A83400C6F02C /* preparing5.gif */; };
 		CD5B27FF1F453E2D005CA2A5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD5B27FE1F453E2D005CA2A5 /* GoogleService-Info.plist */; };
@@ -77,7 +76,6 @@
 		CD58B0EE1ED89CA800C6F02C /* preparing2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = preparing2.gif; sourceTree = "<group>"; };
 		CD58B0EF1ED89CA800C6F02C /* preparing1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = preparing1.gif; sourceTree = "<group>"; };
 		CD58B0F01ED89CA800C6F02C /* preparing3.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = preparing3.gif; sourceTree = "<group>"; };
-		CD58B0F11ED89CA800C6F02C /* finished.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = finished.gif; sourceTree = "<group>"; };
 		CD58B0F81ED8A08900C6F02C /* preparing4.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = preparing4.gif; sourceTree = "<group>"; };
 		CD58B1001ED8A83400C6F02C /* preparing5.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = preparing5.gif; sourceTree = "<group>"; };
 		CD5B27FE1F453E2D005CA2A5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -154,7 +152,6 @@
 				CD58B0F01ED89CA800C6F02C /* preparing3.gif */,
 				CD58B0EE1ED89CA800C6F02C /* preparing2.gif */,
 				CD58B0EF1ED89CA800C6F02C /* preparing1.gif */,
-				CD58B0F11ED89CA800C6F02C /* finished.gif */,
 			);
 			name = Gifs;
 			sourceTree = "<group>";
@@ -361,7 +358,6 @@
 				CD58B1011ED8A83400C6F02C /* preparing5.gif in Resources */,
 				CD58B0F31ED89CA800C6F02C /* preparing1.gif in Resources */,
 				CD8629981F46BEC900DB328F /* Lato-Regular.ttf in Resources */,
-				CD58B0F51ED89CA800C6F02C /* finished.gif in Resources */,
 				CD8629921F46BEC900DB328F /* Lato-BoldItalic.ttf in Resources */,
 				CD8629911F46BEC900DB328F /* Lato-Bold.ttf in Resources */,
 				CD9E14EB1E130C7E000E21C0 /* Assets.xcassets in Resources */,

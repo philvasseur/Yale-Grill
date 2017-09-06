@@ -8,6 +8,9 @@ admin.initializeApp(functions.config().firebase);
 //Defines the grillOrderChange function to be called every time the path below is written to
 exports.grillOrderChange = functions.database.ref('/Grills/{grillId}/Orders/{orderId}').onWrite(event => {
 	var orderIDForLog = event.params.orderId.substring(19);
+	var options = {
+		priority: "high"
+	};
 	if (!event.data.exists()) { //Checks that order exists (onWrite is called by deletions)
 		console.log(orderIDForLog + ': No Data Exists (Order Deleted) - No Action Taken');
 
@@ -40,7 +43,7 @@ exports.grillOrderChange = functions.database.ref('/Grills/{grillId}/Orders/{ord
 		    	event.data.ref.parent.parent.child('PushToken').once('value', (snapshot) => {
 		    		let token = snapshot.val();
 				    console.log(orderIDForLog + ': New Order Placed - Notifying token: ' + token);
-				    return admin.messaging().sendToDevice([token], payload).then(response => {
+				    return admin.messaging().sendToDevice(token, payload,options).then(response => {
 				        //check if there was an error.
 				        const error = response.results[0].error;
 				        if (error) {
@@ -69,7 +72,7 @@ exports.grillOrderChange = functions.database.ref('/Grills/{grillId}/Orders/{ord
 
 	    let token = event.data.val().pushToken;
 	    console.log(orderIDForLog + ': OrderStatus set to ready - Notifying token: ' + token);
-	    return admin.messaging().sendToDevice([token], payload).then(response => {
+	    return admin.messaging().sendToDevice(token, payload,options).then(response => {
 	        //check if there was an error.
 	        const error = response.results[0].error;
 	        if (error) {
