@@ -98,7 +98,7 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
             return true
         }
         if (!grillIsOn) { //Only goes through orders if the grill is on
-            Constants.createAlert(title: "The Grill Is Off!", message: "Please try again later during Dining Hall hours. If you think this is an error, contact your respective dining hall staff.",
+            Constants.createAlert(title: "The Grill Is Off!", message: "Please try again later. If you think this is an error, contact your respective dining hall staff.",
                                   style: .wait)
             return false
         } else if(Constants.currentOrders.count >= Constants.orderLimit){
@@ -137,6 +137,7 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
         let grillStatusRef = Database.database().reference().child(Constants.grills).child(Constants.selectedDiningHall).child(Constants.grillStatus)
         grillStatusRef.observe(DataEventType.value, with: { (snapshot) in
             self.grillIsOn = snapshot.value as? Bool ?? false
+            self.title = " \(Constants.selectedDiningHall!) - \(self.grillIsOn! == true ? "On" : "Off")"
         })
     }
 }

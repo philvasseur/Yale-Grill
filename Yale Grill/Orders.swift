@@ -20,10 +20,9 @@ class Orders : NSObject {
     var orderNum: Int?
     var grill : String!
     
-    private struct DatabaseKeys {
+    public struct DatabaseKeys {
         static let name = "name"
         static let foodServing = "foodServing"
-        static let orderID = "orderID"
         static let userID = "userID"
         static let orderNum = "orderNum"
         static let grill = "grill"

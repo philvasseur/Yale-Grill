@@ -109,8 +109,16 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
             })
             return
         }
-        Constants.selectedDiningHall = diningHall
-        completion(true)
+        
+        if (Constants.ActiveGrills[diningHall] != nil)  {
+            Constants.selectedDiningHall = diningHall
+            completion(true)
+        } else {
+            dHallRef.removeValue()
+            UserDefaults.standard.removeObject(forKey: Constants.prevDining)
+            //There is no active dining hall selected, cannot login
+            completion(false)
+        }
     }
     
     //Checks if the emailed used to login is a valid Yale/Cook email

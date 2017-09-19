@@ -142,6 +142,8 @@ class CookTableViewCell: UITableViewCell{
                 //Removes the order from the grill's active orders once it is removed from the user's
                 if(error == nil) {
                     Database.database().reference().child(Constants.grills).child(self.grillName).child(Constants.orders).child(cOrderID).removeValue()
+                    Database.database().reference().child(Constants.orders).child(cOrderID).child(Orders.DatabaseKeys.name).removeValue()
+                    Database.database().reference().child(Constants.orders).child(cOrderID).child(Orders.DatabaseKeys.userID).removeValue()
                 }
             }
         

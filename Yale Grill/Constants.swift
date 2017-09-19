@@ -8,7 +8,6 @@
 
 import Foundation
 import CoreLocation
-import SCLAlertView
 
 class Constants {
     //Grill Constants
@@ -93,7 +92,7 @@ class Constants {
         case .edit:
             alert.showEdit(title, subTitle: message, closeButtonTitle: "Okay")
         case .wait:
-            alert.showWait(title, subTitle: message, closeButtonTitle: "Okay",colorStyle: 0x4C8BF6)
+            alert.showWait(title, subTitle: message, closeButtonTitle: "Okay",colorStyle: 0x3C7DEA)
         }
     }
     

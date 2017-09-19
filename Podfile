@@ -15,5 +15,5 @@ target 'Yale Grill' do
   pod 'Firebase/Storage', '~> 4.1.0'
   pod 'Firebase/Crash', '~> 4.1.0'
   pod 'NVActivityIndicatorView'
-  pod 'SCLAlertView'
+  #pod 'SCLAlertView'
 end

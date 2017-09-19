@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
+                
         FirebaseConfiguration.shared.setLoggerLevel(.min)
         FirebaseApp.configure()
         Database.database().isPersistenceEnabled = true
@@ -47,13 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerForRemoteNotifications()
         
         
-        UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Lato-Regular", size: 17.0)!], for: .normal)
-        let attrs = [
-            NSForegroundColorAttributeName: UIColor.white,
-            NSFontAttributeName: UIFont(name: "Lato-Bold", size: 18)!
-        ]
-        UINavigationBar.appearance().titleTextAttributes = attrs
-        UINavigationBar.appearance().tintColor = UIColor.white
+        
         
         loadMenu()
         loadDefaultValues()

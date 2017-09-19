@@ -36,11 +36,14 @@
 		CD8629991F46BEC900DB328F /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = CD86298E1F46BEC900DB328F /* OFL.txt */; };
 		CD86299B1F47B12B00DB328F /* MenuItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD86299A1F47B12B00DB328F /* MenuItemViewController.swift */; };
 		CD86299D1F47B71100DB328F /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD86299C1F47B71100DB328F /* MenuItem.swift */; };
+		CD95DEDC1F71B1AF00A46119 /* SCLAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD95DEDA1F71B1AF00A46119 /* SCLAlertView.swift */; };
+		CD95DEDD1F71B1AF00A46119 /* SCLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD95DEDB1F71B1AF00A46119 /* SCLExtensions.swift */; };
 		CD9E14E41E130C7E000E21C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9E14E31E130C7E000E21C0 /* AppDelegate.swift */; };
 		CD9E14E61E130C7E000E21C0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9E14E51E130C7E000E21C0 /* LoginViewController.swift */; };
 		CD9E14E91E130C7E000E21C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD9E14E71E130C7E000E21C0 /* Main.storyboard */; };
 		CD9E14EB1E130C7E000E21C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD9E14EA1E130C7E000E21C0 /* Assets.xcassets */; };
 		CD9E14EE1E130C7E000E21C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD9E14EC1E130C7E000E21C0 /* LaunchScreen.storyboard */; };
+		CDB822B01F719DD70067871C /* NavigationControllerDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB822AF1F719DD70067871C /* NavigationControllerDefault.swift */; };
 		CDBFCDD31F491B7D0001B96B /* OptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBFCDD21F491B7D0001B96B /* OptionCollectionViewCell.swift */; };
 		CDC1A0DA1E177B49009C2538 /* Orders.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC1A0D91E177B49009C2538 /* Orders.swift */; };
 		CDDF9FFE1F567FCF001C1B16 /* yale-grill-firebase-crashreporting-z4rba-02de9e48bd.json in Resources */ = {isa = PBXBuildFile; fileRef = CDDF9FFD1F567FCF001C1B16 /* yale-grill-firebase-crashreporting-z4rba-02de9e48bd.json */; };
@@ -93,6 +96,8 @@
 		CD86298E1F46BEC900DB328F /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
 		CD86299A1F47B12B00DB328F /* MenuItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItemViewController.swift; sourceTree = "<group>"; };
 		CD86299C1F47B71100DB328F /* MenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
+		CD95DEDA1F71B1AF00A46119 /* SCLAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCLAlertView.swift; sourceTree = "<group>"; };
+		CD95DEDB1F71B1AF00A46119 /* SCLExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCLExtensions.swift; sourceTree = "<group>"; };
 		CD9E14E01E130C7E000E21C0 /* Yale Grill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Yale Grill.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD9E14E31E130C7E000E21C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD9E14E51E130C7E000E21C0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -101,6 +106,7 @@
 		CD9E14ED1E130C7E000E21C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CD9E14EF1E130C7E000E21C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CDA5B4A31F4B9E5900662D5B /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		CDB822AF1F719DD70067871C /* NavigationControllerDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationControllerDefault.swift; sourceTree = "<group>"; };
 		CDBFCDD21F491B7D0001B96B /* OptionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionCollectionViewCell.swift; sourceTree = "<group>"; };
 		CDC1A0D91E177B49009C2538 /* Orders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Orders.swift; sourceTree = "<group>"; };
 		CDC748D01ED4FF3700370350 /* YaleGrill.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YaleGrill.entitlements; sourceTree = "<group>"; };
@@ -163,6 +169,8 @@
 				CD1A13DD1E1E1356003AFBCE /* UIImageExtension.swift */,
 				CD3EEFB51ECB971C00A86A52 /* NSLayoutConstraintExtension.swift */,
 				CD58B0E81ED88CB700C6F02C /* UIColorExtensions.swift */,
+				CD95DEDA1F71B1AF00A46119 /* SCLAlertView.swift */,
+				CD95DEDB1F71B1AF00A46119 /* SCLExtensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -187,6 +195,7 @@
 			children = (
 				CD9E14E51E130C7E000E21C0 /* LoginViewController.swift */,
 				CD86299A1F47B12B00DB328F /* MenuItemViewController.swift */,
+				CDB822AF1F719DD70067871C /* NavigationControllerDefault.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -442,8 +451,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD3EEFB81ECB977B00A86A52 /* CustomerTableViewCell.swift in Sources */,
+				CDB822B01F719DD70067871C /* NavigationControllerDefault.swift in Sources */,
 				CD9E14E61E130C7E000E21C0 /* LoginViewController.swift in Sources */,
 				CD86294B1F467B9700DB328F /* MenuTableViewCell.swift in Sources */,
+				CD95DEDC1F71B1AF00A46119 /* SCLAlertView.swift in Sources */,
 				CD0DA1411F467849000E36BF /* MenuTableViewController.swift in Sources */,
 				CD58B0E91ED88CB700C6F02C /* UIColorExtensions.swift in Sources */,
 				CDC1A0DA1E177B49009C2538 /* Orders.swift in Sources */,
@@ -453,6 +464,7 @@
 				CD3EEFB21ECB958E00A86A52 /* CustomerTableViewController.swift in Sources */,
 				CD9E14E41E130C7E000E21C0 /* AppDelegate.swift in Sources */,
 				CD3EEFB61ECB971C00A86A52 /* NSLayoutConstraintExtension.swift in Sources */,
+				CD95DEDD1F71B1AF00A46119 /* SCLExtensions.swift in Sources */,
 				CDE5C00F1E1F0F4900226D71 /* Constants.swift in Sources */,
 				CD86299D1F47B71100DB328F /* MenuItem.swift in Sources */,
 				CD1A13DE1E1E1356003AFBCE /* UIImageExtension.swift in Sources */,

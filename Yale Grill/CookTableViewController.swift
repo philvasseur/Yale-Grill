@@ -108,7 +108,7 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
         
         Database.database().reference().child(Constants.grills).child(grillName).child("PushToken").setValue(Messaging.messaging().fcmToken)
         grillSwitch = Database.database().reference().child(Constants.grills).child(grillName).child(Constants.grillStatus)
-        grillSwitch.observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+        grillSwitch.observe(DataEventType.value, with: { (snapshot) in
             let grillStatus = snapshot.value as? Bool ?? false
             if (grillStatus) {
                 self.grillIsOn = true
@@ -118,7 +118,6 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
                 self.GrillToggleButton.title = Constants.turnGrillOnText
             }
         })
-        grillSwitch.keepSynced(true)
         let ordersRef = Database.database().reference().child(Constants.grills).child(grillName).child(Constants.orders)
         ordersRef.queryOrderedByKey().observe(DataEventType.childAdded, with: { (snapshot) in
             Database.database().reference().child(Constants.orders).child(snapshot.key).observeSingleEvent(of: DataEventType.value, with: { (snapshot) in

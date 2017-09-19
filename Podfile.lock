@@ -109,7 +109,6 @@ PODS:
     - NVActivityIndicatorView/Presenter (= 3.7.0)
   - NVActivityIndicatorView/Presenter (3.7.0)
   - Protobuf (3.4.0)
-  - SCLAlertView (0.7.0)
 
 DEPENDENCIES:
   - Firebase (~> 4.1.0)
@@ -121,7 +120,6 @@ DEPENDENCIES:
   - Firebase/Storage (~> 4.1.0)
   - Google/SignIn
   - NVActivityIndicatorView
-  - SCLAlertView
 
 SPEC CHECKSUMS:
   Firebase: ebebf41db7f10e0c7668b6eaaa857fbe599aa478
@@ -148,8 +146,7 @@ SPEC CHECKSUMS:
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   NVActivityIndicatorView: d3738df7e2e476aca0ba6bf32a8c9fbcfc33d64b
   Protobuf: 03eef2ee0b674770735cf79d9c4d3659cf6908e8
-  SCLAlertView: 8a14ffc40590c619e183eed2298b854385f30be1
 
-PODFILE CHECKSUM: d656fc09c90eeae8aa11ead7fafebe4a3c7ee071
+PODFILE CHECKSUM: babe8f899b0981b50031aa0d947e3ed0672ffa7b
 
 COCOAPODS: 1.2.0
