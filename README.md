@@ -1,3 +1,8 @@
+<h3 align="center">
+  <img src="https://user-images.githubusercontent.com/10122678/31049124-6607de20-a5fa-11e7-8123-c09db1587898.png" />
+</h3>
+
+
 # Yale Grill
 
 Yale Grill is an iOS application that streamlines the grill ordering process at Yale Dining Halls.
