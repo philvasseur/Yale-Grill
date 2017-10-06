@@ -88,7 +88,7 @@ class Constants {
         case .success:
             alert.showSuccess(title, subTitle: message, closeButtonTitle: "Okay")
         case .info:
-            alert.showInfo(title, subTitle: message, closeButtonTitle: "Okay")
+            alert.showInfo(title, subTitle: message, closeButtonTitle: "Okay",colorStyle: 0x3C7DEA)
         case .edit:
             alert.showEdit(title, subTitle: message, closeButtonTitle: "Okay")
         case .wait:

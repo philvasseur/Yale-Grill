@@ -18,7 +18,7 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
     var grillStatusHandle : UInt!
     var userOrdersRef : DatabaseReference!
     var GID = GIDSignIn.sharedInstance()!
-    var grillIsOn : Bool!
+    var grillIsOn : Bool = false
     var menuView: BTNavigationDropdownMenu!
     
     // MARK: - Actions
@@ -107,7 +107,12 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
         if(identifier != "menuSegue") {
             return true
         }
-        if (!grillIsOn) { //Only goes through orders if the grill is on
+        if(Constants.selectedDiningHall == nil ||
+            (Constants.PickerData.index(of: Constants.selectedDiningHall) == nil)){
+            Constants.createAlert(title: "Select a Dining Hall", message: "Tap the title at the top to select a valid dining hall before placing an order.",
+                                  style: .notice)
+            return false
+        } else  if (!grillIsOn) { //Only goes through orders if the grill is on
             Constants.createAlert(title: "The Grill Is Off!", message: "Please try again later. If you think this is an error, contact your respective dining hall staff.",
                                   style: .wait)
             return false
@@ -121,11 +126,16 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
     }
     
     private func setDiningHall(dhall : String) {
-        Database.database().reference().child(Constants.grills).child(Constants.selectedDiningHall).child(Constants.grillStatus).removeAllObservers()
+        UserDefaults.standard.set(dhall, forKey: Constants.prevDining)
+        if(Constants.selectedDiningHall != nil) {
+            Database.database().reference().child(Constants.grills).child(Constants.selectedDiningHall).child(Constants.grillStatus).removeAllObservers()
+        }
         Constants.selectedDiningHall = dhall
         let grillStatusRef = Database.database().reference().child(Constants.grills).child(dhall).child(Constants.grillStatus)
         grillStatusRef.observe(DataEventType.value, with: { (snapshot) in
             self.grillIsOn = snapshot.value as? Bool ?? false
+            self.navigationItem.rightBarButtonItem?.tintColor =
+                self.grillIsOn == true ? .white : UIColor(hex: "#8DAAEA")
         })
     }
     
@@ -148,7 +158,7 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
         
         menuView = BTNavigationDropdownMenu(title: BTTitle.title("Select DHall"), items: Constants.PickerData)
         self.navigationItem.titleView = menuView
-        let index = Constants.PickerData.index(of: Constants.selectedDiningHall)
+        let index = Constants.PickerData.index(of: Constants.selectedDiningHall ?? "Default")
         if(index != nil) {
             menuView.setSelected(index: index!)
             setDiningHall(dhall: Constants.selectedDiningHall)

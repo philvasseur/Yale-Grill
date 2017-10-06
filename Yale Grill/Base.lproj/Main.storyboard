@@ -228,15 +228,6 @@
                                     <constraint firstAttribute="width" secondItem="3fh-YX-xub" secondAttribute="height" multiplier="297:230" id="DWx-lY-bAZ"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4r6-q8-vo8" userLabel="Disabled SignIn Color">
-                                <rect key="frame" x="79" y="311" width="217" height="40"/>
-                                <color key="backgroundColor" red="0.78041446208953857" green="0.78041684627532959" blue="0.7804221510887146" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="2"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VIN-Hj-NQE" userLabel="GSignIn Button" customClass="GIDSignInButton">
                                 <rect key="frame" x="75" y="307" width="225" height="48"/>
                                 <color key="backgroundColor" red="0.78222160532994922" green="0.78222160532994922" blue="0.78222160532994922" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -245,38 +236,11 @@
                                     <constraint firstAttribute="height" constant="48" id="vM4-RB-14a"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dining Hall:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x8Q-2e-89c">
-                                <rect key="frame" x="141" y="372.5" width="94.5" height="22"/>
-                                <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="18"/>
-                                <color key="textColor" red="0.99611258506774902" green="0.99999153614044189" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Developed by Philip Vasseur JE '20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Prv-Si-nvN" userLabel="Credits">
                                 <rect key="frame" x="95.5" y="647" width="184" height="14"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="textColor" red="0.77310041243654826" green="0.77310041243654826" blue="0.77310041243654826" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GFl-ZW-WQc">
-                                <rect key="frame" x="90.5" y="399.5" width="194" height="30"/>
-                                <color key="tintColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="194" id="Ltl-zp-deS"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kLb-HX-SsP" userLabel="DiningHallText">
-                                <rect key="frame" x="90.5" y="399.5" width="194" height="30"/>
-                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="5"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                             </label>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0B7-Lh-0B6" userLabel="LoggingInView">
                                 <rect key="frame" x="167.5" y="313.5" width="40" height="40"/>
@@ -307,40 +271,26 @@
                         </subviews>
                         <color key="backgroundColor" red="0.23529411764705882" green="0.49019607843137253" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="GFl-ZW-WQc" firstAttribute="top" secondItem="x8Q-2e-89c" secondAttribute="bottom" constant="5" id="06q-eK-RK5"/>
-                            <constraint firstItem="4r6-q8-vo8" firstAttribute="centerX" secondItem="VIN-Hj-NQE" secondAttribute="centerX" id="0KI-Aa-ROT"/>
-                            <constraint firstItem="x8Q-2e-89c" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0i9-nT-O0K"/>
                             <constraint firstItem="3xX-Nc-Gkz" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="1.4" id="Cyr-m3-q6I"/>
                             <constraint firstItem="Gw9-Jt-OwV" firstAttribute="top" secondItem="Prv-Si-nvN" secondAttribute="bottom" constant="6" id="DMD-qS-ngG"/>
-                            <constraint firstItem="4r6-q8-vo8" firstAttribute="height" secondItem="VIN-Hj-NQE" secondAttribute="height" constant="-8" id="Fvf-Tr-qiC"/>
                             <constraint firstItem="VIN-Hj-NQE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Nxn-dX-Ol7"/>
-                            <constraint firstItem="x8Q-2e-89c" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="1.15" id="OUN-9x-ug6"/>
                             <constraint firstItem="3xX-Nc-Gkz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="QAu-6b-Zwr"/>
                             <constraint firstItem="rHD-UZ-naE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="S0H-NH-AvD"/>
                             <constraint firstItem="Prv-Si-nvN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ZaD-3V-k7k"/>
                             <constraint firstItem="3fh-YX-xub" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ZuP-M5-FL2"/>
-                            <constraint firstItem="kLb-HX-SsP" firstAttribute="centerY" secondItem="GFl-ZW-WQc" secondAttribute="centerY" id="bZa-Az-BsR"/>
                             <constraint firstItem="3fh-YX-xub" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="0.59" id="bqi-eL-7s0"/>
                             <constraint firstItem="rHD-UZ-naE" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="e7F-v2-0df"/>
-                            <constraint firstItem="4r6-q8-vo8" firstAttribute="centerY" secondItem="VIN-Hj-NQE" secondAttribute="centerY" id="eUL-4I-IMQ"/>
-                            <constraint firstItem="4r6-q8-vo8" firstAttribute="width" secondItem="VIN-Hj-NQE" secondAttribute="width" constant="-8" id="gMT-rx-eJd"/>
                             <constraint firstItem="0B7-Lh-0B6" firstAttribute="centerX" secondItem="rHD-UZ-naE" secondAttribute="centerX" id="gfK-EI-gPe"/>
-                            <constraint firstItem="kLb-HX-SsP" firstAttribute="width" secondItem="GFl-ZW-WQc" secondAttribute="width" id="kQb-uX-655"/>
-                            <constraint firstItem="kLb-HX-SsP" firstAttribute="height" secondItem="GFl-ZW-WQc" secondAttribute="height" id="kRV-8W-CtF"/>
-                            <constraint firstItem="kLb-HX-SsP" firstAttribute="centerX" secondItem="GFl-ZW-WQc" secondAttribute="centerX" id="mF6-v2-N3o"/>
                             <constraint firstItem="0B7-Lh-0B6" firstAttribute="centerY" secondItem="rHD-UZ-naE" secondAttribute="centerY" id="oQg-ge-Mmr"/>
                             <constraint firstItem="VIN-Hj-NQE" firstAttribute="top" secondItem="3fh-YX-xub" secondAttribute="bottom" constant="-5" id="pfu-eD-I2B"/>
                             <constraint firstItem="0B7-Lh-0B6" firstAttribute="width" secondItem="rHD-UZ-naE" secondAttribute="width" multiplier="2" id="qPC-KU-awr"/>
                             <constraint firstItem="0B7-Lh-0B6" firstAttribute="height" secondItem="rHD-UZ-naE" secondAttribute="height" multiplier="2" id="tZ6-8f-Ump"/>
                             <constraint firstItem="VIN-Hj-NQE" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.6" priority="900" id="ulw-tv-A1C"/>
-                            <constraint firstItem="GFl-ZW-WQc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="xGf-VJ-zZh"/>
                             <constraint firstItem="3fh-YX-xub" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.792" id="xhV-l2-8t2"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="GSignInButton" destination="VIN-Hj-NQE" id="GDW-Cd-weg"/>
-                        <outlet property="diningHallText" destination="kLb-HX-SsP" id="XnI-wn-3bh"/>
-                        <outlet property="diningHallTextField" destination="GFl-ZW-WQc" id="skK-68-f5t"/>
                         <outlet property="launchAnimation" destination="3xX-Nc-Gkz" id="FDX-pr-5XR"/>
                         <outlet property="loggingInIndicator" destination="rHD-UZ-naE" id="SRg-25-Cv0"/>
                         <outlet property="loggingInView" destination="0B7-Lh-0B6" id="F57-AI-LPh"/>
@@ -357,7 +307,7 @@
             <objects>
                 <navigationController storyboardIdentifier="NavControl" title="Customer NavController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CYl-rG-eM0" customClass="NavigationControllerDefault" customModule="Yale_Grill" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="3L9-0H-vua">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="3L9-0H-vua">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.23529411764705882" green="0.49019607843137253" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -380,7 +330,7 @@
             <objects>
                 <navigationController title="Cook NavController" automaticallyAdjustsScrollViewInsets="NO" id="Txg-YN-yko" customClass="NavigationControllerDefault" customModule="Yale_Grill" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="yZ9-AK-vnH">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="yZ9-AK-vnH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.23529411764705882" green="0.49019607843137253" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -573,7 +523,7 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="ndn-JL-74r">
-                            <color key="tintColor" red="0.99999058246612549" green="0.99999356269836426" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <color key="tintColor" red="0.55394912114049288" green="0.66852664950695051" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <segue destination="2gx-NI-ptD" kind="show" identifier="menuSegue" id="GWs-cP-ydf"/>
                             </connections>
@@ -853,7 +803,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lem-iG-3uq" customClass="NavigationControllerDefault" customModule="Yale_Grill" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="KF2-rg-N5M">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="KF2-rg-N5M">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.23529411764705882" green="0.49019607843137253" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
