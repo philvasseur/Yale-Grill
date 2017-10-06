@@ -104,7 +104,6 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
         grillName = Constants.ActiveGrills.filter({ (grill: (grillName: String, grillEmail: String)) -> Bool in
             return grill.grillEmail.lowercased()  == GIDSignIn.sharedInstance().currentUser.profile.email.lowercased()
         }).first?.key ?? "Grill Name"
-        self.title = "Orders - \(grillName!)"
         
         Database.database().reference().child(Constants.grills).child(grillName).child("PushToken").setValue(Messaging.messaging().fcmToken)
         grillSwitch = Database.database().reference().child(Constants.grills).child(grillName).child(Constants.grillStatus)
@@ -113,9 +112,11 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
             if (grillStatus) {
                 self.grillIsOn = true
                 self.GrillToggleButton.title = Constants.turnGrillOffText
+                self.title = "ON - \(self.grillName!)"
             }else {
                 self.grillIsOn = false
                 self.GrillToggleButton.title = Constants.turnGrillOnText
+                self.title = "\(self.grillName!) - GRILL IS OFF"
             }
         })
         let ordersRef = Database.database().reference().child(Constants.grills).child(grillName).child(Constants.orders)

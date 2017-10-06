@@ -41,6 +41,10 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
     @IBAction func unwindToOrders(_ sender: UIStoryboardSegue) {
         guard let placedOrderController = sender.source as? MenuItemViewController else { return }
         guard let newOrder = placedOrderController.placedOrder else { return }
+        if(!grillIsOn) {
+            Constants.createAlert(title: "The Grill Is Off!", message: "Please try again later. If you think this is an error, contact your respective dining hall staff.",
+                                  style: .wait)
+        }
         newOrder.insertIntoDatabase()
         Constants.currentOrders.append(newOrder)
         let indexPath = IndexPath(row: Constants.currentOrders.count - 1, section: 0)

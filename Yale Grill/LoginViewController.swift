@@ -125,12 +125,12 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     func checkEmail(email: String) -> Constants.EmailType {
         //Checks if email is a Yale email
         //REMOVE TEST EMAIL IN REAL BUILD
-        if(email.lowercased().range(of: "@yale.edu") != nil || email.lowercased() == "yalegrill.test@gmail.com"){
+        if (Constants.ActiveGrills.values.contains(where: {$0.caseInsensitiveCompare(email) == .orderedSame})) {
+            return .Cook
+        }else if(email.lowercased().range(of: "@yale.edu") != nil || email.lowercased() == "yalegrill.test@gmail.com"){
             return .Yale
             //If not a yale email, checks if the email is contained in the cooks email array (case insensitively)
-        }else if (Constants.ActiveGrills.values.contains(where: {$0.caseInsensitiveCompare(email) == .orderedSame})) {
-            return .Cook
-        }else{
+        }else {
             return .Other
         }
     }
