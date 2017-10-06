@@ -6,6 +6,7 @@ target 'Yale Grill' do
   use_frameworks!
 
   # Pods for YaleGrill
+  pod 'BTNavigationDropdownMenu', :git => 'https://github.com/PhamBaTho/BTNavigationDropdownMenu.git'
   pod 'Google/SignIn'
   pod 'Firebase', '~> 4.1.0'
   pod 'Firebase/RemoteConfig', '~> 4.1.0'

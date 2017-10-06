@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import Firebase
 import FirebaseRemoteConfig
+import BTNavigationDropdownMenu
 
 class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
     
@@ -18,6 +19,7 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
     var userOrdersRef : DatabaseReference!
     var GID = GIDSignIn.sharedInstance()!
     var grillIsOn : Bool!
+    var menuView: BTNavigationDropdownMenu!
     
     // MARK: - Actions
     
@@ -90,8 +92,12 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         if(Constants.currentOrders.count == 0) { //shows the no active orders label if there are no orders
+            menuView.isUserInteractionEnabled = true
+            menuView.arrowTintColor = .white
             noOrdersLabel.isHidden = false
         } else {
+            menuView.isUserInteractionEnabled = false
+            menuView.arrowTintColor = UIColor(hex: "#3C7DEA")
             noOrdersLabel.isHidden = true
         }
         return 1
@@ -112,20 +118,21 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
         } else {
             return true
         }
-
+    }
+    
+    private func setDiningHall(dhall : String) {
+        Database.database().reference().child(Constants.grills).child(Constants.selectedDiningHall).child(Constants.grillStatus).removeAllObservers()
+        Constants.selectedDiningHall = dhall
+        let grillStatusRef = Database.database().reference().child(Constants.grills).child(dhall).child(Constants.grillStatus)
+        grillStatusRef.observe(DataEventType.value, with: { (snapshot) in
+            self.grillIsOn = snapshot.value as? Bool ?? false
+        })
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         GID.uiDelegate = self
-        
-        self.title=Constants.selectedDiningHall
-        
-        tableView.rowHeight = (tableView.frame.height - (self.navigationController?.navigationBar.frame.height)!
-            - UIApplication.shared.statusBarFrame.height)/3
-        tableView.allowsSelection = false
-        tableView.tableFooterView = UIView() //gets rid of dividers below empty cells
         
         //Sets up background image and no active orders label for when user has no orders placed
         noOrdersLabel.numberOfLines = 0
@@ -138,10 +145,23 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
         NSLayoutConstraint.useAndActivate(constraints:
             [noOrdersLabel.centerXAnchor.constraint(equalTo: (tableView.backgroundView?.centerXAnchor)!), noOrdersLabel.centerYAnchor.constraint(equalTo: (tableView.backgroundView?.centerYAnchor)!)])
         
-        let grillStatusRef = Database.database().reference().child(Constants.grills).child(Constants.selectedDiningHall).child(Constants.grillStatus)
-        grillStatusRef.observe(DataEventType.value, with: { (snapshot) in
-            self.grillIsOn = snapshot.value as? Bool ?? false
-            self.title = " \(Constants.selectedDiningHall!) - \(self.grillIsOn! == true ? "On" : "Off")"
-        })
+        
+        menuView = BTNavigationDropdownMenu(title: BTTitle.title("Select DHall"), items: Constants.PickerData)
+        self.navigationItem.titleView = menuView
+        let index = Constants.PickerData.index(of: Constants.selectedDiningHall)
+        if(index != nil) {
+            menuView.setSelected(index: index!)
+            setDiningHall(dhall: Constants.selectedDiningHall)
+        }
+        menuView.didSelectItemAtIndexHandler = { (indexPath: Int) -> () in
+            self.setDiningHall(dhall: Constants.PickerData[indexPath])
+        }
+        menuView.animationDuration = 0.35
+        
+        
+        tableView.rowHeight = (tableView.frame.height - (self.navigationController?.navigationBar.frame.height)!
+            - UIApplication.shared.statusBarFrame.height)/3
+        tableView.allowsSelection = false
+        tableView.tableFooterView = UIView() //gets rid of dividers below empty cells
     }
 }

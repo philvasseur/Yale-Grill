@@ -426,7 +426,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Replace this with the GOOGLE_APP_ID from your GoogleService-Info.plist file\nGOOGLE_APP_ID=1:122523778140:ios:3e868f7e41a69228\n# Replace the /Path/To/ServiceAccount.json with the path to the key you just downloaded\n\"${PODS_ROOT}\"/FirebaseCrash/upload-sym \"${SRCROOT}\"/Yale\\ Grill/yale-grill-firebase-crashreporting-z4rba-02de9e48bd.json\n";
+			shellScript = "# Replace this with the GOOGLE_APP_ID from your GoogleService-Info.plist file\n#GOOGLE_APP_ID=1:122523778140:ios:3e868f7e41a69228\n# Replace the /Path/To/ServiceAccount.json with the path to the key you just downloaded\n#\"${PODS_ROOT}\"/FirebaseCrash/upload-sym \"${SRCROOT}\"/Yale\\ Grill/yale-grill-firebase-crashreporting-z4rba-02de9e48bd.json\n";
 		};
 		FE6A3F43E542E967D535F7FF /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;

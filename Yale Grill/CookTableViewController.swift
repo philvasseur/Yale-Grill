@@ -112,7 +112,7 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
             if (grillStatus) {
                 self.grillIsOn = true
                 self.GrillToggleButton.title = Constants.turnGrillOffText
-                self.title = "ON - \(self.grillName!)"
+                self.title = "Orders - \(self.grillName!)"
             }else {
                 self.grillIsOn = false
                 self.GrillToggleButton.title = Constants.turnGrillOnText

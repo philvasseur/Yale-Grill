@@ -60,8 +60,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let remoteConfigSettings = RemoteConfigSettings(developerModeEnabled: false)
         RemoteConfig.remoteConfig().configSettings = remoteConfigSettings!
         RemoteConfig.remoteConfig().setDefaults([
-            "READYTIMER" : 8 as NSObject,
-            "strikeBanLimit" : 5 as NSObject,
+            "READYTIMER" : 12 as NSObject,
+            "strikeBanLimit" : 3 as NSObject,
             "banLength" : 10 as NSObject,
             "orderLimit" : 3 as NSObject])
     }

@@ -16,7 +16,7 @@ class Constants {
     static var selectedDiningHall : String!
     static var currentOrders : [Orders] = []
     static var appJustOpened = true;
-    static var PickerData = ["Select Dining Hall"]
+    static var PickerData: [String] = []
     static let coordinates  = [
         "Jonathan Edwards": CLLocation(latitude: 41.308839, longitude: -72.929976),
         "Branford" : CLLocation(latitude: 41.310051, longitude: -72.930137),
