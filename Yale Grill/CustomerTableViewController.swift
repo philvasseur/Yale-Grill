@@ -46,6 +46,8 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
         if(!grillIsOn) {
             Constants.createAlert(title: "The Grill Is Off!", message: "Please try again later. If you think this is an error, contact your respective dining hall staff.",
                                   style: .wait)
+            return
+            
         }
         newOrder.insertIntoDatabase()
         Constants.currentOrders.append(newOrder)
