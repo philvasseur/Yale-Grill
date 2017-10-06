@@ -24,7 +24,7 @@ Only usable by those with a valid Yale email address.
 **Authors:** Created and Designed by *Philip Vasseur*
 
 **Library Resources**
-* [Firebase] (https://firebase.google.com)
+* [Firebase](https://firebase.google.com)
 
 ---
 
