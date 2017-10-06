@@ -157,7 +157,9 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
         NSLayoutConstraint.useAndActivate(constraints:
             [noOrdersLabel.centerXAnchor.constraint(equalTo: (tableView.backgroundView?.centerXAnchor)!), noOrdersLabel.centerYAnchor.constraint(equalTo: (tableView.backgroundView?.centerYAnchor)!)])
         
-        
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+        }
         menuView = BTNavigationDropdownMenu(title: BTTitle.title("Select DHall"), items: Constants.PickerData)
         self.navigationItem.titleView = menuView
         let index = Constants.PickerData.index(of: Constants.selectedDiningHall ?? "Default")

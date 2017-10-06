@@ -18,6 +18,9 @@ class MenuTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.backgroundColor = UIColor(hex: "#fafafa")
+        if #available(iOS 11.0, *) {
+            self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+        }
     }
     
     // MARK: - Table view data source
