@@ -31,7 +31,7 @@
             <objects>
                 <tableViewController title="Cook Orders" id="Qtw-aa-nCw" customClass="CookTableViewController" customModule="Yale_Grill" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" id="XT6-2U-dEp">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="599"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="separatorColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -315,7 +315,7 @@
                 <navigationController storyboardIdentifier="NavControl" title="Customer NavController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CYl-rG-eM0" customClass="NavigationControllerDefault" customModule="Yale_Grill" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="3L9-0H-vua">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="48"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.23529411764705882" green="0.49019607843137253" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="barTintColor" red="0.23529411764705882" green="0.49019607843137253" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -338,7 +338,7 @@
                 <navigationController title="Cook NavController" automaticallyAdjustsScrollViewInsets="NO" id="Txg-YN-yko" customClass="NavigationControllerDefault" customModule="Yale_Grill" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="yZ9-AK-vnH">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="48"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.23529411764705882" green="0.49019607843137253" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </navigationBar>
@@ -356,7 +356,7 @@
             <objects>
                 <tableViewController title="Customer Orders" id="oI0-JY-wm8" customClass="CustomerTableViewController" customModule="Yale_Grill" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="tHX-MW-vhW">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="599"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -546,7 +546,7 @@
             <objects>
                 <tableViewController id="2gx-NI-ptD" customClass="MenuTableViewController" customModule="Yale_Grill" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="150" sectionHeaderHeight="28" sectionFooterHeight="28" id="aeT-aW-nVs">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="599"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -641,7 +641,7 @@
                         <viewControllerLayoutGuide type="bottom" id="lrf-Ez-M7S"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="izF-fV-oAf">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="599"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jTH-qv-SuZ">
@@ -811,7 +811,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lem-iG-3uq" customClass="NavigationControllerDefault" customModule="Yale_Grill" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="KF2-rg-N5M">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="48"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.23529411764705882" green="0.49019607843137253" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </navigationBar>

@@ -127,6 +127,10 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        self.menuView.hide()
+    }
+    
     private func setDiningHall(dhall : String) {
         UserDefaults.standard.set(dhall, forKey: Constants.prevDining)
         if(Constants.selectedDiningHall != nil) {
@@ -161,6 +165,13 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
             tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
         }
         menuView = BTNavigationDropdownMenu(title: BTTitle.title("Select DHall"), items: Constants.PickerData)
+        menuView.navigationBarTitleFont = UIFont(name: "Lato-Bold", size: 18)
+        menuView.cellTextLabelFont = UIFont(name: "Lato-Bold", size: 18)
+        var height = (self.view.frame.height - (self.navigationController?.navigationBar.frame.height ?? 0) - UIApplication.shared.statusBarFrame.height)/CGFloat(Constants.PickerData.count)
+        if(height > 50 || height < 35) {
+            height = 45
+        }
+        self.menuView.cellHeight = height as NSNumber
         self.navigationItem.titleView = menuView
         let index = Constants.PickerData.index(of: Constants.selectedDiningHall ?? "Default")
         if(index != nil) {
@@ -170,7 +181,7 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
         menuView.didSelectItemAtIndexHandler = { (indexPath: Int) -> () in
             self.setDiningHall(dhall: Constants.PickerData[indexPath])
         }
-        menuView.animationDuration = 0.35
+        menuView.animationDuration = 0.30
         
         
         tableView.rowHeight = (tableView.frame.height - (self.navigationController?.navigationBar.frame.height)!

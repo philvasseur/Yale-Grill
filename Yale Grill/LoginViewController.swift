@@ -183,6 +183,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
             for(grillName,_) in Constants.ActiveGrills {
                 Constants.PickerData.append(grillName)
             }
+            Constants.PickerData.sort()
             completion();
             
         })
