@@ -137,12 +137,23 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
             Database.database().reference().child(Constants.grills).child(Constants.selectedDiningHall).child(Constants.grillStatus).removeAllObservers()
         }
         Constants.selectedDiningHall = dhall
-        let grillStatusRef = Database.database().reference().child(Constants.grills).child(dhall).child(Constants.grillStatus)
-        grillStatusRef.observe(DataEventType.value, with: { (snapshot) in
-            self.grillIsOn = snapshot.value as? Bool ?? false
-            self.navigationItem.rightBarButtonItem?.tintColor =
-                self.grillIsOn == true ? .white : UIColor(hex: "#8DAAEA")
+        let grillRef = Database.database().reference().child(Constants.grills).child(dhall)
+        grillRef.child(Constants.menuItemsText).observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+            let menuItemNames = snapshot.value as? [String] ?? []
+            grillRef.child(Constants.grillStatus).observe(DataEventType.value, with: { (_snapshot) in
+                self.grillIsOn = _snapshot.value as? Bool ?? false
+                if(menuItemNames.count == 0) { self.grillIsOn = false }
+                self.navigationItem.rightBarButtonItem?.tintColor =
+                    self.grillIsOn == true ? .white : UIColor(hex: "#8DAAEA")
+            })
+            Constants.currentGrillMenu = []
+            for itemName in menuItemNames {
+                if(Constants.menuItems[itemName] != nil) {
+                    Constants.currentGrillMenu.append(Constants.menuItems[itemName]!)
+                }
+            }
         })
+        grillRef.keepSynced(true)
     }
     
     

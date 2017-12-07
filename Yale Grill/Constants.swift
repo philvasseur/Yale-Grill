@@ -46,6 +46,7 @@ class Constants {
     static let orders = "Orders"
     static let grills = "Grills"
     static let grillStatus = "GrillIsOn"
+    static let menuItemsText = "MenuItems"
     static let users = "Users"
     static let activeOrders = "ActiveOrders"
     static let name = "Name"
@@ -64,7 +65,8 @@ class Constants {
     static let preparingTexts = ["Preparing...","Preparing..","Preparing.","Preparing"]
     static let gifArray = ["preparing1","preparing2","preparing3","preparing4","preparing5"]
     
-    static var menuItems: [MenuItem] = []
+    static var menuItems: [String:MenuItem] = [:]
+    static var currentGrillMenu: [MenuItem] = []
     
     //ID Constants
     static let SignInSegueID = "SignInSegue"

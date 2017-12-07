@@ -88,11 +88,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func loadMenu() {
-        Constants.menuItems = []
+        Constants.menuItems = [:]
         Database.database().reference().child("Menu").observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
             let json = snapshot.value as? [Any] ?? []
             for menuItemjson in json {
-                Constants.menuItems.append(MenuItem(json: menuItemjson as? [String : AnyObject] ?? [:]))
+                let newMenuItem = MenuItem(json: menuItemjson as? [String : AnyObject] ?? [:])
+                Constants.menuItems[newMenuItem.title] = newMenuItem
             }
         })
     }
