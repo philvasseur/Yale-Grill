@@ -15,7 +15,6 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
     
     // MARK: - Outlets
     @IBOutlet weak var GrillToggleButton: UIBarButtonItem!
-    @IBOutlet weak var NavBar: UINavigationItem!
     
     // MARK: - Global Variables
     var orderNumCount: Int = -1
@@ -27,14 +26,22 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
     
     // MARK: - Actions
     @IBAction func GrillButtonPressed(_ sender: UIBarButtonItem) {
-        grillIsOn = !grillIsOn
-        if(grillIsOn) {
-            grillSwitch.setValue(true)
-            GrillToggleButton.title = Constants.turnGrillOffText
-        }else if(!grillIsOn) {
-            grillSwitch.setValue(false)
-            GrillToggleButton.title = Constants.turnGrillOnText
+        let alertAppearance = SCLAlertView.SCLAppearance(kWindowWidth: 300, kWindowHeight: 200, contentViewCornerRadius: 10, buttonCornerRadius: 8)
+        let changeStatusAlert = SCLAlertView(appearance: alertAppearance)
+        changeStatusAlert.addButton("Yes") {
+            self.grillIsOn = !self.grillIsOn
+            if(self.grillIsOn) {
+                self.grillSwitch.setValue(true)
+                self.GrillToggleButton.title = Constants.turnGrillOffText
+            }else if(!self.grillIsOn) {
+                self.grillSwitch.setValue(false)
+                self.GrillToggleButton.title = Constants.turnGrillOnText
+            }
+            changeStatusAlert.hideView()
         }
+        changeStatusAlert.showNotice(self.grillIsOn == true ? "Turn the Grill Off?" : "Turn the Grill On?",
+                             subTitle: "Pressing 'Yes' will turn the grill \(self.grillIsOn == true ? "off" : "on")",
+                                closeButtonTitle: "Cancel")
     }
     
     
@@ -104,7 +111,6 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
         grillName = Constants.ActiveGrills.filter({ (grill: (grillName: String, grillEmail: String)) -> Bool in
             return grill.grillEmail.lowercased()  == GIDSignIn.sharedInstance().currentUser.profile.email.lowercased()
         }).first?.key ?? "Grill Name"
-        self.title = "Orders - \(grillName!)"
         
         Database.database().reference().child(Constants.grills).child(grillName).child("PushToken").setValue(Messaging.messaging().fcmToken)
         grillSwitch = Database.database().reference().child(Constants.grills).child(grillName).child(Constants.grillStatus)
@@ -113,9 +119,13 @@ class CookTableViewController: UITableViewController, GIDSignInUIDelegate {
             if (grillStatus) {
                 self.grillIsOn = true
                 self.GrillToggleButton.title = Constants.turnGrillOffText
+                self.title = "Orders - \(self.grillName!)"
+                self.navigationController?.navigationBar.barTintColor = UIColor(hex: "#3C7DEA")
             }else {
                 self.grillIsOn = false
                 self.GrillToggleButton.title = Constants.turnGrillOnText
+                self.title = "\(self.grillName!) - OFF"
+                self.navigationController?.navigationBar.barTintColor = UIColor(hex: "#000000")
             }
         })
         let ordersRef = Database.database().reference().child(Constants.grills).child(grillName).child(Constants.orders)

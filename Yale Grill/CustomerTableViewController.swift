@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import Firebase
 import FirebaseRemoteConfig
+import BTNavigationDropdownMenu
 
 class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
     
@@ -17,7 +18,8 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
     var grillStatusHandle : UInt!
     var userOrdersRef : DatabaseReference!
     var GID = GIDSignIn.sharedInstance()!
-    var grillIsOn : Bool!
+    var grillIsOn : Bool = false
+    var menuView: BTNavigationDropdownMenu!
     
     // MARK: - Actions
     
@@ -41,6 +43,12 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
     @IBAction func unwindToOrders(_ sender: UIStoryboardSegue) {
         guard let placedOrderController = sender.source as? MenuItemViewController else { return }
         guard let newOrder = placedOrderController.placedOrder else { return }
+        if(!grillIsOn) {
+            Constants.createAlert(title: "The Grill Is Off!", message: "Please try again later. If you think this is an error, contact your respective dining hall staff.",
+                                  style: .wait)
+            return
+            
+        }
         newOrder.insertIntoDatabase()
         Constants.currentOrders.append(newOrder)
         let indexPath = IndexPath(row: Constants.currentOrders.count - 1, section: 0)
@@ -86,8 +94,12 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         if(Constants.currentOrders.count == 0) { //shows the no active orders label if there are no orders
+            menuView.isUserInteractionEnabled = true
+            menuView.arrowTintColor = .white
             noOrdersLabel.isHidden = false
         } else {
+            menuView.isUserInteractionEnabled = false
+            menuView.arrowTintColor = UIColor(hex: "#3C7DEA")
             noOrdersLabel.isHidden = true
         }
         return 1
@@ -97,7 +109,12 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
         if(identifier != "menuSegue") {
             return true
         }
-        if (!grillIsOn) { //Only goes through orders if the grill is on
+        if(Constants.selectedDiningHall == nil ||
+            (Constants.PickerData.index(of: Constants.selectedDiningHall) == nil)){
+            Constants.createAlert(title: "Select a Dining Hall", message: "Tap the title at the top to select a valid dining hall before placing an order.",
+                                  style: .notice)
+            return false
+        } else  if (!grillIsOn) { //Only goes through orders if the grill is on
             Constants.createAlert(title: "The Grill Is Off!", message: "Please try again later. If you think this is an error, contact your respective dining hall staff.",
                                   style: .wait)
             return false
@@ -108,20 +125,41 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
         } else {
             return true
         }
-
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        self.menuView.hide()
+    }
+    
+    private func setDiningHall(dhall : String) {
+        UserDefaults.standard.set(dhall, forKey: Constants.prevDining)
+        if(Constants.selectedDiningHall != nil) {
+            Database.database().reference().child(Constants.grills).child(Constants.selectedDiningHall).child(Constants.grillStatus).removeAllObservers()
+        }
+        Constants.selectedDiningHall = dhall
+        let grillRef = Database.database().reference().child(Constants.grills).child(dhall)
+        grillRef.child(Constants.menuItemsText).observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+            let menuItemNames = snapshot.value as? [String] ?? []
+            grillRef.child(Constants.grillStatus).observe(DataEventType.value, with: { (_snapshot) in
+                self.grillIsOn = _snapshot.value as? Bool ?? false
+                if(menuItemNames.count == 0) { self.grillIsOn = false }
+                self.navigationItem.rightBarButtonItem?.tintColor =
+                    self.grillIsOn == true ? .white : UIColor(hex: "#8DAAEA")
+            })
+            Constants.currentGrillMenu = []
+            for itemName in menuItemNames {
+                if(Constants.menuItems[itemName] != nil) {
+                    Constants.currentGrillMenu.append(Constants.menuItems[itemName]!)
+                }
+            }
+        })
+        grillRef.keepSynced(true)
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         GID.uiDelegate = self
-        
-        self.title=Constants.selectedDiningHall
-        
-        tableView.rowHeight = (tableView.frame.height - (self.navigationController?.navigationBar.frame.height)!
-            - UIApplication.shared.statusBarFrame.height)/3
-        tableView.allowsSelection = false
-        tableView.tableFooterView = UIView() //gets rid of dividers below empty cells
         
         //Sets up background image and no active orders label for when user has no orders placed
         noOrdersLabel.numberOfLines = 0
@@ -134,10 +172,32 @@ class CustomerTableViewController: UITableViewController, GIDSignInUIDelegate {
         NSLayoutConstraint.useAndActivate(constraints:
             [noOrdersLabel.centerXAnchor.constraint(equalTo: (tableView.backgroundView?.centerXAnchor)!), noOrdersLabel.centerYAnchor.constraint(equalTo: (tableView.backgroundView?.centerYAnchor)!)])
         
-        let grillStatusRef = Database.database().reference().child(Constants.grills).child(Constants.selectedDiningHall).child(Constants.grillStatus)
-        grillStatusRef.observe(DataEventType.value, with: { (snapshot) in
-            self.grillIsOn = snapshot.value as? Bool ?? false
-            self.title = " \(Constants.selectedDiningHall!) - \(self.grillIsOn! == true ? "On" : "Off")"
-        })
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+        }
+        menuView = BTNavigationDropdownMenu(title: BTTitle.title("Select DHall"), items: Constants.PickerData)
+        menuView.navigationBarTitleFont = UIFont(name: "Lato-Bold", size: 18)
+        menuView.cellTextLabelFont = UIFont(name: "Lato-Bold", size: 18)
+        var height = (self.view.frame.height - (self.navigationController?.navigationBar.frame.height ?? 0) - UIApplication.shared.statusBarFrame.height)/CGFloat(Constants.PickerData.count)
+        if(height > 50 || height < 35) {
+            height = 45
+        }
+        self.menuView.cellHeight = height as NSNumber
+        self.navigationItem.titleView = menuView
+        let index = Constants.PickerData.index(of: Constants.selectedDiningHall ?? "Default")
+        if(index != nil) {
+            menuView.setSelected(index: index!)
+            setDiningHall(dhall: Constants.selectedDiningHall)
+        }
+        menuView.didSelectItemAtIndexHandler = { (indexPath: Int) -> () in
+            self.setDiningHall(dhall: Constants.PickerData[indexPath])
+        }
+        menuView.animationDuration = 0.30
+        
+        
+        tableView.rowHeight = (tableView.frame.height - (self.navigationController?.navigationBar.frame.height)!
+            - UIApplication.shared.statusBarFrame.height)/3
+        tableView.allowsSelection = false
+        tableView.tableFooterView = UIView() //gets rid of dividers below empty cells
     }
 }

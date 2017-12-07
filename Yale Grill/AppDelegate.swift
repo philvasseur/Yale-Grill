@@ -60,8 +60,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let remoteConfigSettings = RemoteConfigSettings(developerModeEnabled: false)
         RemoteConfig.remoteConfig().configSettings = remoteConfigSettings!
         RemoteConfig.remoteConfig().setDefaults([
-            "READYTIMER" : 8 as NSObject,
-            "strikeBanLimit" : 5 as NSObject,
+            "READYTIMER" : 12 as NSObject,
+            "strikeBanLimit" : 3 as NSObject,
             "banLength" : 10 as NSObject,
             "orderLimit" : 3 as NSObject])
     }
@@ -88,11 +88,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func loadMenu() {
-        Constants.menuItems = []
+        Constants.menuItems = [:]
         Database.database().reference().child("Menu").observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
             let json = snapshot.value as? [Any] ?? []
             for menuItemjson in json {
-                Constants.menuItems.append(MenuItem(json: menuItemjson as? [String : AnyObject] ?? [:]))
+                let newMenuItem = MenuItem(json: menuItemjson as? [String : AnyObject] ?? [:])
+                Constants.menuItems[newMenuItem.title] = newMenuItem
             }
         })
     }

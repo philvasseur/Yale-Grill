@@ -53,7 +53,8 @@ class CookTableViewCell: UITableViewCell{
             
         }else if(orderStatus == status.Ready){
             orderStatus = status.PickedUp
-            removeOrder()
+            task?.cancel()
+            cOrder.removeOrder()
         }
         
         if(orderStatus != status.PickedUp) {
@@ -130,23 +131,6 @@ class CookTableViewCell: UITableViewCell{
                 }
             })
         }
-    }
-    
-    private func removeOrder(){
-        //Cancels the task which after a set amount of time of being ready gives customer a strike
-        task?.cancel()
-        let cOrderID = self.cOrder.orderID!
-        
-        //Removes the order from the users's active orders
-        Database.database().reference().child(Constants.users).child(cOrder.userID!).child(Constants.activeOrders).child(cOrderID).removeValue() {(error, reference) in
-                //Removes the order from the grill's active orders once it is removed from the user's
-                if(error == nil) {
-                    Database.database().reference().child(Constants.grills).child(self.grillName).child(Constants.orders).child(cOrderID).removeValue()
-                    Database.database().reference().child(Constants.orders).child(cOrderID).child(Orders.DatabaseKeys.name).removeValue()
-                    Database.database().reference().child(Constants.orders).child(cOrderID).child(Orders.DatabaseKeys.userID).removeValue()
-                }
-            }
-        
     }
     
     // MARK: - Overridden Functions

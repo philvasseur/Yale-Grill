@@ -65,7 +65,7 @@ class MenuItemViewController: UIViewController, UICollectionViewDelegate, UIColl
         let diningHallParams = [
             "food": self.menuItem.title as NSObject,
         ]
-        Analytics.logEvent(Constants.selectedDiningHall, parameters: diningHallParams)
+        Analytics.logEvent(Constants.selectedDiningHall.replacingOccurrences(of: " ", with: ""), parameters: diningHallParams)
     }
     
 

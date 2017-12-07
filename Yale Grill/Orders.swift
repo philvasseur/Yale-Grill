@@ -56,6 +56,21 @@ class Orders : NSObject {
         
     }
     
+    func removeOrder(){
+        
+        //Removes the order from the users's active orders
+        Database.database().reference().child(Constants.users).child(self.userID!).child(Constants.activeOrders).child(self.orderID).removeValue() {(error, reference) in
+            //Removes the order from the grill's active orders once it is removed from the user's
+            if(error == nil) {
+                Database.database().reference().child(Constants.grills).child(self.grill).child(Constants.orders).child(self.orderID).removeValue()
+                Database.database().reference().child(Constants.orders).child(self.orderID).child(Orders.DatabaseKeys.name).removeValue()
+                Database.database().reference().child(Constants.orders).child(self.orderID).child(Orders.DatabaseKeys.userID).removeValue()
+            }
+        }
+        
+    }
+
+    
     //Inserts a new order into fireBase database
     func insertIntoDatabase(){
         let currentOrder = Database.database().reference().child("Orders").child(orderID)

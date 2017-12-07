@@ -1,4 +1,5 @@
 PODS:
+  - BTNavigationDropdownMenu (0.4.1)
   - Firebase (4.1.0):
     - Firebase/Core (= 4.1.0)
   - Firebase/Auth (4.1.0):
@@ -111,6 +112,7 @@ PODS:
   - Protobuf (3.4.0)
 
 DEPENDENCIES:
+  - BTNavigationDropdownMenu (from `https://github.com/PhamBaTho/BTNavigationDropdownMenu.git`)
   - Firebase (~> 4.1.0)
   - Firebase/Auth (~> 4.1.0)
   - Firebase/Crash (~> 4.1.0)
@@ -121,7 +123,17 @@ DEPENDENCIES:
   - Google/SignIn
   - NVActivityIndicatorView
 
+EXTERNAL SOURCES:
+  BTNavigationDropdownMenu:
+    :git: https://github.com/PhamBaTho/BTNavigationDropdownMenu.git
+
+CHECKOUT OPTIONS:
+  BTNavigationDropdownMenu:
+    :commit: 934293ecc4d3c317dd77677a7f2be05934940503
+    :git: https://github.com/PhamBaTho/BTNavigationDropdownMenu.git
+
 SPEC CHECKSUMS:
+  BTNavigationDropdownMenu: 4a88996ad514f2feff98481eb2d6a5cb7520f76c
   Firebase: ebebf41db7f10e0c7668b6eaaa857fbe599aa478
   FirebaseAnalytics: 76f754d37ca5b04f36856729b6af3ca0152d1069
   FirebaseAuth: 8d1d2389cf82f891048d6d50d27d044f55ae09a6
@@ -147,6 +159,6 @@ SPEC CHECKSUMS:
   NVActivityIndicatorView: d3738df7e2e476aca0ba6bf32a8c9fbcfc33d64b
   Protobuf: 03eef2ee0b674770735cf79d9c4d3659cf6908e8
 
-PODFILE CHECKSUM: babe8f899b0981b50031aa0d947e3ed0672ffa7b
+PODFILE CHECKSUM: 6bf3489d64e05eb27fc8f61a2d8cb1c5990f30ec
 
 COCOAPODS: 1.2.0

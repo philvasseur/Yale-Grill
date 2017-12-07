@@ -18,12 +18,15 @@ class MenuTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.backgroundColor = UIColor(hex: "#fafafa")
+        if #available(iOS 11.0, *) {
+            self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+        }
     }
     
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Constants.menuItems.count
+        return Constants.currentGrillMenu.count
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -38,7 +41,7 @@ class MenuTableViewController: UITableViewController {
             for: indexPath) as? MenuTableViewCell else {
                 fatalError("Cannot create MenuTableViewCell")
         }
-        cell.setItemInfo(item: Constants.menuItems[indexPath.row])
+        cell.setItemInfo(item: Constants.currentGrillMenu[indexPath.row])
         cell.delegate = self
         return cell
     }
@@ -47,7 +50,7 @@ class MenuTableViewController: UITableViewController {
         if segue.identifier == "cellSelection" {
             let destination = (segue.destination as! UINavigationController).topViewController as! MenuItemViewController
             let row = (sender as! IndexPath).row
-            destination.menuItem = Constants.menuItems[row]
+            destination.menuItem = Constants.currentGrillMenu[row]
         }
     }
     
