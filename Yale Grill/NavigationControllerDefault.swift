@@ -17,8 +17,8 @@ class NavigationControllerDefault: UINavigationController {
             size = 17
         }
         let attrs = [
-            NSForegroundColorAttributeName: UIColor.white,
-            NSFontAttributeName: UIFont(name: "Lato-Bold", size: size)!
+            NSAttributedStringKey.foregroundColor: UIColor.white,
+            NSAttributedStringKey.font: UIFont(name: "Lato-Bold", size: size)!
         ]
         
         UINavigationBar.appearance().titleTextAttributes = attrs

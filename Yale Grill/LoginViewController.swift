@@ -287,7 +287,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         if(Constants.appJustOpened) {
             Constants.appJustOpened = false
             createLaunchView()
-            loadDiningHalls {_ in //On success of loading dining halls, either hides launch view or signsInSilently for autologin
+            loadDiningHalls { //On success of loading dining halls, either hides launch view or signsInSilently for autologin
                 if(GIDSignIn.sharedInstance().hasAuthInKeychain()) {
                     GIDSignIn.sharedInstance().signInSilently()
                 } else { //If user has no authentication on app open, hides the loading screen

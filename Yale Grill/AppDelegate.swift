@@ -80,10 +80,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("Config not fetched")
                 print("Error \(error!.localizedDescription)")
             }
-            Constants.READYTIMER = Double(RemoteConfig.remoteConfig().configValue(forKey: "READYTIMER").numberValue!)
-            Constants.strikeBanLimit = Int(RemoteConfig.remoteConfig().configValue(forKey: "strikeBanLimit").numberValue!)
-            Constants.banLength = Int(RemoteConfig.remoteConfig().configValue(forKey: "banLength").numberValue!)
-            Constants.orderLimit = Int(RemoteConfig.remoteConfig().configValue(forKey: "orderLimit").numberValue!)
+            Constants.READYTIMER = Double(truncating: RemoteConfig.remoteConfig().configValue(forKey: "READYTIMER").numberValue!)
+            Constants.strikeBanLimit = Int(truncating: RemoteConfig.remoteConfig().configValue(forKey: "strikeBanLimit").numberValue!)
+            Constants.banLength = Int(truncating: RemoteConfig.remoteConfig().configValue(forKey: "banLength").numberValue!)
+            Constants.orderLimit = Int(truncating: RemoteConfig.remoteConfig().configValue(forKey: "orderLimit").numberValue!)
         }
     }
     
