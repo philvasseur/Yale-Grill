@@ -87,7 +87,11 @@ class MenuItemViewController: UIViewController, UICollectionViewDelegate, UIColl
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! OptionCollectionViewCell
         cell.check()
-        options?[cell.optionLabel.text ?? ""] = !(options?[cell.optionLabel.text ?? ""] ?? false)
+        let optionName = cell.optionLabel.text ?? ""
+        if(options?[optionName] != nil) {
+            let flippedVal = !(options?[optionName])!
+            options?[optionName] = flippedVal
+        }
     }
     
     

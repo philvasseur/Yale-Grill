@@ -22,6 +22,7 @@
 		CD58B0FC1ED8A08900C6F02C /* preparing4.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD58B0F81ED8A08900C6F02C /* preparing4.gif */; };
 		CD58B1011ED8A83400C6F02C /* preparing5.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD58B1001ED8A83400C6F02C /* preparing5.gif */; };
 		CD5B27FF1F453E2D005CA2A5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD5B27FE1F453E2D005CA2A5 /* GoogleService-Info.plist */; };
+		CD63A36E1FDDD604009B7799 /* preparing6.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD63A36D1FDDD604009B7799 /* preparing6.gif */; };
 		CD86294B1F467B9700DB328F /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD86294A1F467B9700DB328F /* MenuTableViewCell.swift */; };
 		CD86298F1F46BEC900DB328F /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD8629841F46BEC900DB328F /* Lato-Black.ttf */; };
 		CD8629901F46BEC900DB328F /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD8629851F46BEC900DB328F /* Lato-BlackItalic.ttf */; };
@@ -82,6 +83,7 @@
 		CD58B0F81ED8A08900C6F02C /* preparing4.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = preparing4.gif; sourceTree = "<group>"; };
 		CD58B1001ED8A83400C6F02C /* preparing5.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = preparing5.gif; sourceTree = "<group>"; };
 		CD5B27FE1F453E2D005CA2A5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CD63A36D1FDDD604009B7799 /* preparing6.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = preparing6.gif; sourceTree = "<group>"; };
 		CD86294A1F467B9700DB328F /* MenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		CD8629841F46BEC900DB328F /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
 		CD8629851F46BEC900DB328F /* Lato-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-BlackItalic.ttf"; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 		CD179F0C1E15F71400496D5F /* Gifs */ = {
 			isa = PBXGroup;
 			children = (
+				CD63A36D1FDDD604009B7799 /* preparing6.gif */,
 				CD58B1001ED8A83400C6F02C /* preparing5.gif */,
 				CD58B0F81ED8A08900C6F02C /* preparing4.gif */,
 				CD58B0F01ED89CA800C6F02C /* preparing3.gif */,
@@ -367,6 +370,7 @@
 				CD58B1011ED8A83400C6F02C /* preparing5.gif in Resources */,
 				CD58B0F31ED89CA800C6F02C /* preparing1.gif in Resources */,
 				CD8629981F46BEC900DB328F /* Lato-Regular.ttf in Resources */,
+				CD63A36E1FDDD604009B7799 /* preparing6.gif in Resources */,
 				CD8629921F46BEC900DB328F /* Lato-BoldItalic.ttf in Resources */,
 				CD8629911F46BEC900DB328F /* Lato-Bold.ttf in Resources */,
 				CD9E14EB1E130C7E000E21C0 /* Assets.xcassets in Resources */,

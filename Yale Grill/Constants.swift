@@ -63,7 +63,7 @@ class Constants {
     ]
     static let toppingsArray = ["Bun","Cheese","Sauce","Lettuce","Tomatoes"]
     static let preparingTexts = ["Preparing...","Preparing..","Preparing.","Preparing"]
-    static let gifArray = ["preparing1","preparing2","preparing3","preparing4","preparing5"]
+    static let gifArray = ["preparing1","preparing2","preparing3","preparing4","preparing5","preparing6"]
     
     static var menuItems: [String:MenuItem] = [:]
     static var currentGrillMenu: [MenuItem] = []
